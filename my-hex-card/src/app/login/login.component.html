@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Accedi</h3>
+          </div>
+
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+              </div>
+              <div class="mb-3 input-group">
+                <input type="text" class="form-control" id="password" formControlName="password" placeholder="Password">
+                <span class="input-group-text" (click)="togglePassword()">
+                    <span *ngIf="!showPassword"><mat-icon>warning</mat-icon></span>
+                    <span *ngIf="showPassword"><mat-icon>remove_red_eye</mat-icon></span>
+                </span>
+              </div>
+              <div class="mb-3">
+                <a href="#">Password dimenticata?</a>
+              </div>
+              <button type="submit" class="btn btn-primary">Accedi</button>
+            </form>
+            <hr>
+            <p class="text-center">Non hai un account? <a href="#">Registrati</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
