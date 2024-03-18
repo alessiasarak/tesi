@@ -1,1 +1,37 @@
-<p>main works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        
+      </div>
+      <div class="col-md-8">
+        
+      </div>
+    </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <img src="{{img}}" class="img-fluid rounded-circle mx-auto d-block" alt="Alessia Sarak">
+          <div>{{ title }}</div>
+          <div>{{ subtitle }}</div>
+        </div>
+
+        <div class="card-body">
+          <p>{{ email }}</p>
+          <p>{{ number }}</p>
+          <div *ngFor="let website of websites">
+            <p>{{ website }}</p>
+          </div>
+          <a href="#" target="_blank" class="btn btn-primary mt-3">Aggiungi ai contatti</a>
+        </div>
+
+        <div class="card-footer">
+          <app-social-media-footer></app-social-media-footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
