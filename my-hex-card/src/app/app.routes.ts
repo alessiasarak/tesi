@@ -5,6 +5,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { MainComponent } from './main/main.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
+import { Error404Component } from './error/error-404/error-404.component';
 
 export const routes: Routes = [
     { path: '', component: MainComponent },
@@ -13,4 +14,6 @@ export const routes: Routes = [
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: 'settings', component: SettingsComponent },
     { path: 'profile-settings', component: ProfileSettingsComponent },
+    
+    { path: '**', component: Error404Component },
 ];
