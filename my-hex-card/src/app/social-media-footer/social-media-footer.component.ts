@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './social-media-footer.component.css'
 })
 export class SocialMediaFooterComponent {
-  whatsapp: string = "www.whatsapp.com";
-  facebook: string = "www.facebook.com";
-  instagram: string = "www.instagram.com";
-  youtube: string = "www.youtube.com";
-  linkedin: string = "www.linkedin.com";
-  
+  whatsapp: string = "https://www.whatsapp.com";
+  facebook: string = "https://www.facebook.com";
+  instagram: string = "https://www.instagram.com";
+  youtube: string = "https://www.youtube.com";
+  linkedin: string = "https://www.linkedin.com";
+
 }
