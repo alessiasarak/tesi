@@ -15,16 +15,21 @@
       <div class="card">
         <div class="card-header">
           <app-hamburger-menu></app-hamburger-menu>
-          <img src="{{ img }}" class="img-fluid rounded-circle mx-auto d-block" alt="Alessia Sarak">
-          <div>{{ title }}</div>
-          <div>{{ subtitle }}</div>
+          <img src="{{ myCard.img }}" class="img-fluid rounded-circle mx-auto d-block" alt="Alessia Sarak">
+
+          <div id="title">{{ myCard.title }}</div>
+          <div id="subtitle">{{ myCard.subtitle }}</div>
         </div>
 
         <div class="card-body">
-          <p>{{ email }}</p>
-          <p>{{ number }}</p>
-          <div *ngFor="let website of websites">
-            <p>{{ website }}</p>
+          <div *ngFor="let email of myCard.email">
+            <p>{{ email.email }}</p>
+          </div>
+          <div *ngFor="let number of myCard.phone_number">
+            <p>{{ number.phone_number }}</p>
+          </div>
+          <div *ngFor="let website of myCard.link">
+            <p>{{ website.link }}</p>
           </div>
           <a href="#" target="_blank" class="btn btn-primary mt-3">Aggiungi ai contatti</a>
         </div>

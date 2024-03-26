@@ -1,16 +1,17 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { MainComponent } from './main/main.component';
-import { SettingsComponent } from './settings/settings.component';
-import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { MainComponent } from './pages/main/main.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { ProfileSettingsComponent } from './pages/profile-settings/profile-settings.component';
 import { Error404Component } from './error/error-404/error-404.component';
-import { CardSettingsComponent } from './card-settings/card-settings.component';
-import { CardStyleSettingsComponent } from './card-style-settings/card-style-settings.component';
+import { CardSettingsComponent } from './pages/card-settings/card-settings.component';
+import { CardStyleSettingsComponent } from './pages/card-style-settings/card-style-settings.component';
+import { provideHttpClient } from '@angular/common/http';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
-    { path: '', component: MainComponent },
+    { path: '', providers: [provideHttpClient()], component: MainComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
