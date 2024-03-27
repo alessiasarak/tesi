@@ -23,7 +23,6 @@ const Style = sequelize.define("Style",
     },
     {
         tableName: "style",
-        alter: true,
     }
 );
 

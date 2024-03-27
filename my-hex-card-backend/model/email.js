@@ -26,7 +26,6 @@ const Email = sequelize.define("Email",
     },
     {
         tableName: "email",
-        alter: true,
     }
 );
 

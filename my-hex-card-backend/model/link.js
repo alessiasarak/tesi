@@ -26,7 +26,6 @@ const Link = sequelize.define("Link",
     },
     {
         tableName: "link",
-        alter: true,
     }
 );
 

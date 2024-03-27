@@ -36,7 +36,6 @@ const User = sequelize.define("User",
     },
     {
         tableName: "user",
-        alter: true,
     }
 );
 

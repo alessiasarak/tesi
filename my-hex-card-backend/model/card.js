@@ -54,7 +54,6 @@ const Card = sequelize.define("Card",
     },
     {
         tableName: "card",
-        alter: true,
     }
 );
 

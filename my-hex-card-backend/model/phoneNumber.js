@@ -26,7 +26,6 @@ const PhoneNumber = sequelize.define("PhoneNumber",
     },
     {
         tableName: "phone_number",
-        alter: true,
     }
 );
 
