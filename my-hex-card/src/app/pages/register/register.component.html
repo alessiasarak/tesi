@@ -7,7 +7,7 @@
           </div>
 
           <div class="card-body">
-            <form (ngSubmit)="onSubmit()">
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
               <div class="mb-3">
                 <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
               </div>
@@ -19,7 +19,7 @@
                 </span>
               </div>
               <div class="mb-3 input-group">
-                <input type="text" class="form-control" id="password" formControlName="password" placeholder="Ripeti password">
+                <input type="text" class="form-control" id="repeatPassword" formControlName="repeatPassword" placeholder="Ripeti password">
                 <span class="input-group-text" (click)="togglePassword()">
                     <span *ngIf="!showPassword"><mat-icon>warning</mat-icon></span>
                     <span *ngIf="showPassword"><mat-icon>remove_red_eye</mat-icon></span>
