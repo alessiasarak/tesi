@@ -61,9 +61,7 @@ export class MainComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.assignValue();
-
-    this.service.provadGet();   
+    this.assignValue(); 
   }
 
   assignValue() : void {

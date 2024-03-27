@@ -14,15 +14,7 @@ export class CrudService<T> {
     this.endpoint = endpoint;
   }
 
-
-  provadGet(): Observable<T> {
-    console.log("GEEEEET");
-    return this.http.get<T>(this.baseApiUrl + this.endpoint);
-  }
-
   post(item : T, extraEndPoint?: string) : Observable<T>{
-    console.log("POST");
-
     const body = {
       entity: item,
     }
@@ -30,8 +22,6 @@ export class CrudService<T> {
     const options = {
       headers: this.headers
     }
-
-    console.log(this.baseApiUrl + this.endpoint + extraEndPoint);
 
     return this.http.post<T>(this.baseApiUrl + this.endpoint + extraEndPoint, body, options );
   }

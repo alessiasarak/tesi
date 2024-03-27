@@ -8,6 +8,7 @@ const useragent = require("express-useragent");
 
 //route
 const authRoute = require("./route/authRoute");
+const cardRoute = require("./route/cardRoute");
 
 app.use(bodyParser.json());
 
@@ -30,23 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", authRoute);
-
-/*app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.get('/prova', (req, res) => {
-  console.log("BUUU");
-  res.send('YAAAAAY!')
-})
-
-app.get('/auth/register', (req, res) => {
-  console.log("SERVER JS");
-  console.log(req.body);
-
-
-  res.send('YAAAAAY!')
-})*/
+app.use("/", cardRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
