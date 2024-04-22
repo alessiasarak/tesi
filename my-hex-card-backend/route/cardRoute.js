@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
     res.send("Default route");
 });
 
-router.get("/:id", cardController.getCard);
+router.get("/:id", cardController.getCardById);
+router.put('/card/:id', cardController.updateCard);
 
 module.exports = router;

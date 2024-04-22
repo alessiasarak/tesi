@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const useragent = require("express-useragent");
 
+const session = require('express-session');
+
 //route
 const authRoute = require("./route/authRoute");
 const cardRoute = require("./route/cardRoute");
@@ -29,6 +31,13 @@ app.use(useragent.express());
 app.get("/", (req, res) => {
   res.send(req.useragent);
 });
+
+// Configurazione della sessione
+app.use(session({
+    secret: 'alskdjsakdjal',
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.use("/", authRoute);
 app.use("/", cardRoute);
