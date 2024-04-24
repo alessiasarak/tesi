@@ -12,11 +12,33 @@ const LinkRepository = require('../repository/linkRepository');
 
 exports.getCardById = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
+    let emailRepository = new EmailRepository();
+    let phoneNumberRepository = new PhoneNumberRepository();
+    let linkRepository = new LinkRepository();
 
     const cardId = req.params.id;
     const card = await cardRepository.getCardById(cardId);
+    let emails = await emailRepository.getAll(cardId);
+    let phoneNumbers = await phoneNumberRepository.getAll(cardId);
+    let links = await linkRepository.getAll(cardId);
+
     if (card) {
-        res.status(200).json(card);
+        res.status(200).json({
+            id: card.id,
+            img: card.img,
+            title: card.title,
+            subtitle: card.subtitle,
+            instagram: card.instagram,
+            facebook: card.facebook,
+            linkedin: card.linkedin,
+            whatsapp: card.whatsapp,
+            youtube: card.youtube,
+            fk_id_user: card.fk_id_user,
+
+            email: emails,
+            phone_number: phoneNumbers,
+            link: links
+        });
     } else {
         res.status(404).json({ message: 'Card not found' });
     }

@@ -9,6 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class CardService extends CrudService<Card> {
 
   constructor(http: HttpClient) {
-    super(http, "/prova");
+    super(http, "/card/");
+  }
+
+  getCard(idCard : number) {
+    return this.get(idCard.toString());
   }
 }

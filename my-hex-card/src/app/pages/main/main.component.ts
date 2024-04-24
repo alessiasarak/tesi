@@ -5,6 +5,7 @@ import { SocialMediaFooterComponent } from '../../component/social-media-footer/
 import { HamburgerMenuComponent } from '../../component/hamburger-menu/hamburger-menu.component';
 import { Card } from '../../interfaces/card';
 import { CardService } from '../../services/card.service';
+import { ActivatedRoute } from '@angular/router';
  
 @Component({
   selector: 'app-main',
@@ -15,7 +16,7 @@ import { CardService } from '../../services/card.service';
 })
 export class MainComponent implements OnInit{
 
-  constructor(private service: CardService){}
+  constructor(private service: CardService, private route: ActivatedRoute){}
   
   myCard: Card = {
     id: 0,
@@ -59,13 +60,23 @@ export class MainComponent implements OnInit{
       { link: "www.hexcard.ch" }
     ]
   }
+  
+  
 
   ngOnInit(): void {
-    this.assignValue(); 
+    this.route.params.subscribe(params => {
+      let cardId = params['idCard']; 
+      this.service.getCard(cardId).subscribe((data) => {
+        data.img = 'assets/img/facebook.png';
+        
+        this.assignValue(data); 
+      });
+
+    });
   }
 
-  assignValue() : void {
-    this.myCard = this.example;
+  assignValue(card : Card) : void {
+    this.myCard = card;
   }
 
 }

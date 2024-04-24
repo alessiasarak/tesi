@@ -16,7 +16,8 @@ class EmailRepository{
     async getAll(idCard){
         try {
             const emails = await Email.findAll({
-                where: { fk_id_card: idCard }
+                where: { fk_id_card: idCard },
+                attributes: ['email']
             });
             return emails;
         } catch (error) {

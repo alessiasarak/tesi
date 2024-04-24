@@ -25,4 +25,12 @@ export class CrudService<T> {
 
     return this.http.post<T>(this.baseApiUrl + this.endpoint + extraEndPoint, body, options );
   }
+
+  get(extraEndPoint?: string) : Observable<T>{
+    const options = {
+      headers: this.headers
+    }
+
+    return this.http.get<T>(this.baseApiUrl + this.endpoint + extraEndPoint, options);
+  }
 }

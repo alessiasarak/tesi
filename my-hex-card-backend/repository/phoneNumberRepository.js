@@ -16,7 +16,8 @@ class PhoneNumberRepository{
     async getAll(idCard){
         try {
             const phoneNumbers = await PhoneNumber.findAll({
-                where: { fk_id_card: idCard }
+                where: { fk_id_card: idCard },
+                attributes: ['number']
             });
             return phoneNumbers;
         } catch (error) {

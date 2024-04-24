@@ -16,7 +16,8 @@ class LinkRepository {
     async getAll(idCard){
         try {
             const links = await Link.findAll({
-                where: { fk_id_card: idCard }
+                where: { fk_id_card: idCard },
+                attributes: ['link']
             });
             return links;
         } catch (error) {

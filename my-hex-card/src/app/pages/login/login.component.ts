@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-login',
