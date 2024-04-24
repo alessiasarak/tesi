@@ -49,3 +49,5 @@ class EmailRepository{
         }
     }
 }
+
+module.exports = EmailRepository;

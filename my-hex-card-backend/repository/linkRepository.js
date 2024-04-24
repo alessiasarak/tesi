@@ -49,3 +49,5 @@ class LinkRepository {
         }
     }
 }
+
+module.exports = LinkRepository;

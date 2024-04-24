@@ -1,6 +1,6 @@
 const PhoneNumber = require('../model/phoneNumber.js'); 
 
-class PhoneNumber{
+class PhoneNumberRepository{
     async add(newPhoneNumber, idCard){
         try {
             const phoneNumber = await PhoneNumber.create({
@@ -49,3 +49,5 @@ class PhoneNumber{
         }
     }
 }
+
+module.exports = PhoneNumberRepository;

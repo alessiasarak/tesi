@@ -9,7 +9,7 @@ const useragent = require("express-useragent");
 const session = require('express-session');
 
 //route
-const authRoute = require("./route/authRoute");
+const userRoute = require("./route/userRoute");
 const cardRoute = require("./route/cardRoute");
 
 app.use(bodyParser.json());
@@ -39,7 +39,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use("/", authRoute);
+app.use("/", userRoute);
 app.use("/", cardRoute);
 
 app.listen(port, () => {

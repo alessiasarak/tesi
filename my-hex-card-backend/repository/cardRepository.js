@@ -10,10 +10,10 @@ class CardRepository {
     }
   }
 
-  setCard(idCard, newData) {
+  setCard(idCard, newData, idUser) {
     try {
       const updated = Card.update(newData, {
-        where: { id: idCard },
+        where: { id: idCard, fk_id_user: idUser},
       });
       return updated;
     } catch (error) {
