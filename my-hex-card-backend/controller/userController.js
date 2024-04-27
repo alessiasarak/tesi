@@ -17,8 +17,9 @@ exports.login = asyncHandler(async (req, res) => {
     
     try {
         const response = await userRepository.login(email, password);
+        console.log(response.data.dataValues.id);
 
-        if (response.code == 200) req.session.id = response.data.id;
+        if (response.code == 200) req.session.id = response.data.dataValues.id;
         
         res.status(response.code).json(response.data);
     } catch (error) {

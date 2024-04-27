@@ -33,4 +33,16 @@ export class CrudService<T> {
 
     return this.http.get<T>(this.baseApiUrl + this.endpoint + extraEndPoint, options);
   }
+
+  put(item : T, extraEndPoint?: string) : Observable<T>{
+    const body = {
+      entity: item,
+    }
+
+    const options = {
+      headers: this.headers
+    }
+
+    return this.http.put<T>(this.baseApiUrl + this.endpoint + extraEndPoint, body, options );
+  }
 }

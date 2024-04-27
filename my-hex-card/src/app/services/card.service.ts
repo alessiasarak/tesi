@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CrudService } from './crud.service';
 import { Card } from '../interfaces/card';
 import { HttpClient } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,17 @@ export class CardService extends CrudService<Card> {
     super(http, "/card/");
   }
 
-  getCard(idCard : number) {
+  getCard(idCard : string) {
+    localStorage.setItem("idCard", idCard.toString());
     return this.get(idCard.toString());
+  }
+
+  async putCard(card: Card) : Promise<Card | null> {
+    let idCard = localStorage.getItem("idCard");
+    if(idCard != undefined){
+      let response = await lastValueFrom(this.put(card, idCard));
+      return response;
+    }
+    return null;
   }
 }

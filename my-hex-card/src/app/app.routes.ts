@@ -20,7 +20,7 @@ export const routes: Routes = [
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
     { path: 'card-settings', component: CardSettingsComponent, canActivate: [AuthGuard] },
-    { path: 'card-style-settingcard-ss', component: CardStyleSettingsComponent, canActivate: [AuthGuard] },
+    { path: 'card-style-settings', component: CardStyleSettingsComponent, canActivate: [AuthGuard] },
     
     { path: '**', component: Error404Component },
 ];
