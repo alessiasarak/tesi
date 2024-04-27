@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CrudService } from '../crud.service';
 import { User } from '../../interfaces/user';
 import { HttpClient } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,15 @@ export class AuthService extends CrudService<User> {
     super(http, "/auth");
   }
 
-  login() : boolean {
-    return true;
+  async login(user: User) : Promise<User> {
+    let response = await lastValueFrom(this.post(user, "/login"));
+    
+    return response;
   }
 
-  register(user: User) : boolean {
-    console.log("REGISTER");
-    this.post(user, "/register").subscribe((data) => {
-      console.log(data)
-    });
-    return true;
+  async register(user: User) : Promise<User> {
+    let response = await lastValueFrom(this.post(user, "/register"));
+    
+    return response;
   }
 }

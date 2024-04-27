@@ -11,7 +11,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
-    { path: ':idCard', providers: [provideHttpClient()], component: MainComponent },
+    { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
@@ -19,7 +19,7 @@ export const routes: Routes = [
     { path: 'settings', component: SettingsComponent },
     { path: 'profile-settings', component: ProfileSettingsComponent },
     { path: 'card-settings', component: CardSettingsComponent },
-    { path: 'card-style-settings', component: CardStyleSettingsComponent },
+    { path: 'card-style-settingcard-ss', component: CardStyleSettingsComponent },
     
     { path: '**', component: Error404Component },
 ];
