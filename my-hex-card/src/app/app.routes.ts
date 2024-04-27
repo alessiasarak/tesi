@@ -9,6 +9,7 @@ import { CardSettingsComponent } from './pages/card-settings/card-settings.compo
 import { CardStyleSettingsComponent } from './pages/card-style-settings/card-style-settings.component';
 import { provideHttpClient } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './auth_guard';
 
 export const routes: Routes = [
     { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
@@ -16,10 +17,10 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
 
-    { path: 'settings', component: SettingsComponent },
-    { path: 'profile-settings', component: ProfileSettingsComponent },
-    { path: 'card-settings', component: CardSettingsComponent },
-    { path: 'card-style-settingcard-ss', component: CardStyleSettingsComponent },
+    { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+    { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
+    { path: 'card-settings', component: CardSettingsComponent, canActivate: [AuthGuard] },
+    { path: 'card-style-settingcard-ss', component: CardStyleSettingsComponent, canActivate: [AuthGuard] },
     
     { path: '**', component: Error404Component },
 ];

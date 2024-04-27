@@ -24,4 +24,8 @@ export class AuthService extends CrudService<User> {
     
     return response;
   }
+
+  public isAuthenticated() : boolean {
+    return localStorage.getItem('user_id') != undefined && localStorage.getItem('user_id')!.length > 0;
+  }
 }

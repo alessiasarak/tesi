@@ -48,7 +48,7 @@ export class LoginComponent {
     this.loggedUser = await this.service.login(this.user);
 
     if(this.loggedUser != undefined) {
-      localStorage.setItem("user", this.loggedUser.id.toString());
+      localStorage.setItem("user_id", this.loggedUser.id.toString());
       this.router.navigateByUrl("/settings");
     }
   }
