@@ -1,43 +1,62 @@
-<div class="container">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="content">
+  <div class="menu">
+    <app-hamburger-menu></app-hamburger-menu>
+  </div>
+  <div class="header">
+    <img src="{{ myCard.img }}">
+    <h4>{{ myCard.title }}</h4>
+    <h5>{{ myCard.subtitle }}</h5>
+
+    <button>AGGIUNGI AI CONTATTI</button>
+  </div>
+  <hr>
+  <div class="center">
+    <div *ngFor="let email of myCard.email" class="mydata">
+      <mat-icon aria-hidden="false" fontIcon="email"></mat-icon>
+      <span>{{ email.email }}</span>
+    </div>
+    <div *ngFor="let number of myCard.phone_number" class="mydata">
+      <mat-icon aria-hidden="false" fontIcon="phone"></mat-icon>
+      <span>{{ number.phone_number }}</span>
+    </div>
+    <div *ngFor="let website of myCard.link" class="mydata">
+      <mat-icon aria-hidden="false" fontIcon="link"></mat-icon>
+      <a href="https://{{ website.link }}" _target="_blank">{{ website.link }}</a>
+    </div>
+  </div>
+  <hr>
+  <div class="footer">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.facebook">
+        <a href="{{ myCard.facebook }}" target="_blank">
+          <mat-icon aria-hidden="false" fontIcon="facebook"></mat-icon>
+        </a>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.instagram">
+        <a href="{{ myCard.instagram }}" target="_blank">
+          <!--<mat-icon aria-hidden="false" fontIcon="instagram"></mat-icon>-->
+        </a>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.linkedin">
+        <a href="{{ myCard.linkedin }}" target="_blank">
+          <!--<mat-icon aria-hidden="false" fontIcon="linkedin"></mat-icon>-->
+        </a>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.whatsapp">
+        <a href="{{ myCard.whatsapp }}" target="_blank">
+          <mat-icon aria-hidden="false" fontIcon="whatsapp"></mat-icon>
+        </a>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.youtube">
+        <a href="{{ myCard.youtube }}" target="_blank">
+          <mat-icon aria-hidden="false" fontIcon="youtube"></mat-icon>
+        </a>
+      </div>
+  </div>
   <div class="row">
-    <div class="col-md-4">
-      
-    </div>
-    <div class="col-md-8">
-      
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center">
+      Powered by Hexcard
     </div>
   </div>
-</div>
-
-<div class="container">
-<div class="row justify-content-center">
-  <div class="col-md-6 col-lg-4">
-    <div class="card">
-      <div class="card-header">
-        <app-hamburger-menu></app-hamburger-menu>
-        <img src="{{ myCard.img }}" class="img-fluid rounded-circle mx-auto d-block" alt="Alessia Sarak">
-
-        <div id="title">{{ myCard.title }}</div>
-        <div id="subtitle">{{ myCard.subtitle }}</div>
-      </div>
-
-      <div class="card-body">
-        <div *ngFor="let email of myCard.email">
-          <p>{{ email.email }}</p>
-        </div>
-        <div *ngFor="let number of myCard.phone_number">
-          <p>{{ number.phone_number }}</p>
-        </div>
-        <div *ngFor="let website of myCard.link">
-          <p>{{ website.link }}</p>
-        </div>
-        <a href="#" target="_blank" class="btn btn-primary mt-3">Aggiungi ai contatti</a>
-      </div>
-
-      <div class="card-footer">
-        <app-social-media-footer></app-social-media-footer>
-      </div>
-    </div>
-  </div>
-</div>
 </div>

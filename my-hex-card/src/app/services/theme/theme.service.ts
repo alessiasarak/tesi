@@ -8,24 +8,16 @@ export class ThemeService {
 
   constructor() { }
 
-  toggleTheme(): void {
-    this.isDarkTheme = !this.isDarkTheme;
-    if (this.isDarkTheme) {
-      document.body.classList.add('dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme');
-    }
+  setBackgroundColor(color : string){
+    document.body.style.setProperty("background-color", color);
   }
 
-  setDarkTheme() {
-    document.body.style.background = "00ff00";
-    document.body.style.setProperty("background-color", "#000000");
-
+  setTextColor(color : string){
+    document.body.style.setProperty("color", color);
   }
 
-  setLightTheme() {
-    document.body.style.background = "00ff00";
-    document.body.style.setProperty("background-color", "#ffffff");
+  setButtonColor(color : string){
+    //document.but("color", color);
   }
 }
 

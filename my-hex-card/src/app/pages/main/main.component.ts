@@ -7,11 +7,12 @@ import { Card } from '../../interfaces/card';
 import { CardService } from '../../services/card.service';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../../services/theme/theme.service';
+import { MatIconModule } from '@angular/material/icon';
  
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ CommonModule, SocialMediaFooterComponent, HamburgerMenuComponent, HttpClientModule ],
+  imports: [ CommonModule, SocialMediaFooterComponent, HamburgerMenuComponent, HttpClientModule, MatIconModule ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -37,7 +38,9 @@ export class MainComponent implements OnInit{
   }
   
   ngOnInit(): void {
-    this.themeService.setDarkTheme();
+    this.themeService.setBackgroundColor("#fff");
+    this.themeService.setTextColor("#000");
+    this.themeService.setButtonColor("#fff");
     
     this.route.params.subscribe(params => {
       let cardId = params['idCard']; 
