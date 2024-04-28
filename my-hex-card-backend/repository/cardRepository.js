@@ -18,9 +18,6 @@ class CardRepository {
       let emails = newData.email;
       let links = newData.link;
       let phoneNumbers = newData.phone_number;
-      console.log(emails);
-      console.log(links);
-      console.log(phoneNumbers);
 
       const updated = Card.update(
         {

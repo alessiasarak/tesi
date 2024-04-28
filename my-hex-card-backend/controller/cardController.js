@@ -90,7 +90,7 @@ exports.putCard = asyncHandler(async (req, res) => {
     const cardId = req.params.id;
     const newData = req.body.entity;
 
-    const updated = await cardRepository.setCard(cardId, newData, req.session.id);
+    const updated = await cardRepository.setCard(cardId, newData, req.params.idUser);
     if (updated) {
         res.status(200).json({ message: 'Card updated successfully' });
     } else {

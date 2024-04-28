@@ -14,7 +14,7 @@ router.get("/email/:id", cardController.getEmailsByCardId);
 router.get("/phonenumber/:id", cardController.getPhoneNumbersByCardId);
 router.get("/link/:id", cardController.getLinksByCardId);
 
-router.put('/card/:id', cardController.putCard);
+router.put('/card/:id/:idUser', cardController.putCard);
 
 router.post('/email/:id', cardController.postEmail);
 router.post('/phonenumber/:id', cardController.postPhoneNumber);

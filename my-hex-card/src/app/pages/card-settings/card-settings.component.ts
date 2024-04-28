@@ -92,7 +92,7 @@ export class CardSettingsComponent {
     
     let response = await this.service.putCard(this.card);
     
-    if(response) this.router.navigateByUrl("/card-settings");
+    if(response) this.router.navigateByUrl("/settings");
   }
 }
 

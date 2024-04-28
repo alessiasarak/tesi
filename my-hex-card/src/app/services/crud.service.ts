@@ -22,8 +22,10 @@ export class CrudService<T> {
     const options = {
       headers: this.headers
     }
-
-    return this.http.post<T>(this.baseApiUrl + this.endpoint + extraEndPoint, body, options );
+    
+    if(extraEndPoint) return this.http.post<T>(this.baseApiUrl + this.endpoint + extraEndPoint, body, options );
+    else return this.http.post<T>(this.baseApiUrl + this.endpoint, body, options );
+    
   }
 
   get(extraEndPoint?: string) : Observable<T>{
@@ -31,7 +33,8 @@ export class CrudService<T> {
       headers: this.headers
     }
 
-    return this.http.get<T>(this.baseApiUrl + this.endpoint + extraEndPoint, options);
+    if(extraEndPoint) return this.http.get<T>(this.baseApiUrl + this.endpoint + extraEndPoint, options);
+    else return this.http.get<T>(this.baseApiUrl + this.endpoint, options);
   }
 
   put(item : T, extraEndPoint?: string) : Observable<T>{
@@ -42,7 +45,9 @@ export class CrudService<T> {
     const options = {
       headers: this.headers
     }
-
-    return this.http.put<T>(this.baseApiUrl + this.endpoint + extraEndPoint, body, options );
+    
+    if(extraEndPoint) return this.http.put<T>(this.baseApiUrl + this.endpoint + extraEndPoint, body, options );
+    else return this.http.put<T>(this.baseApiUrl + this.endpoint, body, options );
+    
   }
 }

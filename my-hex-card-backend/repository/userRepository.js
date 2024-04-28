@@ -69,20 +69,42 @@ class UserRepository {
     async updateUser(userId, newData) {
         try {
             const user = await User.findByPk(userId);
+            
             if (!user) {
                 return {
                     "code": 404,
                     "message": "User not found"
                 };
             }
+            
+            if(newData.password != ""){
+                const hashedPassword = await bcrypt.hash(newData.password, 10);
+                await user.update({
+                    password: hashedPassword
+                });
+            } else {
+                await user.update({
+                    name: newData.name,
+                    surname: newData.surname,
+                    email: newData.email,
+                });
+            }
 
-            await user.update(newData);
             return {
                 "code": 200,
                 "message": "User information updated successfully"
             };
         } catch (error) {
             throw error;
+        }
+    }
+
+    async getUser(userId) {
+        try {
+          const user = await User.findByPk(userId);
+          return user;
+        } catch (error) {
+          throw new Error(`Unable to fetch card: ${error}`);
         }
     }
 }

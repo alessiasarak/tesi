@@ -7,12 +7,14 @@ const cors = require("cors");
 const useragent = require("express-useragent");
 
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 //route
 const userRoute = require("./route/userRoute");
 const cardRoute = require("./route/cardRoute");
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 const corsOptions = {
   origin: function(origin, callback) {
@@ -33,11 +35,13 @@ app.get("/", (req, res) => {
 });
 
 // Configurazione della sessione
-app.use(session({
-    secret: 'alskdjsakdjal',
+app.use(
+  session({
+    secret: "askdjflksajfd",
     resave: false,
-    saveUninitialized: false
-}));
+    saveUninitialized: true,
+  })
+);
 
 app.use("/", userRoute);
 app.use("/", cardRoute);
