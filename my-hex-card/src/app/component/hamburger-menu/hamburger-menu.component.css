@@ -1,16 +1,38 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .mat-sidenav-content {
-    flex: 1;
-  }
-  
-  mat-toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-  }
-  
+#menuButton {
+  margin-top: 20px;
+  background-color: white;
+  color: black;
+  border-width: 0px;
+}
+
+#myLinks {
+  background-color: #eee;
+  color: black;
+  width: 200px;
+  text-align: start;
+  right: 20px;
+  position:absolute;
+  border-radius: 4px;
+
+  display: none;
+}
+
+a {
+  color: rgb(0, 0, 0);
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+a:hover {
+  background-color: #ddd;
+}
