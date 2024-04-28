@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './settings.component.css'
 })
 export class SettingsComponent {
-
+  //constructor
+  constructor(private service: AuthService){}
+  
+  logout(){
+    this.service.logout();
+  }
 }

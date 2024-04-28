@@ -17,7 +17,6 @@ exports.login = asyncHandler(async (req, res) => {
     
     try {
         const response = await userRepository.login(email, password);
-        console.log(response.data.dataValues.id);
 
         if (response.code == 200) req.session.id = response.data.dataValues.id;
         
@@ -25,6 +24,12 @@ exports.login = asyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
     }
+});
+
+
+exports.logout = asyncHandler(async (req, res) => {
+    req.session.id = null;
+    res.status(200);
 });
 
 exports.updateData = asyncHandler(async (req, res) => {

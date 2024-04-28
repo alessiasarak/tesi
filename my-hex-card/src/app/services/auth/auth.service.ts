@@ -28,4 +28,10 @@ export class AuthService extends CrudService<User> {
   public isAuthenticated() : boolean {
     return localStorage.getItem('user_id') != undefined && localStorage.getItem('user_id')!.length > 0;
   }
+
+  logout(){
+    localStorage.setItem("user_id", "");
+    console.log(localStorage.getItem("user_id"));
+    this.get("/logout");
+  }
 }

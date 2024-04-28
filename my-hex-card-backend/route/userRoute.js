@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
 
 router.post("/auth/register", userController.createUser);
 router.post("/auth/login", userController.login);
+router.get("/auth/logout", userController.logout);
 
 router.post("/create", userController.createUser);
 
