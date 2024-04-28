@@ -6,6 +6,7 @@ import { HamburgerMenuComponent } from '../../component/hamburger-menu/hamburger
 import { Card } from '../../interfaces/card';
 import { CardService } from '../../services/card.service';
 import { ActivatedRoute } from '@angular/router';
+import { ThemeService } from '../../services/theme/theme.service';
  
 @Component({
   selector: 'app-main',
@@ -16,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MainComponent implements OnInit{
 
-  constructor(private service: CardService, private route: ActivatedRoute){}
+  constructor(private service: CardService, private route: ActivatedRoute, private themeService: ThemeService){}
   
   myCard: Card = {
     id: 0,
@@ -36,6 +37,8 @@ export class MainComponent implements OnInit{
   }
   
   ngOnInit(): void {
+    this.themeService.setDarkTheme();
+    
     this.route.params.subscribe(params => {
       let cardId = params['idCard']; 
       this.service.getCard(cardId).subscribe((data) => {
@@ -45,5 +48,4 @@ export class MainComponent implements OnInit{
       });
     });
   }
-
 }

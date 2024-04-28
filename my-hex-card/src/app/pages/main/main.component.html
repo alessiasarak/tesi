@@ -1,43 +1,43 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        
-      </div>
-      <div class="col-md-8">
-        
-      </div>
+  <div class="row">
+    <div class="col-md-4">
+      
     </div>
+    <div class="col-md-8">
+      
+    </div>
+  </div>
 </div>
 
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-      <div class="card">
-        <div class="card-header">
-          <app-hamburger-menu></app-hamburger-menu>
-          <img src="{{ myCard.img }}" class="img-fluid rounded-circle mx-auto d-block" alt="Alessia Sarak">
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <app-hamburger-menu></app-hamburger-menu>
+        <img src="{{ myCard.img }}" class="img-fluid rounded-circle mx-auto d-block" alt="Alessia Sarak">
 
-          <div id="title">{{ myCard.title }}</div>
-          <div id="subtitle">{{ myCard.subtitle }}</div>
-        </div>
+        <div id="title">{{ myCard.title }}</div>
+        <div id="subtitle">{{ myCard.subtitle }}</div>
+      </div>
 
-        <div class="card-body">
-          <div *ngFor="let email of myCard.email">
-            <p>{{ email.email }}</p>
-          </div>
-          <div *ngFor="let number of myCard.phone_number">
-            <p>{{ number.phone_number }}</p>
-          </div>
-          <div *ngFor="let website of myCard.link">
-            <p>{{ website.link }}</p>
-          </div>
-          <a href="#" target="_blank" class="btn btn-primary mt-3">Aggiungi ai contatti</a>
+      <div class="card-body">
+        <div *ngFor="let email of myCard.email">
+          <p>{{ email.email }}</p>
         </div>
+        <div *ngFor="let number of myCard.phone_number">
+          <p>{{ number.phone_number }}</p>
+        </div>
+        <div *ngFor="let website of myCard.link">
+          <p>{{ website.link }}</p>
+        </div>
+        <a href="#" target="_blank" class="btn btn-primary mt-3">Aggiungi ai contatti</a>
+      </div>
 
-        <div class="card-footer">
-          <app-social-media-footer></app-social-media-footer>
-        </div>
+      <div class="card-footer">
+        <app-social-media-footer></app-social-media-footer>
       </div>
     </div>
   </div>
+</div>
 </div>
