@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class CardSettingsComponent {
   //constructor
-  constructor(private router: Router,  private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
+  constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -54,7 +54,8 @@ export class CardSettingsComponent {
     fk_id_user: 0,
     email: [],
     phone_number: [],
-    link: []
+    link: [],
+    active: false
   };
 
   assignValues(card: Card){

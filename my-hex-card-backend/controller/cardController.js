@@ -33,6 +33,7 @@ exports.getCardById = asyncHandler(async (req, res) => {
             linkedin: card.linkedin,
             whatsapp: card.whatsapp,
             youtube: card.youtube,
+            active: card.active,
             fk_id_user: card.fk_id_user,
 
             email: emails,

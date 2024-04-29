@@ -24,7 +24,7 @@ class UserRepository {
             });
 
             let cardRepository = new CardRepository();
-            let newCard = cardRepository.createCard(userData.name + " " + userData.surname, userData.email, newUser.id);
+            cardRepository.createCard(userData.name + " " + userData.surname, userData.email, newUser.id);
             
             return {
                 "code": 200,
@@ -52,6 +52,9 @@ class UserRepository {
                 await user.update({
                     password: hashedPassword, 
                 });
+
+                let cardRepository = new CardRepository();
+                cardRepository.activateCards(user.id);
                 
                 return {
                     "code": 200,

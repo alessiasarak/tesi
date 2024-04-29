@@ -93,6 +93,17 @@ class CardRepository {
     }
   }
 
+  activateCards(idUser) {
+    try {
+      const updated = Card.update({ active: 1 }, {
+        where: { fk_id_user: idUser },
+      });
+      return updated;
+    } catch (error) {
+      throw new Error(`Unable to update card active: ${error}`);
+    }
+  }
+
   getStyleCard(idCard) {
     try {
       const style = Card.findByPk(idCard, {

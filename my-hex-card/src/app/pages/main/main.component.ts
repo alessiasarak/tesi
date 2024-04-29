@@ -5,7 +5,7 @@ import { SocialMediaFooterComponent } from '../../component/social-media-footer/
 import { HamburgerMenuComponent } from '../../component/hamburger-menu/hamburger-menu.component';
 import { Card } from '../../interfaces/card';
 import { CardService } from '../../services/card.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ThemeService } from '../../services/theme/theme.service';
 import { MatIconModule } from '@angular/material/icon';
  
@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class MainComponent implements OnInit{
 
-  constructor(private service: CardService, private route: ActivatedRoute, private themeService: ThemeService){}
+  constructor(private service: CardService, private route: ActivatedRoute, private themeService: ThemeService, private router: Router){}
   
   myCard: Card = {
     id: 0,
@@ -34,7 +34,8 @@ export class MainComponent implements OnInit{
     fk_id_user: 0,
     email: [],
     phone_number: [],
-    link: []
+    link: [],
+    active: false
   }
   
   ngOnInit(): void {
@@ -47,6 +48,7 @@ export class MainComponent implements OnInit{
       this.service.getCard(cardId).subscribe((data) => {
         data.img = 'assets/img/facebook.png';
         
+        if(!data.active) this.router.navigateByUrl("/register");
         this.myCard = data;
       });
     });
