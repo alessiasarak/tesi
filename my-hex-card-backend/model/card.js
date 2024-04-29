@@ -33,6 +33,9 @@ const Card = sequelize.define("Card",
         instagram: {
             type: DatatTypes.STRING(),
         },
+        active: {
+            type: DatatTypes.BOOLEAN,
+        },
 
         fk_id_user: {
             type: DatatTypes.INTEGER,

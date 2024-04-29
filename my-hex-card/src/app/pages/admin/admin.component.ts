@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user/user.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,11 +14,15 @@ import { CommonModule } from '@angular/common';
 export class AdminComponent {
   users : User[] = [];
 
-  constructor (private service: UserService){}
+  constructor (private authService: AuthService, private service: UserService){}
 
   ngOnInit(): void {
     this.service.getAllUsers().subscribe((data) => {
       this.users = data;
     });
+  }
+
+  logout(){
+    this.authService.logout();
   }
 }

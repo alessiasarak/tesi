@@ -13,6 +13,26 @@ class CardRepository {
     }
   }
 
+  async createCard(title, subtitle, idUser) {
+    try {
+        let newCard = await Card.create({
+            title: title,
+            subtitle: subtitle,
+            fk_id_user: idUser
+        });
+        
+        return {
+            "code": 200,
+            "data": newCard
+        };
+    } catch (error) {
+        return {
+            "code": 500,
+            "data": "Internal server error"
+        };
+    }
+  }
+
   setCard(idCard, newData, idUser) {
     try {
       let emails = newData.email;

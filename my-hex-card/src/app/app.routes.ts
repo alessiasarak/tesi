@@ -10,8 +10,9 @@ import { CardStyleSettingsComponent } from './pages/card-style-settings/card-sty
 import { provideHttpClient } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
-import { AuthGuard } from './auth_guard';
+import { AuthGuard } from './auth-guard';
 import { AddUserComponent } from './pages/add-user/add-user.component';
+import { AdminAuthGuard } from './admin-auth-guard';
 
 export const routes: Routes = [
     { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
@@ -23,8 +24,8 @@ export const routes: Routes = [
     { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
     { path: 'card-settings', component: CardSettingsComponent, canActivate: [AuthGuard] },
     { path: 'card-style-settings', component: CardStyleSettingsComponent, canActivate: [AuthGuard] },
-    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-    { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard] },
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
     { path: '**', component: Error404Component },
 ];

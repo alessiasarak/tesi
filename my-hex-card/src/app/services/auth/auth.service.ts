@@ -35,9 +35,14 @@ export class AuthService extends CrudService<User> {
     return localStorage.getItem('user_id') != undefined && localStorage.getItem('user_id')!.length > 0;
   }
 
+  public isAdmin() : boolean {
+    return localStorage.getItem('role') != undefined && localStorage.getItem('role')! == "ADMIN";
+  }
+
   logout(){
     localStorage.setItem("user_id", "");
-    console.log(localStorage.getItem("user_id"));
+    localStorage.setItem("role", "");
+    
     this.get("/logout");
   }
 }

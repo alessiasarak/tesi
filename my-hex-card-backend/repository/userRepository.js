@@ -1,4 +1,5 @@
 const User = require("../model/user");
+const CardRepository = require("./cardRepository");
 
 const bcrypt = require('bcrypt');
 
@@ -21,6 +22,9 @@ class UserRepository {
                 ...userData,
                 fk_role: userData.fk_role
             });
+
+            let cardRepository = new CardRepository();
+            let newCard = cardRepository.createCard(userData.name + " " + userData.surname, userData.email, newUser.id);
             
             return {
                 "code": 200,

@@ -49,6 +49,7 @@ export class LoginComponent {
 
     if(this.loggedUser != undefined) {
       localStorage.setItem("user_id", this.loggedUser.id.toString());
+      localStorage.setItem("role", this.loggedUser.fk_role.toString());
       this.router.navigateByUrl("/settings");
     }
   }
