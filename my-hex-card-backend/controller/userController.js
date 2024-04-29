@@ -6,7 +6,17 @@ exports.createUser = asyncHandler(async (req, res) => {
     var data = req.body.entity;
 
     let userRepository = new UserRepository();
+    console.log(data);
     let response = await userRepository.createUser(data);
+
+    res.status(response.code).json(response.data);
+});
+
+exports.registerUser = asyncHandler(async (req, res) => {
+    var data = req.body.entity;
+
+    let userRepository = new UserRepository();
+    let response = await userRepository.registerUser(data);
 
     res.status(response.code).json(response.data);
 });
@@ -72,6 +82,35 @@ exports.getUser = asyncHandler(async (req, res) => {
             });
         } else {
             res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+exports.getAllUsers = asyncHandler(async (req, res) => {
+    let userRepository = new UserRepository();
+
+    try {
+        const users = await userRepository.getAllUsers();
+        
+        if (users) {
+            let result = [];
+
+            for(let i = 0; i < users.length; i++){
+                result.push({
+                    id: users[i].dataValues.id,
+                    name: users[i].dataValues.name,
+                    surname: users[i].dataValues.surname,
+                    email: users[i].dataValues.email,
+                    password: "",
+                    fk_role: users[i].dataValues.fk_role,
+                });
+            }
+            
+            res.status(200).json(result);
+        } else {
+            res.status(404).json({ message: 'Users not found' });
         }
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });

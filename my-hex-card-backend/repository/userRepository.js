@@ -16,18 +16,49 @@ class UserRepository {
                     "data": "User with this email already exists"
                 };
             }
-            
-            const hashedPassword = await bcrypt.hash(userData.password, 10); 
+ 
             let newUser = await User.create({
                 ...userData,
-                password: hashedPassword, 
-                fk_role: userData.fk_role.role
+                fk_role: userData.fk_role
             });
             
             return {
                 "code": 200,
                 "data": newUser
             };
+        } catch (error) {
+            return {
+                "code": 500,
+                "data": "Internal server error"
+            };
+        }
+    }
+
+    async registerUser(userData) {
+        try {
+            const user = await User.findOne({ 
+                where: { 
+                    email: userData.email,
+                    password: ""
+                } 
+            });
+            if (user) {
+                const hashedPassword = await bcrypt.hash(userData.password, 10); 
+
+                await user.update({
+                    password: hashedPassword, 
+                });
+                
+                return {
+                    "code": 200,
+                    "data": user
+                };
+            } else {
+                return {
+                    "code": 403,
+                    "data": "User already setted"
+                };
+            }   
         } catch (error) {
             return {
                 "code": 500,
@@ -103,6 +134,15 @@ class UserRepository {
         try {
           const user = await User.findByPk(userId);
           return user;
+        } catch (error) {
+          throw new Error(`Unable to fetch card: ${error}`);
+        }
+    }
+
+    async getAllUsers() {
+        try {
+          const users = await User.findAll();
+          return users;
         } catch (error) {
           throw new Error(`Unable to fetch card: ${error}`);
         }
