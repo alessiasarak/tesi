@@ -1,62 +1,42 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <div class="content">
   <div class="menu">
     <app-hamburger-menu></app-hamburger-menu>
   </div>
-  <div class="header">
-    <img src="{{ myCard.img }}">
-    <h4>{{ myCard.title }}</h4>
-    <h5>{{ myCard.subtitle }}</h5>
 
-    <button class="add-contact">AGGIUNGI AI CONTATTI</button>
-  </div>
-  <hr>
-  <div class="center">
-    <div *ngFor="let email of myCard.email" class="mydata">
-      <mat-icon aria-hidden="false" fontIcon="email"></mat-icon>
-      <span>{{ email.email }}</span>
+  <div class="flex flex-col mb-2">
+    <div class="flex flex-col w-72 items-center text-left">
+      <img src="{{ myCard.img }}" class="flex h-1/4  mb-3">
+      <h4 class="flex h-1/4 mb-3 font-bold">{{ myCard.title }}</h4>
+      <h5 class="flex h-1/4 mb-3">{{ myCard.subtitle }}</h5>
+
+      <button class="add-contact flex h-1/4">AGGIUNGI AI CONTATTI</button>
     </div>
-    <div *ngFor="let number of myCard.phone_number" class="mydata">
-      <mat-icon aria-hidden="false" fontIcon="phone"></mat-icon>
-      <span>{{ number.phone_number }}</span>
+
+    <hr class="flex mt-3 mb-3">
+
+    <div class="center" class="flex flex-col">
+      <div *ngFor="let email of myCard.email" class="flex flex-row mb-3" >
+        <mat-icon aria-hidden="false" fontIcon="email" class="flex"></mat-icon>
+        <span class="flex ml-3">{{ email.email }}</span>
+      </div>
+
+      <div *ngFor="let number of myCard.phone_number" class="flex flex-row mb-3">
+        <mat-icon aria-hidden="false" fontIcon="phone" class="flex"></mat-icon>
+        <span class="flex ml-3">{{ number.phone_number }}</span>
+      </div>
+
+      <div *ngFor="let website of myCard.link" class="flex flex-row mb-3">
+        <mat-icon aria-hidden="false" fontIcon="link" class="flex"></mat-icon>
+        <a href="https://{{ website.link }}" _target="_blank" class="flex ml-3">{{ website.link }}</a>
+      </div>
     </div>
-    <div *ngFor="let website of myCard.link" class="mydata">
-      <mat-icon aria-hidden="false" fontIcon="link"></mat-icon>
-      <a href="https://{{ website.link }}" _target="_blank">{{ website.link }}</a>
-    </div>
-  </div>
-  <hr>
-  <div class="footer">
-    <div class="row">
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.facebook">
-        <a href="{{ myCard.facebook }}" target="_blank">
-          <mat-icon aria-hidden="false" fontIcon="facebook"></mat-icon>
-        </a>
-      </div>
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.instagram">
-        <a href="{{ myCard.instagram }}" target="_blank">
-          <!--<mat-icon aria-hidden="false" fontIcon="instagram"></mat-icon>-->
-        </a>
-      </div>
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.linkedin">
-        <a href="{{ myCard.linkedin }}" target="_blank">
-          <!--<mat-icon aria-hidden="false" fontIcon="linkedin"></mat-icon>-->
-        </a>
-      </div>
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.whatsapp">
-        <a href="{{ myCard.whatsapp }}" target="_blank">
-          <mat-icon aria-hidden="false" fontIcon="whatsapp"></mat-icon>
-        </a>
-      </div>
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center" *ngIf="myCard.youtube">
-        <a href="{{ myCard.youtube }}" target="_blank">
-          <mat-icon aria-hidden="false" fontIcon="youtube"></mat-icon>
-        </a>
-      </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center">
-      Powered by Hexcard
+
+    <hr class="flex mt-3 mb-3">
+
+    <div class="flex w-full items-center text-center">
+      <div class="flex">Powered by Hexcard</div>
     </div>
   </div>
 </div>
