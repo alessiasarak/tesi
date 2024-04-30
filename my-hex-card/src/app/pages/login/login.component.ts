@@ -58,4 +58,8 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
     console.log(this.showPassword);
   }
+
+  forgotPassword(){
+    this.router.navigateByUrl("/forgot-password");
+  }
 }
