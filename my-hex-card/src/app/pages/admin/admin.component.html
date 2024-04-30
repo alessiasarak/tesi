@@ -1,40 +1,43 @@
-<div class="container">
-    
-    <div class="row">
-        <div class="col-sm">
-          ID
-        </div>
-        <div class="col-sm">
-          Email
-        </div>
-        <div class="col-sm">
-          nome
-        </div>
-        <div class="col-sm">
-          Cognome
-        </div>
-        <div class="col-sm">
-          Ruolo
-        </div>
+<div class="p-10">
+  <div class="flex flex-col border ">
+      <div class="flex flex-row font-bold">
+          <div class="flex w-1/5 border p-2">
+            ID
+          </div>
+          <div class="flex w-1/5 border p-2">
+            Email
+          </div>
+          <div class="flex w-1/5 border p-2">
+            Nome
+          </div>
+          <div class="flex w-1/5 border p-2">
+            Cognome
+          </div>
+          <div class="flex w-1/5 border p-2">
+            Ruolo
+          </div>
       </div>
-    <div class="row" *ngFor="let user of users">
-      <div class="col-sm">
-        {{ user.id }}
-      </div>
-      <div class="col-sm">
-        {{ user.email }}
-      </div>
-      <div class="col-sm">
-        {{ user.name }}
-      </div>
-      <div class="col-sm">
-        {{ user.surname }}
-      </div>
-      <div class="col-sm">
-        {{ user.fk_role }}
-      </div>
-    </div>
 
-    <a href="/add-user">Aggiungi utente</a>
-    <button (onclick)="logout()">Logout</button>
+      <div class="flex flex-row" *ngFor="let user of users">
+        <div class="flex w-1/5 border p-2">
+          {{ user.id }}
+        </div>
+        <div class="flex w-1/5 border p-2">
+          {{ user.email }}
+        </div>
+        <div class="flex w-1/5 border p-2">
+          {{ user.name }}
+        </div>
+        <div class="flex w-1/5 border p-2">
+          {{ user.surname }}
+        </div>
+        <div class="flex w-1/5 border p-2">
+          {{ user.fk_role }}
+        </div>
+      </div>
+  </div>
+  <div class="flex flex-col w-full items-center">
+    <button (click)="addUser()" class="bg-slate-200 w-44 rounded-3xl mt-6 mb-6 p-2">Aggiungi utente</button>
+    <button (click)="logout()" class="bg-slate-200 w-44 rounded-3xl p-2">Logout</button>
+  </div>
 </div>

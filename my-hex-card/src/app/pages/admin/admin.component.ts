@@ -3,6 +3,7 @@ import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user/user.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +15,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class AdminComponent {
   users : User[] = [];
 
-  constructor (private authService: AuthService, private service: UserService){}
+  constructor (private router: Router, private authService: AuthService, private service: UserService){}
 
   ngOnInit(): void {
     this.service.getAllUsers().subscribe((data) => {
@@ -24,5 +25,10 @@ export class AdminComponent {
 
   logout(){
     this.authService.logout();
+    this.router.navigateByUrl("/login");
+  }
+
+  addUser(){
+    this.router.navigateByUrl("/add-user");
   }
 }
