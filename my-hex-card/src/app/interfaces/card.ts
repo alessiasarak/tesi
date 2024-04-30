@@ -12,6 +12,7 @@ export interface Card {
     linkedin: string,
     whatsapp: string,
     youtube: string,
+    active: boolean,
 
     fk_id_user: number,
     email: Email[],

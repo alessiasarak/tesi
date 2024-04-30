@@ -1,0 +1,40 @@
+<div class="container">
+    
+    <div class="row">
+        <div class="col-sm">
+          ID
+        </div>
+        <div class="col-sm">
+          Email
+        </div>
+        <div class="col-sm">
+          nome
+        </div>
+        <div class="col-sm">
+          Cognome
+        </div>
+        <div class="col-sm">
+          Ruolo
+        </div>
+      </div>
+    <div class="row" *ngFor="let user of users">
+      <div class="col-sm">
+        {{ user.id }}
+      </div>
+      <div class="col-sm">
+        {{ user.email }}
+      </div>
+      <div class="col-sm">
+        {{ user.name }}
+      </div>
+      <div class="col-sm">
+        {{ user.surname }}
+      </div>
+      <div class="col-sm">
+        {{ user.fk_role }}
+      </div>
+    </div>
+
+    <a href="/add-user">Aggiungi utente</a>
+    <button (onclick)="logout()">Logout</button>
+</div>

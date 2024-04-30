@@ -8,16 +8,15 @@ import { CardService } from '../../services/card.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThemeService } from '../../services/theme/theme.service';
 import { MatIconModule } from '@angular/material/icon';
- 
+
 @Component({
-  selector: 'app-main',
+  selector: 'app-preview-card',
   standalone: true,
   imports: [ CommonModule, SocialMediaFooterComponent, HamburgerMenuComponent, HttpClientModule, MatIconModule ],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.css'
+  templateUrl: './preview-card.component.html',
+  styleUrl: './preview-card.component.css'
 })
-export class MainComponent implements OnInit{
-
+export class PreviewCardComponent {
   constructor(private service: CardService, private route: ActivatedRoute, private themeService: ThemeService, private router: Router){}
   
   myCard: Card = {

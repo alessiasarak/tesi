@@ -33,6 +33,7 @@ exports.getCardById = asyncHandler(async (req, res) => {
             linkedin: card.linkedin,
             whatsapp: card.whatsapp,
             youtube: card.youtube,
+            active: card.active,
             fk_id_user: card.fk_id_user,
 
             email: emails,
@@ -88,8 +89,9 @@ exports.putCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
 
     const cardId = req.params.id;
-    const newData = req.body;
-    const updated = await cardRepository.setCard(cardId, newData, req.session.id);
+    const newData = req.body.entity;
+
+    const updated = await cardRepository.setCard(cardId, newData, req.params.idUser);
     if (updated) {
         res.status(200).json({ message: 'Card updated successfully' });
     } else {

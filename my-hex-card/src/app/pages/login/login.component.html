@@ -7,7 +7,7 @@
           </div>
 
           <div class="card-body">
-            <form (ngSubmit)="onSubmit()" id="loginForm">
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
               <div class="mb-3">
                 <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
               </div>
@@ -23,8 +23,6 @@
               </div>
               <button type="submit" class="btn btn-primary">Accedi</button>
             </form>
-            <hr>
-            <p class="text-center">Non hai un account? <a href="/register">Registrati</a></p>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@
                     <h3>Impostazioni dati carta</h3>
                 </div>
                 <div class="card">
-                    <form>
+                    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
                         <div class="row mt-5 align-items-center">
                             <div class="col-md-3 text-center mb-5">
                                 <div class="avatar avatar-xl">
@@ -18,36 +18,36 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="title">Title</label>
-                                <input type="text" id="title" class="form-control" />
+                                <input type="text" id="title" class="form-control" formControlName="title" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="subtitle">Sbtitle</label>
-                                <input type="text" id="subtitle" class="form-control" />
+                                <label for="subtitle">Subtitle</label>
+                                <input type="text" id="subtitle" class="form-control" formControlName="subtitle" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" />
+                            <input type="email" class="form-control" id="inputEmail" formControlName="emails" />
                         </div>
                         <div class="form-group">
                             <label for="inputPhoneNumber">Phone number</label>
-                            <input type="text" class="form-control" id="inputPhoneNumber" />
+                            <input type="text" class="form-control" id="inputPhoneNumber" formControlName="phoneNumbers" />
                         </div>
                         <div class="form-group">
                             <label for="inputLink">Link</label>
-                            <input type="text" class="form-control" id="inputLink" />
+                            <input type="text" class="form-control" id="inputLink" formControlName="links" />
                         </div>
                         <div class="form-group">
                             <label for="inputInstagramLink">Link Instagram  (lasciare vuoto se nessuno)</label>
-                            <input type="text" class="form-control" id="inputInstagramLink" />
+                            <input type="text" class="form-control" id="inputInstagramLink" formControlName="instagram" />
                         </div>
                         <div class="form-group">
                             <label for="inputFacebookLink">Link Facebook  (lasciare vuoto se nessuno)</label>
-                            <input type="text" class="form-control" id="inputFacebookLink" />
+                            <input type="text" class="form-control" id="inputFacebookLink" formControlName="facebook" />
                         </div>
                         <div class="form-group">
                             <label for="inputLinkedinLink">Link Linkedin (lasciare vuoto se nessuno)</label>
-                            <input type="text" class="form-control" id="inputLinkedinLink" />
+                            <input type="text" class="form-control" id="inputLinkedinLink" formControlName="linkedin" />
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Save Change</button>
