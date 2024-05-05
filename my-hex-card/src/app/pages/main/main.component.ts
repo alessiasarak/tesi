@@ -60,7 +60,7 @@ export class MainComponent implements OnInit{
         this.myButtonClass = "add-contact flex h-1/4 text-[#fff]" + " bg-[" + this.myCard.button_color + "]";
 
         this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
-        this.myButtonStyle = "; background-color: " + this.myCard.button_color + ";";
+        this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
       });
     });
   }
