@@ -23,27 +23,22 @@ export class CardStyleSettingsComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       //let cardId = params['idCard']; 
-      this.service.getCard("1").subscribe((data) => {
+      this.service.getCard(localStorage.getItem("idCard")!).subscribe((data) => {
         data.img = 'assets/img/facebook.png';
         
         this.style = data;
-
-        console.log(this.style);
-
-        this.myMainClass += "bg-[" + this.style.background_color + "]";
-        this.myMainClass += " text-[" + this.style.text_color + "]";
-        this.myButtonClass += "add-contact text-[#fff]" + " bg-[" + this.style.button_color + "]";
-
         
         this.myMainStyle = "color: " + this.style.text_color + "; background-color: " + this.style.background_color + ";";
         this.myButtonStyle = "background-color: " + this.style.button_color + ";";
+        
+        this.assignValues(data);
       });
     });
   }
 
   //properties
   myMainClass : string = "flex flex-col w-96 shadow-xl p-8 rounded-3xl ";
-  myButtonClass : string = "flex h-1/4 ";
+  myButtonClass : string = "add-contact flex h-1/4 ";
   myMainStyle : string = "";
   myButtonStyle : string = "";
 
@@ -76,8 +71,9 @@ export class CardStyleSettingsComponent {
   }
 
   assignValues(style: Card){
-    this.myForm.setValue({
-      backgrondColor: style.background_color,
+    console.log(style)
+    this.myForm.patchValue({
+      backgroundColor: style.background_color,
       textColor: style.text_color,
       buttonColor: style.button_color,
     });
