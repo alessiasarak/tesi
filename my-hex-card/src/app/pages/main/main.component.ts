@@ -23,6 +23,8 @@ export class MainComponent implements OnInit{
 
   myMainClass : string = "";
   myButtonClass : string = "";
+  myMainStyle : string = "";
+  myButtonStyle : string = "";
 
   myCard: Card = {
     id: 0,
@@ -54,11 +56,11 @@ export class MainComponent implements OnInit{
         if(!data.active) this.router.navigateByUrl("/register");
         this.myCard = data;
         
-        this.myMainClass = "content h-full bg-[" + this.myCard.background_color + "] text-[" + this.myCard.text_color + "]";
-        console.log(this.myMainClass);
-
+        this.myMainClass = "content h-full";
         this.myButtonClass = "add-contact flex h-1/4 text-[#fff]" + " bg-[" + this.myCard.button_color + "]";
-        console.log(this.myButtonClass);
+
+        this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
+        this.myButtonStyle = "; background-color: " + this.myCard.button_color + ";";
       });
     });
   }

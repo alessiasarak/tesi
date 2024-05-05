@@ -31,7 +31,7 @@
 </div>
 
 <div class="flex flex-col mt-10 items-center">
-    <div [ngClass]="myMainClass">
+    <div [ngClass]="myMainClass" [style]="myMainStyle">
         
         <h3 class="flex text-xl font-bold mb-3">
             Preview
@@ -45,7 +45,7 @@
                 <h4 class="flex h-1/4 mb-1 font-bold text-left text-2xl">{{ style.title }}</h4>
                 <h5 class="flex h-1/4 mb-3 text-left">{{ style.subtitle }}</h5>
 
-                <button [ngClass]="myButtonClass">AGGIUNGI AI CONTATTI</button>
+                <button [ngClass]="myButtonClass" [style]="myButtonStyle">AGGIUNGI AI CONTATTI</button>
             </div>
 
             <hr class="flex mt-3 mb-3">

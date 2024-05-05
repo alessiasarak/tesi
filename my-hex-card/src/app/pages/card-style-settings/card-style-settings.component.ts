@@ -32,9 +32,11 @@ export class CardStyleSettingsComponent {
 
         this.myMainClass += "bg-[" + this.style.background_color + "]";
         this.myMainClass += " text-[" + this.style.text_color + "]";
-        console.log(this.myButtonClass);
-        console.log(this.myMainClass);
-        this.myButtonClass += "text-[#fff]" + " bg-[" + this.style.button_color + "]";
+        this.myButtonClass += "add-contact text-[#fff]" + " bg-[" + this.style.button_color + "]";
+
+        
+        this.myMainStyle = "color: " + this.style.text_color + "; background-color: " + this.style.background_color + ";";
+        this.myButtonStyle = "background-color: " + this.style.button_color + ";";
       });
     });
   }
@@ -42,6 +44,8 @@ export class CardStyleSettingsComponent {
   //properties
   myMainClass : string = "flex flex-col w-96 shadow-xl p-8 rounded-3xl ";
   myButtonClass : string = "flex h-1/4 ";
+  myMainStyle : string = "";
+  myButtonStyle : string = "";
 
   myForm : FormGroup = this.fb.group({
     backgroundColor: [''],
