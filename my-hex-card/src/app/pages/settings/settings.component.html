@@ -1,30 +1,22 @@
-<div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-4">
-        <div class="card">
-          <div class="card-header">
-            <h3>Impostazioni</h3>
-          </div>
+<div class="flex flex-col mt-10 items-center">
+  <div class="flex flex-col w-80 shadow-xl p-8 rounded-3xl">
+    <h3 class="flex text-xl font-bold mb-3">Impostazioni</h3>
+    
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="/profile-settings">Profilo personale</a>
+      </li>
+      <li class="list-group-item">
+        <a href="/card-settings">Dati visualizzati dalla carta</a>
+      </li>
+      <li class="list-group-item">
+        <a href="/card-style-settings">Stile della carta</a>
+      </li>
+    </ul>
 
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <a href="/profile-settings">Impostazioni del profilo personale</a>
-              </li>
-              <li class="list-group-item">
-                <a href="/card-settings">Impostazioni dei dati visualizzati dalla carta</a>
-              </li>
-              <li class="list-group-item">
-                <a href="/card-style-settings">Impostazioni dello stile della carta</a>
-              </li>
-
-              <li class="list-group-item">
-                <a href="/login" (click)="logout()">Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <div class="flex flex-col items-center mt-4">
+      <button (click)="logout()" class="bg-slate-200 w-44 rounded-3xl p-2">Logout</button>
     </div>
   </div>
+</div>
   

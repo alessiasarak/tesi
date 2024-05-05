@@ -6,11 +6,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Style } from '../../interfaces/style';
+import { MainComponent } from '../main/main.component';
+import { MyButtonComponent } from '../../component/my-button/my-button.component';
 
 @Component({
   selector: 'app-card-style-settings',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent ],
   templateUrl: './card-style-settings.component.html',
   styleUrl: './card-style-settings.component.css'
 })
