@@ -24,12 +24,20 @@ class UserRepository {
             });
 
             let cardRepository = new CardRepository();
-            cardRepository.createCard(userData.name + " " + userData.surname, userData.email, newUser.id);
-            
-            return {
-                "code": 200,
-                "data": newUser
-            };
+            let newCard = await cardRepository.createCard(userData.name + " " + userData.surname, userData.email, newUser.id);
+
+            console.log(newCard);
+            if(newCard.code == 200) {
+                return {
+                    "code": 200,
+                    "data": newUser
+                };
+            }else {
+                return {
+                    "code": 500,
+                    "data": "Internal server error"
+                };
+            }
         } catch (error) {
             return {
                 "code": 500,

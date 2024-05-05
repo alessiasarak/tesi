@@ -15,6 +15,7 @@ class CardRepository {
 
   async createCard(title, subtitle, idUser) {
     try {
+      console.log(idUser)
         let newCard = await Card.create({
             title: title,
             subtitle: subtitle,
@@ -26,6 +27,7 @@ class CardRepository {
             "data": newCard
         };
     } catch (error) {
+      console.log(error);
         return {
             "code": 500,
             "data": "Internal server error"
@@ -82,11 +84,22 @@ class CardRepository {
     }
   }
 
-  setStyleCard(idCard, styleName) {
+  setStyleCard(idCard, newData, idUser) {
     try {
-      const updated = Card.update({ fk_name_style: styleName }, {
-        where: { id: idCard },
-      });
+      const updated = Card.update(
+        {
+          background_color: newData.background_color,
+          text_color: newData.text_color,
+          button_color: newData.button_color
+        }, 
+        {
+          where: { 
+            id: idCard, 
+            fk_id_user: idUser
+          },
+        }
+      );
+
       return updated;
     } catch (error) {
       throw new Error(`Unable to update card style: ${error}`);
@@ -101,17 +114,6 @@ class CardRepository {
       return updated;
     } catch (error) {
       throw new Error(`Unable to update card active: ${error}`);
-    }
-  }
-
-  getStyleCard(idCard) {
-    try {
-      const style = Card.findByPk(idCard, {
-        attributes: ['fk_name_style'],
-      });
-      return style;
-    } catch (error) {
-      throw new Error(`Unable to fetch card style: ${error}`);
     }
   }
 };

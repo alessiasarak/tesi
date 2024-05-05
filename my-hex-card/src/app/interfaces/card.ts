@@ -17,5 +17,9 @@ export interface Card {
     fk_id_user: number,
     email: Email[],
     phone_number: PhoneNumber[],
-    link: Link[]
+    link: Link[],
+
+    background_color: string,
+    text_color: string,
+    button_color: string
 }

@@ -56,7 +56,10 @@ export class CardSettingsComponent {
     email: [],
     phone_number: [],
     link: [],
-    active: false
+    active: false,
+    background_color: '',
+    text_color: '',
+    button_color: ''
   };
 
   assignValues(card: Card){
@@ -69,7 +72,7 @@ export class CardSettingsComponent {
       whatsapp: card.whatsapp,
       youtube: card.youtube,
       emails: card.email.map(value => value.email).join(","),
-      phoneNumbers: card.phone_number.map(value => value.phone_number).join(","),
+      phoneNumbers: card.phone_number.map(value => value.number).join(","),
       links: card.link.map(value => value.link).join(",")
     });
   }

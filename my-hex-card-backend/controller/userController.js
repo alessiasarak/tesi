@@ -6,7 +6,7 @@ exports.createUser = asyncHandler(async (req, res) => {
     var data = req.body.entity;
 
     let userRepository = new UserRepository();
-    console.log(data);
+    
     let response = await userRepository.createUser(data);
 
     res.status(response.code).json(response.data);
@@ -31,7 +31,6 @@ exports.login = asyncHandler(async (req, res) => {
         if (response.code == 200) {
             req.session.idUser = response.data.dataValues.id;
             req.session.save();
-            console.log(req.session.idUser);
         }
         
         res.status(response.code).json(response.data);

@@ -38,7 +38,11 @@ exports.getCardById = asyncHandler(async (req, res) => {
 
             email: emails,
             phone_number: phoneNumbers,
-            link: links
+            link: links,
+
+            background_color: card.background_color,
+            text_color: card.text_color,
+            button_color: card.button_color
         });
     } else {
         res.status(404).json({ message: 'Card not found' });
@@ -92,6 +96,19 @@ exports.putCard = asyncHandler(async (req, res) => {
     const newData = req.body.entity;
 
     const updated = await cardRepository.setCard(cardId, newData, req.params.idUser);
+    if (updated) {
+        res.status(200).json({ message: 'Card updated successfully' });
+    } else {
+        res.status(404).json({ message: 'Card not found' });
+    }
+});
+exports.putStyleCard = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+
+    const cardId = req.params.id;
+    const newData = req.body.entity;
+
+    const updated = await cardRepository.setStyleCard(cardId, newData, req.params.idUser);
     if (updated) {
         res.status(200).json({ message: 'Card updated successfully' });
     } else {

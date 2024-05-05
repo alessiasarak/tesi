@@ -15,6 +15,7 @@ router.get("/phonenumber/:id", cardController.getPhoneNumbersByCardId);
 router.get("/link/:id", cardController.getLinksByCardId);
 
 router.put('/card/:id/:idUser', cardController.putCard);
+router.put('/card/style/:id/:idUser', cardController.putStyleCard);
 
 router.post('/email/:id', cardController.postEmail);
 router.post('/phonenumber/:id', cardController.postPhoneNumber);

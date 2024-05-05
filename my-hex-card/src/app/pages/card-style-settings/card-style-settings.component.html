@@ -10,17 +10,17 @@
             
             <div class="flex flex-row mb-3 w-80">
                 <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
-                <input type="color" id="backgroundColor" formControlName="backgroundColor" />
+                <input type="color" id="backgroundColor" formControlName="backgroundColor" [value]="style.background_color" />
             </div>
             
             <div class="flex flex-row mb-3 w-80">
                 <label for="backgroundColor" class="flex w-4/5">Colore del testo: </label>
-                <input type="color" id="textColor" formControlName="textColor" />
+                <input type="color" id="textColor" formControlName="textColor" [value]="style.text_color" />
             </div>
             
             <div class="flex flex-row mb-3 w-80">
                 <label for="backgroundColor" class="flex w-4/5">Colore del bottone: </label>
-                <input type="color" id="buttonColor" formControlName="buttonColor" />
+                <input type="color" id="buttonColor" formControlName="buttonColor"  [value]="style.button_color" />
             </div>
             
             <div class="flex flex-col items-center">
@@ -28,4 +28,50 @@
             </div>
         </form>
     </div>    
+</div>
+
+<div class="flex flex-col mt-10 items-center">
+    <div [ngClass]="myMainClass">
+        
+        <h3 class="flex text-xl font-bold mb-3">
+            Preview
+        </h3>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <div class="flex flex-col mb-2">
+            <div class="flex flex-col items-center">
+                <img src="{{ style.img }}" class="flex h-20 mb-3 rounded-full">
+                <h4 class="flex h-1/4 mb-1 font-bold text-left text-2xl">{{ style.title }}</h4>
+                <h5 class="flex h-1/4 mb-3 text-left">{{ style.subtitle }}</h5>
+
+                <button [ngClass]="myButtonClass">AGGIUNGI AI CONTATTI</button>
+            </div>
+
+            <hr class="flex mt-3 mb-3">
+
+            <div class="center" class="flex flex-col">
+                <div *ngFor="let email of style.email" class="flex flex-row mb-3" >
+                    <mat-icon aria-hidden="false" fontIcon="email" class="flex"></mat-icon>
+                    <span class="flex ml-3">{{ email.email }}</span>
+                </div>
+
+                <div *ngFor="let number of style.phone_number" class="flex flex-row mb-3">
+                    <mat-icon aria-hidden="false" fontIcon="phone" class="flex"></mat-icon>
+                    <span class="flex ml-3">{{ number.number }}</span>
+                </div>
+
+                <div *ngFor="let website of style.link" class="flex flex-row mb-3">
+                    <mat-icon aria-hidden="false" fontIcon="link" class="flex"></mat-icon>
+                    <a href="https://{{ website.link }}" _target="_blank" class="flex ml-3">{{ website.link }}</a>
+                </div>
+            </div>
+
+            <hr class="flex mt-3 mb-3">
+
+            <div class="flex w-full items-center text-center">
+                <div class="flex">Powered by Hexcard</div>
+            </div>
+        </div>
+    </div>
 </div>

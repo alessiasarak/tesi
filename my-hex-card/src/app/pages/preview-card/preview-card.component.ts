@@ -34,7 +34,11 @@ export class PreviewCardComponent {
     email: [],
     phone_number: [],
     link: [],
-    active: false
+    active: false,
+    
+    background_color: '',
+    text_color: '',
+    button_color: ''
   }
   
   ngOnInit(): void {

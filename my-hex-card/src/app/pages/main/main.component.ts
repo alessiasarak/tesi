@@ -20,6 +20,10 @@ export class MainComponent implements OnInit{
 
   constructor(private service: CardService, private route: ActivatedRoute, private themeService: ThemeService, private router: Router){}
   
+
+  myMainClass : string = "";
+  myButtonClass : string = "";
+
   myCard: Card = {
     id: 0,
     img: '',
@@ -35,14 +39,13 @@ export class MainComponent implements OnInit{
     email: [],
     phone_number: [],
     link: [],
-    active: false
+    active: false,
+    background_color: '',
+    text_color: '',
+    button_color: ''
   }
   
   ngOnInit(): void {
-    this.themeService.setBackgroundColor("#fff");
-    this.themeService.setTextColor("#000");
-    this.themeService.setButtonColor("#fff");
-    
     this.route.params.subscribe(params => {
       let cardId = params['idCard']; 
       this.service.getCard(cardId).subscribe((data) => {
@@ -50,6 +53,12 @@ export class MainComponent implements OnInit{
         
         if(!data.active) this.router.navigateByUrl("/register");
         this.myCard = data;
+        
+        this.myMainClass = "content h-full bg-[" + this.myCard.background_color + "] text-[" + this.myCard.text_color + "]";
+        console.log(this.myMainClass);
+
+        this.myButtonClass = "add-contact flex h-1/4 text-[#fff]" + " bg-[" + this.myCard.button_color + "]";
+        console.log(this.myButtonClass);
       });
     });
   }
