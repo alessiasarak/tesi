@@ -35,11 +35,12 @@ class CardRepository {
     }
   }
 
-  setCard(idCard, newData, idUser) {
+  async setCard(idCard, newData, idUser) {
     try {
       let emails = newData.email;
       let links = newData.link;
       let phoneNumbers = newData.phone_number;
+      console.log(newData)
 
       const updated = Card.update(
         {
@@ -61,21 +62,21 @@ class CardRepository {
       );
 
       let emailRepository = new EmailRepository();
-      emailRepository.deleteAll(idCard);
+      await emailRepository.deleteAll(idCard);
       for(let i = 0; i < emails.length; i++){
-        emailRepository.add(emails[i].email, idCard);
+        await emailRepository.add(emails[i].email, idCard);
       }
 
       let linkRepository = new LinkRepository();
-      linkRepository.deleteAll(idCard);
+      await linkRepository.deleteAll(idCard);
       for(let i = 0; i < links.length; i++){
-        linkRepository.add(links[i].link, idCard);
+        await linkRepository.add(links[i].link, idCard);
       }
 
       let phoneNumberRepository = new PhoneNumberRepository();
-      phoneNumberRepository.deleteAll(idCard);
+      await phoneNumberRepository.deleteAll(idCard);
       for(let i = 0; i < phoneNumbers.length; i++){
-        phoneNumberRepository.add(phoneNumbers[i].phone_number, idCard);
+        await phoneNumberRepository.add(phoneNumbers[i].number, idCard);
       }
       
       return updated;
