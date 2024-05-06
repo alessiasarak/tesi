@@ -40,7 +40,8 @@ export class AddUserComponent {
     this.user.fk_role = this.myForm.value.role;
     
     let response = await this.service.create(this.user);
+    console.log(response);
     
-    if(response) this.router.navigateByUrl("/admin");
+    if(response) this.router.navigateByUrl("/user-cards/"+response.id+"/"+response.email);
   }
 }
