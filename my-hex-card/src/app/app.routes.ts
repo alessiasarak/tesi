@@ -13,7 +13,6 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { AuthGuard } from './auth-guard';
 import { AddUserComponent } from './pages/add-user/add-user.component';
 import { AdminAuthGuard } from './admin-auth-guard';
-import { PreviewCardComponent } from './pages/preview-card/preview-card.component';
 import { RedirectGuard } from './redirect-guard';
 
 export const routes: Routes = [
@@ -27,7 +26,6 @@ export const routes: Routes = [
     { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
     { path: 'card-settings', component: CardSettingsComponent, canActivate: [AuthGuard] },
     { path: 'card-style-settings', component: CardStyleSettingsComponent, canActivate: [AuthGuard] },
-    { path: 'preview-card/:idCard', component: PreviewCardComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     

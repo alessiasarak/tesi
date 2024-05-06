@@ -53,8 +53,10 @@ export class LoginComponent {
       localStorage.setItem("role", this.loggedUser.fk_role.toString());
 
       //setting in the locale storage all the card of the user logged
-      let card = await this.cardService.getCardByUser(this.loggedUser.id.toString());
-      localStorage.setItem('card', JSON.stringify(card.id));
+      if(this.loggedUser.fk_role.toString() != "ADMIN"){
+        let card = await this.cardService.getCardByUser(this.loggedUser.id.toString());
+        localStorage.setItem('card', JSON.stringify(card.id));
+      }
 
       this.router.navigateByUrl("/settings");
     }

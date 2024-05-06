@@ -23,7 +23,7 @@ export class CardStyleSettingsComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       //let cardId = params['idCard']; 
-      this.service.getCard(localStorage.getItem("idCard")!).subscribe((data) => {
+      this.service.getCard(localStorage.getItem("card")!).subscribe((data) => {
         data.img = 'assets/img/facebook.png';
         
         this.style = data;
@@ -71,7 +71,6 @@ export class CardStyleSettingsComponent {
   }
 
   assignValues(style: Card){
-    console.log(style)
     this.myForm.patchValue({
       backgroundColor: style.background_color,
       textColor: style.text_color,
@@ -89,6 +88,10 @@ export class CardStyleSettingsComponent {
     
     //let response = await this.service.putCard(this.card);
     
-    if(response) this.router.navigateByUrl("/card-style-settings");
+    if(response) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(["/card-style-settings"]);
+    }
   }
 }

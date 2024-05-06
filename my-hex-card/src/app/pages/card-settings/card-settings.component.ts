@@ -20,7 +20,7 @@ export class CardSettingsComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.service.getCard(localStorage.getItem("idCard")!).subscribe((data) => {
+      this.service.getCard(localStorage.getItem("card")!).subscribe((data) => {
         data.img = 'assets/img/facebook.png';
         
         this.assignValues(data);
