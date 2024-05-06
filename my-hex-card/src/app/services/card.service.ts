@@ -21,6 +21,10 @@ export class CardService extends CrudService<Card> {
     return await lastValueFrom(this.get("user/ " + idUser));
   }
 
+  getAllCards() {
+    return this.getList();
+  }
+
   async putCard(card: Card) : Promise<Card | null> {
     let idCard = localStorage.getItem("card");
     if(idCard != undefined){

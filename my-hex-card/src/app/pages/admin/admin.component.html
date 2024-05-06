@@ -4,7 +4,7 @@
           <div class="flex w-1/12 border p-2">
             ID
           </div>
-          <div class="flex w-1/6 border p-2">
+          <div class="flex w-3/12 border p-2">
             Email
           </div>
           <div class="flex w-1/6 border p-2">
@@ -21,24 +21,26 @@
           </div>
       </div>
 
-      <div class="flex flex-row" *ngFor="let user of users">
-        <div class="flex w-1/12 border p-2">
-          {{ user.id }}
-        </div>
-        <div class="flex w-1/6 border p-2">
-          {{ user.email }}
-        </div>
-        <div class="flex w-1/6 border p-2">
-          {{ user.name }}
-        </div>
-        <div class="flex w-1/6 border p-2">
-          {{ user.surname }}
-        </div>
-        <div class="flex w-1/6 border p-2">
-          {{ user.fk_role }}
-        </div>
-        <div class="flex w-1/6 border p-2">
-          {{ user.fk_role }}
+      <div class="flex flex-col" *ngFor="let user of users">
+        <div class="flex flex-row" *ngIf="user.fk_role.toString() != 'ADMIN'">
+          <div class="flex w-1/12 border p-2">
+            {{ user.id }}
+          </div>
+          <div class="flex w-3/12 border p-2">
+            {{ user.email }}
+          </div>
+          <div class="flex w-1/6 border p-2">
+            {{ user.name }}
+          </div>
+          <div class="flex w-1/6 border p-2">
+            {{ user.surname }}
+          </div>
+          <div class="flex w-1/6 border p-2">
+            {{ user.fk_role }}
+          </div>
+          <div class="flex w-1/6 border p-2">
+            <button (click)="seeUserCard(user.id, user.email)" class="bg-slate-200 w-44 rounded-3xl p-2">Vedi carte</button>
+          </div>
         </div>
       </div>
   </div>

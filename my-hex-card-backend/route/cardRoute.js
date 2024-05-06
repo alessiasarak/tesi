@@ -9,6 +9,7 @@ router.get("/", (req, res) => {
 });
 
 //getters
+router.get("/card", cardController.getAllCards);
 router.get("/card/:id", cardController.getCardById);
 router.get("/card/user/:id", cardController.getCardByUser);
 router.get("/email/:id", cardController.getEmailsByCardId);

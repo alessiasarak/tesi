@@ -4,6 +4,8 @@ import { UserService } from '../../services/user/user.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { Card } from '../../interfaces/card';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +17,7 @@ import { Router } from '@angular/router';
 export class AdminComponent {
   users : User[] = [];
 
-  constructor (private router: Router, private authService: AuthService, private service: UserService){}
+  constructor (private router: Router, private authService: AuthService, private service: UserService, private cardService : CardService){}
 
   ngOnInit(): void {
     this.service.getAllUsers().subscribe((data) => {
@@ -30,5 +32,9 @@ export class AdminComponent {
 
   addUser(){
     this.router.navigateByUrl("/add-user");
+  }
+
+  async seeUserCard(userId : number, userEmail : string){
+    this.router.navigateByUrl("/user-cards/"+userId+"/"+userEmail);
   }
 }

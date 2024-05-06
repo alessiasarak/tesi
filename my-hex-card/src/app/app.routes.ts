@@ -13,6 +13,7 @@ import { AuthGuard } from './auth-guard';
 import { AddUserComponent } from './pages/add-user/add-user.component';
 import { AdminAuthGuard } from './admin-auth-guard';
 import { RedirectGuard } from './redirect-guard';
+import { UserCardsComponent } from './pages/user-cards/user-cards.component';
 
 export const routes: Routes = [
     { path: '', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'https://hexcard.ch/' } },
@@ -26,6 +27,7 @@ export const routes: Routes = [
     { path: 'card-settings', component: CardSettingsComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'user-cards/:idUser/:email', component: UserCardsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
     { path: '**', component: Error404Component },
 ];

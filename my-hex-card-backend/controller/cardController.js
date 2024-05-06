@@ -56,6 +56,52 @@ exports.getCardById = asyncHandler(async (req, res) => {
     }
 });
 
+
+exports.getAllCards = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+    let emailRepository = new EmailRepository();
+    let phoneNumberRepository = new PhoneNumberRepository();
+    let linkRepository = new LinkRepository();
+
+    const cards = await cardRepository.getAll();
+
+    if (cards) {
+        let result = [];
+
+        for(let i = 0; i < cards.length; i++){
+            let emails = await emailRepository.getAll(cards[i].id);
+            let phoneNumbers = await phoneNumberRepository.getAll(cards[i].id);
+            let links = await linkRepository.getAll(cards[i].id);
+
+            result.push({
+                id: cards[i].id,
+                img: cards[i].img,
+                title: cards[i].title,
+                subtitle: cards[i].subtitle,
+                instagram: cards[i].instagram,
+                facebook: cards[i].facebook,
+                linkedin: cards[i].linkedin,
+                whatsapp: cards[i].whatsapp,
+                youtube: cards[i].youtube,
+                active: cards[i].active,
+                fk_id_user: cards[i].fk_id_user,
+    
+                email: emails,
+                phone_number: phoneNumbers,
+                link: links,
+    
+                background_color: cards[i].background_color,
+                text_color: cards[i].text_color,
+                button_color: cards[i].button_color
+            });
+        }
+        
+        res.status(200).json(result);
+    } else {
+        res.status(404).json({ message: 'Cards not found' });
+    }
+});
+
 exports.getEmailsByCardId = asyncHandler(async (req, res) => {
     let emailRepository = new EmailRepository();
 
