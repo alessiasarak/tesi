@@ -6,7 +6,6 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ProfileSettingsComponent } from './pages/profile-settings/profile-settings.component';
 import { Error404Component } from './error/error-404/error-404.component';
 import { CardSettingsComponent } from './pages/card-settings/card-settings.component';
-import { CardStyleSettingsComponent } from './pages/card-style-settings/card-style-settings.component';
 import { provideHttpClient } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
@@ -25,7 +24,6 @@ export const routes: Routes = [
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
     { path: 'card-settings', component: CardSettingsComponent, canActivate: [AuthGuard] },
-    { path: 'card-style-settings', component: CardStyleSettingsComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     

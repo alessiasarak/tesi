@@ -22,6 +22,11 @@ export class CardSettingsComponent {
     this.route.params.subscribe(params => {
       this.service.getCard(localStorage.getItem("card")!).subscribe((data) => {
         data.img = 'assets/img/facebook.png';
+
+        this.card = data;
+
+        this.myMainStyle = "color: " + this.card.text_color + "; background-color: " + this.card.background_color + ";";
+        this.myButtonStyle = "background-color: " + this.card.button_color + ";";
         
         this.assignValues(data);
       });
@@ -29,6 +34,11 @@ export class CardSettingsComponent {
   }
 
   //properties
+  myMainClass : string = "flex flex-col w-96 shadow-xl p-8 rounded-3xl ";
+  myButtonClass : string = "add-contact flex h-1/4 ";
+  myMainStyle : string = "";
+  myButtonStyle : string = "";
+
   myForm : FormGroup = this.fb.group({
     title: [''],
     subtitle: [''],
@@ -40,6 +50,11 @@ export class CardSettingsComponent {
     emails: [''],
     phoneNumbers: [''],
     links: ['']
+  });
+  myStyleForm : FormGroup = this.fb.group({
+    backgroundColor: [''],
+    textColor: [''],
+    buttonColor: ['']
   });
 
   card: Card = {
@@ -75,6 +90,12 @@ export class CardSettingsComponent {
       phoneNumbers: card.phone_number.map(value => value.number).join(","),
       links: card.link.map(value => value.link).join(",")
     });
+
+    this.myStyleForm.patchValue({
+      backgroundColor: card.background_color,
+      textColor: card.text_color,
+      buttonColor: card.button_color,
+    });
   }
 
   async onSubmit() {
@@ -97,7 +118,25 @@ export class CardSettingsComponent {
     
     let response = await this.service.putCard(this.card);
     
-    if(response) this.router.navigateByUrl("/settings");
+    if(response) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(["/card-settings"]);
+    }
+  }
+
+  async onStyleSubmit() {
+    this.card.background_color = this.myStyleForm.value.backgroundColor;
+    this.card.text_color = this.myStyleForm.value.textColor;
+    this.card.button_color = this.myStyleForm.value.buttonColor;
+    
+    let response = await this.service.putStyleCard(this.card);
+    
+    if(response) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(["/card-settings"]);
+    }
   }
 }
 

@@ -14,7 +14,7 @@ export class UserService extends CrudService<User> {
   }
 
   getUser() {
-    return this.get("/"+localStorage.getItem("user_id")!);
+    return this.get("/" + localStorage.getItem("user_id")!);
   }
 
   getAllUsers() {

@@ -1,37 +1,43 @@
 <div class="p-10">
   <div class="flex flex-col border ">
       <div class="flex flex-row font-bold">
-          <div class="flex w-1/5 border p-2">
+          <div class="flex w-1/12 border p-2">
             ID
           </div>
-          <div class="flex w-1/5 border p-2">
+          <div class="flex w-1/6 border p-2">
             Email
           </div>
-          <div class="flex w-1/5 border p-2">
+          <div class="flex w-1/6 border p-2">
             Nome
           </div>
-          <div class="flex w-1/5 border p-2">
+          <div class="flex w-1/6 border p-2">
             Cognome
           </div>
-          <div class="flex w-1/5 border p-2">
+          <div class="flex w-1/6 border p-2">
             Ruolo
+          </div>
+          <div class="flex w-1/6 border p-2">
+            ID carte collegate
           </div>
       </div>
 
       <div class="flex flex-row" *ngFor="let user of users">
-        <div class="flex w-1/5 border p-2">
+        <div class="flex w-1/12 border p-2">
           {{ user.id }}
         </div>
-        <div class="flex w-1/5 border p-2">
+        <div class="flex w-1/6 border p-2">
           {{ user.email }}
         </div>
-        <div class="flex w-1/5 border p-2">
+        <div class="flex w-1/6 border p-2">
           {{ user.name }}
         </div>
-        <div class="flex w-1/5 border p-2">
+        <div class="flex w-1/6 border p-2">
           {{ user.surname }}
         </div>
-        <div class="flex w-1/5 border p-2">
+        <div class="flex w-1/6 border p-2">
+          {{ user.fk_role }}
+        </div>
+        <div class="flex w-1/6 border p-2">
           {{ user.fk_role }}
         </div>
       </div>
