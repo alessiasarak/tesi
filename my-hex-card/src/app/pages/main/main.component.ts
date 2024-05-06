@@ -8,6 +8,7 @@ import { CardService } from '../../services/card.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThemeService } from '../../services/theme/theme.service';
 import { MatIconModule } from '@angular/material/icon';
+import vCardsJS from 'vcards-js';
  
 @Component({
   selector: 'app-main',
@@ -51,8 +52,6 @@ export class MainComponent implements OnInit{
     this.route.params.subscribe(params => {
       let cardId = params['idCard']; 
       this.service.getCard(cardId).subscribe((data) => {
-        //data.img = 'assets/img/facebook.png';
-        
         if(!data.active) this.router.navigateByUrl("/register");
         this.myCard = data;
         
@@ -63,5 +62,31 @@ export class MainComponent implements OnInit{
         this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
       });
     });
+  }
+
+  addToContact(){
+    let file = new Blob([ this.vCardCreator() ], {type: '.vcf'});
+    let a = document.createElement("a");
+    let url = URL.createObjectURL(file);
+    a.href = url;
+    a.download = this.myCard.title + '.vcf';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);  
+    }, 0); 
+  }
+  
+  private vCardCreator() {
+    const vCard = vCardsJS();
+
+    vCard.firstName = this.myCard.title;
+    vCard.lastName = this.myCard.subtitle;
+    vCard.photo.attachFromUrl(this.myCard.img, 'image/*');
+    vCard.workPhone = this.myCard.phone_number.map(value => value.number).join(",");
+    vCard.url = this.myCard.link.map(value => value.link).join(",");
+
+    return vCard.getFormattedString();
   }
 }
