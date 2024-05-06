@@ -11,6 +11,9 @@ const Card = sequelize.define("Card",
             autoIncrement: true,
             primaryKey: true,
         },
+        img: {
+            type: DatatTypes.STRING(64000),
+        },
         title: {
             type: DatatTypes.STRING(),
         },

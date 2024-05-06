@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-card-settings',
@@ -16,13 +17,11 @@ import { MyButtonComponent } from '../../component/my-button/my-button.component
 })
 export class CardSettingsComponent {
   //constructor
-  constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
+  constructor(private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.service.getCard(localStorage.getItem("card")!).subscribe((data) => {
-        data.img = 'assets/img/facebook.png';
-
         this.card = data;
 
         this.myMainStyle = "color: " + this.card.text_color + "; background-color: " + this.card.background_color + ";";
@@ -40,6 +39,7 @@ export class CardSettingsComponent {
   myButtonStyle : string = "";
 
   myForm : FormGroup = this.fb.group({
+    img: [''],
     title: [''],
     subtitle: [''],
     instagram: [''],
@@ -79,6 +79,7 @@ export class CardSettingsComponent {
 
   assignValues(card: Card){
     this.myForm.setValue({
+      img: null,
       title: card.title,
       subtitle: card.subtitle,
       instagram: card.instagram,
@@ -137,6 +138,15 @@ export class CardSettingsComponent {
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(["/card-settings"]);
     }
+  }
+
+  async processFile(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        this.card.img = reader.result!.toString();
+    };
   }
 }
 

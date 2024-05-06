@@ -1,4 +1,4 @@
-<div class="flex flex-row w-full justify-center">
+<div class="flex xl:flex-row xl:w-full sm:flex-col justify-center">
     <div class="flex flex-col mt-10 items-center ml-10 mb-10">
         <div class="flex flex-col w-96 shadow-xl p-8 rounded-3xl">
             
@@ -11,8 +11,13 @@
                 
                 <div class="flex flex-col mb-2">
                     <div class="flex flex-col items-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="flex h-1/4 mb-3 rounded-full">
+                        <img src="{{ card.img }}" class="flex h-1/4 mb-3 rounded-full">
                     </div>
+                </div>
+
+                <div class="flex flex-col mb-3 w-80">
+                    <label for="img">Image</label>
+                    <input type="file" accept="image/*" (change)="processFile($event)" class="form-control" id="img" formControlName="img" placeholder="Image">
                 </div>
 
                 <hr class="my-4" />

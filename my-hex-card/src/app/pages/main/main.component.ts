@@ -51,7 +51,7 @@ export class MainComponent implements OnInit{
     this.route.params.subscribe(params => {
       let cardId = params['idCard']; 
       this.service.getCard(cardId).subscribe((data) => {
-        data.img = 'assets/img/facebook.png';
+        //data.img = 'assets/img/facebook.png';
         
         if(!data.active) this.router.navigateByUrl("/register");
         this.myCard = data;
