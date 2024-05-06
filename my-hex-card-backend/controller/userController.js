@@ -35,6 +35,7 @@ exports.login = asyncHandler(async (req, res) => {
         
         res.status(response.code).json(response.data);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: "Internal server error" });
     }
 });

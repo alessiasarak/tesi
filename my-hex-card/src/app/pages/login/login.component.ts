@@ -5,6 +5,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "../../services/auth/auth.service";
 import { User } from "../../interfaces/user";
+import { CardService } from "../../services/card.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { User } from "../../interfaces/user";
 })
 export class LoginComponent {
   //constructor
-  constructor(private router: Router, private service: AuthService, private fb: FormBuilder) {}
+  constructor(private router: Router, private service: AuthService, private fb: FormBuilder, private cardService: CardService) {}
 
   //properties
   showPassword = false;
@@ -50,13 +51,17 @@ export class LoginComponent {
     if(this.loggedUser != undefined) {
       localStorage.setItem("user_id", this.loggedUser.id.toString());
       localStorage.setItem("role", this.loggedUser.fk_role.toString());
+
+      //setting in the locale storage all the card of the user logged
+      let card = await this.cardService.getCardByUser(this.loggedUser.id.toString());
+      localStorage.setItem('card', JSON.stringify(card.id));
+
       this.router.navigateByUrl("/settings");
     }
   }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
-    console.log(this.showPassword);
   }
 
   forgotPassword(){

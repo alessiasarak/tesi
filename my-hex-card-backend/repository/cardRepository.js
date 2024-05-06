@@ -13,9 +13,17 @@ class CardRepository {
     }
   }
 
+  async getCardByUser(userId) {
+    try {
+      const card = await Card.findOne({ where: { fk_id_user: userId } });
+      return card;
+    } catch (error) {
+      throw new Error(`Unable to fetch card: ${error}`);
+    }
+  }
+
   async createCard(title, subtitle, idUser) {
     try {
-      console.log(idUser)
         let newCard = await Card.create({
             title: title,
             subtitle: subtitle,
@@ -27,7 +35,6 @@ class CardRepository {
             "data": newCard
         };
     } catch (error) {
-      console.log(error);
         return {
             "code": 500,
             "data": "Internal server error"
@@ -40,7 +47,6 @@ class CardRepository {
       let emails = newData.email;
       let links = newData.link;
       let phoneNumbers = newData.phone_number;
-      console.log(newData)
 
       const updated = Card.update(
         {

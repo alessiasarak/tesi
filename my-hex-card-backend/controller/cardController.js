@@ -10,6 +10,13 @@ const LinkRepository = require('../repository/linkRepository');
 //GETTERS//
 ///////////
 
+exports.getCardByUser = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+    let card = await cardRepository.getCardByUser(req.params.id);
+
+    res.status(200).json(card);
+});
+
 exports.getCardById = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
     let emailRepository = new EmailRepository();
