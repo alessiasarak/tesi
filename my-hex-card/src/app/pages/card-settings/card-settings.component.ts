@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-card-settings',
@@ -17,7 +16,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class CardSettingsComponent {
   //constructor
-  constructor(private sanitizer: DomSanitizer, private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
+  constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
