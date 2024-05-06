@@ -1,37 +1,37 @@
-<div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-4">
-        <div class="card">
-          <div class="card-header">
-            <h3>Registrati</h3>
-          </div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-          <div class="card-body">
-            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-              <div class="mb-3">
-                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
-              </div>
-              <div class="mb-3 input-group">
-                <input type="text" class="form-control" id="password" formControlName="password" placeholder="Password">
-                <span class="input-group-text" (click)="togglePassword()">
-                    <span *ngIf="!showPassword"><mat-icon>warning</mat-icon></span>
-                    <span *ngIf="showPassword"><mat-icon>remove_red_eye</mat-icon></span>
-                </span>
-              </div>
-              <div class="mb-3 input-group">
-                <input type="text" class="form-control" id="repeatPassword" formControlName="repeatPassword" placeholder="Ripeti password">
-                <span class="input-group-text" (click)="togglePassword()">
-                    <span *ngIf="!showPassword"><mat-icon>warning</mat-icon></span>
-                    <span *ngIf="showPassword"><mat-icon>remove_red_eye</mat-icon></span>
-                </span>
-              </div>
-              <button type="submit" class="btn btn-primary">Registrati</button>
-            </form>
-            <hr>
-            <p class="text-center">Hai un account? <a href="/login">Accedi!</a></p>
-          </div>
-        </div>
+<div class="flex flex-col mt-10 items-center">
+  <div class="flex flex-col w-96 shadow-xl p-8 rounded-3xl">
+    <h3 class="flex text-xl font-bold mb-3">
+        Completa la registrazione
+    </h3>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="flex flex-col mb-3 w-80">
+        <label for="title">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
       </div>
-    </div>
+
+      <div class="flex flex-row mb-3 w-80 items-center">
+        <input class="flex w-11/12" type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+        <span class="flex w-1/12" (click)="togglePassword()">
+          <span *ngIf="!showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
+          <span *ngIf="showPassword"><mat-icon class="flex">visibility</mat-icon></span>
+        </span>
+      </div>
+
+      
+      <div class="flex flex-row mb-3 w-80 items-center">
+        <input class="flex w-11/12" type="password" class="form-control" id="repeatPassword" formControlName="repeatPassword" placeholder="Password">
+        <span class="flex w-1/12" (click)="togglePassword()">
+          <span *ngIf="!showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
+          <span *ngIf="showPassword"><mat-icon class="flex">visibility</mat-icon></span>
+        </span>
+      </div>
+
+      <div class="flex flex-col items-center">
+        <button type="submit" class="flex bg-slate-200 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Registrati</button>
+      </div>
+    </form>
   </div>
+</div>
   

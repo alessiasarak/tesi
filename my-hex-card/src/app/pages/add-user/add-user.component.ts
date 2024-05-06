@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../interfaces/user';
+import { MyButtonComponent } from '../../component/my-button/my-button.component';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [ ReactiveFormsModule ],
+  imports: [ ReactiveFormsModule, MyButtonComponent ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })
