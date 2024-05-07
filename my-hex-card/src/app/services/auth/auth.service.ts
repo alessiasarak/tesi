@@ -19,12 +19,6 @@ export class AuthService extends CrudService<User> {
     return response;
   }
 
-  async create(user: User) : Promise<User> {
-    let response = await lastValueFrom(this.post(user, "/create"));
-    
-    return response;
-  }
-
   async register(user: User) : Promise<User> {
     let response = await lastValueFrom(this.post(user, "/register"));
     

@@ -27,8 +27,6 @@ export class RegisterComponent {
   showPassword = false;
   user: User = {
     id: 0,
-    name: '',
-    surname: '',
     email: '',
     password: '',
     fk_role: { role: 'SINGLE_USER' }

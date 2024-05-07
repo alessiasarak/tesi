@@ -6,7 +6,6 @@ import { HamburgerMenuComponent } from '../../component/hamburger-menu/hamburger
 import { Card } from '../../interfaces/card';
 import { CardService } from '../../services/card.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ThemeService } from '../../services/theme/theme.service';
 import { MatIconModule } from '@angular/material/icon';
 import vCardsJS from 'vcards-js';
  
@@ -19,9 +18,8 @@ import vCardsJS from 'vcards-js';
 })
 export class MainComponent implements OnInit{
 
-  constructor(private service: CardService, private route: ActivatedRoute, private themeService: ThemeService, private router: Router){}
+  constructor(private service: CardService, private route: ActivatedRoute, private router: Router){}
   
-
   myMainClass : string = "";
   myButtonClass : string = "";
   myMainStyle : string = "";
@@ -30,22 +28,28 @@ export class MainComponent implements OnInit{
   myCard: Card = {
     id: 0,
     img: '',
-    title: '',
-    subtitle: '',
+    name: '',
+    surname: '',
+    company: '',
+    function: '',
     instagram: '',
     facebook: '',
     linkedin: '',
     whatsapp: '',
     youtube: '',
 
-    fk_id_user: 0,
     email: [],
     phone_number: [],
     link: [],
+    address: [],
+
     active: false,
     background_color: '',
     text_color: '',
-    button_color: ''
+    button_color: '',
+
+    fk_id_contact: 0,
+    fk_id_user: 0
   }
   
   ngOnInit(): void {
@@ -69,7 +73,7 @@ export class MainComponent implements OnInit{
     let a = document.createElement("a");
     let url = URL.createObjectURL(file);
     a.href = url;
-    a.download = this.myCard.title + '.vcf';
+    a.download = this.myCard.company + '.vcf';
     document.body.appendChild(a);
     a.click();
     setTimeout(function() {
@@ -81,8 +85,8 @@ export class MainComponent implements OnInit{
   private vCardCreator() {
     const vCard = vCardsJS();
 
-    vCard.firstName = this.myCard.title;
-    vCard.lastName = this.myCard.subtitle;
+    vCard.firstName = this.myCard.name;
+    vCard.lastName = this.myCard.surname;
     vCard.photo.attachFromUrl(this.myCard.img, 'image/*');
     vCard.workPhone = this.myCard.phone_number.map(value => value.number).join(",");
     vCard.url = this.myCard.link.map(value => value.link).join(",");

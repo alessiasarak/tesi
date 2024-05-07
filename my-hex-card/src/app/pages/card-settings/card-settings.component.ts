@@ -39,8 +39,10 @@ export class CardSettingsComponent {
 
   myForm : FormGroup = this.fb.group({
     img: [''],
-    title: [''],
-    subtitle: [''],
+    name: [''],
+    surname: [''],
+    company: [''],
+    function: [''],
     instagram: [''],
     facebook: [''],
     linkedin: [''],
@@ -58,8 +60,10 @@ export class CardSettingsComponent {
 
   card: Card = {
     id: 0,
-    title: '',
-    subtitle: '',
+    name: '',
+    surname: '',
+    company: '',
+    function: '',
     img: '',
     instagram: '',
     facebook: '',
@@ -67,9 +71,11 @@ export class CardSettingsComponent {
     whatsapp: '',
     youtube: '',
     fk_id_user: 0,
+    fk_id_contact: 0,
     email: [],
     phone_number: [],
     link: [],
+    address: [],
     active: false,
     background_color: '',
     text_color: '',
@@ -79,8 +85,10 @@ export class CardSettingsComponent {
   assignValues(card: Card){
     this.myForm.setValue({
       img: null,
-      title: card.title,
-      subtitle: card.subtitle,
+      name: card.name,
+      surname: card.surname,
+      company: card.company,
+      function: card.function,
       instagram: card.instagram,
       facebook: card.facebook,
       linkedin: card.linkedin,
@@ -99,8 +107,10 @@ export class CardSettingsComponent {
   }
 
   async onSubmit() {
-    this.card.title = this.myForm.value.title;
-    this.card.subtitle = this.myForm.value.subtitle;
+    this.card.name = this.myForm.value.name;
+    this.card.surname = this.myForm.value.surname;
+    this.card.company = this.myForm.value.company;
+    this.card.function = this.myForm.value.function;
     this.card.instagram = this.myForm.value.instagram;
     this.card.facebook = this.myForm.value.facebook;
     this.card.linkedin = this.myForm.value.linkedin;

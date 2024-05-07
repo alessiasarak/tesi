@@ -18,15 +18,12 @@ export class ProfileSettingsComponent {
 
   ngOnInit(): void {
     this.service.getUser().subscribe((data) => {
-      console.log(data);
       this.assignValues(data);
     });
   }
 
   //properties
   myProfileForm : FormGroup = this.fb.group({
-    name: [''],
-    surname: [''],
     email: [''],
   });
   myPasswordForm : FormGroup = this.fb.group({
@@ -37,17 +34,13 @@ export class ProfileSettingsComponent {
 
   user : User = {
     id: 0,
-    name: '',
-    surname: '',
     email: '',
     password: '',
-    fk_role: { role: "SINGLE_USER" }
+    fk_role: { role: "USER" }
   }
 
   assignValues(user: User){
     this.myProfileForm.setValue({
-      name: user.name,
-      surname: user.surname,
       email: user.email,
     });
 
@@ -55,8 +48,6 @@ export class ProfileSettingsComponent {
   }
 
   async onProfileSubmit() {
-    this.user.name = this.myProfileForm.value.name;
-    this.user.surname = this.myProfileForm.value.surname;
     this.user.email = this.myProfileForm.value.email;
     
     let response = await this.service.putUser(this.user);

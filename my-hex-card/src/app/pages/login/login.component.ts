@@ -27,19 +27,15 @@ export class LoginComponent {
   });
   user: User = {
     id: 0,
-    name: '',
-    surname: '',
     email: '',
     password: '',
-    fk_role: { role: 'SINGLE_USER' }
+    fk_role: { role: 'USER' }
   };
   loggedUser : User | undefined = {
     id: 0,
-    name: '',
-    surname: '',
     email: '',
     password: '',
-    fk_role: { role: 'SINGLE_USER' }
+    fk_role: { role: 'USER' }
   };
 
   //methods
