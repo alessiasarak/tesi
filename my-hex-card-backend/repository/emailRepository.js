@@ -1,10 +1,10 @@
 const Email = require('../model/email.js'); 
 
 class EmailRepository{
-    async add(newEmail, idCard){
+    async add(newEmailData, idCard){
         try {
             const email = await Email.create({
-                email: newEmail,
+                ...newEmailData,
                 fk_id_card: idCard
             }); 
             return email;
@@ -16,8 +16,7 @@ class EmailRepository{
     async getAll(idCard){
         try {
             const emails = await Email.findAll({
-                where: { fk_id_card: idCard },
-                attributes: ['email']
+                where: { fk_id_card: idCard }
             });
             return emails;
         } catch (error) {
@@ -25,12 +24,11 @@ class EmailRepository{
         }
     }
 
-    async delete(email, idCard){
+    async delete(id){
         try {
             const deleted = await Email.destroy({
                 where: { 
-                    email: email, 
-                    fk_id_card: idCard 
+                    id: id
                 }
             });
             return deleted;

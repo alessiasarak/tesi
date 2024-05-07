@@ -1,14 +1,13 @@
 const asyncHandler = require("express-async-handler");
 
 const UserRepository = require("../repository/userRepository");
+const ContactRepository = require("../repository/contactRepository");
 
-exports.createUser = asyncHandler(async (req, res) => {
+exports.createContact = asyncHandler(async (req, res) => {
     var data = req.body.entity;
 
-    let userRepository = new UserRepository();
-    
-    let response = await userRepository.createUser(data);
-
+    let contactRepository = new ContactRepository();
+    let response = await contactRepository.createContact(data, req.params.token);
     res.status(response.code).json(response.data);
 });
 
@@ -16,7 +15,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
     var data = req.body.entity;
 
     let userRepository = new UserRepository();
-    let response = await userRepository.registerUser(data);
+    let response = await userRepository.registerUser(data, req.params.token);
 
     res.status(response.code).json(response.data);
 });
@@ -46,7 +45,7 @@ exports.logout = asyncHandler(async (req, res) => {
     res.status(200);
 });
 
-exports.updateData = asyncHandler(async (req, res) => {
+exports.updateUserData = asyncHandler(async (req, res) => {
     const userId = req.params.idUser; 
     const newData = req.body.entity;
     
@@ -88,23 +87,22 @@ exports.getUser = asyncHandler(async (req, res) => {
     }
 });
 
-exports.getAllUsers = asyncHandler(async (req, res) => {
-    let userRepository = new UserRepository();
+exports.getAllContacts = asyncHandler(async (req, res) => {
+    let contactRepository = new ContactRepository();
 
     try {
-        const users = await userRepository.getAllUsers();
+        const contacts = await contactRepository.getAllContacts();
         
-        if (users) {
+        if (contacts) {
             let result = [];
 
-            for(let i = 0; i < users.length; i++){
+            for(let i = 0; i < contacts.length; i++){
                 result.push({
-                    id: users[i].dataValues.id,
-                    name: users[i].dataValues.name,
-                    surname: users[i].dataValues.surname,
-                    email: users[i].dataValues.email,
-                    password: "",
-                    fk_role: users[i].dataValues.fk_role,
+                    id: contacts[i].dataValues.id,
+                    name: contacts[i].dataValues.name,
+                    surname: contacts[i].dataValues.surname,
+                    email: contacts[i].dataValues.email,
+                    password: ""
                 });
             }
             

@@ -4,6 +4,7 @@ const CardRepository = require('../repository/cardRepository');
 const EmailRepository = require('../repository/emailRepository');
 const PhoneNumberRepository = require('../repository/phoneNumberRepository');
 const LinkRepository = require('../repository/linkRepository');
+const AddressRepository = require('../repository/addressRepository');
 
 
 ///////////
@@ -22,14 +23,21 @@ exports.getCardById = asyncHandler(async (req, res) => {
     let emailRepository = new EmailRepository();
     let phoneNumberRepository = new PhoneNumberRepository();
     let linkRepository = new LinkRepository();
+    let addressRepository = new AddressRepository();
 
     const cardId = req.params.id;
     const card = await cardRepository.getCardById(cardId);
     let emails = await emailRepository.getAll(cardId);
     let phoneNumbers = await phoneNumberRepository.getAll(cardId);
     let links = await linkRepository.getAll(cardId);
+    let address = await addressRepository.getAll(cardId);
 
     if (card) {
+        console.log(emails)
+        console.log(phoneNumbers)
+        console.log(links)
+        console.log(address)
+        
         res.status(200).json({
             id: card.id,
             img: card.img,
@@ -43,19 +51,19 @@ exports.getCardById = asyncHandler(async (req, res) => {
             active: card.active,
             fk_id_user: card.fk_id_user,
 
+            background_color: card.background_color,
+            text_color: card.text_color,
+            button_color: card.button_color,
+
             email: emails,
             phone_number: phoneNumbers,
             link: links,
-
-            background_color: card.background_color,
-            text_color: card.text_color,
-            button_color: card.button_color
+            address: address
         });
     } else {
         res.status(404).json({ message: 'Card not found' });
     }
 });
-
 
 exports.getAllCards = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
@@ -102,43 +110,6 @@ exports.getAllCards = asyncHandler(async (req, res) => {
     }
 });
 
-exports.getEmailsByCardId = asyncHandler(async (req, res) => {
-    let emailRepository = new EmailRepository();
-
-    const cardId = req.params.id;
-    const emails = await emailRepository.getAll(cardId);
-    if (emails) {
-        res.status(200).json(emails);
-    } else {
-        res.status(404).json({ message: 'Emails not found' });
-    }
-});
-
-exports.getPhoneNumbersByCardId = asyncHandler(async (req, res) => {
-    let phoneNumberRepository = new PhoneNumberRepository();
-
-    const cardId = req.params.id;
-    const phoneNumbers = await phoneNumberRepository.getAll(cardId);
-    if (phoneNumbers) {
-        res.status(200).json(phoneNumbers);
-    } else {
-        res.status(404).json({ message: 'Phone numbers not found' });
-    }
-});
-
-exports.getLinksByCardId = asyncHandler(async (req, res) => {
-    let linkRepository = new LinkRepository();
-
-    const cardId = req.params.id;
-    const links = await linkRepository.getAll(cardId);
-    if (links) {
-        res.status(200).json(links);
-    } else {
-        res.status(404).json({ message: 'Links not found' });
-    }
-});
-
-
 ///////////
 //UPDATE//
 //////////
@@ -155,6 +126,7 @@ exports.putCard = asyncHandler(async (req, res) => {
         res.status(404).json({ message: 'Card not found' });
     }
 });
+
 exports.putStyleCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
 
@@ -166,89 +138,5 @@ exports.putStyleCard = asyncHandler(async (req, res) => {
         res.status(200).json({ message: 'Card updated successfully' });
     } else {
         res.status(404).json({ message: 'Card not found' });
-    }
-});
-
-///////////
-//POST//
-//////////
-exports.postEmail = asyncHandler(async (req, res) => {
-    let emailRepository = new EmailRepository();
-
-    const cardId = req.params.id;
-    const newEmail = req.body.email;
-    const email = await emailRepository.add(newEmail, cardId);
-    if (email) {
-        res.status(200).json({ message: 'Email added successfully' });
-    } else {
-        res.status(404).json({ message: 'Card not found' });
-    }
-});
-
-exports.postPhoneNumber = asyncHandler(async (req, res) => {
-    let phoneNumberRepository = new PhoneNumberRepository();
-
-    const cardId = req.params.id;
-    const newPhoneNumber = req.body.phoneNumber;
-    const phoneNumber = await phoneNumberRepository.add(newPhoneNumber, cardId);
-    if (phoneNumber) {
-        res.status(200).json({ message: 'Phone number added successfully' });
-    } else {
-        res.status(404).json({ message: 'Card not found' });
-    }
-});
-
-exports.postLink = asyncHandler(async (req, res) => {  
-    let linkRepository = new LinkRepository();
-
-    const cardId = req.params.id;
-    const newLink = req.body.link;
-    const link = await linkRepository.add(newLink, cardId);
-    if (link) {
-        res.status(200).json({ message: 'Link added successfully' });
-    } else {
-        res.status(404).json({ message: 'Card not found' });
-    }
-});
-
-///////////
-//DELETE//
-//////////
-exports.deleteEmail = asyncHandler(async (req, res) => {    
-    let emailRepository = new EmailRepository();
-
-    const cardId = req.params.id;
-    const email = req.body.email;
-    const deleted = await emailRepository.delete(email, cardId);
-    if (deleted) {
-        res.status(200).json({ message: 'Email deleted successfully' });
-    } else {
-        res.status(404).json({ message: 'Email not found' });
-    }
-});
-
-exports.deletePhoneNumber = asyncHandler(async (req, res) => {
-    let phoneNumberRepository = new PhoneNumberRepository();
-
-    const cardId = req.params.id;
-    const phoneNumber = req.body.phoneNumber;
-    const deleted = await phoneNumberRepository.delete(phoneNumber, cardId);
-    if (deleted) {
-        res.status(200).json({ message: 'Phone number deleted successfully' });
-    } else {
-        res.status(404).json({ message: 'Phone number not found' });
-    }
-});
-
-exports.deleteLink = asyncHandler(async (req, res) => {
-    let linkRepository = new LinkRepository();
-
-    const cardId = req.params.id;
-    const link = req.body.link;
-    const deleted = await linkRepository.delete(link, cardId);
-    if (deleted) {
-        res.status(200).json({ message: 'Link deleted successfully' });
-    } else {
-        res.status(404).json({ message: 'Link not found' });
     }
 });

@@ -3,7 +3,7 @@ const sequelize = require("./../database/connection");
 
 const Card = require("./card");
 
-const Email = sequelize.define("Email",
+const Address = sequelize.define("Address",
     {
         id: {
             type: DatatTypes.INTEGER,
@@ -12,11 +12,23 @@ const Email = sequelize.define("Email",
             primaryKey: true,
         },
 
-        label: {
+        street_name: {
             type: DatatTypes.STRING,
         },
 
-        email: {
+        street_number: {
+            type: DatatTypes.STRING,
+        },
+
+        cap: {
+            type: DatatTypes.STRING,
+        },
+
+        city: {
+            type: DatatTypes.STRING,
+        },
+
+        nation: {
             type: DatatTypes.STRING,
         },
 
@@ -29,10 +41,10 @@ const Email = sequelize.define("Email",
         },
     },
     {
-        tableName: "email",
+        tableName: "address",
     }
 );
 
 sequelize.sync();
 
-module.exports = Email;
+module.exports = Address;

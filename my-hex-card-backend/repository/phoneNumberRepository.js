@@ -4,7 +4,7 @@ class PhoneNumberRepository{
     async add(newPhoneNumber, idCard){
         try {
             const phoneNumber = await PhoneNumber.create({
-                number: newPhoneNumber,
+                ...newPhoneNumber,
                 fk_id_card: idCard
             }); 
             return phoneNumber;
@@ -16,8 +16,7 @@ class PhoneNumberRepository{
     async getAll(idCard){
         try {
             const phoneNumbers = await PhoneNumber.findAll({
-                where: { fk_id_card: idCard },
-                attributes: ['number']
+                where: { fk_id_card: idCard }
             });
             return phoneNumbers;
         } catch (error) {

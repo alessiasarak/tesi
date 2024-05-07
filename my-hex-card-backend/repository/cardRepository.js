@@ -2,6 +2,7 @@ const Card = require('../model/card.js');
 const EmailRepository = require('./emailRepository.js');
 const LinkRepository = require('./linkRepository.js');
 const PhoneNumberRepository = require('./phoneNumberRepository.js');
+const AddressRepository = require('./addressRepository.js');
 
 class CardRepository {
   async getCardById(cardId) {
@@ -31,12 +32,10 @@ class CardRepository {
     }
   }
 
-  async createCard(title, subtitle, idUser) {
+  async createCard(token) {
     try {
         let newCard = await Card.create({
-            title: title,
-            subtitle: subtitle,
-            fk_id_user: idUser
+            token: token
         });
         
         return {
@@ -93,6 +92,12 @@ class CardRepository {
       for(let i = 0; i < phoneNumbers.length; i++){
         await phoneNumberRepository.add(phoneNumbers[i].number, idCard);
       }
+
+      let addressRepository = new AddressRepository();
+      await addressRepository.deleteAll(idCard);
+      for(let i = 0; i < addresss.length; i++){
+        await addressRepository.add(addresss[i].number, idCard);
+      }
       
       return updated;
     } catch (error) {
@@ -100,9 +105,9 @@ class CardRepository {
     }
   }
 
-  setStyleCard(idCard, newData, idUser) {
+  async setStyleCard(idCard, newData, idUser) {
     try {
-      const updated = Card.update(
+      const updated = await Card.update(
         {
           background_color: newData.background_color,
           text_color: newData.text_color,
@@ -122,12 +127,12 @@ class CardRepository {
     }
   }
 
-  activateCards(idUser) {
+  async activateCards(token) {
     try {
-      const updated = Card.update({ active: 1 }, {
-        where: { fk_id_user: idUser },
+      const updated = await Card.update({ active: 1 }, {
+        where: { token: token },
       });
-      return updated;
+      return updated.length;
     } catch (error) {
       throw new Error(`Unable to update card active: ${error}`);
     }

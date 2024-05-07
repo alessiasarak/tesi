@@ -4,76 +4,49 @@ const CardRepository = require("./cardRepository");
 const bcrypt = require('bcrypt');
 
 class UserRepository {
-    async createUser(userData) {
+    async registerUser(userData, token) {
         try {
-            const existingUser = await User.findOne({ 
-                where: { 
-                    email: userData.email 
-                } 
-            });
-            if (existingUser) {
-                return {
-                    "code": 403,
-                    "data": "User with this email already exists"
-                };
-            }
- 
-            let newUser = await User.create({
-                ...userData,
-                fk_role: userData.fk_role
-            });
-
             let cardRepository = new CardRepository();
-            let newCard = await cardRepository.createCard(userData.name + " " + userData.surname, userData.email, newUser.id);
+            let isValidToken = cardRepository.activateCards(token);
 
-            console.log(newCard);
-            if(newCard.code == 200) {
-                return {
-                    "code": 200,
-                    "data": newUser
-                };
-            }else {
-                return {
-                    "code": 500,
-                    "data": "Internal server error"
-                };
-            }
-        } catch (error) {
-            return {
-                "code": 500,
-                "data": "Internal server error"
-            };
-        }
-    }
-
-    async registerUser(userData) {
-        try {
-            const user = await User.findOne({ 
-                where: { 
-                    email: userData.email,
-                    password: ""
-                } 
-            });
-            if (user) {
-                const hashedPassword = await bcrypt.hash(userData.password, 10); 
-
-                await user.update({
-                    password: hashedPassword, 
+            if(isValidToken > 0){
+                const existingUser = await User.findOne({ 
+                    where: { 
+                        email: userData.email 
+                    } 
                 });
-
-                let cardRepository = new CardRepository();
-                cardRepository.activateCards(user.id);
+                if (existingUser) {
+                    return {
+                        "code": 403,
+                        "data": "User with this email already exists"
+                    };
+                }
+                
+                const hashedPassword = await bcrypt.hash(userData.password, 10); 
+    
+                let newUser = await User.create({
+                    ...userData,
+                    fk_role: "USER",
+                    password: hashedPassword
+                });
+    
+    
+                if(isValidToken > 1) {
+                    newUser.update({
+                        fk_role: "SUPER_ADMIN"
+                    });
+                }
                 
                 return {
                     "code": 200,
-                    "data": user
-                };
+                    "data": newUser
+                }; 
             } else {
                 return {
-                    "code": 403,
-                    "data": "User already setted"
+                    "code": 400,
+                    "data": "Error"
                 };
-            }   
+            }
         } catch (error) {
             return {
                 "code": 500,
@@ -130,8 +103,6 @@ class UserRepository {
                 });
             } else {
                 await user.update({
-                    name: newData.name,
-                    surname: newData.surname,
                     email: newData.email,
                 });
             }
