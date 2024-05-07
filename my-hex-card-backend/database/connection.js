@@ -1,9 +1,9 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
-    "my_hex_card", "myhexcard", "", 
+    "my_hex_card", "userStem", "", 
     {
-        host: "hexagonswiss-sscb.artera.farm",
+        host: "localhost",
         dialect: "mysql",
         port: "3306",
         define: {
