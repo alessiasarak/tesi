@@ -19,6 +19,7 @@ export class LoginComponent {
   constructor(private router: Router, private service: AuthService, private fb: FormBuilder, private cardService: CardService) {}
 
   //properties
+  isVisible = false;
   showPassword = false;
   myForm : FormGroup = this.fb.group({
     email: [''],
@@ -46,20 +47,28 @@ export class LoginComponent {
     this.user.email = this.myForm.value.email;
     this.user.password = this.myForm.value.password;
     
-    this.loggedUser = await this.service.login(this.user);
-
-    if(this.loggedUser != undefined) {
-      localStorage.setItem("user_id", this.loggedUser.id.toString());
-      localStorage.setItem("role", this.loggedUser.fk_role.toString());
-
-      //setting in the locale storage all the card of the user logged
-      if(this.loggedUser.fk_role.toString() != "ADMIN"){
-        let card = await this.cardService.getCardByUser(this.loggedUser.id.toString());
-        localStorage.setItem('card', JSON.stringify(card.id));
+    this.service.login(this.user).then(async (response) => {  
+      this.loggedUser = response;
+      if(this.loggedUser != undefined) {
+        localStorage.setItem("user_id", this.loggedUser.id.toString());
+        localStorage.setItem("role", this.loggedUser.fk_role.toString());
+  
+        //setting in the locale storage all the card of the user logged, per il momento diamo per scontato che sia sempre una sola carta
+        if(this.loggedUser.fk_role.toString() != "ADMIN"){
+          let card = await this.cardService.getCardByUser(this.loggedUser.id.toString());
+          localStorage.setItem('card', JSON.stringify(card.id));
+        }else {
+          this.isVisible = true;
+        }
+  
+        this.router.navigateByUrl("/settings");
       }
+    }).catch((error) => {
+      console.log(error);
+      this.isVisible = true;
+    });
 
-      this.router.navigateByUrl("/settings");
-    }
+    
   }
 
   togglePassword() {
@@ -68,5 +77,9 @@ export class LoginComponent {
 
   forgotPassword(){
     this.router.navigateByUrl("/forgot-password");
+  }
+
+  closeError() {
+    this.isVisible = false;
   }
 }
