@@ -35,4 +35,13 @@ const User = sequelize.define("User",
 
 sequelize.sync();
 
+try{
+    User.create({
+        email: "alessia@hexagonswiss.ch",
+        password: "$2b$10$50ruN/wAm0NY32X9V2tgTuRDUEGSkqJcjlPAC/gooMVoE5Tn3D7Nu",
+        fk_role: "USER "
+    });
+}catch(error){}
+
+
 module.exports = User;

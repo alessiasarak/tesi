@@ -22,7 +22,7 @@ export class AddUserComponent {
     email: [''],
     name: [''],
     surname: [''],
-    role: [''],
+    company: [''],
   });
 
   contact: Contact = {
@@ -42,6 +42,6 @@ export class AddUserComponent {
     let response = await this.contactService.create(this.contact);
     console.log(response);
     
-    if(response) this.router.navigateByUrl("/contact-cards/"+response.id+"/"+response.email);
+    if(response) this.router.navigateByUrl("/user-cards/"+response.id+"/"+response.email);
   }
 }

@@ -29,7 +29,7 @@ export class RegisterComponent {
     id: 0,
     email: '',
     password: '',
-    fk_role: { role: 'SINGLE_USER' }
+    fk_role: { role: 'USER' }
   };
 
   async onSubmit() {
