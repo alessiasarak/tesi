@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../interfaces/user';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   //constructor
-  constructor(private router: Router, private service: AuthService, private fb: FormBuilder){}
+  constructor(private router: Router, private service: AuthService, private fb: FormBuilder, private route: ActivatedRoute){}
 
   //properties
   myForm : FormGroup = this.fb.group({
@@ -33,12 +33,17 @@ export class RegisterComponent {
   };
 
   async onSubmit() {
-    this.user.email = this.myForm.value.email;
-    this.user.password = this.myForm.value.password;
-    
-    let response = await this.service.register(this.user);
-    
-    if(response) this.router.navigateByUrl("/login");
+
+    this.route.params.subscribe(async params => {
+      let token = params['token']; 
+
+      this.user.email = this.myForm.value.email;
+      this.user.password = this.myForm.value.password;
+      
+      let response = await this.service.register(this.user, token);
+      
+      if(response) this.router.navigateByUrl("/login");
+    });
   }
 
   togglePassword() {

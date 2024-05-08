@@ -13,6 +13,18 @@ class CardRepository {
       throw new Error(`Unable to fetch card: ${error}`);
     }
   }
+  async getCardByToken(cardToken) {
+    try {
+      const card = await Card.findOne({
+        where: {
+          token: cardToken
+        }
+      });
+      return card;
+    } catch (error) {
+      throw new Error(`Unable to fetch card: ${error}`);
+    }
+  }
   
   async getAll() {
     try {
@@ -41,10 +53,10 @@ class CardRepository {
     }
   }
 
-  async createCard(token, idContact) {
+  async createCard(idContact) {
     try {
         let newCard = await Card.create({
-            token: token,
+            token: this.generateToken(),
             fk_id_contact: idContact
         });
         
@@ -53,11 +65,20 @@ class CardRepository {
             "data": newCard
         };
     } catch (error) {
+      console.log(error)
         return {
             "code": 500,
             "data": "Internal server error"
         };
     }
+  }
+  generateToken() {
+    var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var token = '';
+    for(var i = 0; i < 40; i++) {
+        token += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return token;
   }
 
   async setCard(idCard, newData, idUser) {
@@ -137,12 +158,13 @@ class CardRepository {
     }
   }
 
-  async activateCards(token) {
+  async activateCard(token) {
     try {
-      const updated = await Card.update({ active: 1 }, {
-        where: { token: token },
-      });
-      return updated.length;
+      const updated = await Card.findOne({ where: { token: token } });
+      updated.active = 1;
+      updated.save();
+      
+      return updated;
     } catch (error) {
       throw new Error(`Unable to update card active: ${error}`);
     }

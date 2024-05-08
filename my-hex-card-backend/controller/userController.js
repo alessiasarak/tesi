@@ -5,19 +5,19 @@ const ContactRepository = require("../repository/contactRepository");
 
 exports.createContact = asyncHandler(async (req, res) => {
     var data = req.body.entity;
-
-    console.log(data);
     
     let contactRepository = new ContactRepository();
-    let response = await contactRepository.createContact(data, req.params.token);
+    let response = await contactRepository.createContact(data);
     res.status(response.code).json(response.data);
 });
 
 exports.registerUser = asyncHandler(async (req, res) => {
     var data = req.body.entity;
+    var token = req.params.token;
+    console.log(token)
 
     let userRepository = new UserRepository();
-    let response = await userRepository.registerUser(data, req.params.token);
+    let response = await userRepository.registerUser(data, token);
 
     res.status(response.code).json(response.data);
 });

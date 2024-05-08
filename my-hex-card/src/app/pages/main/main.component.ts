@@ -49,14 +49,15 @@ export class MainComponent implements OnInit{
     button_color: '',
 
     fk_id_contact: 0,
-    fk_id_user: 0
+    fk_id_user: 0,
+    token: ''
   }
   
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let cardId = params['idCard']; 
       this.service.getCard(cardId).subscribe((data) => {
-        if(!data.active) this.router.navigateByUrl("/register");
+        if(!data.active) this.router.navigateByUrl("/register/"+cardId);
         this.myCard = data;
         
         this.myMainClass = "content h-full";

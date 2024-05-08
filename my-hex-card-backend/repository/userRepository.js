@@ -7,9 +7,9 @@ class UserRepository {
     async registerUser(userData, token) {
         try {
             let cardRepository = new CardRepository();
-            let isValidToken = cardRepository.activateCards(token);
+            let card = await cardRepository.activateCard(token);
 
-            if(isValidToken > 0){
+            if(card){
                 const existingUser = await User.findOne({ 
                     where: { 
                         email: userData.email 
@@ -29,14 +29,10 @@ class UserRepository {
                     fk_role: "USER",
                     password: hashedPassword
                 });
-    
-    
-                if(isValidToken > 1) {
-                    newUser.update({
-                        fk_role: "SUPER_ADMIN"
-                    });
-                }
-                
+
+                card.fk_id_user = newUser.id;
+                card.save();
+
                 return {
                     "code": 200,
                     "data": newUser

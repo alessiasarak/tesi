@@ -45,6 +45,9 @@ const Card = sequelize.define("Card",
         active: {
             type: DatatTypes.BOOLEAN,
         },
+        token: {
+            type: DatatTypes.STRING(),
+        },
         
         background_color: {
             type: DatatTypes.STRING(7), // codice in esadecimale #rrggbb

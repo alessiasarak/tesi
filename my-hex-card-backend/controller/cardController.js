@@ -25,15 +25,16 @@ exports.getCardsByUser = asyncHandler(async (req, res) => {
     res.status(200).json(cards);
 });
 
-exports.getCardById = asyncHandler(async (req, res) => {
+exports.getCardByToken = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
     let emailRepository = new EmailRepository();
     let phoneNumberRepository = new PhoneNumberRepository();
     let linkRepository = new LinkRepository();
     let addressRepository = new AddressRepository();
 
-    const cardId = req.params.id;
-    const card = await cardRepository.getCardById(cardId);
+    let cardId = req.params.id;//token
+    const card = await cardRepository.getCardByToken(cardId);
+    cardId = card.id;
     let emails = await emailRepository.getAll(cardId);
     let phoneNumbers = await phoneNumberRepository.getAll(cardId);
     let links = await linkRepository.getAll(cardId);

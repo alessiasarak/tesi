@@ -19,7 +19,7 @@ export const routes: Routes = [
     { path: '', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'https://hexcard.ch/' } },
     { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: 'register/:token', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
 
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },

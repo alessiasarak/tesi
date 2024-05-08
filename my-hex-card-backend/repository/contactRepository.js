@@ -4,7 +4,7 @@ const CardRepository = require("./cardRepository");
 const bcrypt = require('bcrypt');
 
 class ContactRepository {
-    async createContact(contactData, token) {
+    async createContact(contactData) {
         try {
             const existingContact = await Contact.findOne({ 
                 where: { 
@@ -23,7 +23,7 @@ class ContactRepository {
             });
 
             let cardRepository = new CardRepository();
-            let newCard = await cardRepository.createCard(token, newContact.id);
+            let newCard = await cardRepository.createCard(newContact.id);
 
             if(newCard.code == 200) {
                 return {

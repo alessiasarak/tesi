@@ -18,6 +18,7 @@ export interface Card {
     linkedin: string,
     whatsapp: string,
     youtube: string,
+    token: string,
 
     active: boolean,
 

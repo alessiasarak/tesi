@@ -79,7 +79,8 @@ export class CardSettingsComponent {
     active: false,
     background_color: '',
     text_color: '',
-    button_color: ''
+    button_color: '',
+    token: ''
   };
 
   assignValues(card: Card){
