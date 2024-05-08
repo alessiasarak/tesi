@@ -17,7 +17,7 @@ router.get("/auth/logout", userController.logout);
 router.post("/create", userController.createContact);
 
 router.get("/user/:idUser", userController.getUser);
-router.get("/user", userController.getAllContacts);
+router.get("/contact", userController.getAllContacts);
 router.put("/user/:idUser", userController.updateUserData);
 router.put("/user/password/:idUser", userController.updateUserData);
 

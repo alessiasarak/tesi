@@ -17,10 +17,6 @@ export class UserService extends CrudService<User> {
     return this.get("/" + localStorage.getItem("user_id")!);
   }
 
-  getAllUsers() {
-    return this.getList();
-  }
-
   async putUser(user: User) : Promise<User> {
     let response = await lastValueFrom(this.put(user, "/" + localStorage.getItem("user_id")!));
     return response;

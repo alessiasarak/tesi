@@ -1,39 +1,39 @@
 <div class="p-10">
   <div class="flex flex-col border ">
       <div class="flex flex-row font-bold">
-          <div class="flex w-1/12 border p-2">
-            ID
+          <div class="flex w-1/4 border p-2">
+            Nome
           </div>
-          <div class="flex w-3/12 border p-2">
+          <div class="flex w-1/4 border p-2">
+            Cognome
+          </div>
+          <div class="flex w-1/4 border p-2">
             Email
           </div>
-          <div class="flex w-1/6 border p-2">
-            Ruolo
-          </div>
-          <div class="flex w-1/6 border p-2">
-            ID carte collegate
+          <div class="flex w-1/4 border p-2">
+            Carte collegate
           </div>
       </div>
 
-      <div class="flex flex-col" *ngFor="let user of users">
-        <div class="flex flex-row" *ngIf="user.fk_role.toString() != 'ADMIN'">
-          <div class="flex w-1/12 border p-2">
-            {{ user.id }}
+      <div class="flex flex-col" *ngFor="let contact of contacts">
+        <div class="flex flex-row">
+          <div class="flex w-1/4 border p-2">
+            {{ contact.name }}
           </div>
-          <div class="flex w-3/12 border p-2">
-            {{ user.email }}
+          <div class="flex w-1/4 border p-2">
+            {{ contact.surname }}
           </div>
-          <div class="flex w-1/6 border p-2">
-            {{ user.fk_role }}
+          <div class="flex w-1/4 border p-2">
+            {{ contact.email }}
           </div>
-          <div class="flex w-1/6 border p-2">
-            <button (click)="seeUserCard(user.id, user.email)" class="bg-slate-200 w-44 rounded-3xl p-2">Vedi carte</button>
+          <div class="flex w-1/4 border p-2 justify-center">
+            <button (click)="seeContactCards(contact.id)" class="bg-slate-200 w-44 rounded-3xl p-2">Vedi carte</button>
           </div>
         </div>
       </div>
   </div>
   <div class="flex flex-col w-full items-center">
-    <button (click)="addUser()" class="bg-slate-200 w-44 rounded-3xl mt-6 mb-6 p-2">Aggiungi utente</button>
+    <button (click)="addContact()" class="bg-slate-200 w-44 rounded-3xl mt-6 mb-6 p-2">Aggiungi utente</button>
     <button (click)="logout()" class="bg-slate-200 w-44 rounded-3xl p-2">Logout</button>
   </div>
 </div>

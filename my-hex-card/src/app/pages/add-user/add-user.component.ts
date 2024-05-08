@@ -41,6 +41,6 @@ export class AddUserComponent {
     
     let response = await this.contactService.create(this.contact);
     
-    if(response) this.router.navigateByUrl("/user-cards/"+response.id);
+    if(response) this.router.navigateByUrl("/contact-cards/"+response.id);
   }
 }

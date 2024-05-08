@@ -9,12 +9,16 @@ import { lastValueFrom } from 'rxjs';
 })
 export class ContactService extends CrudService<Contact>  {
   constructor(http: HttpClient) {
-    super(http, "/auth");
+    super(http, "/");
   }
 
   async create(user: Contact) : Promise<Contact> {
-    let response = await lastValueFrom(this.post(user, "/create"));
+    let response = await lastValueFrom(this.post(user, "auth/create"));
     
     return response;
+  }
+
+  getAllContacts() {
+    return this.getList("contact");
   }
 }
