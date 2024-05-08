@@ -87,6 +87,7 @@ export class CardSettingsComponent {
   };
 
   assignValues(card: Card){
+    console.log(card)
     this.myForm.setValue({
       img: null,
       name: card.name ?? "",

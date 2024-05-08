@@ -20,6 +20,7 @@ class CardRepository {
           token: cardToken
         }
       });
+      console.log(card)
       return card;
     } catch (error) {
       throw new Error(`Unable to fetch card: ${error}`);
