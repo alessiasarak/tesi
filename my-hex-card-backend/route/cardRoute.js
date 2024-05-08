@@ -11,7 +11,9 @@ router.get("/", (req, res) => {
 //getters
 router.get("/card", cardController.getAllCards);
 router.get("/card/:id", cardController.getCardById);
-router.get("/card/user/:id", cardController.getCardByUser);
+
+router.get("/card/contact/:id", cardController.getCardsByContact);
+router.get("/card/user/:id", cardController.getCardsByUser);
 
 router.put('/card/:id/:idUser', cardController.putCard);
 router.put('/card/style/:id/:idUser', cardController.putStyleCard);

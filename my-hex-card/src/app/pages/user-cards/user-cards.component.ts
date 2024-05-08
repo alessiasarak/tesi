@@ -23,12 +23,13 @@ export class UserCardsComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      let userId = params['idUser'];
-      this.email = params['email'];
+      let idContact = params['idContact'];
       
-      this.cardService.getCardByUser(userId).then(
+      this.cardService.getCardsByContact(idContact).then(
         (data) => {
-          this.cards.push(data);
+          console.log(data);
+          this.cards = data;
+          console.log(this.cards);
         }
       );
     });

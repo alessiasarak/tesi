@@ -23,19 +23,29 @@ class CardRepository {
     }
   }
 
-  async getCardByUser(userId) {
+  async getCardsByContact(contactId) {
     try {
-      const card = await Card.findOne({ where: { fk_id_user: userId } });
-      return card;
+      const cards = await Card.findAll({ where: { fk_id_contact: contactId } });
+      return cards;
     } catch (error) {
       throw new Error(`Unable to fetch card: ${error}`);
     }
   }
 
-  async createCard(token) {
+  async getCardsByUser(userId) {
+    try {
+      const cards = await Card.findAll({ where: { fk_id_user: userId } });
+      return cards;
+    } catch (error) {
+      throw new Error(`Unable to fetch card: ${error}`);
+    }
+  }
+
+  async createCard(token, idContact) {
     try {
         let newCard = await Card.create({
-            token: token
+            token: token,
+            fk_id_contact: idContact
         });
         
         return {

@@ -17,7 +17,11 @@ export class CardService extends CrudService<Card> {
     return this.get(idCard);
   }
 
-  async getCardByUser(idUser : string) {
+  async getCardsByContact(idContact : string) : Promise<Card[]> {
+    return await lastValueFrom(this.getList ("contact/ " + idContact));
+  }
+
+  async getCardsByUser(idUser : string) {
     return await lastValueFrom(this.get("user/ " + idUser));
   }
 

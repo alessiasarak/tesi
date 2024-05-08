@@ -16,11 +16,6 @@ const Role = sequelize.define("Role",
 
 sequelize.sync();
 
-try{
-    Role.create({ role: "USER "});
-    Role.create({ role: "SUPER_USER "});
-    Role.create({ role: "ADMIN "});
-}catch(error){}
 
 
 module.exports = Role;

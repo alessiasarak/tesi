@@ -11,11 +11,18 @@ const AddressRepository = require('../repository/addressRepository');
 //GETTERS//
 ///////////
 
-exports.getCardByUser = asyncHandler(async (req, res) => {
+exports.getCardsByContact = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
-    let card = await cardRepository.getCardByUser(req.params.id);
+    let cards = await cardRepository.getCardsByContact(req.params.id);
 
-    res.status(200).json(card);
+    res.status(200).json(cards);
+});
+
+exports.getCardsByUser = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+    let cards = await cardRepository.getCardsByUser(req.params.id);
+
+    res.status(200).json(cards);
 });
 
 exports.getCardById = asyncHandler(async (req, res) => {

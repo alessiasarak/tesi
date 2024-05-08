@@ -27,7 +27,7 @@ export const routes: Routes = [
     { path: 'card-settings', component: CardSettingsComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'user-cards/:idUser/:email', component: UserCardsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'user-cards/:idContact', component: UserCardsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
     { path: '**', component: Error404Component },
 ];

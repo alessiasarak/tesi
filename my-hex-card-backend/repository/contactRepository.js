@@ -23,7 +23,7 @@ class ContactRepository {
             });
 
             let cardRepository = new CardRepository();
-            let newCard = await cardRepository.createCard(token);
+            let newCard = await cardRepository.createCard(token, newContact.id);
 
             if(newCard.code == 200) {
                 return {

@@ -40,8 +40,7 @@ export class AddUserComponent {
     this.contact.company = this.myForm.value.company;
     
     let response = await this.contactService.create(this.contact);
-    console.log(response);
     
-    if(response) this.router.navigateByUrl("/user-cards/"+response.id+"/"+response.email);
+    if(response) this.router.navigateByUrl("/user-cards/"+response.id);
   }
 }

@@ -6,6 +6,8 @@ const ContactRepository = require("../repository/contactRepository");
 exports.createContact = asyncHandler(async (req, res) => {
     var data = req.body.entity;
 
+    console.log(data);
+    
     let contactRepository = new ContactRepository();
     let response = await contactRepository.createContact(data, req.params.token);
     res.status(response.code).json(response.data);
