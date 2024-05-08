@@ -6,9 +6,12 @@
       <li class="list-group-item">
         <a href="/profile-settings">Profilo personale</a>
       </li>
-      <li class="list-group-item">
-        <a href="/card-settings">Carta</a>
-      </li>
+      
+      @for (card of cards; track card.token; let idx = $index) {
+        <li class="list-group-item">
+          <a href="/card-settings/{{ card.token }}">Carta {{ idx+1 }}</a>
+        </li>
+      }
     </ul>
 
     <div class="flex flex-col items-center mt-4">

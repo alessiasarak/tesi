@@ -41,11 +41,6 @@ exports.getCardByToken = asyncHandler(async (req, res) => {
     let address = await addressRepository.getAll(cardId);
 
     if (card) {
-        console.log(emails)
-        console.log(phoneNumbers)
-        console.log(links)
-        console.log(address)
-        
         res.status(200).json({
             id: card.id,
             img: card.img,
@@ -62,6 +57,7 @@ exports.getCardByToken = asyncHandler(async (req, res) => {
             background_color: card.background_color,
             text_color: card.text_color,
             button_color: card.button_color,
+            token: card.token,
 
             email: emails,
             phone_number: phoneNumbers,
@@ -105,6 +101,7 @@ exports.getAllCards = asyncHandler(async (req, res) => {
                 email: emails,
                 phone_number: phoneNumbers,
                 link: links,
+                token: cards[i].token,
     
                 background_color: cards[i].background_color,
                 text_color: cards[i].text_color,
@@ -124,10 +121,10 @@ exports.getAllCards = asyncHandler(async (req, res) => {
 exports.putCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
 
-    const cardId = req.params.id;
     const newData = req.body.entity;
+    let token = req.params.token;
 
-    const updated = await cardRepository.setCard(cardId, newData, req.params.idUser);
+    const updated = await cardRepository.setCard(newData, req.params.idUser, token);
     if (updated) {
         res.status(200).json({ message: 'Card updated successfully' });
     } else {
@@ -138,10 +135,10 @@ exports.putCard = asyncHandler(async (req, res) => {
 exports.putStyleCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
 
-    const cardId = req.params.id;
     const newData = req.body.entity;
+    let token = req.params.token;
 
-    const updated = await cardRepository.setStyleCard(cardId, newData, req.params.idUser);
+    const updated = await cardRepository.setStyleCard(newData, req.params.idUser, token);
     if (updated) {
         res.status(200).json({ message: 'Card updated successfully' });
     } else {

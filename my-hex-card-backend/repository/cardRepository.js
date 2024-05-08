@@ -81,30 +81,28 @@ class CardRepository {
     return token;
   }
 
-  async setCard(idCard, newData, idUser) {
+  async setCard(newData, idUser, token) {
     try {
       let emails = newData.email;
       let links = newData.link;
       let phoneNumbers = newData.phone_number;
+      let address = newData.address;
 
-      const updated = Card.update(
-        {
-          title: newData.title,
-          subtitle: newData.subtitle,
-          img: newData.img,
-          instagram: newData.instagram,
-          facebook: newData.facebook,
-          linkedin: newData.linkedin,
-          whatsapp: newData.whatsapp,
-          youtube: newData.youtube
-        }, 
-        {
-          where: { 
-            id: idCard, 
-            fk_id_user: idUser
-          },
-        }
-      );
+      let card = await this.getCardByToken(token);
+
+      card.name = newData.name;
+      card.surname = newData.surname;
+      card.company = newData.company;
+      card.function = newData.function;
+      card.img = newData.img;
+      card.instagram = newData.instagram;
+      card.facebook = newData.facebook;
+      card.linkedin = newData.linkedin;
+      card.whatsapp = newData.whatsapp;
+      card.youtube = newData.youtube;
+      card.save();
+      
+      let idCard = card.id;
 
       let emailRepository = new EmailRepository();
       await emailRepository.deleteAll(idCard);
@@ -126,17 +124,17 @@ class CardRepository {
 
       let addressRepository = new AddressRepository();
       await addressRepository.deleteAll(idCard);
-      for(let i = 0; i < addresss.length; i++){
-        await addressRepository.add(addresss[i].number, idCard);
+      for(let i = 0; i < address.length; i++){
+        await addressRepository.add(address[i].number, idCard);
       }
       
-      return updated;
+      return card;
     } catch (error) {
       throw new Error(`Unable to update card: ${error}`);
     }
   }
 
-  async setStyleCard(idCard, newData, idUser) {
+  async setStyleCard(newData, idUser, token) {
     try {
       const updated = await Card.update(
         {
@@ -146,7 +144,7 @@ class CardRepository {
         }, 
         {
           where: { 
-            id: idCard, 
+            token: token, 
             fk_id_user: idUser
           },
         }

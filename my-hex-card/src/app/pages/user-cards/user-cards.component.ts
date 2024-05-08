@@ -27,9 +27,7 @@ export class UserCardsComponent {
       
       this.cardService.getCardsByContact(idContact).then(
         (data) => {
-          console.log(data);
           this.cards = data;
-          console.log(this.cards);
         }
       );
     });

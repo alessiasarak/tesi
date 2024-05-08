@@ -15,7 +15,7 @@ router.get("/card/:id", cardController.getCardByToken);
 router.get("/card/contact/:id", cardController.getCardsByContact);
 router.get("/card/user/:id", cardController.getCardsByUser);
 
-router.put('/card/:id/:idUser', cardController.putCard);
-router.put('/card/style/:id/:idUser', cardController.putStyleCard);
+router.put('/card/update/:idUser/:token', cardController.putCard);
+router.put('/card/update/style/:idUser/:token', cardController.putStyleCard);
 
 module.exports = router;

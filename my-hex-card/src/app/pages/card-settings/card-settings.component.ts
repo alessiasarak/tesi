@@ -20,12 +20,13 @@ export class CardSettingsComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.service.getCard(localStorage.getItem("card")!).subscribe((data) => {
+      this.service.getCard(params['id']!).subscribe((data) => {
         this.card = data;
 
         this.myMainStyle = "color: " + this.card.text_color + "; background-color: " + this.card.background_color + ";";
         this.myButtonStyle = "background-color: " + this.card.button_color + ";";
-        
+        this.myToken=params['id'];
+        console.log(this.myToken);
         this.assignValues(data);
       });
     });
@@ -36,6 +37,8 @@ export class CardSettingsComponent {
   myButtonClass : string = "add-contact flex h-1/4 ";
   myMainStyle : string = "";
   myButtonStyle : string = "";
+
+  myToken : string = this.route.snapshot.params['id'];
 
   myForm : FormGroup = this.fb.group({
     img: [''],
@@ -86,18 +89,18 @@ export class CardSettingsComponent {
   assignValues(card: Card){
     this.myForm.setValue({
       img: null,
-      name: card.name,
-      surname: card.surname,
-      company: card.company,
-      function: card.function,
-      instagram: card.instagram,
-      facebook: card.facebook,
-      linkedin: card.linkedin,
-      whatsapp: card.whatsapp,
-      youtube: card.youtube,
-      emails: card.email.map(value => value.email).join(","),
-      phoneNumbers: card.phone_number.map(value => value.number).join(","),
-      links: card.link.map(value => value.link).join(",")
+      name: card.name ?? "",
+      surname: card.surname ?? "",
+      company: card.company ?? "",
+      function: card.function ?? "",
+      instagram: card.instagram ?? "",
+      facebook: card.facebook ?? "",
+      linkedin: card.linkedin ?? "",
+      whatsapp: card.whatsapp ?? "",
+      youtube: card.youtube ?? "",
+      emails: card.email?.map(value => value.email).join(",") ?? "",
+      phoneNumbers: card.phone_number?.map(value => value.number).join(",") ?? "",
+      links: card.link?.map(value => value.link).join(",") ?? ""
     });
 
     this.myStyleForm.patchValue({
@@ -126,27 +129,28 @@ export class CardSettingsComponent {
     this.card.link = this.myForm.value.links.split(",").map(function(item: string) {
       return {link: item};
     });
-    
-    let response = await this.service.putCard(this.card);
-    
+
+    let response = await this.service.putCard(this.card, this.myToken);
     if(response) {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(["/card-settings"]);
+      this.router.navigate(["/card-settings/"+this.myToken]);
     }
+    
   }
 
   async onStyleSubmit() {
     this.card.background_color = this.myStyleForm.value.backgroundColor;
     this.card.text_color = this.myStyleForm.value.textColor;
     this.card.button_color = this.myStyleForm.value.buttonColor;
+    this.card.token = this.myToken;
     
-    let response = await this.service.putStyleCard(this.card);
+    let response = await this.service.putStyleCard(this.card, this.myToken);
     
     if(response) {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(["/card-settings"]);
+      this.router.navigate(["/card-settings/"+this.myToken]);
     }
   }
 

@@ -52,7 +52,7 @@ export class LoginComponent {
         //setting in the locale storage all the card of the user logged, per il momento diamo per scontato che sia sempre una sola carta
         if(this.loggedUser.fk_role.toString() != "ADMIN"){
           let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
-          localStorage.setItem('cards', JSON.stringify(card.id));
+          localStorage.setItem('cards', JSON.stringify(card));
         }else {
           this.isVisible = true;
         }
