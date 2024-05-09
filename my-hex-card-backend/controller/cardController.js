@@ -128,6 +128,8 @@ exports.putCard = asyncHandler(async (req, res) => {
     const newData = req.body.entity;
     let token = req.params.token;
 
+    console.log(newData)
+
     const updated = await cardRepository.setCard(newData, req.params.idUser, token);
     if (updated) {
         res.status(200).json({ message: 'Card updated successfully' });

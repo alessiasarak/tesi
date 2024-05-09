@@ -85,6 +85,8 @@ class CardRepository {
   async setCard(newData, idUser, token) {
     try {
       let emails = newData.email;
+      console.log("emails")
+      console.log(emails)
       let links = newData.link;
       let phoneNumbers = newData.phone_number;
       let address = newData.address;
@@ -108,7 +110,8 @@ class CardRepository {
       let emailRepository = new EmailRepository();
       await emailRepository.deleteAll(idCard);
       for(let i = 0; i < emails.length; i++){
-        await emailRepository.add(emails[i].email, idCard);
+        console.log(emails[i])
+        await emailRepository.add(emails[i], idCard);
       }
 
       let linkRepository = new LinkRepository();

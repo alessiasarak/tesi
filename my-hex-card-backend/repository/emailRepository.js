@@ -4,7 +4,7 @@ class EmailRepository{
     async add(newEmailData, idCard){
         try {
             const email = await Email.create({
-                ...newEmailData,
+                email: newEmailData,
                 fk_id_card: idCard
             }); 
             return email;
