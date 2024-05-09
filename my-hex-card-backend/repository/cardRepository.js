@@ -123,7 +123,7 @@ class CardRepository {
       let phoneNumberRepository = new PhoneNumberRepository();
       await phoneNumberRepository.deleteAll(idCard);
       for(let i = 0; i < phoneNumbers.length; i++){
-        await phoneNumberRepository.add(phoneNumbers[i].number, idCard);
+        await phoneNumberRepository.add(phoneNumbers[i], idCard);
       }
 
       let addressRepository = new AddressRepository();

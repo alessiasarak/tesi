@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
 import { Email } from '../../interfaces/email';
+import { PhoneNumber } from '../../interfaces/phone-number';
 
 @Component({
   selector: 'app-card-settings',
@@ -52,8 +53,8 @@ export class CardSettingsComponent {
     linkedin: [''],
     whatsapp: [''],
     youtube: [''],
-    emails:  this.fb.array([ this.fb.control('') ]),
-    phoneNumbers: [''],
+    emails: this.fb.array([ this.fb.control('') ]),
+    phoneNumbers: this.fb.array([ this.fb.control('') ]),
     links: ['']
   });
   myStyleForm : FormGroup = this.fb.group({
@@ -76,6 +77,20 @@ export class CardSettingsComponent {
     emails.removeAt(index);
   }
 
+  phoneNumber : PhoneNumber[] = [];
+
+  get phoneNumberControls() {
+    return (this.myForm.get('phoneNumbers') as FormArray).controls;
+  }
+  addPhoneNumber(){
+    const phoneNumbers = this.myForm.get('phoneNumbers') as FormArray;
+    phoneNumbers.push(this.fb.control(''));
+  } 
+  removePhoneNumber(index: number) {
+    const phoneNumbers = this.myForm.get('phoneNumbers') as FormArray;
+    phoneNumbers.removeAt(index);
+  }
+
   card: Card = {
     id: 0,
     name: '',
@@ -91,7 +106,7 @@ export class CardSettingsComponent {
     fk_id_user: 0,
     fk_id_contact: 0,
     email: this.email,
-    phone_number: [],
+    phone_number: this.phoneNumber,
     link: [],
     address: [],
     active: false,
@@ -114,9 +129,19 @@ export class CardSettingsComponent {
       linkedin: card.linkedin ?? "",
       whatsapp: card.whatsapp ?? "",
       youtube: card.youtube ?? "",
-      phoneNumbers: card.phone_number?.map(value => value.number).join(",") ?? "",
       links: card.link?.map(value => value.link).join(",") ?? ""
     });
+
+    const phoneNumberArray = this.myForm.get('phoneNumbers') as FormArray;
+    phoneNumberArray.clear(); // Rimuovi tutti gli elementi precedenti per evitare duplicati
+  
+    if (card.phone_number && card.phone_number.length > 0) {
+      card.phone_number.forEach(phoneNumber => {
+        phoneNumberArray.push(this.fb.control(phoneNumber.number)); 
+      });
+    } else {
+      phoneNumberArray.push(this.fb.control(""));
+    }
 
     const emailArray = this.myForm.get('emails') as FormArray;
     emailArray.clear(); // Rimuovi tutti gli elementi precedenti per evitare duplicati
@@ -148,10 +173,8 @@ export class CardSettingsComponent {
     this.card.youtube = this.myForm.value.youtube;
 
     this.card.email = this.myForm.value.emails;
+    this.card.phone_number = this.myForm.value.phoneNumbers;
 
-    this.card.phone_number = this.myForm.value.phoneNumbers.split(",").map(function(item: string) {
-      return {number: item};
-    });
     this.card.link = this.myForm.value.links.split(",").map(function(item: string) {
       return {link: item};
     });
