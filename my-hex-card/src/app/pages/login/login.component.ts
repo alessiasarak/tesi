@@ -1,5 +1,5 @@
 import { Component, HostBinding } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
@@ -16,7 +16,7 @@ import { CardService } from "../../services/card.service";
 })
 export class LoginComponent {
   //constructor
-  constructor(private router: Router, private service: AuthService, private fb: FormBuilder, private cardService: CardService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private service: AuthService, private fb: FormBuilder, private cardService: CardService) {}
 
   //properties
   isVisible = false;
@@ -42,29 +42,30 @@ export class LoginComponent {
   async onSubmit() {
     this.user.email = this.myForm.value.email;
     this.user.password = this.myForm.value.password;
-    
-    this.service.login(this.user).then(async (response) => {  
-      this.loggedUser = response;
-      if(this.loggedUser != undefined) {
-        localStorage.setItem("user_id", this.loggedUser.id.toString());
-        localStorage.setItem("role", this.loggedUser.fk_role.toString());
-  
-        //setting in the locale storage all the card of the user logged, per il momento diamo per scontato che sia sempre una sola carta
-        if(this.loggedUser.fk_role.toString() != "ADMIN"){
-          let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
-          localStorage.setItem('cards', JSON.stringify(card));
-        }else {
-          this.isVisible = true;
-        }
-  
-        this.router.navigateByUrl("/settings");
-      }
-    }).catch((error) => {
-      console.log(error);
-      this.isVisible = true;
-    });
 
+    this.route.params.subscribe(async params => {
+      let token = params['token']; 
+
+      this.service.login(this.user, token).then(async (response) => {  
+        this.loggedUser = response;
+        if(this.loggedUser != undefined) {
+          localStorage.setItem("user_id", this.loggedUser.id.toString());
+          localStorage.setItem("role", this.loggedUser.fk_role.toString());
     
+          if(this.loggedUser.fk_role.toString() != "ADMIN"){
+            let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
+            localStorage.setItem('cards', JSON.stringify(card));
+          }else {
+            this.isVisible = true;
+          }
+    
+          this.router.navigateByUrl("/settings");
+        }
+      }).catch((error) => {
+        console.log(error);
+        this.isVisible = true;
+      });
+    });
   }
 
   togglePassword() {

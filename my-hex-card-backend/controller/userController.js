@@ -41,6 +41,26 @@ exports.login = asyncHandler(async (req, res) => {
     }
 });
 
+exports.loginWithToken = asyncHandler(async (req, res) => {
+    const { email, password } = req.body.entity;
+    let token = req.params.token;
+    let userRepository = new UserRepository();
+    
+    try {
+        const response = await userRepository.loginWithToken(email, password, token);
+
+        if (response.code == 200) {
+            req.session.idUser = response.data.dataValues.id;
+            req.session.save();
+        }
+        
+        res.status(response.code).json(response.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
 
 exports.logout = asyncHandler(async (req, res) => {
     req.session.idUser = null;

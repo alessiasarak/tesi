@@ -12,6 +12,7 @@ router.post("/auth/create", userController.createContact);
 
 router.post("/auth/register/:token", userController.registerUser);
 router.post("/auth/login", userController.login);
+router.post("/auth/login/:token", userController.loginWithToken);
 router.get("/auth/logout", userController.logout);
 
 router.post("/create", userController.createContact);

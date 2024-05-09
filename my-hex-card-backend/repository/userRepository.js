@@ -81,6 +81,51 @@ class UserRepository {
         }
     }
 
+    async loginWithToken(email, password, token) {
+        try {
+            let cardRepository = new CardRepository();
+            let card = await cardRepository.activateCard(token);
+
+            if(card){
+                try {
+                    const user = await User.findOne({ where: { email } });
+                    if (!user) {
+                        return {
+                            "code": 404,
+                            "data": "Email or password incorrect"
+                        };
+                    }
+
+                    const isPasswordValid = await bcrypt.compare(password, user.password);
+                    if(isPasswordValid) {
+                        card.fk_id_user = user.id;
+                        card.save();
+
+                        return {
+                            "code": 200,
+                            "data": user
+                        };
+                    }
+
+                    return {
+                        "code": 404,
+                        "data": "Email or password incorrect"
+                    };
+                } catch (error) {
+                    return {
+                        "code": 500,
+                        "data": "Internal server error"
+                    };
+                }
+            }
+        } catch (error) {
+            return {
+                "code": 500,
+                "data": "Internal server error"
+            };
+        }
+    }
+
     async updateUser(userId, newData) {
         try {
             const user = await User.findByPk(userId);

@@ -17,6 +17,12 @@ export class RegisterComponent {
   //constructor
   constructor(private router: Router, private service: AuthService, private fb: FormBuilder, private route: ActivatedRoute){}
 
+  ngOnInit(): void {
+    this.route.params.subscribe(async params => {
+      this.token = params['token']; 
+    });
+  }
+
   //properties
   myForm : FormGroup = this.fb.group({
     email: [''],
@@ -32,22 +38,21 @@ export class RegisterComponent {
     fk_role: { role: 'USER' }
   };
 
+  token : string = "";
   async onSubmit() {
-
-    this.route.params.subscribe(async params => {
-      let token = params['token']; 
-
-      this.user.email = this.myForm.value.email;
-      this.user.password = this.myForm.value.password;
-      
-      let response = await this.service.register(this.user, token);
-      
-      if(response) this.router.navigateByUrl("/login");
-    });
+    this.user.email = this.myForm.value.email;
+    this.user.password = this.myForm.value.password;
+    
+    let response = await this.service.register(this.user, this.token);
+    
+    if(response) this.router.navigateByUrl("/login");
   }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
-    console.log(this.showPassword);
+  }
+
+  login(){
+    this.router.navigateByUrl("/login/"+this.token);
   }
 }
