@@ -149,3 +149,15 @@ exports.putStyleCard = asyncHandler(async (req, res) => {
         res.status(404).json({ message: 'Card not found' });
     }
 });
+
+//create empty card
+exports.postCard = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+
+    const card = await cardRepository.createCard(req.params.idContact);
+    if (card) {
+        res.status(200).json({ message: 'Card create successfully' });
+    } else {
+        res.status(500).json({ message: 'Card not created' });
+    }
+});

@@ -38,4 +38,9 @@ export class CardService extends CrudService<Card> {
     let response = await lastValueFrom(this.put(card, "update/style/" + localStorage.getItem("user_id") + "/" +token));
     return response;
   }
+
+  async postCard(idContact : string){
+    let response = await lastValueFrom(this.post(undefined, idContact));
+    return response;
+  }
 }
