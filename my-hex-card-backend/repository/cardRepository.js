@@ -110,6 +110,7 @@ class CardRepository {
       let emailRepository = new EmailRepository();
       await emailRepository.deleteAll(idCard);
       for(let i = 0; i < emails.length; i++){
+        console.log(emails[i])
         await emailRepository.add(emails[i], idCard);
       }
 
@@ -128,7 +129,7 @@ class CardRepository {
       let addressRepository = new AddressRepository();
       await addressRepository.deleteAll(idCard);
       for(let i = 0; i < address.length; i++){
-        await addressRepository.add(address[i], idCard);
+        await addressRepository.add(address[i].number, idCard);
       }
       
       return card;
