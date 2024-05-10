@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 const userRoute = require("./route/userRoute");
 const cardRoute = require("./route/cardRoute");
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
 app.use(cookieParser());
 
 const corsOptions = {

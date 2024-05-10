@@ -13,7 +13,7 @@ const Card = sequelize.define("Card",
             primaryKey: true,
         },
         img: {
-            type: DatatTypes.STRING(),
+            type: DatatTypes.STRING(30000),
         },
         name: {
             type: DatatTypes.STRING(),

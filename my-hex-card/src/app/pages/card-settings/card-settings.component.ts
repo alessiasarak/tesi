@@ -9,6 +9,7 @@ import { MyButtonComponent } from '../../component/my-button/my-button.component
 import { Email } from '../../interfaces/email';
 import { PhoneNumber } from '../../interfaces/phone-number';
 import { Link } from '../../interfaces/link';
+import { Address } from '../../interfaces/address';
 
 @Component({
   selector: 'app-card-settings',
@@ -43,6 +44,7 @@ export class CardSettingsComponent {
 
   myToken : string = this.route.snapshot.params['id'];
 
+
   myForm : FormGroup = this.fb.group({
     img: [''],
     name: [''],
@@ -56,7 +58,10 @@ export class CardSettingsComponent {
     youtube: [''],
     emails: this.fb.array([ this.fb.control('') ]),
     phoneNumbers: this.fb.array([ this.fb.control('') ]),
-    links: this.fb.array([ this.fb.control('') ])
+    links: this.fb.array([ this.fb.control('') ]),
+
+   addresses: this.fb.array([])
+   
   });
   myStyleForm : FormGroup = this.fb.group({
     backgroundColor: [''],
@@ -107,6 +112,50 @@ export class CardSettingsComponent {
     links.removeAt(index);
   }
 
+
+  address : Address[] = [];
+  globalCounter : number = 0;
+  street = "street_";
+  number = "number_";
+  cap = "cap_";
+  city = "city_";
+  nation = "nation_";
+
+  get addresses(): FormArray {
+    return this.myForm.get('addresses') as FormArray;
+  }
+
+  addAddress() {
+    const addresses = this.myForm.get('addresses') as FormArray;
+    
+    this.street += this.globalCounter;
+    this.number += this.globalCounter;
+    this.cap += this.globalCounter;
+    this.city += this.globalCounter;
+    this.nation += this.globalCounter;
+
+    addresses.push(
+      this.fb.group({
+        [this.street]: [''],
+        [this.number]: [''],
+        [this.cap]: [''],
+        [this.city]: [''],
+        [this.nation]: ['']
+      })
+    );
+    
+    this.globalCounter++;
+    this.street = "street_";
+    this.number = "number_";
+    this.cap = "cap_";
+    this.city = "city_";
+    this.nation = "nation_";
+  }
+
+  removeAddress(index: number) {
+    this.addresses.removeAt(index);
+  }
+
   card: Card = {
     id: 0,
     name: '',
@@ -124,7 +173,7 @@ export class CardSettingsComponent {
     email: this.email,
     phone_number: this.phoneNumber,
     link: this.link,
-    address: [],
+    address: this.address,
     active: false,
     background_color: '',
     text_color: '',
@@ -177,6 +226,37 @@ export class CardSettingsComponent {
       });
     } else {
       linkArray.push(this.fb.control(""));
+    }
+
+    const addressArray = this.myForm.get('addresses') as FormArray;
+    addressArray.clear(); 
+  
+    if (card.address && card.address.length > 0) {
+      card.address.forEach(address => {
+        this.street += this.globalCounter;
+        this.number += this.globalCounter;
+        this.cap += this.globalCounter;
+        this.city += this.globalCounter;
+        this.nation += this.globalCounter;
+        
+        addressArray.push(
+          this.fb.group({
+            [this.street]: address.street_name ?? [''],
+            [this.number]: address.street_number ?? [''],
+            [this.cap]: address.cap ?? [''],
+            [this.city]: address.city ?? [''],
+            [this.nation]: address.nation ?? ['']
+          })
+        );
+        this.globalCounter++;
+        this.street = "street_";
+        this.number = "number_";
+        this.cap = "cap_";
+        this.city = "city_";
+        this.nation = "nation_";
+      });
+    } else {
+      addressArray.push(this.fb.control(""));
     }
 
     this.myStyleForm.patchValue({

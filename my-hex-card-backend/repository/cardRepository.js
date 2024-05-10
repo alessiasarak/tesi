@@ -85,8 +85,6 @@ class CardRepository {
   async setCard(newData, idUser, token) {
     try {
       let emails = newData.email;
-      console.log("emails")
-      console.log(emails)
       let links = newData.link;
       let phoneNumbers = newData.phone_number;
       let address = newData.address;
