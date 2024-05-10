@@ -40,7 +40,35 @@
 
     <hr class="flex mt-3 mb-3">
 
-    <div class="flex w-full items-center text-center">
+    <div class="flex flex-row w-full justify-around">
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.facebook">
+        <a href="{{ myCard.facebook }}" target="_blank">
+          <mat-icon fontIcon="facebook"></mat-icon>
+        </a>
+      </div>
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.instagram">
+        <a href="{{ myCard.instagram }}" target="_blank">
+          <mat-icon fontIcon="link"></mat-icon>
+        </a>
+      </div>
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.linkedin">
+        <a href="{{ myCard.linkedin }}" target="_blank">
+          <mat-icon fontIcon="link"></mat-icon>
+        </a>
+      </div>
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.whatsapp">
+        <a href="{{ myCard.whatsapp }}" target="_blank">
+          <mat-icon fontIcon="link"></mat-icon>
+        </a>
+      </div>
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.youtube">
+        <a href="{{ myCard.youtube }}" target="_blank">
+          <mat-icon fontIcon="link"></mat-icon>
+        </a>
+      </div>
+    </div>
+
+    <div class="flex w-full items-center text-center justify-center">
       <div class="flex">Powered by Hexcard</div>
     </div>
   </div>

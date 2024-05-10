@@ -115,6 +115,11 @@ export class MainComponent implements OnInit{
       link.push(element.link);
     });
     vCard.url = this.myCard.link.length > 0 ? link[0] : '';
+    
+    vCard.workAddress.street = this.myCard.address.length > 0 ? this.myCard.address[0].street_name : '';
+    vCard.workAddress.city = this.myCard.address.length > 0 ? this.myCard.address[0].city : '';
+    vCard.workAddress.stateProvince = this.myCard.address.length > 0 ? this.myCard.address[0].nation : '';
+    vCard.workAddress.postalCode = this.myCard.address.length > 0 ? this.myCard.address[0].cap.toString() : '';
 
     let img = this.myCard.img.split(",");   
     console.log(img);
