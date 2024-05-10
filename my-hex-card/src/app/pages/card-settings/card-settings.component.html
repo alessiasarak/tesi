@@ -71,7 +71,15 @@
                 <div>
                     <div formArrayName="phoneNumbers">
                         <div *ngFor="let phoneNumber of phoneNumberControls; let i = index" class="flex flex-row">
-                            <div class="flex flex-col mb-3 w-60">
+                            <div class="flex w-30 h-full content-center">
+                                <select class="flex">
+                                    <option value="workPhone">Ufficio</option>
+                                    <option value="cellPhone">Cellulare</option>
+                                    <option value="homePhone">Casa</option>
+                                    <option value="pagerPhone">Altro</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col mb-3 w-30">
                                 <input type="text" class="form-control" id="inputPhoneNumber" [formControlName]="i" placeholder="Numero di telefono">
                             </div>
                             <button *ngIf="i != 0" type="button" (click)="removePhoneNumber(i)" class="flex bg-slate-200 ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full">
