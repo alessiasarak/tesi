@@ -114,12 +114,12 @@ export class CardSettingsComponent {
 
 
   address : Address[] = [];
-  globalCounter : number = 0;
-  street = "street_";
-  number = "number_";
-  cap = "cap_";
-  city = "city_";
-  nation = "nation_";
+  
+  street_name = "street_name";
+  street_number = "street_number";
+  cap = "cap";
+  city = "city";
+  nation = "nation";
 
   get addresses(): FormArray {
     return this.myForm.get('addresses') as FormArray;
@@ -127,29 +127,16 @@ export class CardSettingsComponent {
 
   addAddress() {
     const addresses = this.myForm.get('addresses') as FormArray;
-    
-    this.street += this.globalCounter;
-    this.number += this.globalCounter;
-    this.cap += this.globalCounter;
-    this.city += this.globalCounter;
-    this.nation += this.globalCounter;
 
     addresses.push(
       this.fb.group({
-        [this.street]: [''],
-        [this.number]: [''],
+        [this.street_name]: [''],
+        [this.street_number]: [''],
         [this.cap]: [''],
         [this.city]: [''],
         [this.nation]: ['']
       })
     );
-    
-    this.globalCounter++;
-    this.street = "street_";
-    this.number = "number_";
-    this.cap = "cap_";
-    this.city = "city_";
-    this.nation = "nation_";
   }
 
   removeAddress(index: number) {
@@ -233,27 +220,15 @@ export class CardSettingsComponent {
   
     if (card.address && card.address.length > 0) {
       card.address.forEach(address => {
-        this.street += this.globalCounter;
-        this.number += this.globalCounter;
-        this.cap += this.globalCounter;
-        this.city += this.globalCounter;
-        this.nation += this.globalCounter;
-        
         addressArray.push(
           this.fb.group({
-            [this.street]: address.street_name ?? [''],
-            [this.number]: address.street_number ?? [''],
-            [this.cap]: address.cap ?? [''],
-            [this.city]: address.city ?? [''],
-            [this.nation]: address.nation ?? ['']
+            street_name: address.street_name ?? [''],
+            street_number: address.street_number ?? [''],
+            cap: address.cap ?? [''],
+            city: address.city ?? [''],
+            nation: address.nation ?? ['']
           })
         );
-        this.globalCounter++;
-        this.street = "street_";
-        this.number = "number_";
-        this.cap = "cap_";
-        this.city = "city_";
-        this.nation = "nation_";
       });
     } else {
       addressArray.push(this.fb.control(""));

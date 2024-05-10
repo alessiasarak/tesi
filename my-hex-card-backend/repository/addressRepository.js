@@ -9,11 +9,7 @@ class AddressRepository{
             }
         
             const address = await Address.create({
-                street_name: toSave[0],
-                street_number: toSave[1],
-                cap: toSave[2],
-                city: toSave[3],
-                nation: toSave[4],
+                ...newAddressData,
                 fk_id_card: idCard
             }); 
             return address;

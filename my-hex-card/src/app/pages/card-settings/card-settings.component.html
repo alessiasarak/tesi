@@ -133,23 +133,23 @@
                         <div *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
                             <div class="flex flex-row">
                                 <div class="flex flex-col mb-3 w-40">
-                                    <input type="text" class="form-control" [formControlName]="'street_'+i" id="inputAddressStreet"  placeholder="Via">
+                                    <input type="text" class="form-control" [formControlName]="street_name" id="inputAddressStreet"  placeholder="Via">
                                 </div>
                                 <div class="flex flex-col mb-3 w-40 pl-2">
-                                    <input type="text" class="form-control" [formControlName]="'number_'+i"  id="inputAddressNumber" placeholder="Numero">
+                                    <input type="text" class="form-control" [formControlName]="street_number"  id="inputAddressNumber" placeholder="Numero">
                                 </div>
                             </div>     
                             <div class="flex flex-row">
                                 <div class="flex flex-col mb-3 w-40">
-                                    <input type="text" class="form-control" [formControlName]="'cap_'+i"  id="inputAddressCap" placeholder="CAP">
+                                    <input type="text" class="form-control" [formControlName]="cap"  id="inputAddressCap" placeholder="CAP">
                                 </div>
                                 <div class="flex flex-col mb-3 w-40 ml-2">
-                                    <input type="text" class="form-control" [formControlName]="'city_'+i"  id="inputAddressCity" placeholder="Citta">
+                                    <input type="text" class="form-control" [formControlName]="city"  id="inputAddressCity" placeholder="Citta">
                                 </div>
                             </div>     
                             <div class="flex flex-row">
                                 <div class="flex flex-col mb-3 w-40">
-                                    <input type="text" class="form-control" [formControlName]="'nation_'+i"  id="inputAddressNation" placeholder="Nazione">
+                                    <input type="text" class="form-control" [formControlName]="nation"  id="inputAddressNation" placeholder="Nazione">
                                 </div>
                                 <button *ngIf="i != 0" type="button" class="flex bg-slate-200 ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="removeAddress(i)">
                                     <mat-icon>remove</mat-icon>
