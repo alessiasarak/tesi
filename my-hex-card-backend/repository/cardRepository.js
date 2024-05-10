@@ -127,7 +127,7 @@ class CardRepository {
       let addressRepository = new AddressRepository();
       await addressRepository.deleteAll(idCard);
       for(let i = 0; i < address.length; i++){
-        await addressRepository.add(address[i].number, idCard);
+        await addressRepository.add(address[i], idCard, i);
       }
       
       return card;

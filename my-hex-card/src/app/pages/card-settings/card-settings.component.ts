@@ -280,7 +280,8 @@ export class CardSettingsComponent {
     this.card.email = this.myForm.value.emails;
     this.card.phone_number = this.myForm.value.phoneNumbers;
     this.card.link = this.myForm.value.links;
-
+    this.card.address = this.myForm.value.addresses;
+    
     let response = await this.service.putCard(this.card, this.myToken);
     if(response) {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;

@@ -1,10 +1,19 @@
 const Address = require('../model/address.js'); 
 
 class AddressRepository{
-    async add(newAddressData, idCard){
+    async add(newAddressData, idCard, i){
         try {
+            let toSave = [];
+            for(let a in newAddressData){
+                toSave.push(newAddressData[a]);
+            }
+        
             const address = await Address.create({
-                ...newAddressData,
+                street_name: toSave[0],
+                street_number: toSave[1],
+                cap: toSave[2],
+                city: toSave[3],
+                nation: toSave[4],
                 fk_id_card: idCard
             }); 
             return address;
