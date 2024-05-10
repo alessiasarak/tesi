@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
 import { Email } from '../../interfaces/email';
 import { PhoneNumber } from '../../interfaces/phone-number';
+import { Link } from '../../interfaces/link';
 
 @Component({
   selector: 'app-card-settings',
@@ -55,7 +56,7 @@ export class CardSettingsComponent {
     youtube: [''],
     emails: this.fb.array([ this.fb.control('') ]),
     phoneNumbers: this.fb.array([ this.fb.control('') ]),
-    links: ['']
+    links: this.fb.array([ this.fb.control('') ])
   });
   myStyleForm : FormGroup = this.fb.group({
     backgroundColor: [''],
@@ -91,6 +92,21 @@ export class CardSettingsComponent {
     phoneNumbers.removeAt(index);
   }
 
+
+  link : Link[] = [];
+
+  get linkControls() {
+    return (this.myForm.get('links') as FormArray).controls;
+  }
+  addLink(){
+    const links = this.myForm.get('links') as FormArray;
+    links.push(this.fb.control(''));
+  } 
+  removeLink(index: number) {
+    const links = this.myForm.get('links') as FormArray;
+    links.removeAt(index);
+  }
+
   card: Card = {
     id: 0,
     name: '',
@@ -107,7 +123,7 @@ export class CardSettingsComponent {
     fk_id_contact: 0,
     email: this.email,
     phone_number: this.phoneNumber,
-    link: [],
+    link: this.link,
     address: [],
     active: false,
     background_color: '',
@@ -117,7 +133,6 @@ export class CardSettingsComponent {
   };
 
   assignValues(card: Card){
-    console.log(card)
     this.myForm.patchValue({
       img: null,
       name: card.name ?? "",
@@ -128,12 +143,11 @@ export class CardSettingsComponent {
       facebook: card.facebook ?? "",
       linkedin: card.linkedin ?? "",
       whatsapp: card.whatsapp ?? "",
-      youtube: card.youtube ?? "",
-      links: card.link?.map(value => value.link).join(",") ?? ""
+      youtube: card.youtube ?? ""
     });
 
     const phoneNumberArray = this.myForm.get('phoneNumbers') as FormArray;
-    phoneNumberArray.clear(); // Rimuovi tutti gli elementi precedenti per evitare duplicati
+    phoneNumberArray.clear();
   
     if (card.phone_number && card.phone_number.length > 0) {
       card.phone_number.forEach(phoneNumber => {
@@ -144,14 +158,25 @@ export class CardSettingsComponent {
     }
 
     const emailArray = this.myForm.get('emails') as FormArray;
-    emailArray.clear(); // Rimuovi tutti gli elementi precedenti per evitare duplicati
+    emailArray.clear(); 
   
     if (card.email && card.email.length > 0) {
       card.email.forEach(email => {
-        emailArray.push(this.fb.control(email.email)); // Aggiungi ogni email al FormArray
+        emailArray.push(this.fb.control(email.email));
       });
     } else {
       emailArray.push(this.fb.control(""));
+    }
+
+    const linkArray = this.myForm.get('links') as FormArray;
+    linkArray.clear(); 
+  
+    if (card.link && card.link.length > 0) {
+      card.link.forEach(link => {
+        linkArray.push(this.fb.control(link.link));
+      });
+    } else {
+      linkArray.push(this.fb.control(""));
     }
 
     this.myStyleForm.patchValue({
@@ -174,10 +199,7 @@ export class CardSettingsComponent {
 
     this.card.email = this.myForm.value.emails;
     this.card.phone_number = this.myForm.value.phoneNumbers;
-
-    this.card.link = this.myForm.value.links.split(",").map(function(item: string) {
-      return {link: item};
-    });
+    this.card.link = this.myForm.value.links;
 
     let response = await this.service.putCard(this.card, this.myToken);
     if(response) {

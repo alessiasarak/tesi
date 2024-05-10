@@ -117,7 +117,7 @@ class CardRepository {
       let linkRepository = new LinkRepository();
       await linkRepository.deleteAll(idCard);
       for(let i = 0; i < links.length; i++){
-        await linkRepository.add(links[i].link, idCard);
+        await linkRepository.add(links[i], idCard);
       }
 
       let phoneNumberRepository = new PhoneNumberRepository();
