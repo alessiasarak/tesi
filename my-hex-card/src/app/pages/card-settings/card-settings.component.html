@@ -239,6 +239,11 @@
                         <mat-icon aria-hidden="false" fontIcon="link" class="flex"></mat-icon>
                         <a href="https://{{ website.link }}" _target="_blank" class="flex ml-3">{{ website.link }}</a>
                     </div>
+
+                    <div *ngFor="let address of card.address" class="flex flex-row mb-3">
+                        <mat-icon aria-hidden="false" fontIcon="location_on" class="flex"></mat-icon>
+                        <span class="flex ml-3">{{ address.street_name }} {{ address.street_number }}, {{ address.cap }} {{ address.city }}, {{ address.nation }}</span>
+                    </div>
                 </div>
 
                 <hr class="flex mt-3 mb-3">

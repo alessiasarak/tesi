@@ -88,9 +88,37 @@ export class MainComponent implements OnInit{
 
     vCard.firstName = this.myCard.name;
     vCard.lastName = this.myCard.surname;
-    vCard.photo.attachFromUrl(this.myCard.img, 'image/*');
-    vCard.workPhone = this.myCard.phone_number.map(value => value.number).join(",");
-    vCard.url = this.myCard.link.map(value => value.link).join(",");
+    vCard.organization = this.myCard.company;
+    vCard.title = this.myCard.function;
+
+    vCard.workUrl = this.myCard.link.length > 0 ? this.myCard.link[0].link : '';
+    vCard.workEmail = this.myCard.email.length > 0 ? this.myCard.email[0].email : '';
+    vCard.workPhone = this.myCard.phone_number.length > 0 ? this.myCard.phone_number[0].number : '';
+
+    let otherPhoneNumbers = this.myCard.phone_number.slice(1);
+    let phoneNumber : string[] = [];
+    otherPhoneNumbers.forEach(element => {
+      phoneNumber.push(element.number);
+    });
+    vCard.pagerPhone = this.myCard.phone_number.length > 0 ? phoneNumber : '';
+
+    let otherEmails = this.myCard.email.slice(1);
+    let email : string[] = [];
+    otherEmails.forEach(element => {
+      email.push(element.email);
+    });
+    vCard.otherEmail = this.myCard.email.length > 0 ? email : '';
+
+    let otherLinks = this.myCard.link.slice(1);
+    let link : string[] = [];
+    otherLinks.forEach(element => {
+      link.push(element.link);
+    });
+    vCard.url = this.myCard.link.length > 0 ? link[0] : '';
+
+    let img = this.myCard.img.split(",");   
+    console.log(img);
+    vCard.photo.embedFromString(img[1], img[0]);
 
     return vCard.getFormattedString();
   }
