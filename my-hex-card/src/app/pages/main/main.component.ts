@@ -116,14 +116,16 @@ export class MainComponent implements OnInit{
     });
     vCard.url = this.myCard.link.length > 0 ? link[0] : '';
     
+    vCard.workAddress.label = this.myCard.address.length > 0 ? this.myCard.address[0].street_name : '';
     vCard.workAddress.street = this.myCard.address.length > 0 ? this.myCard.address[0].street_name : '';
     vCard.workAddress.city = this.myCard.address.length > 0 ? this.myCard.address[0].city : '';
     vCard.workAddress.stateProvince = this.myCard.address.length > 0 ? this.myCard.address[0].nation : '';
     vCard.workAddress.postalCode = this.myCard.address.length > 0 ? this.myCard.address[0].cap.toString() : '';
 
     let img = this.myCard.img.split(",");   
-    console.log(img);
-    vCard.photo.embedFromString(img[1], img[0]);
+    let typeImg = img[0].split(";")[0].split(":")[1];
+    
+    vCard.photo.embedFromString(img[1], typeImg);
 
     return vCard.getFormattedString();
   }
