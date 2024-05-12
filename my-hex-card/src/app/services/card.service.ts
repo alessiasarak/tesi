@@ -17,6 +17,10 @@ export class CardService extends CrudService<Card> {
     return this.get(idCard);
   }
 
+  getAUserCard() {
+    return this.get("a-card/" + localStorage.getItem("user_id"));
+  }
+
   async getCardsByContact(idContact : string) : Promise<Card[]> {
     return await lastValueFrom(this.getList ("contact/ " + idContact));
   }
@@ -36,6 +40,11 @@ export class CardService extends CrudService<Card> {
 
   async putStyleCard(card: Card, token: string) : Promise<Card | null> {
     let response = await lastValueFrom(this.put(card, "update/style/" + localStorage.getItem("user_id") + "/" +token));
+    return response;
+  }
+
+  async putStyleAllCard(card: Card) : Promise<Card | null> {
+    let response = await lastValueFrom(this.put(card, "all-style/" + localStorage.getItem("user_id")));
     return response;
   }
 

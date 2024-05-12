@@ -13,6 +13,7 @@ class CardRepository {
       throw new Error(`Unable to fetch card: ${error}`);
     }
   }
+  
   async getCardByToken(cardToken) {
     try {
       const card = await Card.findOne({
@@ -20,7 +21,21 @@ class CardRepository {
           token: cardToken
         }
       });
-      console.log(card)
+      
+      return card;
+    } catch (error) {
+      throw new Error(`Unable to fetch card: ${error}`);
+    }
+  }
+  
+  async getACardByUser(userId) {
+    try {
+      const card = await Card.findOne({
+        where: {
+          fk_id_user: userId
+        }
+      });
+      
       return card;
     } catch (error) {
       throw new Error(`Unable to fetch card: ${error}`);
@@ -139,6 +154,7 @@ class CardRepository {
 
   async setStyleCard(newData, idUser, token) {
     try {
+      console.log("A")
       const updated = await Card.update(
         {
           background_color: newData.background_color,
@@ -148,6 +164,28 @@ class CardRepository {
         {
           where: { 
             token: token, 
+            fk_id_user: idUser
+          },
+        }
+      );
+
+      return updated;
+    } catch (error) {
+      throw new Error(`Unable to update card style: ${error}`);
+    }
+  }
+
+  async setStyleAllCard(newData, idUser) {
+    try {
+      console.log("B")
+      const updated = await Card.update(
+        {
+          background_color: newData.background_color,
+          text_color: newData.text_color,
+          button_color: newData.button_color
+        }, 
+        {
+          where: {
             fk_id_user: idUser
           },
         }

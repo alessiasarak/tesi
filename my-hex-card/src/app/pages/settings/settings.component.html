@@ -6,6 +6,12 @@
       <li class="list-group-item">
         <a href="/profile-settings">Profilo personale</a>
       </li>
+
+      @if(cards.length > 1) {
+        <li class="list-group-item">
+          <a href="/card-settings/style/set-all-style-cards">Cambia lo stile in contemporanea</a>
+        </li>
+      }
       
       @for (card of cards; track card.token; let idx = $index) {
         <li class="list-group-item">
