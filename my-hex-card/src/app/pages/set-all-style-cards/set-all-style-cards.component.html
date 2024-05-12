@@ -43,7 +43,7 @@
 
             <div class="flex flex-col mb-2">
                 <div class="flex flex-col items-center">
-                    <img src="" class="flex h-20 mb-3 rounded-full">
+                    <span *ngIf="card.img"><img src="{{ card.img }}" class="flex h-1/4 mb-3 rounded-full"></span>
                     <h4 class="flex h-1/4 mb-1 font-bold text-left text-2xl">Nome cognome</h4>
                     <h5 class="flex h-1/4 mt-3 text-left">Azienda</h5>
                     <h5 class="flex h-1/4 mb-3 text-left">Funzione</h5>
@@ -78,9 +78,37 @@
                 <hr class="flex mt-3 mb-3">
                 
 
-                <div class="flex w-full items-center text-center">
+                <div class="flex flex-row w-full justify-around">
+                    <div class="flex w-1/5 rounded-full" *ngIf="card.facebook">
+                      <a href="{{ card.facebook }}" target="_blank">
+                        <mat-icon fontIcon="facebook"></mat-icon>
+                      </a>
+                    </div>
+                    <div class="flex w-1/5 rounded-full" *ngIf="card.instagram">
+                      <a href="{{ card.instagram }}" target="_blank">
+                        <mat-icon fontIcon="link"></mat-icon>
+                      </a>
+                    </div>
+                    <div class="flex w-1/5 rounded-full" *ngIf="card.linkedin">
+                      <a href="{{ card.linkedin }}" target="_blank">
+                        <mat-icon fontIcon="link"></mat-icon>
+                      </a>
+                    </div>
+                    <div class="flex w-1/5 rounded-full" *ngIf="card.whatsapp">
+                      <a href="{{ card.whatsapp }}" target="_blank">
+                        <mat-icon fontIcon="link"></mat-icon>
+                      </a>
+                    </div>
+                    <div class="flex w-1/5 rounded-full" *ngIf="card.youtube">
+                      <a href="{{ card.youtube }}" target="_blank">
+                        <mat-icon fontIcon="link"></mat-icon>
+                      </a>
+                    </div>
+                  </div>
+              
+                  <div class="flex w-full items-center text-center justify-center">
                     <div class="flex">Powered by Hexcard</div>
-                </div>
+                  </div>
             </div>
         </div>
     </div>

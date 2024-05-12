@@ -7,7 +7,7 @@
 
   <div class="flex flex-col mb-2">
     <div class="flex flex-col items-center">
-      <img src="{{ myCard.img }}" class="flex h-1/4 mb-3">
+      <span *ngIf="myCard.img"><img src="{{ myCard.img }}" class="flex h-1/4 mb-3"></span>
       <h4 class="flex h-1/4 mb-1 font-bold text-left text-2xl">{{ myCard.name }} {{ myCard.surname }}</h4>
       <h5 class="flex h-1/4 text-left">{{ myCard.company }} </h5>
       <h5 class="flex h-1/4 mb-3 text-left">{{ myCard.function }} </h5>

@@ -122,10 +122,12 @@ export class MainComponent implements OnInit{
     vCard.workAddress.stateProvince = this.myCard.address.length > 0 ? this.myCard.address[0].nation : '';
     vCard.workAddress.postalCode = this.myCard.address.length > 0 ? this.myCard.address[0].cap.toString() : '';
 
-    let img = this.myCard.img.split(",");   
-    let typeImg = img[0].split(";")[0].split(":")[1];
-    
-    vCard.photo.embedFromString(img[1], typeImg);
+    if(this.myCard.img){
+      let img = this.myCard.img.split(",");   
+      let typeImg = img[0].split(";")[0].split(":")[1];
+
+      vCard.photo.embedFromString(img[1], typeImg);
+    }
 
     return vCard.getFormattedString();
   }
