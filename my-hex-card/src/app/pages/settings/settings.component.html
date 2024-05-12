@@ -9,7 +9,15 @@
       
       @for (card of cards; track card.token; let idx = $index) {
         <li class="list-group-item">
-          <a href="/card-settings/{{ card.token }}">Carta {{ idx+1 }}</a>
+          <a href="/card-settings/{{ card.token }}">
+            {{ idx+1 }}. Carta: 
+            @if (card.name && card.surname) {
+              {{ card.name }} {{ card.surname }}
+            } 
+            @else {
+              Nome o cognome non presenti
+            }
+          </a>
         </li>
       }
     </ul>
