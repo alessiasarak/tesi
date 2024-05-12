@@ -13,20 +13,18 @@ export class AuthService extends CrudService<User> {
     super(http, "/auth");
   }
 
-  async login(user: User) : Promise<User> {
+  async login(user: User, token? : string) : Promise<User> {
+    //se il token è presente associa la carta
+    if(token){
+      let response = await lastValueFrom(this.post(user, "/login/"+token));
+      return response;
+    }
     let response = await lastValueFrom(this.post(user, "/login"));
-    
     return response;
   }
 
-  async create(user: User) : Promise<User> {
-    let response = await lastValueFrom(this.post(user, "/create"));
-    
-    return response;
-  }
-
-  async register(user: User) : Promise<User> {
-    let response = await lastValueFrom(this.post(user, "/register"));
+  async register(user: User, token : string) : Promise<User> {
+    let response = await lastValueFrom(this.post(user, "/register/"+token));
     
     return response;
   }

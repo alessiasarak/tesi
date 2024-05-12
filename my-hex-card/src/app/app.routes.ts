@@ -14,21 +14,24 @@ import { AddUserComponent } from './pages/add-user/add-user.component';
 import { AdminAuthGuard } from './admin-auth-guard';
 import { RedirectGuard } from './redirect-guard';
 import { UserCardsComponent } from './pages/user-cards/user-cards.component';
+import { SetAllStyleCardsComponent } from './pages/set-all-style-cards/set-all-style-cards.component';
 
 export const routes: Routes = [
     //{ path: '', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'https://hexcard.ch/' } },
     { path: '', component: LoginComponent },
     { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: 'login/:token', component: LoginComponent },
+    { path: 'register/:token', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
 
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
-    { path: 'card-settings', component: CardSettingsComponent, canActivate: [AuthGuard] },
+    { path: 'card-settings/:id', component: CardSettingsComponent, canActivate: [AuthGuard] },
+    { path: 'card-settings/style/set-all-style-cards', component: SetAllStyleCardsComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'user-cards/:idUser/:email', component: UserCardsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'add-contact', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'contact-cards/:idContact', component: UserCardsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
     { path: '**', component: Error404Component },
 ];

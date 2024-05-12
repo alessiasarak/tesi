@@ -7,9 +7,10 @@
 
   <div class="flex flex-col mb-2">
     <div class="flex flex-col items-center">
-      <img src="{{ myCard.img }}" class="flex h-1/4 mb-3">
-      <h4 class="flex h-1/4 mb-1 font-bold text-left text-2xl">{{ myCard.title }}</h4>
-      <h5 class="flex h-1/4 mb-3 text-left">{{ myCard.subtitle }}</h5>
+      <span *ngIf="myCard.img"><img src="{{ myCard.img }}" class="flex h-1/4 mb-3"></span>
+      <h4 class="flex h-1/4 mb-1 font-bold text-left text-2xl">{{ myCard.name }} {{ myCard.surname }}</h4>
+      <h5 class="flex h-1/4 text-left">{{ myCard.company }} </h5>
+      <h5 class="flex h-1/4 mb-3 text-left">{{ myCard.function }} </h5>
 
       <button [class]="myButtonClass" [style]="myButtonStyle" (click)="addToContact()">AGGIUNGI AI CONTATTI</button>
     </div>
@@ -31,11 +32,44 @@
         <mat-icon aria-hidden="false" fontIcon="link" class="flex"></mat-icon>
         <a href="https://{{ website.link }}" _target="_blank" class="flex ml-3">{{ website.link }}</a>
       </div>
+
+      <div *ngFor="let address of myCard.address" class="flex flex-row mb-3">
+          <mat-icon aria-hidden="false" fontIcon="location_on" class="flex"></mat-icon>
+          <span class="flex ml-3">{{ address.street_name }} {{ address.street_number }}, {{ address.cap }} {{ address.city }}, {{ address.nation }}</span>
+      </div>
     </div>
 
     <hr class="flex mt-3 mb-3">
 
-    <div class="flex w-full items-center text-center">
+    <div class="flex flex-row w-full justify-around">
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.facebook">
+        <a href="{{ myCard.facebook }}" target="_blank">
+          <mat-icon fontIcon="facebook"></mat-icon>
+        </a>
+      </div>
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.instagram">
+        <a href="{{ myCard.instagram }}" target="_blank">
+          <mat-icon fontIcon="link"></mat-icon>
+        </a>
+      </div>
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.linkedin">
+        <a href="{{ myCard.linkedin }}" target="_blank">
+          <mat-icon fontIcon="link"></mat-icon>
+        </a>
+      </div>
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.whatsapp">
+        <a href="{{ myCard.whatsapp }}" target="_blank">
+          <mat-icon fontIcon="link"></mat-icon>
+        </a>
+      </div>
+      <div class="flex w-1/5 rounded-full" *ngIf="myCard.youtube">
+        <a href="{{ myCard.youtube }}" target="_blank">
+          <mat-icon fontIcon="link"></mat-icon>
+        </a>
+      </div>
+    </div>
+
+    <div class="flex w-full items-center text-center justify-center mb-4">
       <div class="flex">Powered by Hexcard</div>
     </div>
   </div>

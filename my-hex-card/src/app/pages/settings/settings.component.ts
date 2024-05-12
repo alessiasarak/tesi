@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Card } from '../../interfaces/card';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-settings',
@@ -11,10 +13,19 @@ import { Router } from '@angular/router';
 })
 export class SettingsComponent {
   //constructor
-  constructor(private service: AuthService, private router: Router){}
+  constructor(private service: AuthService, private router: Router, private route: ActivatedRoute, private cardService : CardService){}
+
+  cards : Card[] = [];
 
   ngOnInit(): void {
     if(localStorage.getItem("role") == "ADMIN") this.router.navigateByUrl("/admin");
+
+    let userId = localStorage.getItem("user_id")
+    this.cardService.getCardsByUser(userId!).then(
+      (data) => {
+        this.cards = data;
+      }
+    );
   }
   
   logout(){

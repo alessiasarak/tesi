@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { User } from '../../interfaces/user';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
+import { Contact } from '../../interfaces/contact';
+import { ContactService } from '../../services/contact/contact.service';
 
 @Component({
   selector: 'app-add-user',
@@ -14,34 +15,32 @@ import { MyButtonComponent } from '../../component/my-button/my-button.component
 })
 export class AddUserComponent {
   //constructor
-  constructor(private router: Router, private service: AuthService, private fb: FormBuilder){}
+  constructor(private router: Router, private service: AuthService, private contactService: ContactService, private fb: FormBuilder){}
 
   //properties
   myForm : FormGroup = this.fb.group({
     email: [''],
     name: [''],
     surname: [''],
-    role: [''],
+    company: [''],
   });
 
-  user: User = {
+  contact: Contact = {
     id: 0,
     name: '',
     surname: '',
     email: '',
-    password: '',
-    fk_role: { role: 'SINGLE_USER' }
+    company: ''
   };
 
   async onSubmit() {
-    this.user.email = this.myForm.value.email;
-    this.user.name = this.myForm.value.name;
-    this.user.surname = this.myForm.value.surname;
-    this.user.fk_role = this.myForm.value.role;
+    this.contact.email = this.myForm.value.email;
+    this.contact.name = this.myForm.value.name;
+    this.contact.surname = this.myForm.value.surname;
+    this.contact.company = this.myForm.value.company;
     
-    let response = await this.service.create(this.user);
-    console.log(response);
+    let response = await this.contactService.create(this.contact);
     
-    if(response) this.router.navigateByUrl("/user-cards/"+response.id+"/"+response.email);
+    if(response) this.router.navigateByUrl("/contact-cards/"+response.id);
   }
 }

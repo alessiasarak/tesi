@@ -18,19 +18,30 @@ export class UserCardsComponent {
   email : string = "";
   cards : Card[] = [];
   link : string = "http://localhost:4200/card/";
+  idContact : string = "";
 
-  constructor (private router: Router, private route: ActivatedRoute, private authService: AuthService, private service: UserService, private cardService : CardService){}
+  constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      let userId = params['idUser'];
-      this.email = params['email'];
+      this.idContact = params['idContact'];
       
-      this.cardService.getCardByUser(userId).then(
+      this.cardService.getCardsByContact(this.idContact).then(
         (data) => {
-          this.cards.push(data);
+          this.cards = data;
         }
       );
     });
+  }
+
+  addCard(){
+    console.log("Aggiungi di una carta");
+    this.cardService.postCard(this.idContact).then(
+      (data) => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(["/contact-cards/"+this.idContact]);
+      }
+    );
   }
 }

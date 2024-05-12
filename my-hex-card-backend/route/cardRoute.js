@@ -8,23 +8,19 @@ router.get("/", (req, res) => {
     res.send("Default route");
 });
 
+router.put('/card/all-style/:idUser', cardController.putStyleAllCard);
 //getters
 router.get("/card", cardController.getAllCards);
-router.get("/card/:id", cardController.getCardById);
-router.get("/card/user/:id", cardController.getCardByUser);
-router.get("/email/:id", cardController.getEmailsByCardId);
-router.get("/phonenumber/:id", cardController.getPhoneNumbersByCardId);
-router.get("/link/:id", cardController.getLinksByCardId);
+router.get("/card/:id", cardController.getCardByToken);
+router.get("/card/a-card/:idUser", cardController.getACardByUser);
 
-router.put('/card/:id/:idUser', cardController.putCard);
-router.put('/card/style/:id/:idUser', cardController.putStyleCard);
+router.get("/card/contact/:id", cardController.getCardsByContact);
+router.get("/card/user/:id", cardController.getCardsByUser);
 
-router.post('/email/:id', cardController.postEmail);
-router.post('/phonenumber/:id', cardController.postPhoneNumber);
-router.post('/link/:id', cardController.postLink);
+router.put('/card/update/:idUser/:token', cardController.putCard);
+router.put('/card/update/style/:idUser/:token', cardController.putStyleCard);
 
-router.delete('/email/:id', cardController.deleteEmail);
-router.delete('/phonenumber/:id', cardController.deletePhoneNumber);
-router.delete('/link/:id', cardController.deleteLink);
+
+router.post('/card/:idContact', cardController.postCard);
 
 module.exports = router;

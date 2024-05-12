@@ -12,6 +12,10 @@ const PhoneNumber = sequelize.define("PhoneNumber",
             primaryKey: true,
         },
 
+        label: {
+            type: DatatTypes.STRING,
+        },
+
         number: {
             type: DatatTypes.STRING,
         },

@@ -1,9 +1,7 @@
 const DatatTypes = require("sequelize");
 const sequelize = require("./../database/connection");
 
-const Role = require("./role");
-
-const User = sequelize.define("User",
+const Contact = sequelize.define("Contact",
     {
         id: {
             type: DatatTypes.INTEGER,
@@ -11,28 +9,24 @@ const User = sequelize.define("User",
             autoIncrement: true,
             primaryKey: true,
         },
+        name: {
+            type: DatatTypes.STRING(),
+        },
+        surname: {
+            type: DatatTypes.STRING(),
+        },
+        company: {
+            type: DatatTypes.STRING(),
+        },
         email: {
             type: DatatTypes.STRING(),
         },
-        password: {
-            type: DatatTypes.STRING(),
-        },
-
-        fk_role: {
-            type: DatatTypes.STRING(20),
-            defaultValue: "USER",
-            allowNull: false,
-            references: {
-                model: Role, 
-                key: "role"
-            }
-        }
     },
     {
-        tableName: "user",
+        tableName: "contact",
     }
 );
 
 sequelize.sync();
 
-module.exports = User;
+module.exports = Contact;

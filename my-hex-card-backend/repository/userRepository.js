@@ -4,76 +4,45 @@ const CardRepository = require("./cardRepository");
 const bcrypt = require('bcrypt');
 
 class UserRepository {
-    async createUser(userData) {
+    async registerUser(userData, token) {
         try {
-            const existingUser = await User.findOne({ 
-                where: { 
-                    email: userData.email 
-                } 
-            });
-            if (existingUser) {
-                return {
-                    "code": 403,
-                    "data": "User with this email already exists"
-                };
-            }
- 
-            let newUser = await User.create({
-                ...userData,
-                fk_role: userData.fk_role
-            });
-
             let cardRepository = new CardRepository();
-            let newCard = await cardRepository.createCard(userData.name + " " + userData.surname, userData.email, newUser.id);
+            let card = await cardRepository.activateCard(token);
 
-            console.log(newCard);
-            if(newCard.code == 200) {
+            if(card){
+                const existingUser = await User.findOne({ 
+                    where: { 
+                        email: userData.email 
+                    } 
+                });
+                if (existingUser) {
+                    return {
+                        "code": 403,
+                        "data": "User with this email already exists"
+                    };
+                }
+                
+                const hashedPassword = await bcrypt.hash(userData.password, 10); 
+    
+                let newUser = await User.create({
+                    ...userData,
+                    fk_role: "USER",
+                    password: hashedPassword
+                });
+
+                card.fk_id_user = newUser.id;
+                card.save();
+
                 return {
                     "code": 200,
                     "data": newUser
-                };
-            }else {
-                return {
-                    "code": 500,
-                    "data": "Internal server error"
-                };
-            }
-        } catch (error) {
-            return {
-                "code": 500,
-                "data": "Internal server error"
-            };
-        }
-    }
-
-    async registerUser(userData) {
-        try {
-            const user = await User.findOne({ 
-                where: { 
-                    email: userData.email,
-                    password: ""
-                } 
-            });
-            if (user) {
-                const hashedPassword = await bcrypt.hash(userData.password, 10); 
-
-                await user.update({
-                    password: hashedPassword, 
-                });
-
-                let cardRepository = new CardRepository();
-                cardRepository.activateCards(user.id);
-                
-                return {
-                    "code": 200,
-                    "data": user
-                };
+                }; 
             } else {
                 return {
-                    "code": 403,
-                    "data": "User already setted"
+                    "code": 400,
+                    "data": "Error"
                 };
-            }   
+            }
         } catch (error) {
             return {
                 "code": 500,
@@ -112,6 +81,51 @@ class UserRepository {
         }
     }
 
+    async loginWithToken(email, password, token) {
+        try {
+            let cardRepository = new CardRepository();
+            let card = await cardRepository.activateCard(token);
+
+            if(card){
+                try {
+                    const user = await User.findOne({ where: { email } });
+                    if (!user) {
+                        return {
+                            "code": 404,
+                            "data": "Email or password incorrect"
+                        };
+                    }
+
+                    const isPasswordValid = await bcrypt.compare(password, user.password);
+                    if(isPasswordValid) {
+                        card.fk_id_user = user.id;
+                        card.save();
+
+                        return {
+                            "code": 200,
+                            "data": user
+                        };
+                    }
+
+                    return {
+                        "code": 404,
+                        "data": "Email or password incorrect"
+                    };
+                } catch (error) {
+                    return {
+                        "code": 500,
+                        "data": "Internal server error"
+                    };
+                }
+            }
+        } catch (error) {
+            return {
+                "code": 500,
+                "data": "Internal server error"
+            };
+        }
+    }
+
     async updateUser(userId, newData) {
         try {
             const user = await User.findByPk(userId);
@@ -130,8 +144,6 @@ class UserRepository {
                 });
             } else {
                 await user.update({
-                    name: newData.name,
-                    surname: newData.surname,
                     email: newData.email,
                 });
             }

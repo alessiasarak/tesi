@@ -2,6 +2,7 @@ const DatatTypes = require("sequelize");
 const sequelize = require("./../database/connection");
 
 const User = require("./user");
+const Contact = require("./contact");
 
 const Card = sequelize.define("Card",
     {
@@ -12,12 +13,18 @@ const Card = sequelize.define("Card",
             primaryKey: true,
         },
         img: {
-            type: DatatTypes.STRING(64000),
+            type: DatatTypes.STRING(30000),
         },
-        title: {
+        name: {
             type: DatatTypes.STRING(),
         },
-        subtitle: {
+        surname: {
+            type: DatatTypes.STRING(),
+        },
+        company: {
+            type: DatatTypes.STRING(),
+        },
+        function: {
             type: DatatTypes.STRING(),
         },
         youtube: {
@@ -38,6 +45,9 @@ const Card = sequelize.define("Card",
         active: {
             type: DatatTypes.BOOLEAN,
         },
+        token: {
+            type: DatatTypes.STRING(),
+        },
         
         background_color: {
             type: DatatTypes.STRING(7), // codice in esadecimale #rrggbb
@@ -56,6 +66,14 @@ const Card = sequelize.define("Card",
             type: DatatTypes.INTEGER,
             references: {
                 model: User, 
+                key: "id"
+            }
+        },
+
+        fk_id_contact: {
+            type: DatatTypes.INTEGER,
+            references: {
+                model: Contact, 
                 key: "id"
             }
         }

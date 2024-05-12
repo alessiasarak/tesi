@@ -6,7 +6,6 @@ import { HamburgerMenuComponent } from '../../component/hamburger-menu/hamburger
 import { Card } from '../../interfaces/card';
 import { CardService } from '../../services/card.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ThemeService } from '../../services/theme/theme.service';
 import { MatIconModule } from '@angular/material/icon';
 import vCardsJS from 'vcards-js';
  
@@ -19,9 +18,8 @@ import vCardsJS from 'vcards-js';
 })
 export class MainComponent implements OnInit{
 
-  constructor(private service: CardService, private route: ActivatedRoute, private themeService: ThemeService, private router: Router){}
+  constructor(private service: CardService, private route: ActivatedRoute, private router: Router){}
   
-
   myMainClass : string = "";
   myButtonClass : string = "";
   myMainStyle : string = "";
@@ -30,29 +28,36 @@ export class MainComponent implements OnInit{
   myCard: Card = {
     id: 0,
     img: '',
-    title: '',
-    subtitle: '',
+    name: '',
+    surname: '',
+    company: '',
+    function: '',
     instagram: '',
     facebook: '',
     linkedin: '',
     whatsapp: '',
     youtube: '',
 
-    fk_id_user: 0,
     email: [],
     phone_number: [],
     link: [],
+    address: [],
+
     active: false,
     background_color: '',
     text_color: '',
-    button_color: ''
+    button_color: '',
+
+    fk_id_contact: 0,
+    fk_id_user: 0,
+    token: ''
   }
   
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let cardId = params['idCard']; 
       this.service.getCard(cardId).subscribe((data) => {
-        if(!data.active) this.router.navigateByUrl("/register");
+        if(!data.active) this.router.navigateByUrl("/register/"+cardId);
         this.myCard = data;
         
         this.myMainClass = "content h-full";
@@ -69,7 +74,7 @@ export class MainComponent implements OnInit{
     let a = document.createElement("a");
     let url = URL.createObjectURL(file);
     a.href = url;
-    a.download = this.myCard.title + '.vcf';
+    a.download = this.myCard.company + '.vcf';
     document.body.appendChild(a);
     a.click();
     setTimeout(function() {
@@ -81,11 +86,48 @@ export class MainComponent implements OnInit{
   private vCardCreator() {
     const vCard = vCardsJS();
 
-    vCard.firstName = this.myCard.title;
-    vCard.lastName = this.myCard.subtitle;
-    vCard.photo.attachFromUrl(this.myCard.img, 'image/*');
-    vCard.workPhone = this.myCard.phone_number.map(value => value.number).join(",");
-    vCard.url = this.myCard.link.map(value => value.link).join(",");
+    vCard.firstName = this.myCard.name;
+    vCard.lastName = this.myCard.surname;
+    vCard.organization = this.myCard.company;
+    vCard.title = this.myCard.function;
+
+    vCard.workUrl = this.myCard.link.length > 0 ? this.myCard.link[0].link : '';
+    vCard.workEmail = this.myCard.email.length > 0 ? this.myCard.email[0].email : '';
+    vCard.workPhone = this.myCard.phone_number.length > 0 ? this.myCard.phone_number[0].number : '';
+
+    let otherPhoneNumbers = this.myCard.phone_number.slice(1);
+    let phoneNumber : string[] = [];
+    otherPhoneNumbers.forEach(element => {
+      phoneNumber.push(element.number);
+    });
+    vCard.pagerPhone = this.myCard.phone_number.length > 0 ? phoneNumber : '';
+
+    let otherEmails = this.myCard.email.slice(1);
+    let email : string[] = [];
+    otherEmails.forEach(element => {
+      email.push(element.email);
+    });
+    vCard.otherEmail = this.myCard.email.length > 0 ? email : '';
+
+    let otherLinks = this.myCard.link.slice(1);
+    let link : string[] = [];
+    otherLinks.forEach(element => {
+      link.push(element.link);
+    });
+    vCard.url = this.myCard.link.length > 0 ? link[0] : '';
+    
+    vCard.workAddress.label = this.myCard.address.length > 0 ? this.myCard.address[0].street_name : '';
+    vCard.workAddress.street = this.myCard.address.length > 0 ? this.myCard.address[0].street_name : '';
+    vCard.workAddress.city = this.myCard.address.length > 0 ? this.myCard.address[0].city : '';
+    vCard.workAddress.stateProvince = this.myCard.address.length > 0 ? this.myCard.address[0].nation : '';
+    vCard.workAddress.postalCode = this.myCard.address.length > 0 ? this.myCard.address[0].cap.toString() : '';
+
+    if(this.myCard.img){
+      let img = this.myCard.img.split(",");   
+      let typeImg = img[0].split(";")[0].split(":")[1];
+
+      vCard.photo.embedFromString(img[1], typeImg);
+    }
 
     return vCard.getFormattedString();
   }

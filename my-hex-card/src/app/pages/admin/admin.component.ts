@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { User } from '../../interfaces/user';
-import { UserService } from '../../services/user/user.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
-import { Card } from '../../interfaces/card';
-import { CardService } from '../../services/card.service';
+import { Contact } from '../../interfaces/contact';
+import { ContactService } from '../../services/contact/contact.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,13 +13,14 @@ import { CardService } from '../../services/card.service';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  users : User[] = [];
+  contacts : Contact[] = [];
 
-  constructor (private router: Router, private authService: AuthService, private service: UserService, private cardService : CardService){}
+  constructor (private router: Router, private authService: AuthService, private service: ContactService){}
 
   ngOnInit(): void {
-    this.service.getAllUsers().subscribe((data) => {
-      this.users = data;
+    this.service.getAllContacts().subscribe((data) => {
+      this.contacts = data;
+      console.log(this.contacts)
     });
   }
 
@@ -30,11 +29,11 @@ export class AdminComponent {
     this.router.navigateByUrl("/login");
   }
 
-  addUser(){
-    this.router.navigateByUrl("/add-user");
+  addContact(){
+    this.router.navigateByUrl("/add-contact");
   }
 
-  async seeUserCard(userId : number, userEmail : string){
-    this.router.navigateByUrl("/user-cards/"+userId+"/"+userEmail);
+  async seeContactCards(contactId : number){
+    this.router.navigateByUrl("/contact-cards/"+contactId);
   }
 }

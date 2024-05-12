@@ -1,6 +1,19 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="flex flex-col mt-10 items-center">
+  <div class="z-10 bg-red-200 rounded-3xl absolute border border-spacing-1 border-red-500" *ngIf="isVisible">
+      <div class="flex flex-col items-end pt-3 pr-3" >
+      <button (click)="closeError()"><mat-icon class="flex">close</mat-icon></button>
+      </div>
+      <div class="flex flex-col items-center">
+      <h1 class="flex text-xl font-semibold">Errore</h1>
+      <h2 class="flex mt-3 mb-8 ml-6 mr-6">Email o password non validi</h2>
+      </div>
+  </div>
+</div>
+
+<div class="flex flex-col mt-10 items-center">
+
   <div class="flex flex-col w-80 shadow-xl p-8 rounded-3xl">
     <h3 class="flex text-xl font-bold mb-3">Accedi</h3>
 
@@ -10,10 +23,18 @@
         <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
       </div>
 
-      <div class="flex flex-row mb-3 w-64 items-center">
-        <input class="flex w-11/12" type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
-        <span class="flex w-1/12" (click)="togglePassword()">
+      <div class="flex flex-row mb-3 w-64 items-center" *ngIf="!showPassword">
+        <input class="flex" type="text" class="form-control" id="password" formControlName="password" placeholder="Password">
+
+        <span class="flex" (click)="togglePassword()">
           <span *ngIf="!showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
+        </span>
+      </div>
+
+      <div class="flex flex-row mb-3 w-64 items-center" *ngIf="showPassword">
+        <input class="flex" type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+
+        <span class="flex" (click)="togglePassword()">
           <span *ngIf="showPassword"><mat-icon class="flex">visibility</mat-icon></span>
         </span>
       </div>
