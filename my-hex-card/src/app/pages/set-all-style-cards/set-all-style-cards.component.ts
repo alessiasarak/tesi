@@ -36,6 +36,7 @@ export class SetAllStyleCardsComponent {
   myButtonStyle : string = "";
   
   myStyleForm : FormGroup = this.fb.group({
+    img: [''],
     backgroundColor: [''],
     textColor: [''],
     buttonColor: ['']
@@ -69,6 +70,7 @@ export class SetAllStyleCardsComponent {
 
   assignValues(card: Card){
     this.myStyleForm.patchValue({
+      img: null,
       backgroundColor: card.background_color,
       textColor: card.text_color,
       buttonColor: card.button_color,
@@ -87,5 +89,15 @@ export class SetAllStyleCardsComponent {
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(["/card-settings/style/set-all-style-cards"]);
     }
+  }
+
+  
+  async processFile(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        this.card.img = reader.result!.toString();
+    };
   }
 }

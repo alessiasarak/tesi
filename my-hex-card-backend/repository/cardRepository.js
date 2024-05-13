@@ -154,7 +154,6 @@ class CardRepository {
 
   async setStyleCard(newData, idUser, token) {
     try {
-      console.log("A")
       const updated = await Card.update(
         {
           background_color: newData.background_color,
@@ -177,9 +176,9 @@ class CardRepository {
 
   async setStyleAllCard(newData, idUser) {
     try {
-      console.log("B")
       const updated = await Card.update(
         {
+          img: newData.img,
           background_color: newData.background_color,
           text_color: newData.text_color,
           button_color: newData.button_color
