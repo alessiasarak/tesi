@@ -21,6 +21,12 @@ exports.login = asyncHandler(async (req, res) => {
 
         if (response.code == 200) {
             req.session.idUser = response.data.dataValues.id;
+            req.session.role = response.data.dataValues.fk_role;
+            
+
+    console.log("LOGIN req.session.idUser");
+    console.log(req.session.idUser);
+    console.log(req.session);
             req.session.save();
         }
         

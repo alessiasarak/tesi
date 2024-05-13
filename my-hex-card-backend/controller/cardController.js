@@ -34,13 +34,16 @@ exports.getCardByToken = asyncHandler(async (req, res) => {
 
     let cardId = req.params.id;//token
     const card = await cardRepository.getCardByToken(cardId);
-    cardId = card.id;
-    let emails = await emailRepository.getAll(cardId);
-    let phoneNumbers = await phoneNumberRepository.getAll(cardId);
-    let links = await linkRepository.getAll(cardId);
-    let address = await addressRepository.getAll(cardId);
+    
+    if(!card) res.status(404).json({ message: 'Card not found' });
 
     if (card) {
+        cardId = card.id;
+        let emails = await emailRepository.getAll(cardId);
+        let phoneNumbers = await phoneNumberRepository.getAll(cardId);
+        let links = await linkRepository.getAll(cardId);
+        let address = await addressRepository.getAll(cardId);
+
         res.status(200).json({
             id: card.id,
             img: card.img,
@@ -67,7 +70,7 @@ exports.getCardByToken = asyncHandler(async (req, res) => {
             address: address
         });
     } else {
-        res.status(404).json({ message: 'Card not found' });
+        res.status(404);
     }
 });
 

@@ -8,6 +8,7 @@ import { CardService } from '../../services/card.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import vCardsJS from 'vcards-js';
+import { catchError, throwError } from 'rxjs';
  
 @Component({
   selector: 'app-main',
@@ -56,16 +57,27 @@ export class MainComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let cardId = params['idCard']; 
-      this.service.getCard(cardId).subscribe((data) => {
-        if(!data.active) this.router.navigateByUrl("/register/"+cardId);
-        this.myCard = data;
-        
-        this.myMainClass = "content h-full";
-        this.myButtonClass = "add-contact flex h-1/4 text-[#fff]" + " bg-[" + this.myCard.button_color + "]";
+      this.service.getCard(cardId)
+      .pipe(
+        catchError((error: any) => {
+          // Handle the error here
+          this.router.navigateByUrl("**")
+          // Optionally, re-throw the error or return a default value
+          return throwError(() => new Error('Errore'));
+        })
+      )
+      .subscribe(
+        (data) => {
+          if(!data.active) this.router.navigateByUrl("/register/"+cardId);
+          this.myCard = data;
+          
+          this.myMainClass = "content h-full";
+          this.myButtonClass = "add-contact flex h-1/4 text-[#fff]" + " bg-[" + this.myCard.button_color + "]";
 
-        this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
-        this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
-      });
+          this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
+          this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
+        }
+      );
     });
   }
 

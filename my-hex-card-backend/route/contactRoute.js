@@ -8,6 +8,6 @@ router.get("/", (req, res) => {
 });
 
 router.get("/contact", contactController.getAllContacts);
-router.post("/create", contactController.createContact);
+router.post("/auth/create", contactController.createContact);
 
 module.exports = router;

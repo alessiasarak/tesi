@@ -20,7 +20,6 @@ router.get("/card/user/:id", cardController.getCardsByUser);
 router.put('/card/update/:idUser/:token', cardController.putCard);
 router.put('/card/update/style/:idUser/:token', cardController.putStyleCard);
 
-
 router.post('/card/:idContact', cardController.postCard);
 
 module.exports = router;
