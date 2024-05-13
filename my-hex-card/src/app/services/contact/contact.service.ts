@@ -21,4 +21,8 @@ export class ContactService extends CrudService<Contact>  {
   getAllContacts() {
     return this.getList("contact");
   }
+
+  deleteContact(idContact: number) {
+    return this.delete("contact/"+idContact);
+  }
 }

@@ -39,3 +39,11 @@ exports.getAllContacts = asyncHandler(async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
+exports.deleteContact = asyncHandler(async (req, res) => {
+    let id = req.params.id;
+    console.log(id);
+    let contactRepository = new ContactRepository();
+    let response = await contactRepository.deleteContact(id);
+    res.status(response.code).json(response.data);
+});

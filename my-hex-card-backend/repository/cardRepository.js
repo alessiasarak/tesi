@@ -198,6 +198,14 @@ class CardRepository {
       throw new Error(`Unable to update card active: ${error}`);
     }
   }
+
+  async deleteAllCardsByContact(contactId) {
+    try {
+      await Card.destroy({ where: { fk_id_contact: contactId } });
+    } catch (error) {
+      throw new Error(`Unable to delete cards: ${error}`);
+    }
+  }
 };
 
 module.exports = CardRepository;

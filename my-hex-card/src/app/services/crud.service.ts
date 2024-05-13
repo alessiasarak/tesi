@@ -59,4 +59,13 @@ export class CrudService<T> {
     else return this.http.put<T>(this.baseApiUrl + this.endpoint, body, options );
     
   }
+
+  delete(extraEndPoint?: string) : Observable<T>{
+    const options = {
+      headers: this.headers
+    }
+
+    if(extraEndPoint) return this.http.delete<T>(this.baseApiUrl + this.endpoint + extraEndPoint, options);
+    else return this.http.delete<T>(this.baseApiUrl + this.endpoint, options);
+  }
 }
