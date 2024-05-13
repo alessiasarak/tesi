@@ -68,7 +68,16 @@ export class MainComponent implements OnInit{
       )
       .subscribe(
         (data) => {
-          if(!data.active) this.router.navigateByUrl("/register/"+cardId);
+          if(!data.active) {
+            //se il login è gia stato effettuato
+            if(localStorage.getItem("user_id")){
+              //associa direttamente il token
+              //reinderizza alle impostazioni
+            }
+
+            this.router.navigateByUrl("/register/"+cardId);
+          }
+          
           this.myCard = data;
           
           this.myMainClass = "content h-full";

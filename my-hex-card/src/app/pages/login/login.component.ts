@@ -59,10 +59,10 @@ export class LoginComponent {
             this.isVisible = true;
           }
     
+          if(token) this.router.navigateByUrl("/card-settings/"+token);
           this.router.navigateByUrl("/settings");
         }
       }).catch((error) => {
-        console.log(error);
         this.isVisible = true;
       });
     });
