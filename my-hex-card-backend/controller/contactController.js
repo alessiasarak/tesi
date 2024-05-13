@@ -7,6 +7,7 @@ exports.createContact = asyncHandler(async (req, res) => {
     
     let contactRepository = new ContactRepository();
     let response = await contactRepository.createContact(data);
+    
     res.status(response.code).json(response.data);
 });
 
