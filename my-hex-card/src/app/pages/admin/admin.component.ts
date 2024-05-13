@@ -37,18 +37,16 @@ export class AdminComponent {
     this.router.navigateByUrl("/contact-cards/"+contactId);
   }
 
-  async delete(contactId : number){
-    //this.router.navigateByUrl("/contact-cards/"+contactId);
-    const confirmed = confirm("Are you sure you want to delete this contact?");
+  async delete(contact : Contact){
+    const confirmed = confirm("Sicuro di voler eliminare il contatto?" + contact.name + " " + contact.surname + " " + contact.email + " " + contact.company);
     if (confirmed) {
-      console.log("Deleting contact with id: ", contactId);
-      this.service.deleteContact(contactId).subscribe((data) => {
+      this.service.deleteContact(contact.id).subscribe((data) => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(["/admin"]);
       });
-      // Perform the delete operation
-      // this.router.navigateByUrl("/contact-cards/"+contactId);
+    }else {
+      console.log("Delete operation cancelled");
     }
   }
 }
