@@ -41,15 +41,6 @@ class CardRepository {
       throw new Error(`Unable to fetch card: ${error}`);
     }
   }
-  
-  async getAll() {
-    try {
-      const cards = await Card.findAll();
-      return cards;
-    } catch (error) {
-      throw new Error(`Unable to fetch card: ${error}`);
-    }
-  }
 
   async getCardsByContact(contactId) {
     try {
