@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../services/auth/auth.service';
-import { UserService } from '../../services/user/user.service';
 import { CardService } from '../../services/card.service';
 import { Card } from '../../interfaces/card';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
 import { CommonModule } from '@angular/common';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-user-cards',
@@ -17,10 +16,10 @@ import { CommonModule } from '@angular/common';
 export class UserCardsComponent {
   email : string = "";
   cards : Card[] = [];
-  link : string = "http://localhost:4200/card/";
+  link : string = "https://myhexcard.com/#/card/";
   idContact : string = "";
 
-  constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService){}
+  constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -43,5 +42,9 @@ export class UserCardsComponent {
         this.router.navigate(["/contact-cards/"+this.idContact]);
       }
     );
+  }
+
+  copy(data:string){
+    this.clipboard.copy(data);
   }
 }

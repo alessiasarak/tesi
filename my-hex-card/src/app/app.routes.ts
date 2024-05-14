@@ -17,7 +17,8 @@ import { UserCardsComponent } from './pages/user-cards/user-cards.component';
 import { SetAllStyleCardsComponent } from './pages/set-all-style-cards/set-all-style-cards.component';
 
 export const routes: Routes = [
-    { path: '', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'https://hexcard.ch/' } },
+    //{ path: '', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'https://hexcard.ch/' } },
+    { path: '', component: LoginComponent },
     { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
     { path: 'login', component: LoginComponent },
     { path: 'login/:token', component: LoginComponent },

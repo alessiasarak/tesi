@@ -42,10 +42,11 @@ export class LoginComponent {
   async onSubmit() {
     this.user.email = this.myForm.value.email;
     this.user.password = this.myForm.value.password;
+    console.log("USER LOGIN 1")
 
     this.route.params.subscribe(async params => {
       let token = params['token']; 
-
+      
       this.service.login(this.user, token).then(async (response) => {  
         this.loggedUser = response;
         if(this.loggedUser != undefined) {

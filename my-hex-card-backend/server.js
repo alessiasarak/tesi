@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3124;
 
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -20,13 +20,16 @@ app.use(cookieParser());
 
 const corsOptions = {
   origin: function(origin, callback) {
-    const allowedOrigins = ["http://127.0.0.1:4200", "http://localhost:4200"];
+    const allowedOrigins = ["https://www.myhexcard.com", "https://myhexcard.com"];
     if(!origin || allowedOrigins.includes(origin)){
       callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
     }
   },
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  optionSuccessStatus: 200
+  optionSuccessStatus: 200,
+  credentials: true, 
 };
 
 app.use(cors(corsOptions));
