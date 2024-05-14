@@ -1,71 +1,6 @@
 const asyncHandler = require("express-async-handler");
 
 const UserRepository = require("../repository/userRepository");
-const ContactRepository = require("../repository/contactRepository");
-
-exports.createContact = asyncHandler(async (req, res) => {
-    var data = req.body.entity;
-    
-    let contactRepository = new ContactRepository();
-    let response = await contactRepository.createContact(data);
-    res.status(response.code).json(response.data);
-});
-
-exports.registerUser = asyncHandler(async (req, res) => {
-    var data = req.body.entity;
-    var token = req.params.token;
-    console.log(token)
-
-    let userRepository = new UserRepository();
-    let response = await userRepository.registerUser(data, token);
-
-    res.status(response.code).json(response.data);
-});
-
-exports.login = asyncHandler(async (req, res) => {
-    const { email, password } = req.body.entity;
-    let userRepository = new UserRepository();
-    
-    try {
-        const response = await userRepository.login(email, password);
-
-        if (response.code == 200) {
-            req.session.idUser = response.data.dataValues.id;
-            req.session.save();
-        }
-        
-        res.status(response.code).json(response.data);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
-
-exports.loginWithToken = asyncHandler(async (req, res) => {
-    const { email, password } = req.body.entity;
-    let token = req.params.token;
-    let userRepository = new UserRepository();
-    
-    try {
-        const response = await userRepository.loginWithToken(email, password, token);
-
-        if (response.code == 200) {
-            req.session.idUser = response.data.dataValues.id;
-            req.session.save();
-        }
-        
-        res.status(response.code).json(response.data);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
-
-
-exports.logout = asyncHandler(async (req, res) => {
-    req.session.idUser = null;
-    res.status(200);
-});
 
 exports.updateUserData = asyncHandler(async (req, res) => {
     const userId = req.params.idUser; 
@@ -103,34 +38,6 @@ exports.getUser = asyncHandler(async (req, res) => {
             });
         } else {
             res.status(404).json({ message: 'User not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
-
-exports.getAllContacts = asyncHandler(async (req, res) => {
-    let contactRepository = new ContactRepository();
-
-    try {
-        const contacts = await contactRepository.getAllContacts();
-        
-        if (contacts) {
-            let result = [];
-
-            for(let i = 0; i < contacts.length; i++){
-                result.push({
-                    id: contacts[i].dataValues.id,
-                    name: contacts[i].dataValues.name,
-                    surname: contacts[i].dataValues.surname,
-                    email: contacts[i].dataValues.email,
-                    password: ""
-                });
-            }
-            
-            res.status(200).json(result);
-        } else {
-            res.status(404).json({ message: 'Users not found' });
         }
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });

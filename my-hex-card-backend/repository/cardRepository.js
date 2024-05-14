@@ -41,15 +41,6 @@ class CardRepository {
       throw new Error(`Unable to fetch card: ${error}`);
     }
   }
-  
-  async getAll() {
-    try {
-      const cards = await Card.findAll();
-      return cards;
-    } catch (error) {
-      throw new Error(`Unable to fetch card: ${error}`);
-    }
-  }
 
   async getCardsByContact(contactId) {
     try {
@@ -205,6 +196,14 @@ class CardRepository {
       return updated;
     } catch (error) {
       throw new Error(`Unable to update card active: ${error}`);
+    }
+  }
+
+  async deleteAllCardsByContact(contactId) {
+    try {
+      await Card.destroy({ where: { fk_id_contact: contactId } });
+    } catch (error) {
+      throw new Error(`Unable to delete cards: ${error}`);
     }
   }
 };

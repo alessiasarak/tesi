@@ -12,6 +12,8 @@ const cookieParser = require('cookie-parser');
 //route
 const userRoute = require("./route/userRoute");
 const cardRoute = require("./route/cardRoute");
+const contactRoute = require("./route/contactRoute");
+const authRoute = require("./route/authRoute");
 
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(cookieParser());
@@ -45,6 +47,8 @@ app.use(
 
 app.use("/", userRoute);
 app.use("/", cardRoute);
+app.use("/", contactRoute);
+app.use("/", authRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

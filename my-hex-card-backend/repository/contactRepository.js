@@ -61,6 +61,32 @@ class ContactRepository {
           throw new Error(`Unable to fetch card: ${error}`);
         }
     }
+
+    async deleteContact(contactId) {
+        try {
+          const contact = await Contact.findByPk(contactId);
+          if (contact) {
+            await new CardRepository().deleteAllCardsByContact(contactId);
+
+            await contact.destroy();
+            
+            return {
+                "code": 200,
+                "data": "Contact deleted"
+            };
+          } else {
+            return {
+                "code": 404,
+                "data": "Contact not found"
+            };
+          }
+        } catch (error) {
+          return {
+              "code": 500,
+              "data": "Internal server error"
+          };
+        }
+    }
 }
 
 module.exports = ContactRepository;

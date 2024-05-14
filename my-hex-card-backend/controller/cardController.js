@@ -34,13 +34,16 @@ exports.getCardByToken = asyncHandler(async (req, res) => {
 
     let cardId = req.params.id;//token
     const card = await cardRepository.getCardByToken(cardId);
-    cardId = card.id;
-    let emails = await emailRepository.getAll(cardId);
-    let phoneNumbers = await phoneNumberRepository.getAll(cardId);
-    let links = await linkRepository.getAll(cardId);
-    let address = await addressRepository.getAll(cardId);
+    
+    if(!card) res.status(404).json({ message: 'Card not found' });
 
     if (card) {
+        cardId = card.id;
+        let emails = await emailRepository.getAll(cardId);
+        let phoneNumbers = await phoneNumberRepository.getAll(cardId);
+        let links = await linkRepository.getAll(cardId);
+        let address = await addressRepository.getAll(cardId);
+
         res.status(200).json({
             id: card.id,
             img: card.img,
@@ -67,7 +70,7 @@ exports.getCardByToken = asyncHandler(async (req, res) => {
             address: address
         });
     } else {
-        res.status(404).json({ message: 'Card not found' });
+        res.status(404);
     }
 });
 
@@ -115,54 +118,6 @@ exports.getACardByUser = asyncHandler(async (req, res) => {
         });
     } else {
         res.status(404).json({ message: 'Card not found' });
-    }
-});
-
-exports.getAllCards = asyncHandler(async (req, res) => {
-    let cardRepository = new CardRepository();
-    let emailRepository = new EmailRepository();
-    let phoneNumberRepository = new PhoneNumberRepository();
-    let linkRepository = new LinkRepository();
-
-    const cards = await cardRepository.getAll();
-
-    if (cards) {
-        let result = [];
-
-        for(let i = 0; i < cards.length; i++){
-            let emails = await emailRepository.getAll(cards[i].id);
-            let phoneNumbers = await phoneNumberRepository.getAll(cards[i].id);
-            let links = await linkRepository.getAll(cards[i].id);
-
-            result.push({
-                id: cards[i].id,
-                img: cards[i].img,
-                name: cards[i].name,
-                surname: cards[i].surname,
-                company: cards[i].company,
-                function: cards[i].function,
-                instagram: cards[i].instagram,
-                facebook: cards[i].facebook,
-                linkedin: cards[i].linkedin,
-                whatsapp: cards[i].whatsapp,
-                youtube: cards[i].youtube,
-                active: cards[i].active,
-                fk_id_user: cards[i].fk_id_user,
-    
-                email: emails,
-                phone_number: phoneNumbers,
-                link: links,
-                token: cards[i].token,
-    
-                background_color: cards[i].background_color,
-                text_color: cards[i].text_color,
-                button_color: cards[i].button_color
-            });
-        }
-        
-        res.status(200).json(result);
-    } else {
-        res.status(404).json({ message: 'Cards not found' });
     }
 });
 
