@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CrudService<T> {
-  private baseApiUrl: string = "https://api.myhexcard.com:3124";
+  private baseApiUrl: string = "https://api.myhexcard.com";
   private endpoint: string = "";
   private headers = new HttpHeaders({ "Content-Type": "application/json" });
 

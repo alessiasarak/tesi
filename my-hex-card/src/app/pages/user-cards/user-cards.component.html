@@ -5,20 +5,21 @@
   </h3>
   <div class="flex flex-col border ">
     <div class="flex flex-row font-bold">
-        <div class="flex w-1/6 border p-2">
+        <div class="flex w-1/2 border p-2">
           ID
         </div>
-        <div class="flex w-5/6 border p-2">
+        <div class="flex w-1/2 border p-2">
           Link da associare
         </div>
     </div>
 
     <div class="flex flex-row" *ngFor="let card of cards">
-      <div class="flex w-1/6 border p-2">
+      <div class="flex w-1/2 border p-2">
         {{ card.id }}
       </div>
-      <div class="flex w-5/6 border p-2">
-        <a href="{{ link + card.token }}">{{ link + card.token }}</a>
+      <div class="flex w-1/2 border p-2">
+        <!--<a href="{{ link + card.token }}">{{ link + card.token }}</a>-->
+        <button class="bg-slate-200 rounded-3xl p-2 pl-4 pr-4" (click)="copy(link + card.token)">copy</button>
       </div>
     </div>
   </div>
