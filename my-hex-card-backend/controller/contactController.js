@@ -27,7 +27,7 @@ exports.getAllContacts = asyncHandler(async (req, res) => {
                     name: contacts[i].dataValues.name,
                     surname: contacts[i].dataValues.surname,
                     email: contacts[i].dataValues.email,
-                    password: ""
+                    company: contacts[i].dataValues.company,
                 });
             }
             

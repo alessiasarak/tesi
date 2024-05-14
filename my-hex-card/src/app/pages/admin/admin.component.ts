@@ -21,6 +21,7 @@ export class AdminComponent {
   ngOnInit(): void {
     this.service.getAllContacts().subscribe((data) => {
       this.contacts = data;
+      console.log(this.contacts);
     });
   }
 
