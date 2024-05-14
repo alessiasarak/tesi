@@ -16,7 +16,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 export class UserCardsComponent {
   email : string = "";
   cards : Card[] = [];
-  link : string = "https://myhexcard.com/#/card/";
+  link : string = "http://localhost:4200/#/card/";
   idContact : string = "";
 
   constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
