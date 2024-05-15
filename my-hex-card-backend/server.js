@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 const corsOptions = {
   origin: function(origin, callback) {
-    const allowedOrigins = ["http://127.0.0.1:4200", "http://localhost:4200"];
+    const allowedOrigins = ["https://www.myhexcard.com", "https://myhexcard.com"];
     if(!origin || allowedOrigins.includes(origin)){
       callback(null, true);
     } else {
