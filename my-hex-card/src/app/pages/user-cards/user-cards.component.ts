@@ -23,6 +23,9 @@ export class UserCardsComponent {
   idContact : string = "";
   isVisible = false;
 
+  backgroundColor: string = "#ffffff00";
+  codeColor: string = "#000000";
+
   constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
 
   ngOnInit(): void {
@@ -61,5 +64,15 @@ export class UserCardsComponent {
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  changeCodeColor(event : any){
+    this.codeColor = event.target.value;
+    console.log(this.codeColor)
+  }
+
+  changeBackgroundColor(event : any){
+    this.backgroundColor = event.target.value;
+    console.log(this.backgroundColor)
   }
 }
