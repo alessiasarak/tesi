@@ -20,7 +20,7 @@
     <div class="center" class="flex flex-col">
       <div *ngFor="let email of myCard.email" class="flex flex-row mb-3" >
         <mat-icon aria-hidden="false" fontIcon="email" class="flex"></mat-icon>
-        <span class="flex ml-3">{{ email.email }}</span>
+        <a href="mailto://{{ email.email }}" _target="_blank" class="flex ml-3">{{ email.email }}</a>
       </div>
 
       <div *ngFor="let phone_number of myCard.phone_number" class="flex flex-row mb-3">

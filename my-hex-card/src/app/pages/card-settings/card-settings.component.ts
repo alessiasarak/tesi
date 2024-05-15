@@ -231,7 +231,15 @@ export class CardSettingsComponent {
         );
       });
     } else {
-      addressArray.push(this.fb.control(""));
+      addressArray.push(
+        this.fb.group({
+          street_name: [''],
+          street_number: [''],
+          cap: [''],
+          city: [''],
+          nation: ['']
+        })
+      );
     }
 
     this.myStyleForm.patchValue({
@@ -263,7 +271,6 @@ export class CardSettingsComponent {
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(["/card-settings/"+this.myToken]);
     }
-    
   }
 
   async onStyleSubmit() {
@@ -290,4 +297,3 @@ export class CardSettingsComponent {
     };
   }
 }
-

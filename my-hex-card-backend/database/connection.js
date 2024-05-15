@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
-    "my_hex_card", "userStem", "", 
+    "my_hex_card", "root", "", 
     {
         host: "localhost",
         dialect: "mysql",

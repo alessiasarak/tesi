@@ -39,6 +39,8 @@ export class RegisterComponent {
   };
 
   token : string = "";
+  isVisible = false;
+
   async onSubmit() {
     this.user.email = this.myForm.value.email;
     this.user.password = this.myForm.value.password;
@@ -46,6 +48,9 @@ export class RegisterComponent {
     let response = await this.service.register(this.user, this.token);
     
     if(response) this.router.navigateByUrl("/login");
+    else {
+      this.isVisible = true;
+    }
   }
 
   togglePassword() {
