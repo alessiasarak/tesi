@@ -42,7 +42,6 @@ export class LoginComponent {
   async onSubmit() {
     this.user.email = this.myForm.value.email;
     this.user.password = this.myForm.value.password;
-    console.log("USER LOGIN 1")
 
     this.route.params.subscribe(async params => {
       let token = params['token']; 
@@ -56,7 +55,7 @@ export class LoginComponent {
           if(this.loggedUser.fk_role.toString() != "ADMIN"){
             let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
             localStorage.setItem('cards', JSON.stringify(card));
-          }else {
+          } else {
             this.isVisible = true;
           }
     
@@ -75,9 +74,5 @@ export class LoginComponent {
 
   forgotPassword(){
     this.router.navigateByUrl("/forgot-password");
-  }
-
-  closeError() {
-    this.isVisible = false;
   }
 }

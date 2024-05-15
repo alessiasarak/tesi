@@ -5,6 +5,9 @@
     <h3 class="flex text-xl font-bold mb-3">
         Completa la registrazione
     </h3>
+    <div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
+      Email già presente
+    </div>
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <div class="flex flex-col mb-3 w-80">
         <label for="title">Email</label>
