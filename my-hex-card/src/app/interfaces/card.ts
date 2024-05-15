@@ -1,3 +1,4 @@
+import { SafeUrl } from "@angular/platform-browser";
 import { Address } from "./address";
 import { Email } from "./email";
 import { Link } from "./link";
@@ -33,4 +34,6 @@ export interface Card {
     background_color: string,
     text_color: string,
     button_color: string,
+
+    qrCode?: SafeUrl
 }

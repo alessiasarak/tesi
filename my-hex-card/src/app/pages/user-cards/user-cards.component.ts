@@ -5,11 +5,14 @@ import { Card } from '../../interfaces/card';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
 import { CommonModule } from '@angular/common';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { QRCodeModule } from 'angularx-qrcode';
+import { SafeUrl } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-cards',
   standalone: true,
-  imports: [ MyButtonComponent, CommonModule ],
+  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule ],
   templateUrl: './user-cards.component.html',
   styleUrl: './user-cards.component.css'
 })
@@ -18,6 +21,7 @@ export class UserCardsComponent {
   cards : Card[] = [];
   link : string = "http://localhost:4200/#/card/";
   idContact : string = "";
+  public qrCodeDownloadLink: SafeUrl = "";
 
   constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
 
@@ -47,4 +51,9 @@ export class UserCardsComponent {
   copy(data:string){
     this.clipboard.copy(data);
   }
+
+  setCardUrl(url: SafeUrl, i: number){
+    this.cards[i].qrCode = url;
+  }
+  
 }
