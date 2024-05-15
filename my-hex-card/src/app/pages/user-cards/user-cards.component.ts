@@ -21,7 +21,7 @@ export class UserCardsComponent {
   cards : Card[] = [];
   link : string = "http://localhost:4200/#/card/";
   idContact : string = "";
-  public qrCodeDownloadLink: SafeUrl = "";
+  isVisible = false;
 
   constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
 
@@ -48,12 +48,18 @@ export class UserCardsComponent {
     );
   }
 
-  copy(data:string){
+  async copy(data:string){
     this.clipboard.copy(data);
+    this.isVisible = true;
+    await this.delay(3000);
+    this.isVisible = false;
   }
 
   setCardUrl(url: SafeUrl, i: number){
     this.cards[i].qrCode = url;
   }
-  
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 }
