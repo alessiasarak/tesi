@@ -4,18 +4,18 @@
     
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <a href="/#/profile-settings">Profilo personale</a>
+        <a href="/profile-settings">Profilo personale</a>
       </li>
 
       @if(cards.length > 1) {
         <li class="list-group-item">
-          <a href="/#/card-settings/style/set-all-style-cards">Cambia immagine e stile in contemporanea</a>
+          <a href="/card-settings/style/set-all-style-cards">Cambia immagine e stile in contemporanea</a>
         </li>
       }
       
       @for (card of cards; track card.token; let idx = $index) {
         <li class="list-group-item">
-          <a href="/#/card-settings/{{ card.token }}">
+          <a href="/card-settings/{{ card.token }}">
             {{ idx+1 }}. Carta: 
             @if (card.name && card.surname) {
               {{ card.name }} {{ card.surname }}
