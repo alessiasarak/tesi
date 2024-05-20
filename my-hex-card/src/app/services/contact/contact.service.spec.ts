@@ -41,10 +41,6 @@ describe('ContactService', () => {
 
 
     service.create(contact).then((response) => {
-      console.log("ASDFGHJKL")
-      console.log(contact)
-      console.log(expectedResponse)
-      console.log(response)
       expect(response).toEqual(expectedResponse);
     });
 

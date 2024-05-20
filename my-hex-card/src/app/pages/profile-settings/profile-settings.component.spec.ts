@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileSettingsComponent } from './profile-settings.component';
+import { UserService } from '../../services/user/user.service';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('ProfileSettingsComponent', () => {
   let component: ProfileSettingsComponent;
@@ -8,7 +10,8 @@ describe('ProfileSettingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileSettingsComponent]
+      imports: [ProfileSettingsComponent],
+      providers: [UserService, provideHttpClient()]
     })
     .compileComponents();
     
