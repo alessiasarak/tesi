@@ -60,7 +60,7 @@ export class LoginComponent {
           }
     
           if(token) this.router.navigateByUrl("/card-settings/"+token);
-          this.router.navigateByUrl("/settings");
+          else this.router.navigateByUrl("/settings");
         }
       }).catch((error) => {
         this.isVisible = true;
