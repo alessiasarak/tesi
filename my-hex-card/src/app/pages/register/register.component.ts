@@ -46,7 +46,9 @@ export class RegisterComponent {
     this.user.email = this.myForm.value.email;
     this.user.password = this.myForm.value.password;
     
-    
+    let isPasswordValid = await this.checkPasswordValidity();
+    if(!isPasswordValid) return;
+
     this.route.params.subscribe(async params => {
       let token = params['token']; 
       
@@ -76,5 +78,28 @@ export class RegisterComponent {
 
   login(){
     this.router.navigateByUrl("/login/"+this.token);
+  }
+
+  passwordError: string = "";
+  isPasswordErrorVisible: boolean = false;
+
+  async checkPasswordValidity() : Promise<boolean> {
+    const password = this.myForm.value.password;
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;    
+
+    if (regex.test(password)) {
+      if (password === this.myForm.value.repeatPassword) {
+        this.isPasswordErrorVisible = false;
+        return true;
+      } else {
+        this.passwordError = "Passwords do not match";
+        this.isPasswordErrorVisible = true;
+        return false;
+      }
+    } else {
+      this.passwordError = "Password is not valid";
+      this.isPasswordErrorVisible = true;
+      return false;
+    }
   }
 }

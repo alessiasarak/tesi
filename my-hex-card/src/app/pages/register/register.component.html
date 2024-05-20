@@ -14,33 +14,37 @@
         <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
       </div>
 
-      <div class="flex flex-row mb-3 w-80 items-center" *ngIf="!showPassword">
-        <input class="flex" type="text" class="form-control" id="password" formControlName="password" placeholder="Password">
-
-        <span class="flex" (click)="togglePassword()">
-          <span *ngIf="!showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
-        </span>
+      <div *ngIf="isPasswordErrorVisible" class="text-red-400 pb-6 w-full">
+          {{ passwordError}}
       </div>
 
       <div class="flex flex-row mb-3 w-80 items-center" *ngIf="showPassword">
-        <input class="flex" type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
-
-        <span class="flex" (click)="togglePassword()">
-          <span *ngIf="showPassword"><mat-icon class="flex">visibility</mat-icon></span>
-        </span>
-      </div>
-
-      
-      <div class="flex flex-row mb-3 w-80 items-center" *ngIf="!showPassword">
-        <input class="flex" type="text" class="form-control" id="password" formControlName="password" placeholder="Password">
+        <input class="flex" type="text" class="form-control" id="password" formControlName="password" placeholder="Password" (keyup)="checkPasswordValidity()">
 
         <span class="flex" (click)="togglePassword()">
           <span *ngIf="showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
         </span>
       </div>
 
+      <div class="flex flex-row mb-3 w-80 items-center" *ngIf="!showPassword">
+        <input class="flex" type="password" class="form-control" id="password" formControlName="password" placeholder="Password" (keyup)="checkPasswordValidity()">
+
+        <span class="flex" (click)="togglePassword()">
+          <span *ngIf="!showPassword"><mat-icon class="flex">visibility</mat-icon></span>
+        </span>
+      </div>
+
+      
       <div class="flex flex-row mb-3 w-80 items-center" *ngIf="showPassword">
-        <input class="flex" type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+        <input class="flex" type="text" class="form-control" id="repeatPassword" formControlName="repeatPassword" placeholder="Password" (keyup)="checkPasswordValidity()">
+
+        <span class="flex" (click)="togglePassword()">
+          <span *ngIf="showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
+        </span>
+      </div>
+
+      <div class="flex flex-row mb-3 w-80 items-center" *ngIf="!showPassword">
+        <input class="flex" type="password" class="form-control" id="repeatPassword" formControlName="repeatPassword" placeholder="Password" (keyup)="checkPasswordValidity()">
 
         <span class="flex" (click)="togglePassword()">
           <span *ngIf="!showPassword"><mat-icon class="flex">visibility</mat-icon></span>

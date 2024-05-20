@@ -26,9 +26,7 @@
                 <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
                 <ul class="small text-muted pl-4 mb-0">
                     <li>Minimum 8 character</li>
-                    <li>At least one special character</li>
                     <li>At least one number</li>
-                    <li>Can’t be the same as a previous password</li>
                 </ul>
             </div>
             
@@ -36,15 +34,19 @@
                 <label for="password">Old Password</label>
                 <input type="password" class="form-control" id="password"  formControlName="password" />
             </div>
+
+            <div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
+                {{ passwordError}}
+            </div>
             
             <div class="flex flex-col mb-3 w-80">
                 <label for="newPassword">New Password</label>
-                <input type="password" class="form-control" id="newPassword"  formControlName="newPassword" />
+                <input type="password" class="form-control" id="newPassword"  formControlName="newPassword" (keyup)="checkPasswordValidity()"/>
             </div>
             
             <div class="flex flex-col mb-3 w-80">
                 <label for="repeatedPassword">Confirm Password</label>
-                <input type="password" class="form-control" id="repeatedPassword"  formControlName="repeatedPassword"  />
+                <input type="password" class="form-control" id="repeatedPassword"  formControlName="repeatedPassword" (keyup)="checkPasswordValidity()" />
             </div>
             
             <div class="flex flex-col items-center">

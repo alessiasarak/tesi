@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile-settings',
   standalone: true,
-  imports: [ ReactiveFormsModule, MyButtonComponent ],
+  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule ],
   templateUrl: './profile-settings.component.html',
   styleUrl: './profile-settings.component.css'
 })
@@ -58,8 +59,33 @@ export class ProfileSettingsComponent {
   async onPasswordSubmit() {
     this.user.password = this.myPasswordForm.value.newPassword;
     
+    let isValid = await this.checkPasswordValidity();
+    if(!isValid) return;
+
     let response = await this.service.putPassword(this.user);
-    
     if(response) this.router.navigateByUrl("/settings");
+  }
+
+  passwordError: string = "";
+  isVisible: boolean = false;
+
+  async checkPasswordValidity() : Promise<boolean> {
+    const password = this.myPasswordForm.value.newPassword;
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (regex.test(password)) {
+      if (password === this.myPasswordForm.value.repeatedPassword) {
+        this.isVisible = false;
+        return true;
+      } else {
+        this.passwordError = "Passwords do not match";
+        this.isVisible = true;
+        return false;
+      }
+    } else {
+      this.passwordError = "Password is not valid";
+      this.isVisible = true;
+      return false;
+    }
   }
 }
