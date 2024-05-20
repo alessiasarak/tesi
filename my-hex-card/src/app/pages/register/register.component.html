@@ -35,7 +35,7 @@
         <input class="flex" type="text" class="form-control" id="password" formControlName="password" placeholder="Password">
 
         <span class="flex" (click)="togglePassword()">
-          <span *ngIf="!showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
+          <span *ngIf="showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
         </span>
       </div>
 
@@ -43,7 +43,7 @@
         <input class="flex" type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
 
         <span class="flex" (click)="togglePassword()">
-          <span *ngIf="showPassword"><mat-icon class="flex">visibility</mat-icon></span>
+          <span *ngIf="!showPassword"><mat-icon class="flex">visibility</mat-icon></span>
         </span>
       </div>
 
