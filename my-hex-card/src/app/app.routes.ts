@@ -18,7 +18,6 @@ import { SetAllStyleCardsComponent } from './pages/set-all-style-cards/set-all-s
 import { ForgotPasswordResetComponent } from './pages/forgot-password-reset/forgot-password-reset.component';
 
 export const routes: Routes = [
-    //{ path: '', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'https://hexcard.ch/' } },
     { path: '', component: LoginComponent },
     { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
     { path: 'login', component: LoginComponent },
