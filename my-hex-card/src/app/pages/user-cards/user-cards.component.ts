@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class UserCardsComponent {
   email : string = "";
   cards : Card[] = [];
-  link : string = "https://myhexcard.com/#/card/";
+  link : string = "https://myhexcard.com/card/";
   idContact : string = "";
   isVisible = false;
 
