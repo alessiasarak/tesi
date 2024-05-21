@@ -13,7 +13,7 @@ import { CardService } from '../../services/card.service';
 })
 export class SettingsComponent {
   //constructor
-  constructor(private service: AuthService, private router: Router, private route: ActivatedRoute, private cardService : CardService){}
+  constructor(private service: AuthService, private router: Router, private cardService : CardService){}
 
   cards : Card[] = [];
 

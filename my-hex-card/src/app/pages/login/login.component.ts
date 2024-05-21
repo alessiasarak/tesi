@@ -29,12 +29,14 @@ export class LoginComponent {
     id: 0,
     email: '',
     password: '',
+    reset_password_token: '',
     fk_role: { role: 'USER' }
   };
   loggedUser : User | undefined = {
     id: 0,
     email: '',
     password: '',
+    reset_password_token: '',
     fk_role: { role: 'USER' }
   };
 
@@ -60,7 +62,7 @@ export class LoginComponent {
           }
     
           if(token) this.router.navigateByUrl("/card-settings/"+token);
-          this.router.navigateByUrl("/settings");
+          else this.router.navigateByUrl("/settings");
         }
       }).catch((error) => {
         this.isVisible = true;

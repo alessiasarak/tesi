@@ -11,7 +11,7 @@ export class ContactService extends CrudService<Contact>  {
   constructor(http: HttpClient) {
     super(http, "/");
   }
-
+  
   async create(user: Contact) : Promise<Contact> {
     let response = await lastValueFrom(this.post(user, "auth/create"));
     

@@ -157,6 +157,36 @@ class UserRepository {
         }
     }
 
+    async updateUserPassword(token, newData) {
+        try {
+            const user = await User.findOne({
+                where: {
+                    reset_password_token: token,
+                }
+            });
+            
+            if (!user) {
+                return {
+                    "code": 404,
+                    "message": "Token not valid"
+                };
+            }
+            
+            const hashedPassword = await bcrypt.hash(newData.password, 10);
+            await user.update({
+                password: hashedPassword,
+                reset_password_token: ""
+            });
+
+            return {
+                "code": 200,
+                "message": "User information updated successfully"
+            };
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async getUser(userId) {
         try {
           const user = await User.findByPk(userId);
@@ -172,6 +202,96 @@ class UserRepository {
           return users;
         } catch (error) {
           throw new Error(`Unable to fetch card: ${error}`);
+        }
+    }
+
+    async forgotPassword(data) {
+        //invio email con token
+        try {
+            const email = data.email;
+        
+            // Check if the email is provided
+            if (!email) {
+                return {
+                    "code": 400,
+                    "message": "Email not valid"
+                };
+            }
+        
+            // Find user by email
+            const user = await User.findOne({
+                where: {
+                    email: email
+                }
+            });
+            if (!user) {
+                return {
+                    "code": 404,
+                    "message": "User not found"
+                };
+            }
+        
+            // Generate a password reset token
+            const resetToken = this.generateToken();
+        
+            await user.update({
+                reset_password_token: resetToken
+            });
+            user.save();
+
+            console.log("Sending email");
+
+            let domain = "https://myhexcard.com";
+            console.log(domain + "/forgot-password/reset/" + resetToken);
+
+            // this.sendingMail({
+            //     from: "no-reply@myhexcard.com",
+            //     to: `${user.email}`,
+            //     subject: "Password da resettare",
+            //     text: `  ${domain}/forgot-password/reset/${resetToken} `,
+            // });
+            return {
+                "code": 200,
+                "message": "IEmail sended"
+            };
+        } catch (error) {
+            return {
+                "code": 500,
+                "message": "Internal Server Error"
+            };
+        }
+    }
+
+    generateToken() {
+        var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var token = '';
+        for(var i = 0; i < 30; i++) {
+            token += chars[Math.floor(Math.random() * chars.length)];
+        }
+        return token;
+    }
+
+    async sendingMail({ from, to, subject, text }) {
+        try {
+            let mailOptions = {
+                from,
+                to,
+                subject,
+                text,
+            };
+        
+            const Transporter = nodemailer.createTransport({
+                host: process.env.EMAIL_HOST,
+                port: 587,
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.EMAIL_PASSWORD,
+                },
+            });
+        
+            return await Transporter.sendMail(mailOptions);
+        } catch (error) {
+            console.log(error);
         }
     }
 }

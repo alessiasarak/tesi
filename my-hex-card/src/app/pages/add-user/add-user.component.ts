@@ -15,7 +15,7 @@ import { ContactService } from '../../services/contact/contact.service';
 })
 export class AddUserComponent {
   //constructor
-  constructor(private router: Router, private service: AuthService, private contactService: ContactService, private fb: FormBuilder){}
+  constructor(private router: Router, private contactService: ContactService, private fb: FormBuilder){}
 
   //properties
   myForm : FormGroup = this.fb.group({

@@ -8,7 +8,6 @@ import { lastValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class CardService extends CrudService<Card> {
-
   constructor(http: HttpClient) {
     super(http, "/card/");
   }

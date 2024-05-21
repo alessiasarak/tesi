@@ -43,3 +43,21 @@ exports.getUser = asyncHandler(async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
+
+exports.forgotPassword = asyncHandler(async (req, res) =>{
+    var data = req.body.entity;
+    let userRepository = new UserRepository();
+    let response = await userRepository.forgotPassword(data);
+
+    res.status(response.code).json(response.data);
+});
+
+exports.setPassword = asyncHandler(async (req, res) =>{
+    var data = req.body.entity;
+    var token = req.params.token;
+    let userRepository = new UserRepository();
+    let response = await userRepository.updateUserPassword(token, data);
+
+    res.status(response.code).json(response.data);
+});

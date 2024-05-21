@@ -1,8 +1,22 @@
 <div class="p-10">
-  <h3 class="flex text-xl font-bold mb-3">
+  <h3 class="flex text-2xl font-bold mb-3">
       <app-my-button path="/admin"></app-my-button>
       Dettagli carte utente {{ email }}
   </h3>
+  <div>
+    <h3 class="flex text-xl mb-3">
+      Colori del QR code
+    </h3>
+    <div class="flex flex-row mb-3 w-80">
+      <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
+      <input type="color" id="backgroundColor" (change)="changeBackgroundColor($event)"/>
+    </div>
+    
+    <div class="flex flex-row mb-3 w-80">
+        <label for="textColor" class="flex w-4/5">Colore del codice: </label>
+        <input type="color" id="codColor" (change)="changeCodeColor($event)"/>
+    </div>
+  </div>
   <div class="flex flex-col border ">
     <div class="flex flex-row font-bold">
         <div class="flex md:w-1/4 sm:w-1/3 border p-2">
@@ -27,7 +41,7 @@
         <button class="bg-slate-200 rounded-3xl pt-1 pb-1 pl-4 pr-4 h-14" (click)="copy(link + card.token)">copy</button>
       </div>
       <div class="flex md:w-1/4 sm:w-1/3 border p-2 sm:hidden md:block">
-        <qrcode (qrCodeURL)="setCardUrl($event, i)" colorLight="#FFFFFF00" [qrdata]="link + card.token" [width]="180" [errorCorrectionLevel]="'M'"></qrcode>
+        <qrcode (qrCodeURL)="setCardUrl($event, i)" [colorLight]="backgroundColor" [colorDark]="codeColor" [qrdata]="link + card.token" [width]="180" [errorCorrectionLevel]="'M'"></qrcode>
       </div>
       <div class="flex md:w-1/4 sm:w-1/3 border p-2">
         <a class="bg-slate-200 rounded-3xl pt-1 pb-1 pl-4 pr-4 h-14 content-center" [href]="card.qrCode" download="qrcode">
