@@ -24,7 +24,6 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
-
   const user = { 
     id:0,
     email: 'teste@mailch',
