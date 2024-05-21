@@ -174,7 +174,8 @@ class UserRepository {
             
             const hashedPassword = await bcrypt.hash(newData.password, 10);
             await user.update({
-                password: hashedPassword
+                password: hashedPassword,
+                reset_password_token: ""
             });
 
             return {
