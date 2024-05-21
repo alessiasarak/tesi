@@ -15,6 +15,7 @@ import { AdminAuthGuard } from './admin-auth-guard';
 import { RedirectGuard } from './redirect-guard';
 import { UserCardsComponent } from './pages/user-cards/user-cards.component';
 import { SetAllStyleCardsComponent } from './pages/set-all-style-cards/set-all-style-cards.component';
+import { ForgotPasswordResetComponent } from './pages/forgot-password-reset/forgot-password-reset.component';
 
 export const routes: Routes = [
     //{ path: '', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'https://hexcard.ch/' } },
@@ -24,6 +25,8 @@ export const routes: Routes = [
     { path: 'login/:token', component: LoginComponent },
     { path: 'register/:token', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'forgot-password/reset/:token', component: ForgotPasswordResetComponent },
+    
 
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },

@@ -17,6 +17,9 @@ const User = sequelize.define("User",
         password: {
             type: DatatTypes.STRING(),
         },
+        reset_password_token: {
+            type: DatatTypes.STRING(30),
+        },
 
         fk_role: {
             type: DatatTypes.STRING(20),

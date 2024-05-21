@@ -1,32 +1,22 @@
 import { Component } from '@angular/core';
-import { User } from '../../interfaces/user';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from '../../services/user/user.service';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
+import { User } from '../../interfaces/user';
 
 @Component({
-  selector: 'app-profile-settings',
+  selector: 'app-forgot-password-reset',
   standalone: true,
   imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule ],
-  templateUrl: './profile-settings.component.html',
-  styleUrl: './profile-settings.component.css'
+  templateUrl: './forgot-password-reset.component.html',
+  styleUrl: './forgot-password-reset.component.css'
 })
-export class ProfileSettingsComponent {
+export class ForgotPasswordResetComponent {
   //constructor
-  constructor(private router: Router, private service: UserService, private fb: FormBuilder){}
+  constructor(private router: Router, private route: ActivatedRoute, private service: UserService, private fb: FormBuilder){}
 
-  ngOnInit(): void {
-    this.service.getUser().subscribe((data) => {
-      this.assignValues(data);
-    });
-  }
-
-  //properties
-  myProfileForm : FormGroup = this.fb.group({
-    email: [''],
-  });
   myPasswordForm : FormGroup = this.fb.group({
     password: [''],
     newPassword: [''],
@@ -38,23 +28,7 @@ export class ProfileSettingsComponent {
     email: '',
     password: '',
     reset_password_token: '',
-    fk_role: { role: "USER" }
-  }
-
-  assignValues(user: User){
-    this.myProfileForm.setValue({
-      email: user.email,
-    });
-
-    console.log(this.myProfileForm);
-  }
-
-  async onProfileSubmit() {
-    this.user.email = this.myProfileForm.value.email;
-    
-    let response = await this.service.putUser(this.user);
-    
-    if(response) this.router.navigateByUrl("/settings");
+    fk_role: { role: "USER" },
   }
 
   async onPasswordSubmit() {
@@ -63,8 +37,12 @@ export class ProfileSettingsComponent {
     let isValid = await this.checkPasswordValidity();
     if(!isValid) return;
 
-    let response = await this.service.putPassword(this.user);
-    if(response) this.router.navigateByUrl("/settings");
+    this.route.params.subscribe(async params => {
+      let token = params['token']; 
+
+      let response = await this.service.putPasswordToReset(this.user, token);
+      if(response) this.router.navigateByUrl("/login");
+    });
   }
 
   passwordError: string = "";

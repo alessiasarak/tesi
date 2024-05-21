@@ -36,6 +36,7 @@ export class RegisterComponent {
     id: 0,
     email: '',
     password: '',
+    reset_password_token: '',
     fk_role: { role: 'USER' }
   };
 

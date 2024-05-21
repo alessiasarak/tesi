@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class UserCardsComponent {
   email : string = "";
   cards : Card[] = [];
-  link : string = "http://localhost:4200/#/card/";
+  link : string = "http://localhost:4200/card/";
   idContact : string = "";
   isVisible = false;
 
