@@ -1,42 +1,51 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="flex flex-col mt-10 items-center">
+<app-title title="Hey, welcome back!"></app-title>
 
-  <div class="flex flex-col w-80 shadow-xl p-8 rounded-3xl">
-    <h3 class="flex text-xl font-bold mb-3">Accedi</h3>
-    <div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
-      Email o password non corretti
-    </div>
 
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
+  Email o password non corretti
+</div>
 
-      <div class="flex flex-row mb-3 w-64">
-        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
-      </div>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
-      <div class="flex flex-row mb-3 w-64 items-center" *ngIf="showPassword">
-        <input class="flex" type="text" class="form-control" id="password" formControlName="password" placeholder="Password">
-
-        <span class="flex" (click)="togglePassword()">
-          <span *ngIf="showPassword"><mat-icon class="flex">visibility_off</mat-icon></span>
-        </span>
-      </div>
-
-      <div class="flex flex-row mb-3 w-64 items-center" *ngIf="!showPassword">
-        <input class="flex" type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
-
-        <span class="flex" (click)="togglePassword()">
-          <span *ngIf="!showPassword"><mat-icon class="flex">visibility</mat-icon></span>
-        </span>
-      </div>
-      
-      <div class="flex flex-col items-center">
-        <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Accedi</button>
-      </div>
-    </form>
-    <div class="flex flex-col items-center">
-      <button (click)="forgotPassword()" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 rounded-3xl">Password dimenticata?</button>
+  <div class="mb-4">
+    <div class="flex items-center border-b border-gray-500 py-2">
+      <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+      placeholder="E-mail" type="email" id="email" formControlName="email">
+      <span class="text-gray-500">
+        <mat-icon class="flex">person</mat-icon>
+      </span>
     </div>
   </div>
-</div>
+
+  <div *ngIf="showPassword">
+    <div class="flex items-center border-b border-gray-500 py-2">
+      <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+      placeholder="Password" type="text" id="password" formControlName="password">
+      <span class="text-gray-500" (click)="togglePassword()">
+        <mat-icon class="flex">visibility_off</mat-icon>
+      </span>
+    </div>
+  </div>
+
+
+  <div *ngIf="!showPassword">
+    <div class="flex items-center border-b border-gray-500 py-2">
+      <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+      placeholder="Password*" type="password" id="password" formControlName="password">
+      <span class="text-gray-500" (click)="togglePassword()">
+        <mat-icon class="flex">visibility</mat-icon>
+      </span>
+    </div>
+  </div>
+  <div class="flex flex-row w-full justify-end text-medium_text font-medium mb-4">
+    <a class="flex text-primary underline" (click)="forgotPassword()">Forgot password?</a>
+  </div>
+  
+  <div class="flex flex-col items-center">
+    <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-4 pb-4 mb-3 rounded-full">Login</button>
+  </div>
+</form>
+
   

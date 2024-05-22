@@ -48,11 +48,13 @@ module.exports = {
       title: '35px',
       subtitle: '16px',
       tiny_text: '10px',
+      medium_text: '12px',
     },
     fontWeight: {
       title: '700',
       subtitle: '400',
       normal: '400',
+      medium: '500',
     }
   },
   plugins: [],
