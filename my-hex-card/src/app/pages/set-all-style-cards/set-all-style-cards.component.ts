@@ -6,11 +6,12 @@ import { Card } from '../../interfaces/card';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
+import { TitleComponent } from '../../component/title/title.component';
 
 @Component({
   selector: 'app-set-all-style-cards',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent ],
+  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, TitleComponent ],
   templateUrl: './set-all-style-cards.component.html',
   styleUrl: './set-all-style-cards.component.css'
 })

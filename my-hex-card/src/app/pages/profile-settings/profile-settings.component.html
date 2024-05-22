@@ -1,9 +1,12 @@
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <app-title title="Profilo"></app-title>
 
 <form [formGroup]="myProfileForm" (ngSubmit)="onProfileSubmit()">
     <div class="flex flex-col mb-6">
         <label for="email">Email</label>
-        <input type="text" class="bg-secondary w-full p-2 rounded-md" id="email" formControlName="email" />
+        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="email" formControlName="email" />
     </div>
             
     <div class="flex flex-col items-center">
@@ -26,7 +29,7 @@
     
     <div class="flex flex-col mb-3">
         <label for="password">Old Password</label>
-        <input type="password" class="bg-secondary w-full p-2 rounded-md" id="password"  formControlName="password" />
+        <input type="password" class="bg-secondary w-full p-2 rounded-md text-black" id="password"  formControlName="password" />
     </div>
 
     <div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
@@ -35,12 +38,12 @@
     
     <div class="flex flex-col mb-3">
         <label for="newPassword">New Password</label>
-        <input type="password" class="bg-secondary w-full p-2 rounded-md" id="newPassword"  formControlName="newPassword" (keyup)="checkPasswordValidity()"/>
+        <input type="password" class="bg-secondary w-full p-2 rounded-md text-black" id="newPassword"  formControlName="newPassword" (keyup)="checkPasswordValidity()"/>
     </div>
     
     <div class="flex flex-col mb-6">
         <label for="repeatedPassword">Confirm Password</label>
-        <input type="password" class="bg-secondary w-full p-2 rounded-md" id="repeatedPassword"  formControlName="repeatedPassword" (keyup)="checkPasswordValidity()" />
+        <input type="password" class="bg-secondary w-full p-2 rounded-md text-black" id="repeatedPassword"  formControlName="repeatedPassword" (keyup)="checkPasswordValidity()" />
     </div>
     
     <div class="flex flex-col items-center">

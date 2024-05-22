@@ -45,6 +45,8 @@ export class CardSettingsComponent {
 
   myToken : string = this.route.snapshot.params['id'];
 
+  style = false;
+
 
   myForm : FormGroup = this.fb.group({
     img: [''],
@@ -296,5 +298,13 @@ export class CardSettingsComponent {
     reader.onload = () => {
         this.card.img = reader.result!.toString();
     };
+  }
+
+  setStyleFalse(){
+    this.style = false;
+  }
+
+  setStyleTrue(){
+    this.style = true;
   }
 }

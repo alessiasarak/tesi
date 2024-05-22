@@ -3,11 +3,11 @@
 
 <app-title title="La tua card"></app-title>
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form *ngIf="!style" [formGroup]="myForm" (ngSubmit)="onSubmit()" >
     
     <div class="flex flex-col mb-2">
         <div class="flex flex-row justify-between align-middle">
-            <img src="{{ card.img }}" class="flex h-1/4 mb-3 rounded-full">
+            <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
             
             <a href="/card/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
         </div>
@@ -15,8 +15,8 @@
 
     <div class="flex flex-col mb-2">
         <div class="flex flex-row justify-between">
-            <a href="/card-settings/{{card.token}}" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</a>
-            <a href="/style-settings/{{card.token}}" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</a>
+            <button (click)="setStyleFalse()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
+            <button (click)="setStyleTrue()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
         </div>
     </div>
 
@@ -176,34 +176,41 @@
         <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
     </div>
 </form>
-<!-- 
-<div class="flex flex-col mt-10 items-center ml-10 sm:ml-1">
-<div class="flex flex-col w-96 shadow-xl p-8 rounded-3xl">
-    
-    <h3 class="flex text-xl font-bold mb-3">
-        Impostazioni stile carta
-    </h3>
 
-    <form [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()">
-        
-        <div class="flex flex-row mb-3 ">
-            <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
-            <input type="color" id="backgroundColor" formControlName="backgroundColor" />
+
+
+<form *ngIf="style" [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()">
+    <div class="flex flex-col mb-2">
+        <div class="flex flex-row justify-between align-middle">
+            <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
+            
+            <a href="/card/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
         </div>
-        
-        <div class="flex flex-row mb-3 ">
-            <label for="textColor" class="flex w-4/5">Colore del testo: </label>
-            <input type="color" id="textColor" formControlName="textColor"/>
+    </div>
+
+    <div class="flex flex-col mb-2">
+        <div class="flex flex-row justify-between">
+            <button (click)="setStyleFalse()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
+            <button (click)="setStyleTrue()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
         </div>
-        
-        <div class="flex flex-row mb-3 ">
-            <label for="buttonColor" class="flex w-4/5">Colore del bottone: </label>
-            <input type="color" id="buttonColor" formControlName="buttonColor" />
-        </div>
-        
-        <div class="flex flex-col items-center">
-            <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
-        </div>
-    </form>
-</div>    
-</div> -->
+    </div>
+    
+    <div class="flex flex-row mb-3 ">
+        <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
+        <input type="color" id="backgroundColor" formControlName="backgroundColor" class="rounded-full" />
+    </div>
+    
+    <div class="flex flex-row mb-3 ">
+        <label for="textColor" class="flex w-4/5">Colore del testo: </label>
+        <input type="color" id="textColor" formControlName="textColor" class="rounded-full" />
+    </div>
+    
+    <div class="flex flex-row mb-3 ">
+        <label for="buttonColor" class="flex w-4/5">Colore del bottone: </label>
+        <input type="color" id="buttonColor" formControlName="buttonColor" class="rounded-full" />
+    </div>
+    
+    <div class="flex flex-col items-center">
+        <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
+    </div>
+</form>

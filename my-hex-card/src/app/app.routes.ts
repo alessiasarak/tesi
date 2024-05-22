@@ -16,6 +16,7 @@ import { RedirectGuard } from './redirect-guard';
 import { UserCardsComponent } from './pages/user-cards/user-cards.component';
 import { SetAllStyleCardsComponent } from './pages/set-all-style-cards/set-all-style-cards.component';
 import { ForgotPasswordResetComponent } from './pages/forgot-password-reset/forgot-password-reset.component';
+import { LogoutComponent } from './component/logout/logout.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -26,6 +27,7 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: 'forgot-password/reset/:token', component: ForgotPasswordResetComponent },
+    { path: 'logout', component: LogoutComponent },
     
 
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
