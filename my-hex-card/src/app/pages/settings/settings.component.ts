@@ -5,11 +5,13 @@ import { Card } from '../../interfaces/card';
 import { CardService } from '../../services/card.service';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 import Swiper from 'swiper';
+import { CommonModule } from '@angular/common';
+import { TitleComponent } from '../../component/title/title.component';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [ CardPreviewComponent ],
+  imports: [ CommonModule, CardPreviewComponent, TitleComponent ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
@@ -34,5 +36,9 @@ export class SettingsComponent {
   logout(){
     this.service.logout();
     this.router.navigateByUrl("/login");
+  }
+
+  viewDetailCard(token: string){
+    this.router.navigateByUrl("/card-settings/"+token);
   }
 }

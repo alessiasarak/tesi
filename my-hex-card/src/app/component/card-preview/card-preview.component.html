@@ -9,10 +9,10 @@
 
     <div class="flex flex-col mb-2">
         <div class="flex flex-col items-center">
-            <span *ngIf="card.img"><img src="{{ card.img }}" class="flex h-1/4 mb-3 rounded-full"></span>
-            <h4 class="flex h-1/4 mb-1 font-bold text-left text-2xl">{{ card.name }} {{ card.surname }}</h4>
-            <h5 class="flex h-1/4 mt-3 text-left">{{ card.company }}</h5>
-            <h5 class="flex h-1/4 mb-3 text-left">{{ card.function }}</h5>
+            <span *ngIf="card.img"><img src="{{ card.img }}" class="flex mb-3 rounded-full h-36 w-36"></span>
+            <h4 class="flex mb-1 font-bold text-left text-2xl">{{ card.name }} {{ card.surname }}</h4>
+            <h5 class="flex mt-3 text-left">{{ card.company }}</h5>
+            <h5 class="flex mb-3 text-left">{{ card.function }}</h5>
 
             <button [ngClass]="myButtonClass" [style]="myButtonStyle">AGGIUNGI AI CONTATTI</button>
         </div>
