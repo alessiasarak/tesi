@@ -55,13 +55,13 @@
                             <div class="flex flex-col mb-3 w-60">
                                 <input type="email" class="form-control" id="inputEmail" [formControlName]="i" placeholder="Email">
                             </div>
-                            <button *ngIf="i != 0" type="button" (click)="removeEmail(i)" class="flex bg-primary ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full">
+                            <button *ngIf="i != 0" type="button" (click)="removeEmail(i)" class="flex bg-primary  text-black ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full">
                                 <mat-icon>remove</mat-icon>
                             </button>
                         </div>
                     </div>
 
-                    <button type="button" class="flex bg-primary pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="addEmail()">
+                    <button type="button" class="flex bg-primary  text-black pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="addEmail()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
@@ -76,13 +76,13 @@
                             <div class="flex flex-col mb-3 w-60">
                                 <input type="text" class="form-control" id="inputPhoneNumber" [formControlName]="i" placeholder="Numero di telefono">
                             </div>
-                            <button *ngIf="i != 0" type="button" (click)="removePhoneNumber(i)" class="flex bg-primary ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full">
+                            <button *ngIf="i != 0" type="button" (click)="removePhoneNumber(i)" class="flex bg-primary  text-black ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full">
                                 <mat-icon>remove</mat-icon>
                             </button>
                         </div>
                     </div>
 
-                    <button type="button" class="flex bg-primary pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="addPhoneNumber()">
+                    <button type="button" class="flex bg-primary  text-black pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="addPhoneNumber()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
@@ -98,13 +98,13 @@
                             <div class="flex flex-col mb-3 w-60">
                                 <input type="text" class="form-control" id="inputLink" [formControlName]="i" placeholder="Link">
                             </div>
-                            <button *ngIf="i != 0" type="button" (click)="removeLink(i)" class="flex bg-primary ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full">
+                            <button *ngIf="i != 0" type="button" (click)="removeLink(i)" class="flex bg-primary  text-black ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full">
                                 <mat-icon>remove</mat-icon>
                             </button>
                         </div>
                     </div>
 
-                    <button type="button" class="flex bg-primary pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="addLink()">
+                    <button type="button" class="flex bg-primary  text-black pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="addLink()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
@@ -153,14 +153,14 @@
                                 <div class="flex flex-col mb-3 w-40">
                                     <input type="text" class="form-control" [formControlName]="nation"  id="inputAddressNation" placeholder="Nazione">
                                 </div>
-                                <button *ngIf="i != 0" type="button" class="flex bg-primary ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="removeAddress(i)">
+                                <button *ngIf="i != 0" type="button" class="flex bg-primary  text-black ml-2 pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="removeAddress(i)">
                                     <mat-icon>remove</mat-icon>
                                 </button>
                             </div>  
                         </div>
                     </div>        
 
-                    <button type="button" class="flex bg-primary pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="addAddress()">
+                    <button type="button" class="flex bg-primary  text-black pl-4 pr-4 pt-2 pb-2 mb-3 rounded-full" (click)="addAddress()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
@@ -168,7 +168,7 @@
 
 
                 <div class="flex flex-col items-center">
-                    <button type="submit" class="flex bg-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Save change</button>
+                    <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Save change</button>
                 </div>
             </form>
         </div>
@@ -199,7 +199,7 @@
                 </div>
                 
                 <div class="flex flex-col items-center">
-                    <button type="submit" class="flex bg-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Save change</button>
+                    <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Save change</button>
                 </div>
             </form>
         </div>    
