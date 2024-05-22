@@ -4,7 +4,6 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
     screens: {
       'sm': '0',
       // => @media (min-width: 640px) { ... }
@@ -20,6 +19,19 @@ module.exports = {
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
+    },
+    colors: {
+      primary: "#FF742C",
+      secondary: "#fff",
+      transparent: "#00000000",
+      
+      primary_text: "#fff",
+      secondary_text: "#BBBBBB",
+      
+      black: "#000",
+    },
+    backgroundImage: {
+      background: ""
     }
   },
   plugins: [],

@@ -26,10 +26,10 @@
             {{ contact.company }}
           </div>
           <div class="flex w-1/4 border p-2 justify-center">
-            <button (click)="seeContactCards(contact.id)" class="bg-slate-200 w-44 rounded-3xl p-2">Vedi carte</button>
+            <button (click)="seeContactCards(contact.id)" class="bg-primary w-44 rounded-3xl p-2">Vedi carte</button>
           </div>
           <div class="flex w-1/4 border p-2 justify-center">
-            <button (click)="delete(contact)" class="bg-slate-200 w-44 rounded-3xl p-2">
+            <button (click)="delete(contact)" class="bg-primary w-44 rounded-3xl p-2">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -37,7 +37,7 @@
       </div>
   </div>
   <div class="flex flex-col w-full items-center">
-    <button (click)="addContact()" class="bg-slate-200 w-44 rounded-3xl mt-6 mb-6 p-2">Aggiungi utente</button>
-    <button (click)="logout()" class="bg-slate-200 w-44 rounded-3xl p-2">Logout</button>
+    <button (click)="addContact()" class="bg-primary w-44 rounded-3xl mt-6 mb-6 p-2">Aggiungi utente</button>
+    <button (click)="logout()" class="bg-primary w-44 rounded-3xl p-2">Logout</button>
   </div>
 </div>
