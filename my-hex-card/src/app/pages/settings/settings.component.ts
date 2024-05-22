@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from '../../interfaces/card';
 import { CardService } from '../../services/card.service';
+import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [],
+  imports: [ CardPreviewComponent ],
   templateUrl: './settings.component.html',
-  styleUrl: './settings.component.css'
+  styleUrl: './settings.component.css',
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class SettingsComponent {
   //constructor

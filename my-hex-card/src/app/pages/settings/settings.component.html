@@ -12,9 +12,19 @@
           <a href="/card-settings/style/set-all-style-cards">Cambia immagine e stile in contemporanea</a>
         </li>
       }
-      
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <!-- <swiper-container>
+      <swiper-slide>Slide 1</swiper-slide>
+      <swiper-slide>Slide 2</swiper-slide>
+      <swiper-slide>Slide 3</swiper-slide>
+      <swiper-slide>Slide ...</swiper-slide>
+    </swiper-container>
       @for (card of cards; track card.token; let idx = $index) {
-        <li class="list-group-item">
+        <div class="w-full">
+          <app-card-preview [card]="card"></app-card-preview>
+        </div> -->
+        
+        <!-- <li class="list-group-item">
           <a href="/card-settings/{{ card.token }}">
             {{ idx+1 }}. Carta: 
             @if (card.name && card.surname) {
@@ -24,12 +34,21 @@
               Nome o cognome non presenti
             }
           </a>
-        </li>
-      }
+        </li> -->
+      <!-- } -->
     </ul>
+    <swiper-container class="w-full" effect="cards">
+      @for (card of cards; track card.token; let idx = $index) {
+        <swiper-slide class="w-full">
+          <app-card-preview [card]="card"></app-card-preview>
+        </swiper-slide>
+      }
+    </swiper-container>
+      
 
     <div class="flex flex-col items-center mt-4">
-      <button (click)="logout()" class="bg-primary  text-black w-44 rounded-3xl p-2">Logout</button>
+      <!-- <button (click)="logout()" class="bg-primary  text-black w-44 rounded-3xl p-2">Logout</button> -->
+      <button (click)="logout()" class="bg-primary  text-black w-44 rounded-3xl p-2">Impostazioni carte</button>
     </div>
   </div>
 </div>
