@@ -24,10 +24,6 @@
     top: 0;
   }
   
-  a:hover {
-    background-color: #ddd;
-  }
-
   .obscure {
     position: absolute;
     width: 100%;
