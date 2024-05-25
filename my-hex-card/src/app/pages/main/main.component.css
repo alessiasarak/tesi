@@ -1,6 +1,6 @@
-img{
-    height: 100px;
-    width: 100px;
+.my-img{
+    height: 100px !important;
+    width: 100px !important;
     border-radius: 100px;
 }
 

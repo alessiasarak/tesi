@@ -1,13 +1,15 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div [class]="myMainClass + 'fixed z-50 top-0 left-0 h-screen'" [style]="myMainStyle">
+<div [class]="myMainClass + 'fixed z-50 top-0 left-0 h-full'" [style]="myMainStyle">
   <div class="menu">
     <app-hamburger-menu></app-hamburger-menu>
   </div>
 
   <div class="flex flex-col mb-2">
     <div class="flex flex-col items-center">
-      <span *ngIf="myCard.img"><img src="{{ myCard.img }}" class="flex bg-cover mb-3"></span>
+      <div  class="w-36 h-36">
+          <img src="{{ myCard.img }}" class="bg-cover bg-center">
+      </div>
       <h4 class="flex h-1/4 mb-1 font-bold text-left text-2xl">{{ myCard.name }} {{ myCard.surname }}</h4>
       <h5 class="flex h-1/4 text-left">{{ myCard.company }} </h5>
       <h5 class="flex h-1/4 mb-3 text-left">{{ myCard.function }} </h5>
@@ -41,30 +43,30 @@
 
     <hr class="flex mt-3 mb-3">
 
-    <div class="flex flex-row w-full justify-around">
-      <div class="flex w-1/5 rounded-full" *ngIf="myCard.facebook">
+    <div class="flex flex-row w-full justify-around h-[30px]">
+      <div class="flex" *ngIf="myCard.facebook">
         <a href="{{ myCard.facebook }}" target="_blank">
-          <mat-icon fontIcon="facebook"></mat-icon>
+          <img src="/assets/img/facebook.png" class="h-[20px] w-[20px]">
         </a>
       </div>
-      <div class="flex w-1/5 rounded-full" *ngIf="myCard.instagram">
+      <div class="flex" *ngIf="myCard.instagram">
         <a href="{{ myCard.instagram }}" target="_blank">
-          <mat-icon fontIcon="link"></mat-icon>
+          <img src="/assets/img/instagram.png" class="h-[20px] w-[20px]">
         </a>
       </div>
-      <div class="flex w-1/5 rounded-full" *ngIf="myCard.linkedin">
+      <div class="flex" *ngIf="myCard.linkedin">
         <a href="{{ myCard.linkedin }}" target="_blank">
-          <mat-icon fontIcon="link"></mat-icon>
+          <img src="/assets/img/linkedin.png" class="h-[20px] w-[20px]">
         </a>
       </div>
-      <div class="flex w-1/5 rounded-full" *ngIf="myCard.whatsapp">
+      <div class="flex" *ngIf="myCard.whatsapp">
         <a href="{{ myCard.whatsapp }}" target="_blank">
-          <mat-icon fontIcon="link"></mat-icon>
+          <img src="/assets/img/whatsapp.png" class="h-[20px] w-[20px]">
         </a>
       </div>
-      <div class="flex w-1/5 rounded-full" *ngIf="myCard.youtube">
+      <div class="flex" *ngIf="myCard.youtube">
         <a href="{{ myCard.youtube }}" target="_blank">
-          <mat-icon fontIcon="link"></mat-icon>
+          <img src="/assets/img/youtube.png" class="h-[20px] w-[20px]">
         </a>
       </div>
     </div>
