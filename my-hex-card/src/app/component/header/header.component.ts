@@ -22,6 +22,7 @@ export class HeaderComponent {
     { link: "/logout", title: "Logout" }
   ];
   adminMenu = [
+    { link: "/admin", title: "Home" },
     { link: "/profile-settings", title: "Profilo" },
     { link: "/logout", title: "Logout" }
   ];

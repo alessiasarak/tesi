@@ -41,6 +41,8 @@ export class LoginComponent {
     fk_role: { role: 'USER' }
   };
 
+  token : string | undefined = undefined;
+
   //methods
   async onSubmit() {
     this.user.email = this.myForm.value.email;
@@ -48,9 +50,11 @@ export class LoginComponent {
 
     this.route.params.subscribe(async params => {
       let token = params['token']; 
+      this.token = token;
       
       this.service.login(this.user, token).then(async (response) => {  
         this.loggedUser = response;
+        
         if(this.loggedUser != undefined) {
           localStorage.setItem("user_id", this.loggedUser.id.toString());
           localStorage.setItem("role", this.loggedUser.fk_role.toString());
@@ -77,5 +81,9 @@ export class LoginComponent {
 
   forgotPassword(){
     this.router.navigateByUrl("/forgot-password");
+  }
+
+  register(){
+    this.router.navigateByUrl("/register/"+this.token);
   }
 }

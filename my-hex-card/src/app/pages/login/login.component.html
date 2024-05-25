@@ -49,3 +49,7 @@
 </form>
 
   
+<div class="flex flex-row w-full justify-center text-tiny_text font-normal" *ngIf="token">
+  <div class="flex mr-2">Non sei registrato? </div>
+  <a class="flex text-primary" (click)="register()"> Crea un account!</a>
+</div>
