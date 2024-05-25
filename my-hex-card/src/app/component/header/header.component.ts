@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
 import { CommonModule } from '@angular/common';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-header',
@@ -36,7 +37,7 @@ export class HeaderComponent {
 
     this.menuList[i].active = true;
   }
-
+  
   ngOnInit() {
     let userLogged = localStorage.getItem("user_id");
     if(userLogged) {
@@ -44,5 +45,12 @@ export class HeaderComponent {
       if(role && role == "USER") this.menuList = this.userMenu;
       else if(role && role == "ADMIN") this.menuList = this.adminMenu;
     }
+  }
+
+  
+  constructor(private location: Location) {}
+
+  goBack(): void {
+    this.location.back();
   }
 }
