@@ -49,6 +49,7 @@ exports.forgotPassword = asyncHandler(async (req, res) =>{
     var data = req.body.entity;
     let userRepository = new UserRepository();
     let response = await userRepository.forgotPassword(data);
+    console.log(response)
 
     res.status(response.code).json(response.data);
 });

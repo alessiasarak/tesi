@@ -18,6 +18,7 @@ import { SetAllStyleCardsComponent } from './pages/set-all-style-cards/set-all-s
 import { ForgotPasswordResetComponent } from './pages/forgot-password-reset/forgot-password-reset.component';
 import { LogoutComponent } from './component/logout/logout.component';
 import { CardPreviewPageComponent } from './pages/card-preview-page/card-preview-page.component';
+import { EmailSendComponent } from './pages/email-send/email-send.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -27,6 +28,7 @@ export const routes: Routes = [
     { path: 'register/:token', component: RegisterComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'email-send', component: EmailSendComponent },
     { path: 'forgot-password/reset/:token', component: ForgotPasswordResetComponent },
     { path: 'logout', component: LogoutComponent },
     

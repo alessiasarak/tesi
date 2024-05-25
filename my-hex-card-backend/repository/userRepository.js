@@ -239,10 +239,8 @@ class UserRepository {
             });
             user.save();
 
-            console.log("Sending email");
-
             let domain = "https://myhexcard.com";
-            console.log(domain + "/forgot-password/reset/" + resetToken);
+            console.log(domain)
 
             // this.sendingMail({
             //     from: "no-reply@myhexcard.com",
@@ -250,9 +248,10 @@ class UserRepository {
             //     subject: "Password da resettare",
             //     text: `  ${domain}/forgot-password/reset/${resetToken} `,
             // });
+            
             return {
                 "code": 200,
-                "message": "IEmail sended"
+                "data": user.dataValues
             };
         } catch (error) {
             return {
