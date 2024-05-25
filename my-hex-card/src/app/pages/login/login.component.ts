@@ -7,11 +7,12 @@ import { AuthService } from "../../services/auth/auth.service";
 import { User } from "../../interfaces/user";
 import { CardService } from "../../services/card.service";
 import { TitleComponent } from "../../component/title/title.component";
+import { HeaderComponent } from "../../component/header/header.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, TitleComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, TitleComponent, HeaderComponent ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -41,37 +42,38 @@ export class LoginComponent {
     fk_role: { role: 'USER' }
   };
 
-  token : string | undefined = undefined;
+  token : string | undefined;
+
+  ngOnInit(){
+    this.route.params.subscribe(async params => {
+      this.token = params['token']; 
+    });
+  }
 
   //methods
   async onSubmit() {
     this.user.email = this.myForm.value.email;
     this.user.password = this.myForm.value.password;
 
-    this.route.params.subscribe(async params => {
-      let token = params['token']; 
-      this.token = token;
+    this.service.login(this.user, this.token).then(async (response) => {  
+      this.loggedUser = response;
       
-      this.service.login(this.user, token).then(async (response) => {  
-        this.loggedUser = response;
-        
-        if(this.loggedUser != undefined) {
-          localStorage.setItem("user_id", this.loggedUser.id.toString());
-          localStorage.setItem("role", this.loggedUser.fk_role.toString());
-    
-          if(this.loggedUser.fk_role.toString() != "ADMIN"){
-            let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
-            localStorage.setItem('cards', JSON.stringify(card));
-          } else {
-            this.isVisible = true;
-          }
-    
-          if(token) this.router.navigateByUrl("/card-settings/"+token);
-          else this.router.navigateByUrl("/settings");
+      if(this.loggedUser != undefined) {
+        localStorage.setItem("user_id", this.loggedUser.id.toString());
+        localStorage.setItem("role", this.loggedUser.fk_role.toString());
+  
+        if(this.loggedUser.fk_role.toString() != "ADMIN"){
+          let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
+          localStorage.setItem('cards', JSON.stringify(card));
+        } else {
+          this.isVisible = true;
         }
-      }).catch((error) => {
-        this.isVisible = true;
-      });
+  
+        if(this.token) this.router.navigateByUrl("/card-settings/"+this.token);
+        else this.router.navigateByUrl("/settings");
+      }
+    }).catch((error) => {
+      this.isVisible = true;
     });
   }
 

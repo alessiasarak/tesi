@@ -72,10 +72,10 @@ export class MainComponent implements OnInit{
             //se il login è gia stato effettuato
             if(localStorage.getItem("user_id")){
               //associa direttamente il token
-              //reinderizza alle impostazioni
+              //this.service.addToUserACard();
             }
 
-            this.router.navigateByUrl("/register/"+cardId);
+            this.router.navigateByUrl("/homepage/"+cardId);
           }
           
           this.myCard = data;
