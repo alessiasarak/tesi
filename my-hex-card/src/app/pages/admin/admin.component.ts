@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { Contact } from '../../interfaces/contact';
 import { ContactService } from '../../services/contact/contact.service';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { TitleComponent } from '../../component/title/title.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, MatIcon ],
+  imports: [ CommonModule, MatIconModule, MatIcon, TitleComponent ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
