@@ -1,12 +1,14 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<app-title title="Sign up"></app-title>
+
+<div class="flex lg:flex-row lg:justify-between sm:flex-col">
+<app-title title="Sign up" class="flex"></app-title>
 
 <div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
   Email già presente
 </div>
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="flex lg:flex-row sm:flex-col">
 
   <div class="mb-4">
     <div class="flex items-center border-b border-gray-500 py-2">
@@ -22,58 +24,64 @@
       {{ passwordError}}
   </div>
 
-  <div class="mb-4"  *ngIf="showPassword">
-    <div class="flex items-center border-b border-gray-500 py-2">
-      <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-      placeholder="Password*" type="text" id="password" formControlName="password">
-      <span class="text-gray-500" (click)="togglePassword()">
-        <mat-icon class="flex">visibility_off</mat-icon>
-      </span>
-    </div>
-  </div>
-
-
-  <div class="mb-4"  *ngIf="!showPassword">
-    <div class="flex items-center border-b border-gray-500 py-2">
-      <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-      placeholder="Password*" type="password" id="password" formControlName="password">
-      <span class="text-gray-500" (click)="togglePassword()">
-        <mat-icon class="flex">visibility</mat-icon>
-      </span>
-    </div>
-  </div>
   
+  <div class="lg:flex lg:flex-col">
+    <div class="mb-4"  *ngIf="showPassword">
+      <div class="flex items-center border-b border-gray-500 py-2">
+        <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+        placeholder="Password*" type="text" id="password" formControlName="password">
+        <span class="text-gray-500" (click)="togglePassword()">
+          <mat-icon class="flex">visibility_off</mat-icon>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="mb-4"  *ngIf="!showPassword">
+      <div class="flex items-center border-b border-gray-500 py-2">
+        <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+        placeholder="Password*" type="password" id="password" formControlName="password">
+        <span class="text-gray-500" (click)="togglePassword()">
+          <mat-icon class="flex">visibility</mat-icon>
+        </span>
+      </div>
+    </div>
+    
 
 
 
-  <div class="mb-4"  *ngIf="showPassword">
-    <div class="flex items-center border-b border-gray-500 py-2">
-      <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-      placeholder="Password*" type="text" id="repeatPassword" formControlName="repeatPassword">
-      <span class="text-gray-500" (click)="togglePassword()">
-        <mat-icon class="flex">visibility_off</mat-icon>
-      </span>
+    <div class="mb-4"  *ngIf="showPassword">
+      <div class="flex items-center border-b border-gray-500 py-2">
+        <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+        placeholder="Password*" type="text" id="repeatPassword" formControlName="repeatPassword">
+        <span class="text-gray-500" (click)="togglePassword()">
+          <mat-icon class="flex">visibility_off</mat-icon>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="mb-4"  *ngIf="!showPassword">
+      <div class="flex items-center border-b border-gray-500 py-2">
+        <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+        placeholder="Confirm password*" type="password" id="repeatPassword" formControlName="repeatPassword">
+        <span class="text-gray-500" (click)="togglePassword()">
+          <mat-icon class="flex">visibility</mat-icon>
+        </span>
+      </div>
     </div>
   </div>
 
-
-  <div class="mb-4"  *ngIf="!showPassword">
-    <div class="flex items-center border-b border-gray-500 py-2">
-      <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-      placeholder="Confirm password*" type="password" id="repeatPassword" formControlName="repeatPassword">
-      <span class="text-gray-500" (click)="togglePassword()">
-        <mat-icon class="flex">visibility</mat-icon>
-      </span>
+  
+  <div class="lg:flex lg:flex-col">
+    <div class="flex flex-col items-center">
+      <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-4 pb-4 mb-3 rounded-full">Sign up</button>
     </div>
-  </div>
-
-  <div class="flex flex-col items-center">
-    <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-4 pb-4 mb-3 rounded-full">Sign up</button>
+    <div class="flex flex-row w-full justify-center text-tiny_text font-normal">
+      <div class="flex mr-2">Hai già un account? </div>
+      <a class="flex text-primary" (click)="login()"> Fai il login</a>
+    </div>
   </div>
 </form>
 
-<div class="flex flex-row w-full justify-center text-tiny_text font-normal">
-  <div class="flex mr-2">Hai già un account? </div>
-  <a class="flex text-primary" (click)="login()"> Fai il login</a>
-</div>
-  
+</div>  

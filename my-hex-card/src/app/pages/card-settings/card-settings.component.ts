@@ -11,11 +11,12 @@ import { PhoneNumber } from '../../interfaces/phone-number';
 import { Link } from '../../interfaces/link';
 import { Address } from '../../interfaces/address';
 import { TitleComponent } from '../../component/title/title.component';
+import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 
 @Component({
   selector: 'app-card-settings',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent ],
   templateUrl: './card-settings.component.html',
   styleUrl: './card-settings.component.css'
 })

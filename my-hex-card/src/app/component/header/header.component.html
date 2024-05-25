@@ -3,14 +3,22 @@
         <mat-icon class="flex">arrow_back</mat-icon>
     </button>
     
-    <button (click)="menu()" id="menuButton" class="flex z-30">
+    <button (click)="menu()" id="menuButton" class="flex z-30 lg:hidden">
         <mat-icon *ngIf="!isVisible">menu</mat-icon>
         <mat-icon *ngIf="isVisible">close</mat-icon>
     </button>
+
+    
+    <div class="flex text-secondary bg-black lg:z-30 sm:hidden">
+        @for (item of menuList; track item; let i = $index) {
+            <a [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-secondary'">{{ item.title }}</a>
+        }
+    </div>
 </div>
 
 
 <div *ngIf="isVisible" class="obscure z-10" (click)="menu()"></div>
+
 <div class="z-20 absolute top-0 min-h-screen w-52 text-secondary bg-black pt-16 transition-all duration-1000"
     [ngClass]="!isVisible ? '-right-52' : 'right-0'">
     
