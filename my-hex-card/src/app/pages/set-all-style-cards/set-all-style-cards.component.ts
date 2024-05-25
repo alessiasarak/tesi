@@ -18,6 +18,7 @@ import { TitleComponent } from '../../component/title/title.component';
 export class SetAllStyleCardsComponent {
   constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
 
+  isLoading = true;
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.service.getAUserCard().subscribe((data) => {
@@ -27,6 +28,7 @@ export class SetAllStyleCardsComponent {
         this.myButtonStyle = "background-color: " + this.card.button_color + ";";
         
         this.assignValues(data);
+        this.isLoading = false;
       });
     });
   }

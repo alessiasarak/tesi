@@ -21,6 +21,7 @@ export class SettingsComponent {
   constructor(private service: AuthService, private router: Router, private cardService : CardService){}
 
   cards : Card[] = [];
+  isLoading = true;
 
   ngOnInit(): void {
     if(localStorage.getItem("role") == "ADMIN") this.router.navigateByUrl("/admin");
@@ -29,6 +30,7 @@ export class SettingsComponent {
     this.cardService.getCardsByUser(userId!).then(
       (data) => {
         this.cards = data;
+        this.isLoading = false;
       }
     );
   }

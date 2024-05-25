@@ -43,6 +43,7 @@ export class RegisterComponent {
 
   token : string = "";
   isVisible = false;
+  isLoading = false;
 
   async onSubmit() {
     this.user.email = this.myForm.value.email;
@@ -51,6 +52,7 @@ export class RegisterComponent {
     let isPasswordValid = await this.checkPasswordValidity();
     if(!isPasswordValid) return;
 
+    this.isLoading = true;
     this.route.params.subscribe(async params => {
       let token = params['token']; 
       
