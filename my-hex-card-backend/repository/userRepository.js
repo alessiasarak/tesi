@@ -2,6 +2,7 @@ const User = require("../model/user");
 const CardRepository = require("./cardRepository");
 
 const bcrypt = require('bcrypt');
+const nodemailer = require("nodemailer");
 
 class UserRepository {
     async registerUser(userData, token) {
@@ -242,12 +243,14 @@ class UserRepository {
             let domain = "https://myhexcard.com";
             console.log(domain)
 
-            // this.sendingMail({
-            //     from: "no-reply@myhexcard.com",
-            //     to: `${user.email}`,
-            //     subject: "Password da resettare",
-            //     text: `  ${domain}/forgot-password/reset/${resetToken} `,
-            // });
+            
+
+            this.sendingMail({
+                from: "no-reply@myhexcard.com",
+                to: `${user.email}`,
+                subject: "Password da resettare",
+                text: `  ${domain}/forgot-password/reset/${resetToken} `,
+            });
             
             return {
                 "code": 200,
@@ -280,11 +283,11 @@ class UserRepository {
             };
         
             const Transporter = nodemailer.createTransport({
-                host: process.env.EMAIL_HOST,
+                host: 'asmtp.mail.hostpoint.ch',
                 port: 587,
                 auth: {
-                    user: process.env.EMAIL,
-                    pass: process.env.EMAIL_PASSWORD,
+                  user: 'no-reply@bgtax.app',
+                  pass: 'tkbBf-57W2KvfFf',
                 },
             });
         
