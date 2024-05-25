@@ -9,11 +9,12 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { SafeUrl } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { TitleComponent } from '../../component/title/title.component';
+import { LoadingComponent } from '../../component/loading/loading.component';
 
 @Component({
   selector: 'app-user-cards',
   standalone: true,
-  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule, TitleComponent ],
+  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule, TitleComponent, LoadingComponent ],
   templateUrl: './user-cards.component.html',
   styleUrl: './user-cards.component.css'
 })
@@ -25,8 +26,10 @@ export class UserCardsComponent {
   isVisible = false;
 
   backgroundColor: string = "#ffffff00";
-  codeColor: string = "#000000";
+  codeColor: string = "#fff";
 
+
+  isLoading = true;
   constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
 
   ngOnInit(): void {
@@ -36,17 +39,19 @@ export class UserCardsComponent {
       this.cardService.getCardsByContact(this.idContact).then(
         (data) => {
           this.cards = data;
+          this.isLoading = false;
         }
       );
     });
   }
 
   addCard(){
-    console.log("Aggiungi di una carta");
+    this.isLoading = true;
     this.cardService.postCard(this.idContact).then(
       (data) => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
+        this.isLoading = false;
         this.router.navigate(["/contact-cards/"+this.idContact]);
       }
     );
