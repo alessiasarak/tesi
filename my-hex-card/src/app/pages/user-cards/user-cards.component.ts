@@ -8,11 +8,12 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SafeUrl } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
+import { TitleComponent } from '../../component/title/title.component';
 
 @Component({
   selector: 'app-user-cards',
   standalone: true,
-  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule ],
+  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule, TitleComponent ],
   templateUrl: './user-cards.component.html',
   styleUrl: './user-cards.component.css'
 })

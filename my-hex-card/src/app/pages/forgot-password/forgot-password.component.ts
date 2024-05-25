@@ -5,11 +5,12 @@ import { User } from '../../interfaces/user';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
+import { TitleComponent } from '../../component/title/title.component';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, TitleComponent ],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })
@@ -34,6 +35,6 @@ export class ForgotPasswordComponent {
     this.user.email = this.myProfileForm.value.email;
     
     let response = await this.service.sendEmailToResetPassword(this.user); 
-    if(response) this.router.navigateByUrl("/login");
+    if(response) this.router.navigateByUrl("/email-send");
   }
 }

@@ -10,11 +10,12 @@ import { Email } from '../../interfaces/email';
 import { PhoneNumber } from '../../interfaces/phone-number';
 import { Link } from '../../interfaces/link';
 import { Address } from '../../interfaces/address';
+import { TitleComponent } from '../../component/title/title.component';
 
 @Component({
   selector: 'app-card-settings',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, MyButtonComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent ],
   templateUrl: './card-settings.component.html',
   styleUrl: './card-settings.component.css'
 })
@@ -43,6 +44,8 @@ export class CardSettingsComponent {
   myButtonStyle : string = "";
 
   myToken : string = this.route.snapshot.params['id'];
+
+  style = false;
 
 
   myForm : FormGroup = this.fb.group({
@@ -295,5 +298,13 @@ export class CardSettingsComponent {
     reader.onload = () => {
         this.card.img = reader.result!.toString();
     };
+  }
+
+  setStyleFalse(){
+    this.style = false;
+  }
+
+  setStyleTrue(){
+    this.style = true;
   }
 }

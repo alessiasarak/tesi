@@ -16,21 +16,27 @@ import { RedirectGuard } from './redirect-guard';
 import { UserCardsComponent } from './pages/user-cards/user-cards.component';
 import { SetAllStyleCardsComponent } from './pages/set-all-style-cards/set-all-style-cards.component';
 import { ForgotPasswordResetComponent } from './pages/forgot-password-reset/forgot-password-reset.component';
+import { LogoutComponent } from './component/logout/logout.component';
+import { CardPreviewPageComponent } from './pages/card-preview-page/card-preview-page.component';
+import { EmailSendComponent } from './pages/email-send/email-send.component';
 
 export const routes: Routes = [
-    //{ path: '', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'https://hexcard.ch/' } },
     { path: '', component: LoginComponent },
     { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
     { path: 'login', component: LoginComponent },
     { path: 'login/:token', component: LoginComponent },
     { path: 'register/:token', component: RegisterComponent },
+    { path: 'register', component: RegisterComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'email-send', component: EmailSendComponent },
     { path: 'forgot-password/reset/:token', component: ForgotPasswordResetComponent },
+    { path: 'logout', component: LogoutComponent },
     
 
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
     { path: 'card-settings/:id', component: CardSettingsComponent, canActivate: [AuthGuard] },
+    { path: 'card-preview/:id', component: CardPreviewPageComponent, canActivate: [AuthGuard] },
     { path: 'card-settings/style/set-all-style-cards', component: SetAllStyleCardsComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'add-contact', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },

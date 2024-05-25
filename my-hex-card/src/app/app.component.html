@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="bg-black h-full w-[100%] absolute top-0 -z-30 overflow-x-clip"> 
+    <app-header></app-header>
+    <img src="/assets/img/big_circle.png" class="circle1 -z-20">
+    <img src="/assets/img/little_circle.png" class="circle2 -z-20">
+    <div class="obscure -z-10"></div>
+    <div class="flex flex-col mt-10 items-center w-screen h-screen text-primary_text">
+        <div class="flex flex-col w-full p-8 pt-0 rounded-3xl">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

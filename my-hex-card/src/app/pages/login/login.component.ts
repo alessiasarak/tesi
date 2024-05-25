@@ -6,11 +6,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "../../services/auth/auth.service";
 import { User } from "../../interfaces/user";
 import { CardService } from "../../services/card.service";
+import { TitleComponent } from "../../component/title/title.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, TitleComponent ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -40,6 +41,8 @@ export class LoginComponent {
     fk_role: { role: 'USER' }
   };
 
+  token : string | undefined = undefined;
+
   //methods
   async onSubmit() {
     this.user.email = this.myForm.value.email;
@@ -47,9 +50,11 @@ export class LoginComponent {
 
     this.route.params.subscribe(async params => {
       let token = params['token']; 
+      this.token = token;
       
       this.service.login(this.user, token).then(async (response) => {  
         this.loggedUser = response;
+        
         if(this.loggedUser != undefined) {
           localStorage.setItem("user_id", this.loggedUser.id.toString());
           localStorage.setItem("role", this.loggedUser.fk_role.toString());
@@ -76,5 +81,9 @@ export class LoginComponent {
 
   forgotPassword(){
     this.router.navigateByUrl("/forgot-password");
+  }
+
+  register(){
+    this.router.navigateByUrl("/register/"+this.token);
   }
 }

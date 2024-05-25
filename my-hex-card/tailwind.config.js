@@ -4,7 +4,6 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
     screens: {
       'sm': '0',
       // => @media (min-width: 640px) { ... }
@@ -20,6 +19,42 @@ module.exports = {
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
+    },
+    colors: {
+      primary: "#FF742C",
+      secondary: "#fff",
+      transparent: "#00000000",
+      
+      primary_text: "#fff",
+      secondary_text: "#BBBBBB",
+      
+      black: "#000",
+    },
+    backgroundImage: {
+      background: ""
+    },
+    fontSize: {
+      'xs': '0.75rem',
+      'sm': '0.875rem',
+      'base': '1rem',
+      'lg': '1.125rem',
+      'xl': '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+      '6xl': '4rem',
+
+      title: '35px',
+      subtitle: '16px',
+      tiny_text: '10px',
+      medium_text: '12px',
+    },
+    fontWeight: {
+      title: '700',
+      subtitle: '400',
+      normal: '400',
+      medium: '500',
     }
   },
   plugins: [],

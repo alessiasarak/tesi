@@ -1,57 +1,52 @@
-<div class="flex flex-col mt-10 items-center">
-    <div class="flex flex-col w-96 shadow-xl p-8 rounded-3xl">
-        
-        <h3 class="flex text-xl font-bold mb-3">
-            <app-my-button path="/settings"></app-my-button>
-            Impostazioni profilo
-        </h3>
 
-        <form [formGroup]="myProfileForm" (ngSubmit)="onProfileSubmit()">
-            <div class="flex flex-col mb-3 w-80">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" formControlName="email" />
-            </div>
-                    
-            <div class="flex flex-col items-center">
-                <button type="submit" class="flex bg-slate-200 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Save change</button>
-            </div>
-        </form>
-        
-        <hr class="my-4" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <form [formGroup]="myPasswordForm" (ngSubmit)="onPasswordSubmit()">
-            
-            <div class="flex flex-col mb-3 w-80">
-                <p class="mb-2">Password requirements</p>
-                <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
-                <ul class="small text-muted pl-4 mb-0">
-                    <li>Minimum 8 character</li>
-                    <li>At least one number</li>
-                </ul>
-            </div>
-            
-            <div class="flex flex-col mb-3 w-80">
-                <label for="password">Old Password</label>
-                <input type="password" class="form-control" id="password"  formControlName="password" />
-            </div>
+<app-title title="Profilo"></app-title>
 
-            <div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
-                {{ passwordError}}
-            </div>
-            
-            <div class="flex flex-col mb-3 w-80">
-                <label for="newPassword">New Password</label>
-                <input type="password" class="form-control" id="newPassword"  formControlName="newPassword" (keyup)="checkPasswordValidity()"/>
-            </div>
-            
-            <div class="flex flex-col mb-3 w-80">
-                <label for="repeatedPassword">Confirm Password</label>
-                <input type="password" class="form-control" id="repeatedPassword"  formControlName="repeatedPassword" (keyup)="checkPasswordValidity()" />
-            </div>
-            
-            <div class="flex flex-col items-center">
-                <button type="submit" class="flex bg-slate-200 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Save change</button>
-            </div>
-        </form>
+<form [formGroup]="myProfileForm" (ngSubmit)="onProfileSubmit()">
+    <div class="flex flex-col mb-6">
+        <label for="email">Email</label>
+        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="email" formControlName="email" />
     </div>
-</div>
+            
+    <div class="flex flex-col items-center">
+        <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
+    </div>
+</form>
+
+<hr class="my-4" />
+
+<form [formGroup]="myPasswordForm" (ngSubmit)="onPasswordSubmit()">
+    
+    <div class="flex flex-col mb-3">
+        <p class="mb-2">Password requirements</p>
+        <p class="small text-muted mb-2">To create a new password, you have to meet all of the following requirements:</p>
+        <ul class="small text-muted pl-4 mb-0">
+            <li>Minimum 8 character</li>
+            <li>At least one number</li>
+        </ul>
+    </div>
+    
+    <div class="flex flex-col mb-3">
+        <label for="password">Old Password</label>
+        <input type="password" class="bg-secondary w-full p-2 rounded-md text-black" id="password"  formControlName="password" />
+    </div>
+
+    <div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
+        {{ passwordError}}
+    </div>
+    
+    <div class="flex flex-col mb-3">
+        <label for="newPassword">New Password</label>
+        <input type="password" class="bg-secondary w-full p-2 rounded-md text-black" id="newPassword"  formControlName="newPassword" (keyup)="checkPasswordValidity()"/>
+    </div>
+    
+    <div class="flex flex-col mb-6">
+        <label for="repeatedPassword">Confirm Password</label>
+        <input type="password" class="bg-secondary w-full p-2 rounded-md text-black" id="repeatedPassword"  formControlName="repeatedPassword" (keyup)="checkPasswordValidity()" />
+    </div>
+    
+    <div class="flex flex-col items-center">
+        <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
+    </div>
+</form>

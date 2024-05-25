@@ -5,11 +5,13 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
 import { CommonModule } from '@angular/common';
+import { TitleComponent } from '../../component/title/title.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-profile-settings',
   standalone: true,
-  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule ],
+  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule, TitleComponent, MatIconModule ],
   templateUrl: './profile-settings.component.html',
   styleUrl: './profile-settings.component.css'
 })

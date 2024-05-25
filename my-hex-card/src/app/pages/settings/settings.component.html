@@ -1,36 +1,17 @@
-<div class="flex flex-col mt-10 items-center">
-  <div class="flex flex-col w-80 shadow-xl p-8 rounded-3xl">
-    <h3 class="flex text-xl font-bold mb-3">Impostazioni</h3>
-    
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <a href="/profile-settings">Profilo personale</a>
-      </li>
+<app-title title="Morning!"></app-title>
 
-      @if(cards.length > 1) {
-        <li class="list-group-item">
-          <a href="/card-settings/style/set-all-style-cards">Cambia immagine e stile in contemporanea</a>
-        </li>
-      }
-      
-      @for (card of cards; track card.token; let idx = $index) {
-        <li class="list-group-item">
-          <a href="/card-settings/{{ card.token }}">
-            {{ idx+1 }}. Carta: 
-            @if (card.name && card.surname) {
-              {{ card.name }} {{ card.surname }}
-            } 
-            @else {
-              Nome o cognome non presenti
-            }
-          </a>
-        </li>
-      }
-    </ul>
+<swiper-container class="w-full" effect="cards">
+  @for (card of cards; track card.token; let idx = $index) {
+    <swiper-slide class="w-full" (click)="viewDetailCard(card.token)">
+      <!-- href="/card-settings/{{ card.token }}" -->
+      <app-card-preview [card]="card"></app-card-preview>
+    </swiper-slide>
+  }
+</swiper-container>
 
-    <div class="flex flex-col items-center mt-4">
-      <button (click)="logout()" class="bg-slate-200 w-44 rounded-3xl p-2">Logout</button>
-    </div>
-  </div>
+<div *ngIf="cards.length > 1" class="flex flex-col items-center mt-4">
+  <!-- <button (click)="logout()" class="bg-primary  text-black w-44 rounded-3xl p-2">Logout</button> -->
+  <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black w-44 rounded-3xl p-2">Impostazioni carte</a>
 </div>
+
   
