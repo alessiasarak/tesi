@@ -17,6 +17,7 @@ import { UserCardsComponent } from './pages/user-cards/user-cards.component';
 import { SetAllStyleCardsComponent } from './pages/set-all-style-cards/set-all-style-cards.component';
 import { ForgotPasswordResetComponent } from './pages/forgot-password-reset/forgot-password-reset.component';
 import { LogoutComponent } from './component/logout/logout.component';
+import { CardPreviewPageComponent } from './pages/card-preview-page/card-preview-page.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -33,6 +34,7 @@ export const routes: Routes = [
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
     { path: 'card-settings/:id', component: CardSettingsComponent, canActivate: [AuthGuard] },
+    { path: 'card-preview/:id', component: CardPreviewPageComponent, canActivate: [AuthGuard] },
     { path: 'card-settings/style/set-all-style-cards', component: SetAllStyleCardsComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'add-contact', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
