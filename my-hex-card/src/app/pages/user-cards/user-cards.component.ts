@@ -91,6 +91,7 @@ export class UserCardsComponent {
     text_color: '',
     button_color: ''
   }
+
   async onSubmit() {
     this.isLoading = true;
     this.card.name = this.myForm.value.name;
@@ -130,5 +131,29 @@ export class UserCardsComponent {
   changeBackgroundColor(event : any){
     this.backgroundColor = event.target.value;
     console.log(this.backgroundColor)
+  }
+
+  myOtherForm : FormGroup = this.fb.group({
+    name: [''],
+    surname: ['']
+  });
+  changeNameVisibilty : boolean[] = new Array(this.cards.length).fill(false);
+  seeInput(i : number){
+    this.changeNameVisibilty[i] = !this.changeNameVisibilty[i];
+  }
+
+  saveNameSurname(i: number){
+    this.isLoading = true;
+    this.cards[i].name = this.myOtherForm.value.name != '' ? this.myOtherForm.value.name : "Nome";
+    this.cards[i].surname = this.myOtherForm.value.surname != '' ? this.myOtherForm.value.surname : "Cognome";
+
+    this.cardService.updateNameSurnameCard(this.cards[i], this.cards[i].token).then(
+      (data) => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.isLoading = false;
+        this.router.navigate(["/contact-cards/"+this.idContact]);
+      }
+    );
   }
 }

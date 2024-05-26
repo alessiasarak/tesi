@@ -47,4 +47,9 @@ export class CardService extends CrudService<Card> {
     let response = await lastValueFrom(this.post(card, idContact));
     return response;
   }
+
+  async updateNameSurnameCard(card: Card, token : string) : Promise<Card | null> {
+    let response = await lastValueFrom(this.put(card, "name-surname/update/"+token));
+    return response;
+  }
 }

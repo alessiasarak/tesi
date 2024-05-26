@@ -168,6 +168,22 @@ class CardRepository {
     }
   }
 
+  
+  async updateNameSurname(newData, token) {
+    try {
+      let card = await this.getCardByToken(token);
+
+      card.name = newData.name;
+      card.surname = newData.surname;
+
+      card.save();
+      
+      return card;
+    } catch (error) {
+      throw new Error(`Unable to update card: ${error}`);
+    }
+  }
+
   async setStyleAllCard(newData, idUser) {
     try {
       const updated = await Card.update(

@@ -137,6 +137,19 @@ exports.putCard = asyncHandler(async (req, res) => {
         res.status(404).json({ message: 'Card not found' });
     }
 });
+exports.updateNameSurname = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+
+    const newData = req.body.entity;
+    let token = req.params.token;
+
+    const updated = await cardRepository.updateNameSurname(newData, token);
+    if (updated) {
+        res.status(200).json({ message: 'Card updated successfully' });
+    } else {
+        res.status(404).json({ message: 'Card not found' });
+    }
+});
 
 exports.putStyleCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();

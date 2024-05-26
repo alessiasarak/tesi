@@ -38,7 +38,27 @@
             ></qrcode>
           </div>
           <div class="flex flex-col text-subtitle w-full">
-            <div class="flex text-[20px] font-[700]">{{ card.name }} {{ card.surname }}</div>
+            <div *ngIf="!changeNameVisibilty[i]" class="flex text-[20px] font-[700]" (click)="seeInput(i)">{{ card.name }} {{ card.surname }}</div>
+
+            <form [formGroup]="myOtherForm" (ngSubmit)="saveNameSurname(i)" *ngIf="changeNameVisibilty[i]" class="flex flex-row">
+              <div class="flex items-center border-b border-gray-500 py-2 mr-2">
+                <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+                placeholder="name" type="text" id="name" formControlName="name">
+              </div>
+            
+              <div class="flex items-center border-b border-gray-500 py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+                placeholder="surname" type="text" id="surname" formControlName="surname">
+              </div>
+
+              <button type="submit" class="flex bg-transparenttext-primary_text pl-2 pr-2 pt-2 pb-1 rounded-full">
+                <mat-icon>save</mat-icon>
+              </button>
+              <button class="flex bg-transparent text-primary_text pl-2 pr-2 pt-2 pb-1 rounded-full" (click)="seeInput(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </form>
+
             <div class="flex flex-row w-full justify-between">
                 <div class="flex">Link da associare</div>
                 <a class="flex text-primary text-medium_text underline cursor-pointer lg:text-subtitle"  (click)="copy(link + card.token)">Copia</a>
