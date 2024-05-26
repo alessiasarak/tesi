@@ -5,6 +5,11 @@
     display: block;
   }
   
+
+  a.newA {
+    padding: 0px 16px;
+  }
+
   a.icon {
     background: black;
     display: block;
