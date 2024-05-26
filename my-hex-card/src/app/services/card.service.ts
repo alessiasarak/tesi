@@ -43,8 +43,19 @@ export class CardService extends CrudService<Card> {
     return response;
   }
 
-  async postCard(idContact : string){
-    let response = await lastValueFrom(this.post(undefined, idContact));
+  async postCard(idContact : string, card : Card){
+    let response = await lastValueFrom(this.post(card, idContact));
+    return response;
+  }
+
+  async updateNameSurnameCard(card: Card, token : string) : Promise<Card | null> {
+    let response = await lastValueFrom(this.put(card, "name-surname/update/"+token));
+    return response;
+  }
+
+  async associateCard(card : Card){
+    let userId = localStorage.getItem("user_id");
+    let response = await lastValueFrom(this.put(card, "associate/"+userId));
     return response;
   }
 }

@@ -4,11 +4,13 @@ import { CardService } from '../../services/card.service';
 import { Card } from '../../interfaces/card';
 import { TitleComponent } from '../../component/title/title.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
+import { LoadingComponent } from '../../component/loading/loading.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-card-preview-page',
   standalone: true,
-  imports: [ TitleComponent, CardPreviewComponent ],
+  imports: [ TitleComponent, CardPreviewComponent, LoadingComponent, CommonModule ],
   templateUrl: './card-preview-page.component.html',
   styleUrl: './card-preview-page.component.css'
 })
@@ -37,6 +39,7 @@ export class CardPreviewPageComponent {
     text_color: '',
     button_color: ''
   };
+  isLoading = true;
 
   constructor(private router: Router, private route: ActivatedRoute, private service: CardService){}
 
@@ -44,6 +47,7 @@ export class CardPreviewPageComponent {
     this.route.params.subscribe(params => {
       this.service.getCard(params['id']!).subscribe((data) => {
         this.card = data;
+        this.isLoading = false;
       });
     });
   }

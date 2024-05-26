@@ -9,11 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import vCardsJS from 'vcards-js';
 import { catchError, throwError } from 'rxjs';
+import { LoadingComponent } from '../../component/loading/loading.component';
  
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ CommonModule, SocialMediaFooterComponent, HamburgerMenuComponent, HttpClientModule, MatIconModule ],
+  imports: [ CommonModule, SocialMediaFooterComponent, HamburgerMenuComponent, HttpClientModule, MatIconModule, LoadingComponent ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -25,6 +26,7 @@ export class MainComponent implements OnInit{
   myButtonClass : string = "";
   myMainStyle : string = "";
   myButtonStyle : string = "";
+  isLoading = true;
 
   myCard: Card = {
     id: 0,
@@ -70,12 +72,15 @@ export class MainComponent implements OnInit{
         (data) => {
           if(!data.active) {
             //se il login è gia stato effettuato
+            console.log(localStorage)
             if(localStorage.getItem("user_id")){
+              this.myCard = data;
               //associa direttamente il token
-              //reinderizza alle impostazioni
+              this.service.associateCard(this.myCard);
+              this.router.navigateByUrl("/card-settings/"+cardId);
+            }else {
+              this.router.navigateByUrl("/"+cardId);
             }
-
-            this.router.navigateByUrl("/register/"+cardId);
           }
           
           this.myCard = data;
@@ -85,6 +90,7 @@ export class MainComponent implements OnInit{
 
           this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
           this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
+          this.isLoading = false;
         }
       );
     });

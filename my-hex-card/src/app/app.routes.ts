@@ -19,9 +19,10 @@ import { ForgotPasswordResetComponent } from './pages/forgot-password-reset/forg
 import { LogoutComponent } from './component/logout/logout.component';
 import { CardPreviewPageComponent } from './pages/card-preview-page/card-preview-page.component';
 import { EmailSendComponent } from './pages/email-send/email-send.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
 
 export const routes: Routes = [
-    { path: '', component: LoginComponent },
+    { path: '', component: HomepageComponent },
     { path: 'card/:idCard', providers: [provideHttpClient()], component: MainComponent },
     { path: 'login', component: LoginComponent },
     { path: 'login/:token', component: LoginComponent },
@@ -42,5 +43,6 @@ export const routes: Routes = [
     { path: 'add-contact', component: AddUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'contact-cards/:idContact', component: UserCardsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
+    { path: ':token', component: HomepageComponent },
     { path: '**', component: Error404Component },
 ];

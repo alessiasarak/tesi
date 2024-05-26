@@ -1,216 +1,245 @@
-
+<app-loading *ngIf="isLoading"></app-loading>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="flex lg:flex-row lg:justify-between sm:flex-col lg:pl-44 lg:pr-44">
+  
 
-<app-title title="La tua card"></app-title>
+    <app-title title="La tua card" class="lg:hidden"></app-title>
+    <div class="flex flex-col mb-2 sm:hidden lg:block">
+        <app-title title="La tua card"></app-title>
 
-<form *ngIf="!style" [formGroup]="myForm" (ngSubmit)="onSubmit()" >
-    
-    <div class="flex flex-col mb-2">
-        <div class="flex flex-row justify-between align-middle">
-            <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
+        <button (click)="setStyleFalse()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
+        <button (click)="setStyleTrue()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
+        <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
+    </div>
+
+    <form *ngIf="!style" [formGroup]="myForm" (ngSubmit)="onSubmit()" class="lg:flex lg:flex-row" >
+        
+        
+        <div class="lg:flex lg:flex-col lg:mr-8">
+            <div class="flex flex-col mb-2">
+                <div class="flex flex-row justify-between align-middle lg:hidden">
+                    <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
+                    
+                    <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col mb-2 lg:hidden">
+                <div class="flex flex-row justify-between">
+                    <button (click)="setStyleFalse()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
+                    <button (click)="setStyleTrue()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col mb-3 ">
+                <label for="img">Image</label>
+                <input type="file" accept=".jpg, .jpeg, .png" 
+                (change)="processFile($event)" class="bg-secondary w-full p-2 rounded-md text-black" id="img" 
+                formControlName="img" placeholder="Image" maxFileSize="5 * 1024 * 1024">
+            </div>
+
+            <hr class="my-4 lg:hidden" />
+
+            <div class="flex flex-col mb-3 ">
+                <label for="name">Name</label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="name" formControlName="name" placeholder="name">
+            </div>
+
+            <div class="flex flex-col mb-3 ">
+                <label for="surname">Surname</label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="surname" formControlName="surname" placeholder="surname">
+            </div>
+
+            <div class="flex flex-col mb-3 ">
+                <label for="company">Company</label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="company" formControlName="company" placeholder="company">
+            </div>
+
+            <div class="flex flex-col mb-3 ">
+                <label for="function">Function</label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="function" formControlName="function" placeholder="function">
+            </div>
+
             
-            <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
-        </div>
-    </div>
-
-    <div class="flex flex-col mb-2">
-        <div class="flex flex-row justify-between">
-            <button (click)="setStyleFalse()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
-            <button (click)="setStyleTrue()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
-        </div>
-    </div>
-
-    <div class="flex flex-col mb-3 ">
-        <label for="img">Image</label>
-        <input type="file" accept=".jpg, .jpeg, .png" 
-        (change)="processFile($event)" class="bg-secondary w-full p-2 rounded-md text-black" id="img" 
-        formControlName="img" placeholder="Image" maxFileSize="5 * 1024 * 1024">
-    </div>
-
-    <hr class="my-4" />
-
-    <div class="flex flex-col mb-3 ">
-        <label for="name">Name</label>
-        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="name" formControlName="name" placeholder="name">
-    </div>
-
-    <div class="flex flex-col mb-3 ">
-        <label for="surname">Surname</label>
-        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="surname" formControlName="surname" placeholder="surname">
-    </div>
-
-    <div class="flex flex-col mb-3 ">
-        <label for="company">Company</label>
-        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="company" formControlName="company" placeholder="company">
-    </div>
-
-    <div class="flex flex-col mb-3 ">
-        <label for="function">Function</label>
-        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="function" formControlName="function" placeholder="function">
-    </div>
-
-    
-    <hr class="my-4" />
-    <div class="flex flex-col mb-3 ">
-        <label>Email</label>
-    </div>
-    <div>
-        <div formArrayName="emails">
-            <div *ngFor="let email of emailControls; let i = index" class="flex flex-row">
-                <div class="flex flex-col mb-3 w-60">
-                    <input type="email" class="bg-secondary w-full p-2 rounded-md text-black" id="inputEmail" [formControlName]="i" placeholder="Email">
+            <hr class="my-4 lg:hidden" />
+            <div class="flex flex-col mb-3 ">
+                <label>Email</label>
+            </div>
+            <div>
+                <div formArrayName="emails">
+                    <div *ngFor="let email of emailControls; let i = index" class="flex flex-row">
+                        <div class="flex flex-col mb-3 w-60">
+                            <input type="email" class="bg-secondary w-full p-2 rounded-md text-black" id="inputEmail" [formControlName]="i" placeholder="Email">
+                        </div>
+                        <button *ngIf="i != 0" type="button" (click)="removeEmail(i)" class="flex bg-primary  text-black ml-2 pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
                 </div>
-                <button *ngIf="i != 0" type="button" (click)="removeEmail(i)" class="flex bg-primary  text-black ml-2 pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full">
-                    <mat-icon>remove</mat-icon>
+
+                <button type="button" class="flex bg-secondary  text-primary pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addEmail()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <hr class="my-4 lg:hidden" />
+
+            <div class="flex flex-col mb-3 ">
+                <label>Numeri di telefono</label>
+            </div>
+            <div>
+                <div formArrayName="phoneNumbers">
+                    <div *ngFor="let phoneNumber of phoneNumberControls; let i = index" class="flex flex-row">
+                        <div class="flex flex-col mb-3 w-60">
+                            <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputPhoneNumber" [formControlName]="i" placeholder="Numero di telefono">
+                        </div>
+                        <button *ngIf="i != 0" type="button" (click)="removePhoneNumber(i)" class="flex  bg-secondary  text-primary ml-2 pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="button" class="flex  bg-secondary  text-primary pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addPhoneNumber()">
+                    <mat-icon>add</mat-icon>
                 </button>
             </div>
         </div>
 
-        <button type="button" class="flex bg-secondary  text-primary pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addEmail()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-    <hr class="my-4" />
+        <div class="lg:flex lg:flex-col">
 
-    <div class="flex flex-col mb-3 ">
-        <label>Numeri di telefono</label>
-    </div>
-    <div>
-        <div formArrayName="phoneNumbers">
-            <div *ngFor="let phoneNumber of phoneNumberControls; let i = index" class="flex flex-row">
-                <div class="flex flex-col mb-3 w-60">
-                    <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputPhoneNumber" [formControlName]="i" placeholder="Numero di telefono">
+            <div class="flex flex-col mb-3 ">
+                <label>Link</label>
+            </div>
+            <div>
+                <div formArrayName="links">
+                    <div *ngFor="let link of linkControls; let i = index" class="flex flex-row">
+                        <div class="flex flex-col mb-3 w-60">
+                            <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputLink" [formControlName]="i" placeholder="Link">
+                        </div>
+                        <button *ngIf="i != 0" type="button" (click)="removeLink(i)" class="flex  bg-secondary  text-primary ml-2 pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
                 </div>
-                <button *ngIf="i != 0" type="button" (click)="removePhoneNumber(i)" class="flex  bg-secondary  text-primary ml-2 pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full">
-                    <mat-icon>remove</mat-icon>
+
+                <button type="button" class="flex  bg-secondary  text-primary pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addLink()">
+                    <mat-icon>add</mat-icon>
                 </button>
             </div>
-        </div>
-
-        <button type="button" class="flex  bg-secondary  text-primary pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addPhoneNumber()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-
-    <hr class="my-4" />
-
-    <div class="flex flex-col mb-3 ">
-        <label>Link</label>
-    </div>
-    <div>
-        <div formArrayName="links">
-            <div *ngFor="let link of linkControls; let i = index" class="flex flex-row">
-                <div class="flex flex-col mb-3 w-60">
-                    <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputLink" [formControlName]="i" placeholder="Link">
-                </div>
-                <button *ngIf="i != 0" type="button" (click)="removeLink(i)" class="flex  bg-secondary  text-primary ml-2 pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full">
-                    <mat-icon>remove</mat-icon>
-                </button>
-            </div>
-        </div>
-
-        <button type="button" class="flex  bg-secondary  text-primary pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addLink()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-    <hr class="my-4" />
-    
-    <div class="flex flex-col mb-3 ">
-        <label for="inputInstagramLink">Link Instagram  </label>
-        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputInstagramLink" formControlName="instagram" />
-    </div>
-    
-    <div class="flex flex-col mb-3 ">
-        <label for="inputFacebookLink">Link Facebook  </label>
-        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputFacebookLink" formControlName="facebook" />
-    </div>
-
-    <div class="flex flex-col mb-3 ">
-        <label for="inputLinkedinLink">Link Linkedin </label>
-        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputLinkedinLink" formControlName="linkedin" />
-    </div>
-
-    <hr class="my-4" />
-    <div class="flex flex-col mb-3 ">
-        <label>Indirizzi</label>
-    </div>
-    
-    <div>
-        <div formArrayName="addresses">
-            <div *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
-                <div class="flex flex-row">
-                    <div class="flex flex-col mb-3 w-40">
-                        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="street_name" id="inputAddressStreet"  placeholder="Via">
-                    </div>
-                    <div class="flex flex-col mb-3 w-40 pl-2">
-                        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="street_number"  id="inputAddressNumber" placeholder="Numero">
-                    </div>
-                </div>     
-                <div class="flex flex-row">
-                    <div class="flex flex-col mb-3 w-40">
-                        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="cap"  id="inputAddressCap" placeholder="CAP">
-                    </div>
-                    <div class="flex flex-col mb-3 w-40 ml-2">
-                        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="city"  id="inputAddressCity" placeholder="Citta">
-                    </div>
-                </div>     
-                <div class="flex flex-row">
-                    <div class="flex flex-col mb-3 w-40">
-                        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="nation"  id="inputAddressNation" placeholder="Nazione">
-                    </div>
-                    <button *ngIf="i != 0" type="button" class="flex bg-primary  text-black ml-2 pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="removeAddress(i)">
-                        <mat-icon>remove</mat-icon>
-                    </button>
-                </div>  
-            </div>
-        </div>        
-
-        <button type="button" class="flex bg-secondary  text-primary pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addAddress()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-    <hr class="my-4" />
-
-
-    <div class="flex flex-col items-center">
-        <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
-    </div>
-</form>
-
-
-
-<form *ngIf="style" [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()">
-    <div class="flex flex-col mb-2">
-        <div class="flex flex-row justify-between align-middle">
-            <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
+            <hr class="my-4 lg:hidden" />
             
-            <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
-        </div>
-    </div>
 
-    <div class="flex flex-col mb-2">
-        <div class="flex flex-row justify-between">
-            <button (click)="setStyleFalse()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
-            <button (click)="setStyleTrue()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
+            <div class="flex flex-col mb-3 ">
+                <label for="inputLinkedinLink">Linkedin </label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputLinkedinLink" formControlName="linkedin" />
+            </div>
+
+            <div class="flex flex-col mb-3 ">
+                <label for="inputInstagramLink">Instagram  </label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputInstagramLink" formControlName="instagram" />
+            </div>
+            
+            <div class="flex flex-col mb-3 ">
+                <label for="inputFacebookLink">Facebook  </label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputFacebookLink" formControlName="facebook" />
+            </div>
+
+            <div class="flex flex-col mb-3 ">
+                <label for="inputYoutubeLink">Youtube </label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputYoutubeLink" formControlName="youtube" />
+            </div>
+
+            <div class="flex flex-col mb-3 ">
+                <label for="inputWhatsappLink">Whatsapp </label>
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputWhatsappLink" formControlName="whatsapp" />
+            </div>
+
+            <hr class="my-4 lg:hidden" />
+            <div class="flex flex-col mb-3 ">
+                <label>Indirizzi</label>
+            </div>
+            
+            <div>
+                <div formArrayName="addresses">
+                    <div *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
+                        <div class="flex flex-row">
+                            <div class="flex flex-col mb-3 w-40">
+                                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="street_name" id="inputAddressStreet"  placeholder="Via">
+                            </div>
+                            <div class="flex flex-col mb-3 w-40 pl-2">
+                                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="street_number"  id="inputAddressNumber" placeholder="Numero">
+                            </div>
+                        </div>     
+                        <div class="flex flex-row">
+                            <div class="flex flex-col mb-3 w-40">
+                                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="cap"  id="inputAddressCap" placeholder="CAP">
+                            </div>
+                            <div class="flex flex-col mb-3 w-40 ml-2">
+                                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="city"  id="inputAddressCity" placeholder="Citta">
+                            </div>
+                        </div>     
+                        <div class="flex flex-row">
+                            <div class="flex flex-col mb-3 w-40">
+                                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" [formControlName]="nation"  id="inputAddressNation" placeholder="Nazione">
+                            </div>
+                            <button *ngIf="i != 0" type="button" class="flex bg-primary  text-black ml-2 pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="removeAddress(i)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </div>  
+                    </div>
+                </div>        
+
+                <button type="button" class="flex bg-secondary  text-primary pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addAddress()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <hr class="my-4 lg:hidden" />
+
+
+            <div class="flex flex-col items-center">
+                <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
+            </div>
         </div>
+    </form>
+
+
+
+    <form *ngIf="style" [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()">
+        <div class="flex flex-col mb-2">
+            <div class="flex flex-row justify-between align-middle lg:hidden">
+                <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
+                
+                <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
+            </div>
+        </div>
+
+        <div class="flex flex-col mb-2 lg:hidden">
+            <div class="flex flex-row justify-between">
+                <button (click)="setStyleFalse()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
+                <button (click)="setStyleTrue()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
+            </div>
+        </div>
+        
+        <div class="flex flex-row mb-3 ">
+            <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
+            <input type="color" id="backgroundColor" formControlName="backgroundColor" class="rounded-full" />
+        </div>
+        
+        <div class="flex flex-row mb-3 ">
+            <label for="textColor" class="flex w-4/5">Colore del testo: </label>
+            <input type="color" id="textColor" formControlName="textColor" class="rounded-full" />
+        </div>
+        
+        <div class="flex flex-row mb-3 ">
+            <label for="buttonColor" class="flex w-4/5">Colore del bottone: </label>
+            <input type="color" id="buttonColor" formControlName="buttonColor" class="rounded-full" />
+        </div>
+        
+        <div class="flex flex-col items-center">
+            <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
+        </div>
+    </form>
+
+    <div *ngIf="style" class="flex lg:block sm:hidden">
+        <app-card-preview [card]="card"></app-card-preview>
     </div>
-    
-    <div class="flex flex-row mb-3 ">
-        <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
-        <input type="color" id="backgroundColor" formControlName="backgroundColor" class="rounded-full" />
-    </div>
-    
-    <div class="flex flex-row mb-3 ">
-        <label for="textColor" class="flex w-4/5">Colore del testo: </label>
-        <input type="color" id="textColor" formControlName="textColor" class="rounded-full" />
-    </div>
-    
-    <div class="flex flex-row mb-3 ">
-        <label for="buttonColor" class="flex w-4/5">Colore del bottone: </label>
-        <input type="color" id="buttonColor" formControlName="buttonColor" class="rounded-full" />
-    </div>
-    
-    <div class="flex flex-col items-center">
-        <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
-    </div>
-</form>
+</div>

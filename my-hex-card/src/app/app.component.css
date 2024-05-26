@@ -3,23 +3,23 @@ h4, h5, button, span {
 }
 
 .circle1, .circle2 {
-    position: absolute;
+    position: fixed;
 }
 .circle1 {
     width: 300px;
     height: 300px;
     top: 15%;
-    left: -5%;
+    left: 0%;
 }
 .circle2 {
     width: 250px;
     height: 250px;
     top: 60%;
-    left: 60%;
+    right: 0%;
 }
 .obscure {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.1);
 }

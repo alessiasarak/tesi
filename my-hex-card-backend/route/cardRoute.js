@@ -21,5 +21,7 @@ router.put('/card/update/:idUser/:token', cardController.putCard);
 router.put('/card/update/style/:idUser/:token', cardController.putStyleCard);
 
 router.post('/card/:idContact', cardController.postCard);
+router.put('/card/name-surname/update/:token', cardController.updateNameSurname);
+router.put('/card/associate/:idUser', cardController.associate);
 
 module.exports = router;

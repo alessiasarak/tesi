@@ -137,6 +137,33 @@ exports.putCard = asyncHandler(async (req, res) => {
         res.status(404).json({ message: 'Card not found' });
     }
 });
+exports.updateNameSurname = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+
+    const newData = req.body.entity;
+    let token = req.params.token;
+
+    const updated = await cardRepository.updateNameSurname(newData, token);
+    if (updated) {
+        res.status(200).json({ message: 'Card updated successfully' });
+    } else {
+        res.status(404).json({ message: 'Card not found' });
+    }
+});
+exports.associate = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+
+    console.log(req.body.entity);
+    const token = req.body.entity.token;
+    let idUser = req.params.idUser;
+
+    const updated = await cardRepository.associate(idUser, token);
+    if (updated) {
+        res.status(200).json({ message: 'Card updated successfully' });
+    } else {
+        res.status(404).json({ message: 'Card not found' });
+    }
+});
 
 exports.putStyleCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
@@ -156,7 +183,6 @@ exports.putStyleAllCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
 
     const newData = req.body.entity;
-    console.log("A")
 
     const updated = await cardRepository.setStyleAllCard(newData, req.params.idUser);
     if (updated) {
@@ -169,8 +195,10 @@ exports.putStyleAllCard = asyncHandler(async (req, res) => {
 //create empty card
 exports.postCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
+    
+    const data = req.body.entity;
 
-    const card = await cardRepository.createCard(req.params.idContact);
+    const card = await cardRepository.createCard(req.params.idContact, data);
     if (card) {
         res.status(200).json({ message: 'Card create successfully' });
     } else {

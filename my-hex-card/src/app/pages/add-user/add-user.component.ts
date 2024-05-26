@@ -5,11 +5,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
 import { Contact } from '../../interfaces/contact';
 import { ContactService } from '../../services/contact/contact.service';
+import { LoadingComponent } from '../../component/loading/loading.component';
+import { TitleComponent } from '../../component/title/title.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [ ReactiveFormsModule, MyButtonComponent ],
+  imports: [ ReactiveFormsModule, MyButtonComponent, LoadingComponent, TitleComponent, CommonModule ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })
@@ -32,15 +35,24 @@ export class AddUserComponent {
     email: '',
     company: ''
   };
+  isLoading = false;
+  isVisible = false;
 
   async onSubmit() {
+    this.isLoading = true;
     this.contact.email = this.myForm.value.email;
     this.contact.name = this.myForm.value.name;
     this.contact.surname = this.myForm.value.surname;
     this.contact.company = this.myForm.value.company;
     
-    let response = await this.contactService.create(this.contact);
+    this.contactService.create(this.contact)
+    .then((response) => {
+      this.router.navigateByUrl("/contact-cards/"+response.id);
+    })
+    .catch((error) => {
+      this.isVisible = true;
+      this.isLoading = false;
+    });
     
-    if(response) this.router.navigateByUrl("/contact-cards/"+response.id);
   }
 }

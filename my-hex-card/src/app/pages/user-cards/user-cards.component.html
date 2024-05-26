@@ -1,97 +1,107 @@
+<app-loading *ngIf="isLoading"></app-loading>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="lg:pl-96 lg:pr-96">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<app-title title="Amministrazione"></app-title>
+  <app-title title="Amministrazione"></app-title>
 
-<div class="shadow-lg rounded-md p-2 mb-4" >
-  <div class="flex flex-row mb-3 justify-between">
-      <label for="textColor" class="flex text-[20px] font-[700]">QR Code: </label>
-      <a class="flex text-primary text-medium_text underline">Preview</a>
-  </div>
+  <div class="shadow-lg rounded-md p-2 mb-4" >
+    <div class="flex flex-row mb-3 justify-between">
+        <label for="textColor" class="flex text-[20px] font-[700]">QR Code: </label>
+        <!--<a class="flex text-primary text-medium_text underline cursor-pointer lg:text-subtitle">Preview</a>-->
+    </div>
 
-  <div class="flex flex-row mb-3 justify-between">
-    <label for="backgroundColor" class="flex text-[20px] font-[400]">Colore sfondo: </label>
-    <input type="color" id="backgroundColor" (change)="changeBackgroundColor($event)"/>
+    <div class="flex flex-row mb-3 justify-between">
+      <label for="backgroundColor" class="flex text-[20px] font-[400]">Colore sfondo: </label>
+      <input type="color" id="backgroundColor" (change)="changeBackgroundColor($event)"/>
+    </div>
+    
+    <div class="flex flex-row mb-3 justify-between">
+        <label for="textColor" class="flex text-[20px] font-[400]">Colore del codice: </label>
+        <input type="color" id="codColor" (change)="changeCodeColor($event)"/>
+    </div>
   </div>
   
-  <div class="flex flex-row mb-3 justify-between">
-      <label for="textColor" class="flex text-[20px] font-[400]">Colore del codice: </label>
-      <input type="color" id="codColor" (change)="changeCodeColor($event)"/>
-  </div>
-</div>
-
-<div class="shadow-lg rounded-md p-2" >
-  <div *ngFor="let card of cards; index as i">
-    <div class="pb-2">
-        <div class="flex flex-col text-subtitle">
-          <div class="flex text-[20px] font-[700]">{{ card.name }} {{ card.surname }}</div>
-          <div class="flex flex-row w-full justify-between">
-              <div class="flex">Link da associare</div>
-              <a class="flex text-primary text-medium_text underline"  (click)="copy(link + card.token)">Copia</a>
+  <div class="shadow-lg rounded-md p-2" >
+    <div *ngFor="let card of cards; index as i">
+      <div class="pb-2 flex">
+          <div class="flex sm:hidden lg:block mr-4">
+            <qrcode 
+              (qrCodeURL)="setCardUrl($event, i)" 
+              [colorLight]="backgroundColor" 
+              [colorDark]="codeColor" 
+              [qrdata]="link + card.token" 
+              [elementType]="'canvas'"
+              [errorCorrectionLevel]="'L'"
+              [scale]="1"
+              [width]="30"
+            ></qrcode>
           </div>
-          <div class="flex flex-row w-full justify-between">
-            <div class="flex">QR code</div>
-            <a class="flex text-primary text-medium_text underline" [href]="card.qrCode" download="qrcode">Scarica</a>
+          <div class="flex flex-col text-subtitle w-full">
+            <div *ngIf="!changeNameVisibilty[i]" class="flex text-[20px] font-[700]" (click)="seeInput(i)">{{ card.name }} {{ card.surname }}</div>
+
+            <form [formGroup]="myOtherForm" (ngSubmit)="saveNameSurname(i)" *ngIf="changeNameVisibilty[i]" class="flex flex-row">
+              <div class="flex items-center border-b border-gray-500 py-2 mr-2">
+                <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+                placeholder="name" type="text" id="name" formControlName="name">
+              </div>
+            
+              <div class="flex items-center border-b border-gray-500 py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
+                placeholder="surname" type="text" id="surname" formControlName="surname">
+              </div>
+
+              <button type="submit" class="flex bg-transparent text-primary_text pl-2 pr-2 pt-2 pb-1 rounded-full">
+                <mat-icon>save</mat-icon>
+              </button>
+              <button class="flex bg-transparent text-primary_text pl-2 pr-2 pt-2 pb-1 rounded-full" (click)="seeInput(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </form>
+
+            <div class="flex flex-row w-full justify-between">
+                <div class="flex">Link da associare</div>
+                <a class="flex text-primary text-medium_text underline cursor-pointer lg:text-subtitle"  (click)="copy(link + card.token)">Copia</a>
+            </div>
+            <div class="flex flex-row w-full justify-between">
+              <div class="flex">QR code</div>
+              <a class="flex text-primary text-medium_text underline cursor-pointer lg:text-subtitle" [href]="card.qrCode" download="qrcode">Scarica</a>
+            </div>
           </div>
-        </div>
+      </div>
+      <hr class="pt-2">
     </div>
-    <hr class="pt-2">
+  </div>
+
+  <div class="flex flex-col w-full items-end">
+    <button type="button" class="flex bg-primary  text-black pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addCardVisibilty()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 </div>
 
-<div class="flex flex-col w-full items-end">
-  <button type="button" class="flex bg-primary  text-black pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addCard()">
-    <mat-icon>add</mat-icon>
-  </button>
-</div>
 
-<!--
-<div class="p-10">
-  <h3 class="flex text-2xl font-bold mb-3">
-      <app-my-button path="/admin"></app-my-button>
-      Dettagli carte utente {{ email }}
-  </h3>
+<div *ngIf="isVisibleAddCard" class="obscure z-40" (click)="addCardVisibilty()"></div>
+<div *ngIf="isVisibleAddCard" class="fixed z-50 top-8 w-screen flex items-center justify-center">
+  <form  [formGroup]="myForm" (ngSubmit)="onSubmit()" class="bg-black border border-primary text-black pr-8 pl-8 pt-2 pb-2 rounded-xl">
+    <div class="flex flex-col mb-3 ">
+      <label for="name">Name</label>
+      <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="name" formControlName="name" placeholder="name">
+    </div>
   
-  <div class="flex flex-col border ">
-    <div class="flex flex-row font-bold">
-        <div class="flex md:w-1/4 sm:w-1/3 border p-2">
-          Nome e cognome
-        </div>
-        <div class="flex md:w-1/4 sm:w-1/3 border p-2">
-          Link da associare
-        </div>
-        <div class="flex md:w-1/4 sm:w-1/3 border p-2 sm:hidden md:block" >
-          Codice QR
-        </div>
-        <div class="flex md:w-1/4 sm:w-1/3 border p-2">
-          Scarica il codice QR
-        </div>
+    <div class="flex flex-col mb-3 ">
+        <label for="surname">Surname</label>
+        <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="surname" formControlName="surname" placeholder="surname">
     </div>
-
-    <div class="flex flex-col sm:flex-row" *ngFor="let card of cards; index as i">
-      <div class="flex w-full sm:md:w-1/4 sm:w-1/3 border p-2">
-        {{ card.name }} {{ card.surname }}
-      </div>
-      <div class="flex w-full sm:md:w-1/4 sm:w-1/3 border p-2">
-        <button class="bg-primary  text-black rounded-3xl pt-1 pb-1 pl-4 pr-4 h-14" (click)="copy(link + card.token)">copy</button>
-      </div>
-      <div class="flex md:w-1/4 sm:w-1/3 border p-2 sm:hidden md:block">
-        <qrcode (qrCodeURL)="setCardUrl($event, i)" [colorLight]="backgroundColor" [colorDark]="codeColor" [qrdata]="link + card.token" [width]="180" [errorCorrectionLevel]="'M'"></qrcode>
-      </div>
-      <div class="flex md:w-1/4 sm:w-1/3 border p-2">
-        <a class="bg-primary  text-black rounded-3xl pt-1 pb-1 pl-4 pr-4 h-14 content-center" [href]="card.qrCode" download="qrcode">
-          <mat-icon>download</mat-icon>
-        </a>
-      </div>
+    
+    <div class="flex flex-col items-center">
+      <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Aggiungi carta</button>
     </div>
-  </div>
-  <div class="mt-8 w-full content-end">
-    <button (click)="addCard()" class="bg-primary  text-black w-44 rounded-3xl p-2">Aggiungi carta</button>
-  </div>
+  </form>
 </div>
-  
+
 <div *ngIf="isVisible" class="fixed z-10 top-8 w-screen flex items-center justify-center">
-  <div class="bg-[#8bde8f] p-8 rounded-full font-bold w-60">
+  <div class="bg-primary text-black pr-8 pl-8 pt-2 pb-2 rounded-full font-bold">
     Copiato con successo
   </div>
-</div>-->
+</div>

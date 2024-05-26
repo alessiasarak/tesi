@@ -60,9 +60,11 @@ class CardRepository {
     }
   }
 
-  async createCard(idContact) {
+  async createCard(idContact, data) {
     try {
         let newCard = await Card.create({
+            name: data.name != '' ? data.name : "Nome",
+            surname: data.surname != '' ? data.surname : "Cognome",
             token: this.generateToken(),
             fk_id_contact: idContact
         });
@@ -163,6 +165,38 @@ class CardRepository {
       return updated;
     } catch (error) {
       throw new Error(`Unable to update card style: ${error}`);
+    }
+  }
+
+  
+  async updateNameSurname(newData, token) {
+    try {
+      let card = await this.getCardByToken(token);
+
+      card.name = newData.name;
+      card.surname = newData.surname;
+
+      card.save();
+      
+      return card;
+    } catch (error) {
+      throw new Error(`Unable to update card: ${error}`);
+    }
+  }
+  
+  async associate(idUser, token) {
+    try {
+      console.log(token)
+      let card = await this.getCardByToken(token);
+
+      card.fk_id_user = idUser;
+      card.active = 1;
+
+      card.save();
+      
+      return card;
+    } catch (error) {
+      throw new Error(`Unable to update card: ${error}`);
     }
   }
 

@@ -1,28 +1,30 @@
+<app-loading *ngIf="isLoading"></app-loading>
+<div class="lg:pl-96 lg:pr-96">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <app-title title="Amministrazione"></app-title>
 
-<app-title title="Amministrazione"></app-title>
-
-<div class="shadow-lg rounded-md p-2" >
-  <div *ngFor="let contact of contacts">
-    <div class="pb-2">
-        <div class="flex flex-row justify-between text-subtitle">
-            <div class="flex flex-col">
-                <div class="flex">{{ contact.email }}</div>
-                <div class="flex">{{ contact.company }}</div>
-            </div>
-            <div class="flex flex-col">
-              <a class="flex text-primary text-medium_text underline" (click)="seeContactCards(contact.id)">vedi carte</a>
-              <a class="flex text-primary text-medium_text underline" (click)="delete(contact)">elimina</a>
-            </div>
-        </div>
+  <div class="shadow-lg rounded-md p-2" >
+    <div *ngFor="let contact of contacts">
+      <div class="pb-2">
+          <div class="flex flex-row justify-between text-subtitle">
+              <div class="flex flex-col">
+                  <div class="flex">{{ contact.email }}</div>
+                  <div class="flex">{{ contact.company }}</div>
+              </div>
+              <div class="flex flex-col cursor-pointer text-medium_text lg:flex-row lg:text-subtitle">
+                <a class="flex text-primary underline lg:mr-4" (click)="seeContactCards(contact.id)">vedi carte</a>
+                <a class="flex text-primary underline" (click)="delete(contact)">elimina</a>
+              </div>
+          </div>
+      </div>
+      <hr class="pt-2">
     </div>
-    <hr class="pt-2">
   </div>
-</div>
 
-<div class="flex flex-col w-full items-end">
-  <button type="button" class="flex bg-primary  text-black pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addContact()">
-    <mat-icon>add</mat-icon>
-  </button>
+  <div class="flex flex-col w-full items-end">
+    <button type="button" class="flex bg-primary  text-black pl-2 pr-2 pt-2 pb-2 mb-3 rounded-full" (click)="addContact()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>

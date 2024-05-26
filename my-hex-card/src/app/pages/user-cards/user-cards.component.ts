@@ -9,11 +9,13 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { SafeUrl } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { TitleComponent } from '../../component/title/title.component';
+import { LoadingComponent } from '../../component/loading/loading.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-cards',
   standalone: true,
-  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule, TitleComponent ],
+  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule, TitleComponent, LoadingComponent, ReactiveFormsModule ],
   templateUrl: './user-cards.component.html',
   styleUrl: './user-cards.component.css'
 })
@@ -25,9 +27,11 @@ export class UserCardsComponent {
   isVisible = false;
 
   backgroundColor: string = "#ffffff00";
-  codeColor: string = "#000000";
+  codeColor: string = "#fff";
 
-  constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
+
+  isLoading = true;
+  constructor (private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -36,20 +40,72 @@ export class UserCardsComponent {
       this.cardService.getCardsByContact(this.idContact).then(
         (data) => {
           this.cards = data;
+          this.isLoading = false;
         }
       );
     });
   }
 
+  isVisibleAddCard = false;
+
+  addCardVisibilty(){
+    this.isVisibleAddCard = !this.isVisibleAddCard;
+  }
   addCard(){
-    console.log("Aggiungi di una carta");
+    /*this.isLoading = true;
     this.cardService.postCard(this.idContact).then(
       (data) => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
+        this.isLoading = false;
+        this.router.navigate(["/contact-cards/"+this.idContact]);
+      }
+    );*/
+  }
+  myForm : FormGroup = this.fb.group({
+    name: [''],
+    surname: ['']
+  });
+
+  card: Card = {
+    id: 0,
+    img: '',
+    name: '',
+    surname: '',
+    company: '',
+    function: '',
+    instagram: '',
+    facebook: '',
+    linkedin: '',
+    whatsapp: '',
+    youtube: '',
+    token: '',
+    active: false,
+    fk_id_user: 0,
+    fk_id_contact: 0,
+    email: [],
+    phone_number: [],
+    link: [],
+    address: [],
+    background_color: '',
+    text_color: '',
+    button_color: ''
+  }
+
+  async onSubmit() {
+    this.isLoading = true;
+    this.card.name = this.myForm.value.name;
+    this.card.surname = this.myForm.value.surname;
+
+    this.cardService.postCard(this.idContact, this.card).then(
+      (data) => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.isLoading = false;
         this.router.navigate(["/contact-cards/"+this.idContact]);
       }
     );
+    
   }
 
   async copy(data:string){
@@ -75,5 +131,29 @@ export class UserCardsComponent {
   changeBackgroundColor(event : any){
     this.backgroundColor = event.target.value;
     console.log(this.backgroundColor)
+  }
+
+  myOtherForm : FormGroup = this.fb.group({
+    name: [''],
+    surname: ['']
+  });
+  changeNameVisibilty : boolean[] = new Array(this.cards.length).fill(false);
+  seeInput(i : number){
+    this.changeNameVisibilty[i] = !this.changeNameVisibilty[i];
+  }
+
+  saveNameSurname(i: number){
+    this.isLoading = true;
+    this.cards[i].name = this.myOtherForm.value.name != '' ? this.myOtherForm.value.name : "Nome";
+    this.cards[i].surname = this.myOtherForm.value.surname != '' ? this.myOtherForm.value.surname : "Cognome";
+
+    this.cardService.updateNameSurnameCard(this.cards[i], this.cards[i].token).then(
+      (data) => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.isLoading = false;
+        this.router.navigate(["/contact-cards/"+this.idContact]);
+      }
+    );
   }
 }

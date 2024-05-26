@@ -7,11 +7,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardService } from '../../services/card.service';
 import { TitleComponent } from '../../component/title/title.component';
+import { LoadingComponent } from '../../component/loading/loading.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, FormsModule, TitleComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, FormsModule, TitleComponent, LoadingComponent ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -43,6 +44,7 @@ export class RegisterComponent {
 
   token : string = "";
   isVisible = false;
+  isLoading = false;
 
   async onSubmit() {
     this.user.email = this.myForm.value.email;
@@ -51,6 +53,7 @@ export class RegisterComponent {
     let isPasswordValid = await this.checkPasswordValidity();
     if(!isPasswordValid) return;
 
+    this.isLoading = true;
     this.route.params.subscribe(async params => {
       let token = params['token']; 
       
@@ -69,6 +72,7 @@ export class RegisterComponent {
 
         this.router.navigateByUrl("/card-settings/"+token);
       }).catch((error) => {
+        this.isLoading = false;
         this.isVisible = true;
       });
     });
