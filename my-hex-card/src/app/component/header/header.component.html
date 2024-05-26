@@ -9,7 +9,7 @@
     </button>
 
     
-    <div class="flex text-secondary bg-black lg:z-30 sm:hidden">
+    <div class="flex flex-row text-secondary bg-black lg:z-30 sm:hidden lg:inline-flex">
         @for (item of menuList; track item; let i = $index) {
             <a [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-secondary'">{{ item.title }}</a>
         }
