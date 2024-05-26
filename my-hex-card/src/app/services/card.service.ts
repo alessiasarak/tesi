@@ -52,4 +52,10 @@ export class CardService extends CrudService<Card> {
     let response = await lastValueFrom(this.put(card, "name-surname/update/"+token));
     return response;
   }
+
+  async associateCard(card : Card){
+    let userId = localStorage.getItem("user_id");
+    let response = await lastValueFrom(this.put(card, "associate/"+userId));
+    return response;
+  }
 }

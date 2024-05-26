@@ -72,12 +72,15 @@ export class MainComponent implements OnInit{
         (data) => {
           if(!data.active) {
             //se il login è gia stato effettuato
+            console.log(localStorage)
             if(localStorage.getItem("user_id")){
+              this.myCard = data;
               //associa direttamente il token
-              //this.service.addToUserACard();
+              this.service.associateCard(this.myCard);
+              this.router.navigateByUrl("/card-settings/"+cardId);
+            }else {
+              this.router.navigateByUrl("/"+cardId);
             }
-
-            this.router.navigateByUrl("/homepage/"+cardId);
           }
           
           this.myCard = data;

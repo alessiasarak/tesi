@@ -183,6 +183,22 @@ class CardRepository {
       throw new Error(`Unable to update card: ${error}`);
     }
   }
+  
+  async associate(idUser, token) {
+    try {
+      console.log(token)
+      let card = await this.getCardByToken(token);
+
+      card.fk_id_user = idUser;
+      card.active = 1;
+
+      card.save();
+      
+      return card;
+    } catch (error) {
+      throw new Error(`Unable to update card: ${error}`);
+    }
+  }
 
   async setStyleAllCard(newData, idUser) {
     try {

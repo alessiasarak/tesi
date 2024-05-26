@@ -150,6 +150,20 @@ exports.updateNameSurname = asyncHandler(async (req, res) => {
         res.status(404).json({ message: 'Card not found' });
     }
 });
+exports.associate = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+
+    console.log(req.body.entity);
+    const token = req.body.entity.token;
+    let idUser = req.params.idUser;
+
+    const updated = await cardRepository.associate(idUser, token);
+    if (updated) {
+        res.status(200).json({ message: 'Card updated successfully' });
+    } else {
+        res.status(404).json({ message: 'Card not found' });
+    }
+});
 
 exports.putStyleCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
