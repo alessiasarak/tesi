@@ -7,11 +7,12 @@ import { MyButtonComponent } from '../../component/my-button/my-button.component
 import { CommonModule } from '@angular/common';
 import { TitleComponent } from '../../component/title/title.component';
 import { MatIconModule } from '@angular/material/icon';
+import { LoadingComponent } from '../../component/loading/loading.component';
 
 @Component({
   selector: 'app-profile-settings',
   standalone: true,
-  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule, TitleComponent, MatIconModule ],
+  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule, TitleComponent, MatIconModule, LoadingComponent ],
   templateUrl: './profile-settings.component.html',
   styleUrl: './profile-settings.component.css'
 })
@@ -22,6 +23,7 @@ export class ProfileSettingsComponent {
   ngOnInit(): void {
     this.service.getUser().subscribe((data) => {
       this.assignValues(data);
+      this.isLoading = false;
     });
   }
 
@@ -35,6 +37,7 @@ export class ProfileSettingsComponent {
     repeatedPassword: [''],
   });
 
+  isLoading = true;
   user : User = {
     id: 0,
     email: '',
@@ -52,6 +55,7 @@ export class ProfileSettingsComponent {
   }
 
   async onProfileSubmit() {
+    this.isLoading = true;
     this.user.email = this.myProfileForm.value.email;
     
     let response = await this.service.putUser(this.user);
@@ -60,6 +64,7 @@ export class ProfileSettingsComponent {
   }
 
   async onPasswordSubmit() {
+    this.isLoading = true;
     this.user.password = this.myPasswordForm.value.newPassword;
     
     let isValid = await this.checkPasswordValidity();

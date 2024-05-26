@@ -8,11 +8,12 @@ import { User } from "../../interfaces/user";
 import { CardService } from "../../services/card.service";
 import { TitleComponent } from "../../component/title/title.component";
 import { HeaderComponent } from "../../component/header/header.component";
+import { LoadingComponent } from "../../component/loading/loading.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, TitleComponent, HeaderComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, TitleComponent, HeaderComponent, LoadingComponent ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -43,6 +44,7 @@ export class LoginComponent {
   };
 
   token : string | undefined;
+  isLoading = false;
 
   ngOnInit(){
     this.route.params.subscribe(async params => {
@@ -52,6 +54,7 @@ export class LoginComponent {
 
   //methods
   async onSubmit() {
+    this.isLoading = true;
     this.user.email = this.myForm.value.email;
     this.user.password = this.myForm.value.password;
 
@@ -73,6 +76,7 @@ export class LoginComponent {
         else this.router.navigateByUrl("/settings");
       }
     }).catch((error) => {
+      this.isLoading = false;
       this.isVisible = true;
     });
   }

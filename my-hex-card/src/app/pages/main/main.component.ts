@@ -9,11 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import vCardsJS from 'vcards-js';
 import { catchError, throwError } from 'rxjs';
+import { LoadingComponent } from '../../component/loading/loading.component';
  
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [ CommonModule, SocialMediaFooterComponent, HamburgerMenuComponent, HttpClientModule, MatIconModule ],
+  imports: [ CommonModule, SocialMediaFooterComponent, HamburgerMenuComponent, HttpClientModule, MatIconModule, LoadingComponent ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -25,6 +26,7 @@ export class MainComponent implements OnInit{
   myButtonClass : string = "";
   myMainStyle : string = "";
   myButtonStyle : string = "";
+  isLoading = true;
 
   myCard: Card = {
     id: 0,
@@ -85,6 +87,7 @@ export class MainComponent implements OnInit{
 
           this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
           this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
+          this.isLoading = false;
         }
       );
     });

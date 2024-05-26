@@ -12,16 +12,18 @@ import { Link } from '../../interfaces/link';
 import { Address } from '../../interfaces/address';
 import { TitleComponent } from '../../component/title/title.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
+import { LoadingComponent } from '../../component/loading/loading.component';
 
 @Component({
   selector: 'app-card-settings',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent, LoadingComponent ],
   templateUrl: './card-settings.component.html',
   styleUrl: './card-settings.component.css'
 })
 export class CardSettingsComponent {
   //constructor
+  isLoading = true;
   constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class CardSettingsComponent {
         this.myToken=params['id'];
         
         this.assignValues(data);
+        this.isLoading = false;
       });
     });
   }
@@ -254,6 +257,7 @@ export class CardSettingsComponent {
   }
 
   async onSubmit() {
+    this.isLoading = true;
     this.card.name = this.myForm.value.name;
     this.card.surname = this.myForm.value.surname;
     this.card.company = this.myForm.value.company;
@@ -274,10 +278,12 @@ export class CardSettingsComponent {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(["/card-settings/"+this.myToken]);
+      this.isLoading = false;
     }
   }
 
   async onStyleSubmit() {
+    this.isLoading = true;
     this.card.background_color = this.myStyleForm.value.backgroundColor;
     this.card.text_color = this.myStyleForm.value.textColor;
     this.card.button_color = this.myStyleForm.value.buttonColor;
@@ -289,6 +295,7 @@ export class CardSettingsComponent {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(["/card-settings/"+this.myToken]);
+      this.isLoading = false;
     }
   }
 
