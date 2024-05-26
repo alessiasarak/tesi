@@ -10,11 +10,12 @@ import { SafeUrl } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-cards',
   standalone: true,
-  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule, TitleComponent, LoadingComponent ],
+  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule, TitleComponent, LoadingComponent, ReactiveFormsModule ],
   templateUrl: './user-cards.component.html',
   styleUrl: './user-cards.component.css'
 })
@@ -30,7 +31,7 @@ export class UserCardsComponent {
 
 
   isLoading = true;
-  constructor (private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
+  constructor (private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private cardService : CardService, private clipboard: Clipboard){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -45,8 +46,13 @@ export class UserCardsComponent {
     });
   }
 
+  isVisibleAddCard = false;
+
+  addCardVisibilty(){
+    this.isVisibleAddCard = !this.isVisibleAddCard;
+  }
   addCard(){
-    this.isLoading = true;
+    /*this.isLoading = true;
     this.cardService.postCard(this.idContact).then(
       (data) => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -54,7 +60,51 @@ export class UserCardsComponent {
         this.isLoading = false;
         this.router.navigate(["/contact-cards/"+this.idContact]);
       }
+    );*/
+  }
+  myForm : FormGroup = this.fb.group({
+    name: [''],
+    surname: ['']
+  });
+
+  card: Card = {
+    id: 0,
+    img: '',
+    name: '',
+    surname: '',
+    company: '',
+    function: '',
+    instagram: '',
+    facebook: '',
+    linkedin: '',
+    whatsapp: '',
+    youtube: '',
+    token: '',
+    active: false,
+    fk_id_user: 0,
+    fk_id_contact: 0,
+    email: [],
+    phone_number: [],
+    link: [],
+    address: [],
+    background_color: '',
+    text_color: '',
+    button_color: ''
+  }
+  async onSubmit() {
+    this.isLoading = true;
+    this.card.name = this.myForm.value.name;
+    this.card.surname = this.myForm.value.surname;
+
+    this.cardService.postCard(this.idContact, this.card).then(
+      (data) => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.isLoading = false;
+        this.router.navigate(["/contact-cards/"+this.idContact]);
+      }
     );
+    
   }
 
   async copy(data:string){

@@ -60,9 +60,11 @@ class CardRepository {
     }
   }
 
-  async createCard(idContact) {
+  async createCard(idContact, data) {
     try {
         let newCard = await Card.create({
+            name: data.name != '' ? data.name : "Nome",
+            surname: data.surname != '' ? data.surname : "Cognome",
             token: this.generateToken(),
             fk_id_contact: idContact
         });

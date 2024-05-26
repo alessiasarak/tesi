@@ -156,7 +156,6 @@ exports.putStyleAllCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
 
     const newData = req.body.entity;
-    console.log("A")
 
     const updated = await cardRepository.setStyleAllCard(newData, req.params.idUser);
     if (updated) {
@@ -169,8 +168,10 @@ exports.putStyleAllCard = asyncHandler(async (req, res) => {
 //create empty card
 exports.postCard = asyncHandler(async (req, res) => {
     let cardRepository = new CardRepository();
+    
+    const data = req.body.entity;
 
-    const card = await cardRepository.createCard(req.params.idContact);
+    const card = await cardRepository.createCard(req.params.idContact, data);
     if (card) {
         res.status(200).json({ message: 'Card create successfully' });
     } else {
