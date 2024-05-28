@@ -10,9 +10,9 @@
     </div>
   </div>
 
-  <swiper-container class="w-full lg:w-80 " effect="cards">
+  <swiper-container class="w-full lg:w-60 " effect="cards">
     @for (card of cards; track card.token; let idx = $index) {
-      <swiper-slide class="w-full h-[44rem] overflow-y-scroll swiper-vertical" (click)="viewDetailCard(card.token)">
+      <swiper-slide class="w-full h-[24rem] overflow-y-scroll swiper-vertical" (click)="viewDetailCard(card.token)">
         <app-card-preview [card]="card"></app-card-preview>
       </swiper-slide>
     }

@@ -10,9 +10,16 @@
         <app-title title="La tua card"></app-title>
         <app-subtitle subtitle="Modifica i dati ed il look della tua card"></app-subtitle>
 
-        <button (click)="setStyleFalse()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
-        <button (click)="setStyleTrue()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
-        <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
+        <div class="lg:block" *ngIf="style">
+            <button (click)="setStyleFalse()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
+            <button (click)="setStyleTrue()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
+        </div>
+        <div class="lg:block" *ngIf="!style">
+            <button (click)="setStyleFalse()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica dati</button>
+            <button (click)="setStyleTrue()" class="flex bg-primary  text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica look</button>
+        </div>
+       
+       <a href="/card-preview/{{card.token}}" class="lg:hidden flex bg-primary text-black text-medium_text pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl w-32">Preview</a>
     </div>
 
     <form *ngIf="!style" [formGroup]="myForm" (ngSubmit)="onSubmit()" class="lg:flex lg:flex-row" >
@@ -21,9 +28,11 @@
         <div class="lg:flex lg:flex-col lg:mr-8">
             <div class="flex flex-col mb-2">
                 <div class="flex flex-row justify-between align-middle lg:hidden">
-                    <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
+                    <div class="w-20 h-20 overflow-hidden rounded-full">
+                        <img src="{{ card.img }}" class="object-cover w-full h-full">
+                    </div>
                     
-                    <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
+                    <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 mb-3 rounded-3xl">Preview</a>
                 </div>
             </div>
 
@@ -209,7 +218,9 @@
     <form *ngIf="style" [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()">
         <div class="flex flex-col mb-2">
             <div class="flex flex-row justify-between align-middle lg:hidden">
-                <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
+                <div class="w-20 h-20 overflow-hidden rounded-full">
+                    <img src="{{ card.img }}" class="object-cover w-full h-full">
+                </div>
                 
                 <a href="/card-preview/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
             </div>
