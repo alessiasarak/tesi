@@ -63,6 +63,11 @@ exports.loginWithToken = asyncHandler(async (req, res) => {
 
 
 exports.logout = asyncHandler(async (req, res) => {
-    req.session.idUser = null;
-    res.status(200);
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        res.sendStatus(200); // Send a 200 response if logout is successful
+    });
 });

@@ -38,10 +38,10 @@ export class AuthService extends CrudService<User> {
     return sessionStorage.getItem('role') != undefined && sessionStorage.getItem('role')! == "ADMIN";
   }
 
-  logout(){
+  async logout() {
     sessionStorage.setItem("user_id", "");
     sessionStorage.setItem("role", "");
     
-    this.get("/logout");
+    this.get("/logout")
   }
 }

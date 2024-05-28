@@ -20,6 +20,7 @@ import { LogoutComponent } from './component/logout/logout.component';
 import { CardPreviewPageComponent } from './pages/card-preview-page/card-preview-page.component';
 import { EmailSendComponent } from './pages/email-send/email-send.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
+import { Error401Component } from './error/error-401/error-401.component';
 
 export const routes: Routes = [
     { path: '', component: HomepageComponent },
@@ -44,5 +45,6 @@ export const routes: Routes = [
     { path: 'contact-cards/:idContact', component: UserCardsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
     { path: ':token', component: HomepageComponent },
+    { path: 'error/401', component: Error401Component },
     { path: '**', component: Error404Component },
 ];

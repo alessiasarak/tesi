@@ -26,8 +26,7 @@ export class CrudService<T> {
   }
 
   get(extraEndPoint?: string) : Observable<T>{
-    
-
+    console.log(this.baseApiUrl + this.endpoint + extraEndPoint)
     if(extraEndPoint) return this.http.get<T>(this.baseApiUrl + this.endpoint + extraEndPoint, {  withCredentials: true, headers: this.headers });
     else return this.http.get<T>(this.baseApiUrl + this.endpoint, {  withCredentials: true, headers: this.headers });
   }

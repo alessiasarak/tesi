@@ -62,13 +62,12 @@ app.use(
     resave: true,
     saveUninitialized: true,
     store: new MemoryStore({ checkPeriod: 86400000 }),
-    cookie: { maxAge: 3600000, secure: false, httpOnly: true, sameSite: "strict" }//un'ora di durata
+    cookie: { maxAge: 3600000, secure: false, httpOnly: true, sameSite: "strict" } // 60 minuti
   })
 );
 
 app.use((req, res, next) => {
   console.log(req.session.id)
-  console.log('Session:', req.session);
   next();
 });
 
