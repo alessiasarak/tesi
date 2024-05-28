@@ -48,7 +48,7 @@ describe('AuthService', () => {
       expect(response).toEqual(expectedResponse);
     });
 
-    const req = httpMock.expectOne('http://127.0.0.1:3124/auth/register/'+token);
+    const req = httpMock.expectOne('http://localhost:3124/auth/register/'+token);
     expect(req.request.method).toBe('POST');
     req.flush(expectedResponse);
   });
@@ -58,7 +58,7 @@ describe('AuthService', () => {
       expect(response).toEqual(expectedResponse);
     });
 
-    const req = httpMock.expectOne('http://127.0.0.1:3124/auth/login');
+    const req = httpMock.expectOne('http://localhost:3124/auth/login');
     expect(req.request.method).toBe('POST');
     req.flush(expectedResponse);
   });
@@ -68,37 +68,37 @@ describe('AuthService', () => {
       expect(response).toEqual(expectedResponse);
     });
 
-    const req = httpMock.expectOne('http://127.0.0.1:3124/auth/login/'+token);
+    const req = httpMock.expectOne('http://localhost:3124/auth/login/'+token);
     expect(req.request.method).toBe('POST');
     req.flush(expectedResponse);
   });
 
   it('should check if user is authenticated', () => {
-    spyOn(localStorage, 'getItem').and.returnValue('1');
+    spyOn(sessionStorage, 'getItem').and.returnValue('1');
 
     const isAuthenticated = service.isAuthenticated();
 
-    expect(localStorage.getItem).toHaveBeenCalledWith('user_id');
+    expect(sessionStorage.getItem).toHaveBeenCalledWith('user_id');
     expect(isAuthenticated).toBe(true);
   });
 
   it('should check if user is admin', () => {
-    spyOn(localStorage, 'getItem').and.returnValue('ADMIN');
+    spyOn(sessionStorage, 'getItem').and.returnValue('ADMIN');
 
     const isAdmin = service.isAdmin();
 
-    expect(localStorage.getItem).toHaveBeenCalledWith('role');
+    expect(sessionStorage.getItem).toHaveBeenCalledWith('role');
     expect(isAdmin).toBe(true);
   });
 
   it('should logout', () => {
-    spyOn(localStorage, 'setItem');
+    spyOn(sessionStorage, 'setItem');
     spyOn(service, 'get');
 
     service.logout();
 
-    expect(localStorage.setItem).toHaveBeenCalledWith('user_id', '');
-    expect(localStorage.setItem).toHaveBeenCalledWith('role', '');
+    expect(sessionStorage.setItem).toHaveBeenCalledWith('user_id', '');
+    expect(sessionStorage.setItem).toHaveBeenCalledWith('role', '');
     expect(service.get).toHaveBeenCalledWith('/logout');
   });
 });

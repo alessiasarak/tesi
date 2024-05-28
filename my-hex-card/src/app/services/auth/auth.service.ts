@@ -31,16 +31,16 @@ export class AuthService extends CrudService<User> {
   }
 
   public isAuthenticated() : boolean {
-    return localStorage.getItem('user_id') != undefined && localStorage.getItem('user_id')!.length > 0;
+    return sessionStorage.getItem('user_id') != undefined && sessionStorage.getItem('user_id')!.length > 0;
   }
 
   public isAdmin() : boolean {
-    return localStorage.getItem('role') != undefined && localStorage.getItem('role')! == "ADMIN";
+    return sessionStorage.getItem('role') != undefined && sessionStorage.getItem('role')! == "ADMIN";
   }
 
   logout(){
-    localStorage.setItem("user_id", "");
-    localStorage.setItem("role", "");
+    sessionStorage.setItem("user_id", "");
+    sessionStorage.setItem("role", "");
     
     this.get("/logout");
   }

@@ -9,6 +9,8 @@ const useragent = require("express-useragent");
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+const MemoryStore = require('memorystore')(session);
+
 //route
 const userRoute = require("./route/userRoute");
 const cardRoute = require("./route/cardRoute");
@@ -16,11 +18,18 @@ const contactRoute = require("./route/contactRoute");
 const authRoute = require("./route/authRoute");
 
 app.use(bodyParser.json({limit: '5mb'}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+    limit: "5mb",
+  })
+);
+
 app.use(cookieParser());
 
 const corsOptions = {
   origin: function(origin, callback) {
-    const allowedOrigins = ["http://127.0.0.1:4200", "http://localhost:4200", "http://localhost:9876", "http://127.0.0.1:9876"];
+    const allowedOrigins = ["http://localhost:4200", "http://localhost:4200", "http://localhost:9876", "http://localhost:9876"];
     if(!origin || allowedOrigins.includes(origin)){
       callback(null, true);
     } else {
@@ -39,14 +48,29 @@ app.get("/", (req, res) => {
   res.send(req.useragent);
 });
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Custom-Header");
+  
+  next();
+});
+
 // Configurazione della sessione
 app.use(
   session({
     secret: "askdjflksajfd",
-    resave: false,
+    resave: true,
     saveUninitialized: true,
+    store: new MemoryStore({ checkPeriod: 86400000 }),
+    cookie: { maxAge: 3600000, secure: false, httpOnly: true, sameSite: "strict" }//un'ora di durata
   })
 );
+
+app.use((req, res, next) => {
+  console.log(req.session.id)
+  console.log('Session:', req.session);
+  next();
+});
 
 app.use("/", userRoute);
 app.use("/", cardRoute);

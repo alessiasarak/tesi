@@ -14,16 +14,16 @@ export class UserService extends CrudService<User> {
   }
 
   getUser() {
-    return this.get("/" + localStorage.getItem("user_id")!);
+    return this.get("/" + sessionStorage.getItem("user_id")!);
   }
 
   async putUser(user: User) : Promise<User> {
-    let response = await lastValueFrom(this.put(user, "/" + localStorage.getItem("user_id")!));
+    let response = await lastValueFrom(this.put(user, "/" + sessionStorage.getItem("user_id")!));
     return response;
   }
 
   async putPassword(user : User){
-    let response = await lastValueFrom(this.put(user, "/password/" + localStorage.getItem("user_id")!));
+    let response = await lastValueFrom(this.put(user, "/password/" + sessionStorage.getItem("user_id")!));
     return response;
   }
 

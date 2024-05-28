@@ -37,9 +37,9 @@ export class HeaderComponent {
   }
   
   ngOnInit() {
-    let userLogged = localStorage.getItem("user_id");
+    let userLogged = sessionStorage.getItem("user_id");
     if(userLogged) {
-      let role = localStorage.getItem("role");
+      let role = sessionStorage.getItem("role");
       if(role && role == "USER") this.menuList = this.userMenu;
       else if(role && role == "ADMIN") this.menuList = this.adminMenu;
     } else this.menuList = this.notLoggedMenu;

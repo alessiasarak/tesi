@@ -22,8 +22,16 @@ exports.login = asyncHandler(async (req, res) => {
         if (response.code == 200) {
             req.session.idUser = response.data.dataValues.id;
             req.session.role = response.data.dataValues.fk_role;
+            console.log(req.session)
             
-            req.session.save();
+            req.session.save((err) => {
+                if (err) {
+                  console.error('Errore nel salvataggio della sessione:', err);
+                } else {
+                  console.log('Sessione salvata correttamente');
+                  console.log(req.session.id)
+                }
+              });
         }
         
         res.status(response.code).json(response.data);

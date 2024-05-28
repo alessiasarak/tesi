@@ -25,9 +25,9 @@ export class SettingsComponent {
   isLoading = true;
 
   ngOnInit(): void {
-    if(localStorage.getItem("role") == "ADMIN") this.router.navigateByUrl("/admin");
+    if(sessionStorage.getItem("role") == "ADMIN") this.router.navigateByUrl("/admin");
 
-    let userId = localStorage.getItem("user_id")
+    let userId = sessionStorage.getItem("user_id")
     this.cardService.getCardsByUser(userId!).then(
       (data) => {
         this.cards = data;

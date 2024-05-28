@@ -17,7 +17,7 @@ export class CardService extends CrudService<Card> {
   }
 
   getAUserCard() {
-    return this.get("a-card/" + localStorage.getItem("user_id"));
+    return this.get("a-card/" + sessionStorage.getItem("user_id"));
   }
 
   async getCardsByContact(idContact : string) : Promise<Card[]> {
@@ -29,17 +29,17 @@ export class CardService extends CrudService<Card> {
   }
 
   async putCard(card: Card, token: string) : Promise<Card | null> {
-    let response = await lastValueFrom(this.put(card, "update/" + localStorage.getItem("user_id") + "/" +token));
+    let response = await lastValueFrom(this.put(card, "update/" + sessionStorage.getItem("user_id") + "/" +token));
     return response;
   }
 
   async putStyleCard(card: Card, token: string) : Promise<Card | null> {
-    let response = await lastValueFrom(this.put(card, "update/style/" + localStorage.getItem("user_id") + "/" +token));
+    let response = await lastValueFrom(this.put(card, "update/style/" + sessionStorage.getItem("user_id") + "/" +token));
     return response;
   }
 
   async putStyleAllCard(card: Card) : Promise<Card | null> {
-    let response = await lastValueFrom(this.put(card, "all-style/" + localStorage.getItem("user_id")));
+    let response = await lastValueFrom(this.put(card, "all-style/" + sessionStorage.getItem("user_id")));
     return response;
   }
 
@@ -54,7 +54,7 @@ export class CardService extends CrudService<Card> {
   }
 
   async associateCard(card : Card){
-    let userId = localStorage.getItem("user_id");
+    let userId = sessionStorage.getItem("user_id");
     let response = await lastValueFrom(this.put(card, "associate/"+userId));
     return response;
   }
