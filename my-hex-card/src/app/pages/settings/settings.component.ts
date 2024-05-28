@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from '../../interfaces/card';
@@ -36,7 +36,7 @@ export class SettingsComponent {
       }
     );
   }
-  
+
   logout(){
     this.service.logout();
     this.router.navigateByUrl("/login");
