@@ -3,7 +3,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
 import { CommonModule } from '@angular/common';
 import { Location } from "@angular/common";
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   isVisible = false;
+  showBackButton = false;
   menuList : any[] = [];
 
   userMenu = [
@@ -37,21 +39,43 @@ export class HeaderComponent {
   }
   
   ngOnInit() {
-    let userLogged = localStorage.getItem("user_id");
+    let userLogged = sessionStorage.getItem("user_id");
     if(userLogged) {
-      let role = localStorage.getItem("role");
+      let role = sessionStorage.getItem("role");
       if(role && role == "USER") this.menuList = this.userMenu;
       else if(role && role == "ADMIN") this.menuList = this.adminMenu;
     } else this.menuList = this.notLoggedMenu;
   }
-  
-  constructor(private location: Location, private router: Router) {}
+
+  constructor(private location: Location, private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.ngOnInit();
+      this.updateBackButtonVisibility();
+    });
+  }
 
   isCurrentPage(link: string): boolean {
     return this.router.url === link;
   }
 
   goBack(): void {
-    this.location.back();
+    const currentUrl = this.router.url;
+    
+    if (currentUrl === '/profile-settings') {
+      this.router.navigate(['/settings']);
+    } else {
+      this.location.back();
+    }
+  }
+  
+
+  updateBackButtonVisibility(): void {
+    if(this.router.url == '/settings' || this.router.url == '/admin' 
+    || this.router.url == '/' || this.router.url == '/login'  
+    || this.router.url == '/register' || this.router.url == '/forgot-password'){
+      this.showBackButton = false;
+    }else this.showBackButton = true;
   }
 }

@@ -44,7 +44,7 @@ describe('ContactService', () => {
       expect(response).toEqual(expectedResponse);
     });
 
-    const req = httpMock.expectOne('http://127.0.0.1:3124/auth/create');
+    const req = httpMock.expectOne('http://localhost:3124/auth/create');
     expect(req.request.method).toBe('POST');
     req.flush(expectedResponse);
   });
@@ -85,7 +85,7 @@ describe('ContactService', () => {
       expect(contacts).toEqual(expectedContacts);
     });
 
-    const req = httpMock.expectOne('http://127.0.0.1:3124/contact');
+    const req = httpMock.expectOne('http://localhost:3124/contact');
     expect(req.request.method).toBe('GET');
     req.flush(expectedContacts);
   });
@@ -95,7 +95,7 @@ describe('ContactService', () => {
 
     service.deleteContact(contactId).subscribe();
 
-    const req = httpMock.expectOne(`http://127.0.0.1:3124/contact/${contactId}`);
+    const req = httpMock.expectOne(`http://localhost:3124/contact/${contactId}`);
     expect(req.request.method).toBe('DELETE');
     req.flush({});
   });

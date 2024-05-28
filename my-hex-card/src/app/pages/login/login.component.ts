@@ -62,12 +62,12 @@ export class LoginComponent {
       this.loggedUser = response;
       
       if(this.loggedUser != undefined) {
-        localStorage.setItem("user_id", this.loggedUser.id.toString());
-        localStorage.setItem("role", this.loggedUser.fk_role.toString());
+        sessionStorage.setItem("user_id", this.loggedUser.id.toString());
+        sessionStorage.setItem("role", this.loggedUser.fk_role.toString());
   
         if(this.loggedUser.fk_role.toString() != "ADMIN"){
           let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
-          localStorage.setItem('cards', JSON.stringify(card));
+          sessionStorage.setItem('cards', JSON.stringify(card));
         } else {
           this.isVisible = true;
         }

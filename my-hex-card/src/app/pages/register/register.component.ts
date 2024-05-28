@@ -60,12 +60,12 @@ export class RegisterComponent {
       this.service.register(this.user, this.token).then(async (response) =>{
         this.user = response;
         
-        localStorage.setItem("user_id", this.user.id.toString());
-        localStorage.setItem("role", this.user.fk_role.toString());
+        sessionStorage.setItem("user_id", this.user.id.toString());
+        sessionStorage.setItem("role", this.user.fk_role.toString());
 
         if(this.user.fk_role.toString() != "ADMIN"){
           let card = await this.cardService.getCardsByUser(this.user.id.toString());
-          localStorage.setItem('cards', JSON.stringify(card));
+          sessionStorage.setItem('cards', JSON.stringify(card));
         } else {
           this.isVisible = true;
         }

@@ -13,11 +13,12 @@ import { Address } from '../../interfaces/address';
 import { TitleComponent } from '../../component/title/title.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-card-settings',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent, LoadingComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent, LoadingComponent, SubtitleComponent ],
   templateUrl: './card-settings.component.html',
   styleUrl: './card-settings.component.css'
 })

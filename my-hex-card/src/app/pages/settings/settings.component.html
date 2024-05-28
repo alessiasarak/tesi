@@ -6,23 +6,20 @@
     <app-title title="Morning!"></app-title>
 
     <div *ngIf="cards.length > 1" class="flex flex-col items-center mt-4 lg:block sm:hidden">
-      <!-- <button (click)="logout()" class="bg-primary  text-black w-44 rounded-3xl p-2">Logout</button> -->
       <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black w-44 rounded-3xl p-2">Impostazioni carte</a>
     </div>
   </div>
 
-  <swiper-container class="w-full lg:w-80" effect="cards">
+  <swiper-container class="w-full lg:w-80 " effect="cards">
     @for (card of cards; track card.token; let idx = $index) {
-      <swiper-slide class="w-full" (click)="viewDetailCard(card.token)">
-        <!-- href="/card-settings/{{ card.token }}" -->
+      <swiper-slide class="w-full h-[44rem] overflow-y-scroll swiper-vertical" (click)="viewDetailCard(card.token)">
         <app-card-preview [card]="card"></app-card-preview>
       </swiper-slide>
     }
   </swiper-container>
 
   <div *ngIf="cards.length > 1" class="flex flex-col items-center mt-4 lg:hidden">
-    <!-- <button (click)="logout()" class="bg-primary  text-black w-44 rounded-3xl p-2">Logout</button> -->
-    <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black w-44 rounded-3xl p-2">Impostazioni carte</a>
+    <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black rounded-3xl p-2">Impostazioni carte</a>
   </div>
 </div>
   

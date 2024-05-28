@@ -22,8 +22,16 @@ exports.login = asyncHandler(async (req, res) => {
         if (response.code == 200) {
             req.session.idUser = response.data.dataValues.id;
             req.session.role = response.data.dataValues.fk_role;
+            console.log(req.session)
             
-            req.session.save();
+            req.session.save((err) => {
+                if (err) {
+                  console.error('Errore nel salvataggio della sessione:', err);
+                } else {
+                  console.log('Sessione salvata correttamente');
+                  console.log(req.session.id)
+                }
+              });
         }
         
         res.status(response.code).json(response.data);
@@ -55,6 +63,11 @@ exports.loginWithToken = asyncHandler(async (req, res) => {
 
 
 exports.logout = asyncHandler(async (req, res) => {
-    req.session.idUser = null;
-    res.status(200);
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        res.sendStatus(200); // Send a 200 response if logout is successful
+    });
 });

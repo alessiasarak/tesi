@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from '../../interfaces/card';
@@ -25,17 +25,18 @@ export class SettingsComponent {
   isLoading = true;
 
   ngOnInit(): void {
-    if(localStorage.getItem("role") == "ADMIN") this.router.navigateByUrl("/admin");
+    if(sessionStorage.getItem("role") == "ADMIN") this.router.navigateByUrl("/admin");
 
-    let userId = localStorage.getItem("user_id")
+    let userId = sessionStorage.getItem("user_id")
     this.cardService.getCardsByUser(userId!).then(
       (data) => {
         this.cards = data;
+        console.log(data)
         this.isLoading = false;
       }
     );
   }
-  
+
   logout(){
     this.service.logout();
     this.router.navigateByUrl("/login");

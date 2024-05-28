@@ -12,6 +12,8 @@ const AddressRepository = require('../repository/addressRepository');
 ///////////
 
 exports.getCardsByContact = asyncHandler(async (req, res) => {
+    
+    console.log(req.session)
     let cardRepository = new CardRepository();
     let cards = await cardRepository.getCardsByContact(req.params.id);
 

@@ -72,8 +72,8 @@ export class MainComponent implements OnInit{
         (data) => {
           if(!data.active) {
             //se il login è gia stato effettuato
-            console.log(localStorage)
-            if(localStorage.getItem("user_id")){
+            console.log(sessionStorage)
+            if(sessionStorage.getItem("user_id")){
               this.myCard = data;
               //associa direttamente il token
               this.service.associateCard(this.myCard);

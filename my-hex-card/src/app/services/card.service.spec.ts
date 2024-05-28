@@ -87,7 +87,7 @@ describe('CardService', () => {
       text_color: '',
       button_color: ''
     };
-    spyOn(localStorage, 'getItem').and.returnValue('user_id');
+    spyOn(sessionStorage, 'getItem').and.returnValue('user_id');
 
     service.getAUserCard().subscribe(card => {
       expect(card).toEqual(mockCard);
@@ -239,7 +239,7 @@ describe('CardService', () => {
       text_color: '',
       button_color: ''
     };
-    spyOn(localStorage, 'getItem').and.returnValue('user_id');
+    spyOn(sessionStorage, 'getItem').and.returnValue('user_id');
     const token = 'token';
 
     const updatedCard = await service.putCard(mockCard, token);
@@ -276,7 +276,7 @@ describe('CardService', () => {
       text_color: '',
       button_color: ''
     };
-    spyOn(localStorage, 'getItem').and.returnValue('user_id');
+    spyOn(sessionStorage, 'getItem').and.returnValue('user_id');
     const token = 'token';
 
     const updatedCard = await service.putStyleCard(mockCard, token);
@@ -313,7 +313,7 @@ describe('CardService', () => {
       text_color: '',
       button_color: ''
     };
-    spyOn(localStorage, 'getItem').and.returnValue('user_id');
+    spyOn(sessionStorage, 'getItem').and.returnValue('user_id');
 
     const updatedCard = await service.putStyleAllCard(mockCard);
     expect(updatedCard).toEqual(mockCard);

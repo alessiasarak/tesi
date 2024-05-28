@@ -45,12 +45,12 @@ describe('UserService', () => {
 
   it('should get user', () => {
     const userId = '1';
-    localStorage.setItem('user_id', userId);
+    sessionStorage.setItem('user_id', userId);
 
     service.getUser().subscribe(response => {
       expect(response).toEqual(user);
     });
-    const req = httpMock.expectOne(`http://127.0.0.1:3124/user/${userId}`);
+    const req = httpMock.expectOne(`http://localhost:3124/user/${userId}`);
     expect(req.request.method).toBe('GET');
     req.flush(user);
   });
@@ -69,7 +69,7 @@ describe('UserService', () => {
     service.putUser(updatedUser).then(response => {
       expect(response).toEqual(user);
     });
-    const req = httpMock.expectOne(`http://127.0.0.1:3124/user/${userId}`);
+    const req = httpMock.expectOne(`http://localhost:3124/user/${userId}`);
     expect(req.request.method).toBe('PUT');
     req.flush(user);
   });
@@ -77,12 +77,12 @@ describe('UserService', () => {
   it('should update password', async () => {
     const userId = '1';
 
-    spyOn(localStorage, 'getItem').and.returnValue(userId);
+    spyOn(sessionStorage, 'getItem').and.returnValue(userId);
 
     service.putPassword(user).then(response => {
       expect(response).toEqual(user);
     });
-    const req = httpMock.expectOne(`http://127.0.0.1:3124/user/password/${userId}`);
+    const req = httpMock.expectOne(`http://localhost:3124/user/password/${userId}`);
     expect(req.request.method).toBe('PUT');
     req.flush(user);
   });
@@ -91,7 +91,7 @@ describe('UserService', () => {
     service.putPasswordToReset(user, token).then(response => {
       expect(response).toEqual(user);
     });
-    const req = httpMock.expectOne(`http://127.0.0.1:3124/user/reset/${token}`);
+    const req = httpMock.expectOne(`http://localhost:3124/user/reset/${token}`);
     expect(req.request.method).toBe('PUT');
     req.flush(user);
   });
@@ -100,7 +100,7 @@ describe('UserService', () => {
     service.sendEmailToResetPassword(user).then(response => {
       expect(response).toEqual(user);
     });
-    const req = httpMock.expectOne(`http://127.0.0.1:3124/user/reset`);
+    const req = httpMock.expectOne(`http://localhost:3124/user/reset`);
     expect(req.request.method).toBe('POST');
     req.flush(user);
   });
