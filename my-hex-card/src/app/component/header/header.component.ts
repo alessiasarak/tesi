@@ -15,6 +15,7 @@ import { filter } from 'rxjs';
 })
 export class HeaderComponent {
   isVisible = false;
+  showBackButton = false;
   menuList : any[] = [];
 
   userMenu = [
@@ -45,11 +46,13 @@ export class HeaderComponent {
       else if(role && role == "ADMIN") this.menuList = this.adminMenu;
     } else this.menuList = this.notLoggedMenu;
   }
+
   constructor(private location: Location, private router: Router) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.ngOnInit();
+      this.updateBackButtonVisibility();
     });
   }
 
@@ -58,6 +61,21 @@ export class HeaderComponent {
   }
 
   goBack(): void {
-    this.location.back();
+    const currentUrl = this.router.url;
+    
+    if (currentUrl === '/profile-settings') {
+      this.router.navigate(['/settings']);
+    } else {
+      this.location.back();
+    }
+  }
+  
+
+  updateBackButtonVisibility(): void {
+    if(this.router.url == '/settings' || this.router.url == '/admin' 
+    || this.router.url == '/' || this.router.url == '/login'  
+    || this.router.url == '/register' || this.router.url == '/forgot-password'){
+      this.showBackButton = false;
+    }else this.showBackButton = true;
   }
 }

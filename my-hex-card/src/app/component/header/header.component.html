@@ -1,7 +1,9 @@
 <div class="flex flex-row justify-between z-10 bg-black  text-secondary p-4 pt-8">
-    <button type="button" class="flex" (click)="goBack()">
-        <mat-icon class="flex">arrow_back</mat-icon>
-    </button>
+    <div class="flex">
+        <button *ngIf="showBackButton" type="button" class="flex" (click)="goBack()">
+            <mat-icon class="flex">arrow_back</mat-icon>
+        </button>
+    </div>
     
     <button (click)="menu()" id="menuButton" class="flex z-30 lg:hidden">
         <mat-icon *ngIf="!isVisible">menu</mat-icon>
