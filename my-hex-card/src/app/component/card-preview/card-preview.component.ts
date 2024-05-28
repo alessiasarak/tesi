@@ -44,7 +44,5 @@ export class CardPreviewComponent {
   ngOnInit(): void {
     this.myMainStyle = "color: " + this.card.text_color + "; background-color: " + this.card.background_color + ";";
     this.myButtonStyle = "background-color: " + this.card.button_color + ";";
-
-    console.log(this.card)
   }
 }
