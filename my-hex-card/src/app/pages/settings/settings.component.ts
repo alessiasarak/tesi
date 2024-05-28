@@ -31,6 +31,7 @@ export class SettingsComponent {
     this.cardService.getCardsByUser(userId!).then(
       (data) => {
         this.cards = data;
+        console.log(data)
         this.isLoading = false;
       }
     );
