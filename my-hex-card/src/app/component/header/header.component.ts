@@ -3,7 +3,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { HamburgerMenuComponent } from '../hamburger-menu/hamburger-menu.component';
 import { CommonModule } from '@angular/common';
 import { Location } from "@angular/common";
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -44,8 +45,13 @@ export class HeaderComponent {
       else if(role && role == "ADMIN") this.menuList = this.adminMenu;
     } else this.menuList = this.notLoggedMenu;
   }
-  
-  constructor(private location: Location, private router: Router) {}
+  constructor(private location: Location, private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
 
   isCurrentPage(link: string): boolean {
     return this.router.url === link;
