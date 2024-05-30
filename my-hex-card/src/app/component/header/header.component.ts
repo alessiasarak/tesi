@@ -29,7 +29,8 @@ export class HeaderComponent {
     { link: "/logout", title: "Logout" }
   ];
   notLoggedMenu = [
-    { link: "/login", title: "Home" },
+    { link: "/", title: "Home" },
+    { link: "/login", title: "Login" },
     { link: "https://hexcard.ch/store/", title: "Compra la card" },
     { link: "https://hexcard.ch/contatti/", title: "Aiuto?" }
   ];
