@@ -8,9 +8,6 @@ export const authInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
         // Handle HTTP errors
         if (err.status === 401) {
           window.location.href = 'error/401';
-        } else {
-          // Handle other HTTP error codes
-          console.error('HTTP error:', err);
         }
       } else {
         // Handle non-HTTP errors
