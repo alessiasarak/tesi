@@ -1,4 +1,4 @@
-<div class="flex flex-row justify-between z-10 bg-black  text-secondary p-4 pt-8">
+<div class="flex flex-row justify-between z-10 bg-transparent  text-secondary p-4 pt-8">
     <div class="flex">
         <button *ngIf="showBackButton" type="button" class="flex" (click)="goBack()">
             <mat-icon class="flex">arrow_back</mat-icon>
@@ -11,7 +11,7 @@
     </button>
 
     
-    <div class="flex flex-row text-secondary bg-black lg:z-30 sm:hidden lg:inline-flex">
+    <div class="flex flex-row text-secondary bg-transparent lg:z-30 sm:hidden lg:inline-flex">
         @for (item of menuList; track item; let i = $index) {
             <a class="newA" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-secondary'">{{ item.title }}</a>
         }
