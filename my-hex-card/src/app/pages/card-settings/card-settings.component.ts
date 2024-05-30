@@ -68,7 +68,7 @@ export class CardSettingsComponent {
     phoneNumbers: this.fb.array([ this.fb.control('') ]),
     links: this.fb.array([ this.fb.control('') ]),
 
-   addresses: this.fb.array([])
+    addresses: this.fb.array([])
    
   });
   myStyleForm : FormGroup = this.fb.group({
@@ -269,11 +269,11 @@ export class CardSettingsComponent {
     this.card.whatsapp = this.myForm.value.whatsapp;
     this.card.youtube = this.myForm.value.youtube;
 
-    this.card.email = this.myForm.value.emails;
-    this.card.phone_number = this.myForm.value.phoneNumbers;
-    this.card.link = this.myForm.value.links;
-    this.card.address = this.myForm.value.addresses;
-    
+    this.card.email = this.myForm.value.emails.filter((email:any) => typeof email === 'string' && email.trim() !== '');
+    this.card.phone_number = this.myForm.value.phoneNumbers.filter((phone:any) => typeof phone === 'string' && phone.trim() !== '');
+    this.card.link = this.myForm.value.links.filter((link:any) => typeof link === 'string' && link.trim() !== '');
+    this.card.address = this.myForm.value.addresses.filter((address:any) => address.street_name.trim() !== '');
+
     let response = await this.service.putCard(this.card, this.myToken);
     if(response) {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
