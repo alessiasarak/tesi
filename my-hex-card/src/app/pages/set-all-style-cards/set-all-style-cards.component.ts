@@ -8,11 +8,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MyButtonComponent } from '../../component/my-button/my-button.component';
 import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
+import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-set-all-style-cards',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, TitleComponent, LoadingComponent ],
+  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, TitleComponent, SubtitleComponent, LoadingComponent, CardPreviewComponent ],
   templateUrl: './set-all-style-cards.component.html',
   styleUrl: './set-all-style-cards.component.css'
 })
@@ -23,12 +25,35 @@ export class SetAllStyleCardsComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.service.getAUserCard().subscribe((data) => {
-        this.card = data;
+        this.card = {
+          id: data.id,
+          name: 'Esempio',
+          surname: 'Esempio',
+          company: 'Esempio',
+          function: 'Esempio',
+          img: data.img,
+          instagram: '',
+          facebook: '',
+          linkedin: '',
+          whatsapp: '',
+          youtube: '',
+          fk_id_user: 0,
+          fk_id_contact: 0,
+          email: [ { id: 0, label: "", email: "Esempio"} ],
+          phone_number: [],
+          link: [],
+          address: [],
+          active: false,
+          background_color: data.background_color,
+          text_color: data.text_color,
+          button_color: data.button_color,
+          token: ''
+        }
 
         this.myMainStyle = "color: " + this.card.text_color + "; background-color: " + this.card.background_color + ";";
         this.myButtonStyle = "background-color: " + this.card.button_color + ";";
         
-        this.assignValues(data);
+        this.assignValues(this.card);
         this.isLoading = false;
       });
     });
