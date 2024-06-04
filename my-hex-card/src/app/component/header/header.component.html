@@ -1,23 +1,24 @@
-<div class="flex flex-row justify-between z-10 bg-transparent  text-secondary p-4 pt-8">
-    <div class="flex">
-        <button *ngIf="showBackButton" type="button" class="flex" (click)="goBack()">
-            <mat-icon class="flex">arrow_back</mat-icon>
+<div class="fixed w-full right-0">
+    <div class="flex flex-row justify-between z-10 bg-transparent  text-secondary p-4 pt-8">
+        <div class="flex">
+            <button *ngIf="showBackButton" type="button" class="flex" (click)="goBack()">
+                <mat-icon class="flex">arrow_back</mat-icon>
+            </button>
+        </div>
+        
+        <button (click)="menu()" id="menuButton" class="flex z-30 lg:hidden">
+            <mat-icon *ngIf="!isVisible">menu</mat-icon>
+            <mat-icon *ngIf="isVisible">close</mat-icon>
         </button>
-    </div>
-    
-    <button (click)="menu()" id="menuButton" class="flex z-30 lg:hidden">
-        <mat-icon *ngIf="!isVisible">menu</mat-icon>
-        <mat-icon *ngIf="isVisible">close</mat-icon>
-    </button>
 
-    
-    <div class="flex flex-row text-secondary bg-transparent lg:z-30 sm:hidden lg:inline-flex">
-        @for (item of menuList; track item; let i = $index) {
-            <a class="newA" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-secondary'">{{ item.title }}</a>
-        }
+        
+        <div class="flex flex-row text-secondary bg-transparent lg:z-30 sm:hidden lg:inline-flex">
+            @for (item of menuList; track item; let i = $index) {
+                <a class="newA" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-secondary'">{{ item.title }}</a>
+            }
+        </div>
     </div>
 </div>
-
 
 <div *ngIf="isVisible" class="obscure z-10" (click)="menu()"></div>
 
