@@ -39,12 +39,12 @@
             ></qrcode>
           </div>
           <div class="flex flex-col text-subtitle w-full">
-            <div *ngIf="!changeNameVisibilty[i]" class="flex text-[20px] font-[700] h-1/6" (click)="seeInput(i)">
+            <div *ngIf="!changeNameVisibilty[i]" class="flex text-[20px] font-[700] lg:h-1/6" (click)="seeInput(i)">
               {{ card.name }} {{ card.surname }}
               <mat-icon class="text-primary ml-2">edit</mat-icon>
             </div>
 
-            <form [formGroup]="myOtherForm" (ngSubmit)="saveNameSurname(i)" *ngIf="changeNameVisibilty[i]" class="flex flex-row h-1/6">
+            <form [formGroup]="myOtherForm" (ngSubmit)="saveNameSurname(i)" *ngIf="changeNameVisibilty[i]" class="flex flex-row lg:h-1/6">
               <div class="flex items-center border-b border-gray-500 py-2 mr-2">
                 <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
                 placeholder="Nome" type="text" id="name" formControlName="name">
@@ -63,16 +63,16 @@
               </button>
             </form>
 
-            <div class="flex flex-row w-full justify-between h-1/6">
+            <div class="flex flex-row w-full justify-between lg:h-1/6">
                 <div class="flex">Link da associare</div>
                 <a class="flex text-primary text-medium_text underline cursor-pointer lg:text-subtitle"  (click)="copy(link + card.token)">Copia</a>
             </div>
-            <div class="flex flex-row w-full justify-between h-1/6">
+            <div class="flex flex-row w-full justify-between lg:h-1/6">
               <div class="flex">QR code</div>
               <a class="flex text-primary text-medium_text underline cursor-pointer lg:text-subtitle" [href]="card.qrCode" download="qrcode">Scarica</a>
             </div>
-            <div class=" h-1/6"></div>
-            <div class="flex flex-row w-full justify-between h-1/6">
+            <div class=" lg:h-1/6"></div>
+            <div class="flex flex-row w-full justify-between lg:h-1/6">
               <div class="flex"></div>
               <a class="flex text-primary text-medium_text underline cursor-pointer lg:text-subtitle" 
               (click)="delete(card.token, card.name, card.surname)">Elimina carta</a>
