@@ -118,10 +118,10 @@ class UserRepository {
         }
     }
 
-    async updateUser(userId, newData) {
+    async updateUser(userId, newData, extra) {
         try {
             const user = await User.findByPk(userId);
-            
+
             if (!user) {
                 return {
                     "code": 404,
@@ -130,10 +130,18 @@ class UserRepository {
             }
             
             if(newData.password != ""){
-                const hashedPassword = await bcrypt.hash(newData.password, 10);
-                await user.update({
-                    password: hashedPassword
-                });
+                const isPasswordValid = await bcrypt.compare(extra, user.password);
+                if(isPasswordValid){
+                    const hashedPassword = await bcrypt.hash(newData.password, 10);
+                    await user.update({
+                        password: hashedPassword
+                    });
+                }else {
+                    return {
+                        "code": 500,
+                        "data": "Internal error"
+                    };
+                }
             } else {
                 await user.update({
                     email: newData.email,
