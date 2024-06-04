@@ -1,12 +1,18 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <app-loading *ngIf="isLoading"></app-loading>
 <div class="flex lg:flex-row lg:justify-between sm:flex-col lg:h-screen lg:align-middle lg:pt-[15%]">
-<div><app-title title="Registrati" class="flex"></app-title>
-<app-subtitle subtitle="Registrati per collegare automaticamente la carta fisica a quella digitale!"></app-subtitle></div>
 
+<div class="sm:hidden lg:flex lg:flex-col">
+  <app-title title="Registrati" class="flex"></app-title>
+  <app-subtitle subtitle="Registrati per collegare automaticamente la carta fisica a quella digitale!"></app-subtitle>
+</div>
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="flex lg:flex-row sm:flex-col">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="flex sm:flex-col lg:flex-row sm:min-h-screen sm:justify-center">
 
+  <div class="sm:flex sm:flex-col lg:hidden">
+    <app-title title="Registrati" class="flex"></app-title>
+    <app-subtitle subtitle="Registrati per collegare automaticamente la carta fisica a quella digitale!"></app-subtitle>
+  </div>
   <div class="mb-4">
     <div class="flex items-center border-b border-gray-500 py-2 mr-4">
       <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
