@@ -23,7 +23,7 @@ import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 export class UserCardsComponent {
   email : string = "";
   cards : Card[] = [];
-  link : string = "http://localhost:4200/card/";
+  link : string = "https://myhexcard.com/card/";
   idContact : string = "";
   isVisible = false;
 
