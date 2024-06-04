@@ -127,6 +127,7 @@ export class SetAllStyleCardsComponent {
     reader.readAsDataURL(file);
     reader.onload = () => {
         this.card.img = reader.result!.toString();
+        this.isLoading = false;
     };
   }
 }

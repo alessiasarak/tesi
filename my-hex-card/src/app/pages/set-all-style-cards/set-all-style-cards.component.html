@@ -3,13 +3,12 @@
 <div class="flex lg:flex-row lg:justify-around sm:flex-col lg:pl-44 lg:pr-44">
   
 
-    <app-title title="La tua card" class="lg:hidden"></app-title>
+    <app-title title="Stile delle card" class="lg:hidden"></app-title>
     <app-subtitle subtitle="Modifica il look delle tue card" class="lg:hidden"></app-subtitle>
 
 
     <form [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()">
-
-        <div class="flex flex-col mb-2">
+        <div class="flex flex-col my-4 lg:m-0">
             <div class="flex flex-row justify-between align-middle lg:hidden">
                 <div class="w-20 h-20 overflow-hidden rounded-full">
                     <img src="{{ card.img }}" class="object-cover w-full h-full">

@@ -2,17 +2,19 @@
 
 <div class="flex lg:flex-row lg:justify-between sm:flex-col lg:pl-44 lg:pr-44">
   
-  <div class="lg:flex lg:flex-col lg:items-center lg:justify-center flex-grow min-h-full lg:w-1/3">
-    <app-title title="Morning!"></app-title>
+  <div class="lg:flex lg:flex-col lg:justify-center flex-grow min-h-full lg:w-1/3">
+    <app-title title="Benvenuto!"></app-title>
+    <app-subtitle *ngIf="cards.length > 1" subtitle="Qua puoi trovare i tuoi biglietti da visita digitali e modificarli!"></app-subtitle>
+    <app-subtitle *ngIf="cards.length == 1" subtitle="Qua puoi trovare il tuo biglietto da visita digitale e modificarlo!"></app-subtitle>
 
-    <div *ngIf="cards.length > 1" class="flex flex-col items-center mt-4 lg:block sm:hidden">
-      <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black w-44 rounded-3xl pr-8 pl-8 pt-4 pb-4">Impostazioni carte</a>
+    <div *ngIf="cards.length > 1" class="flex flex-col items-center mt-8 lg:block sm:hidden ">
+      <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black w-44 rounded-3xl pr-4 pl-4 pt-2 pb-2 text-[14px]">Impostazioni carte</a>
     </div>
   </div>
 
-  <div class="lg:flex lg:items-center lg:justify-center flex-grow min-h-full lg:w-2/3">
+  <div class="lg:flex lg:items-center lg:justify-center flex-grow min-h-full lg:w-2/3 mt-8 mb-4">
     <swiper-container class="w-full lg:w-72 " effect="cards">
-      @for (card of cards; track card.token; let idx = $index) {
+      @for (card of cards; track card.token; let i = $index) {
         <swiper-slide class="w-full h-[30rem] overflow-y-scroll swiper-vertical" (click)="viewDetailCard(card.token)">
           <app-card-preview [card]="card"></app-card-preview>
         </swiper-slide>
@@ -20,7 +22,7 @@
     </swiper-container>
   </div>
 
-  <div *ngIf="cards.length > 1" class="flex flex-col items-center mt-4 lg:hidden">
+  <div *ngIf="cards.length > 1" class="flex flex-col items-center p-4 mt-4 lg:hidden">
     <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black rounded-3xl p-2">Impostazioni carte</a>
   </div>
 </div>
