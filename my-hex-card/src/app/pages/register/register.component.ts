@@ -99,7 +99,7 @@ export class RegisterComponent {
 
   async checkPasswordValidity() : Promise<boolean> {
     const password = this.myForm.value.password;
-    const regex = /^(?=.*[A-Z]).{8,}$/;    
+    const regex = /^(?=.*[A-Z]).{8,}$/;       
 
     if (regex.test(password)) {
       if (password === this.myForm.value.repeatPassword) {
