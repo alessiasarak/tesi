@@ -90,6 +90,7 @@ export class MainComponent implements OnInit{
 
           this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
           this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
+          console.log(this.myMainStyle)
           this.isLoading = false;
         }
       );
