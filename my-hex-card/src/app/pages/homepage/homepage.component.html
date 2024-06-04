@@ -1,17 +1,16 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="sm:hidden lg:block">
-    <button class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl" (click)="login()">Login</button>
 
-    <app-title title="Il tuo nuovo biglietto da visita NFC!"></app-title>
-    
-    <button *ngIf="token" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl" (click)="register()">Sign up</button>
+<div class="flex flex-col flex-grow min-h-screen justify-center">
+    <div class="flex lg:flex-row sm:flex-col w-full justify-between">
+        <div class="flex flex-col">
+            <app-title title="Il tuo nuovo biglietto da visita NFC!" class="flex"></app-title>
+            <app-subtitle subtitle="Effettua il login o richiedi una carta!"></app-subtitle>
+        </div>
+        <div class="flex flex-col justify-end mt-8">
+            <button class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl w-36 justify-center" (click)="login()">Login</button>
+            <button *ngIf="token" class="flex bg-transparent  text-primary border border-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl w-36 justify-center" (click)="register()">Sign up</button>
+        </div>
+    </div>
 </div>
-
-<div class="lg:hidden">
-    <app-title title="Il tuo nuovo biglietto da visita NFC!"></app-title>
     
-    <button class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl" (click)="login()">Login</button>
-    
-    <button *ngIf="token" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl" (click)="register()">Sign up</button>
-</div>

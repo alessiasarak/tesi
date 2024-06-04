@@ -4,8 +4,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <app-title title="Amministrazione"></app-title>
+  <app-subtitle subtitle="Gestisci tutti le carte del contatto selezionato"></app-subtitle>
 
-  <div class="shadow-lg rounded-md p-2 mb-4" >
+  <div class="shadow-lg rounded-md mb-4 mt-4" >
     <div class="flex flex-row mb-3 justify-between">
         <label for="textColor" class="flex text-[20px] font-[700]">QR Code: </label>
         <!--<a class="flex text-primary text-medium_text underline cursor-pointer lg:text-subtitle">Preview</a>-->
@@ -22,7 +23,7 @@
     </div>
   </div>
   
-  <div class="shadow-lg rounded-md p-2" >
+  <div class="shadow-lg rounded-md" >
     <div *ngFor="let card of cards; index as i">
       <div class="pb-2 flex">
           <div class="flex sm:hidden lg:block mr-4">
@@ -38,17 +39,20 @@
             ></qrcode>
           </div>
           <div class="flex flex-col text-subtitle w-full">
-            <div *ngIf="!changeNameVisibilty[i]" class="flex text-[20px] font-[700]" (click)="seeInput(i)">{{ card.name }} {{ card.surname }}</div>
+            <div *ngIf="!changeNameVisibilty[i]" class="flex text-[20px] font-[700]" (click)="seeInput(i)">
+              {{ card.name }} {{ card.surname }}
+              <mat-icon class="text-primary ml-2">edit</mat-icon>
+            </div>
 
             <form [formGroup]="myOtherForm" (ngSubmit)="saveNameSurname(i)" *ngIf="changeNameVisibilty[i]" class="flex flex-row">
               <div class="flex items-center border-b border-gray-500 py-2 mr-2">
                 <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-                placeholder="name" type="text" id="name" formControlName="name">
+                placeholder="Nome" type="text" id="name" formControlName="name">
               </div>
             
               <div class="flex items-center border-b border-gray-500 py-2">
                 <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-                placeholder="surname" type="text" id="surname" formControlName="surname">
+                placeholder="Cognome" type="text" id="surname" formControlName="surname">
               </div>
 
               <button type="submit" class="flex bg-transparent text-primary_text pl-2 pr-2 pt-2 pb-1 rounded-full">

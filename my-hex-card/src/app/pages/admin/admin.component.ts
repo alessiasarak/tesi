@@ -7,11 +7,12 @@ import { ContactService } from '../../services/contact/contact.service';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, MatIcon, TitleComponent, LoadingComponent ],
+  imports: [ CommonModule, MatIconModule, MatIcon, TitleComponent, SubtitleComponent, LoadingComponent ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })

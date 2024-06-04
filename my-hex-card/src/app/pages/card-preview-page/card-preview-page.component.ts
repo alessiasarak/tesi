@@ -6,11 +6,12 @@ import { TitleComponent } from '../../component/title/title.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { CommonModule } from '@angular/common';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-card-preview-page',
   standalone: true,
-  imports: [ TitleComponent, CardPreviewComponent, LoadingComponent, CommonModule ],
+  imports: [ TitleComponent, SubtitleComponent, CardPreviewComponent, LoadingComponent, CommonModule ],
   templateUrl: './card-preview-page.component.html',
   styleUrl: './card-preview-page.component.css'
 })

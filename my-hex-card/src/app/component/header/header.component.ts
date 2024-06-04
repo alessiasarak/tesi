@@ -66,6 +66,8 @@ export class HeaderComponent {
     
     if (currentUrl === '/profile-settings') {
       this.router.navigate(['/settings']);
+    } else if (/^\/card-settings\/[^\/]+$/.test(currentUrl)) {
+      this.router.navigate(['/settings']);
     } else {
       this.location.back();
     }

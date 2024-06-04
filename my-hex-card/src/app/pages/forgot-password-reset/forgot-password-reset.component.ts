@@ -41,7 +41,7 @@ export class ForgotPasswordResetComponent {
       let token = params['token']; 
 
       let response = await this.service.putPasswordToReset(this.user, token);
-      if(response) this.router.navigateByUrl("/login");
+      this.router.navigateByUrl("/login");
     });
   }
 

@@ -2,8 +2,10 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<app-title title="La tua card"></app-title>
-<div class="lg:flex lg:w-full lg:justify-center">
+<app-title title="La tua carta digitale"></app-title>
+<app-subtitle subtitle="Qui è presente una preview di come risulterà il la tua carta digitale agli altri!"></app-subtitle>
+
+<div class="lg:flex lg:w-full lg:justify-center my-8">
     <div class="lg:w-80">
         <app-card-preview *ngIf="!isLoading" [card]="card"></app-card-preview>
     </div>

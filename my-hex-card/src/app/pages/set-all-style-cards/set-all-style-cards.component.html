@@ -1,40 +1,50 @@
 <app-loading *ngIf="isLoading"></app-loading>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="flex lg:flex-row lg:justify-around sm:flex-col lg:pl-44 lg:pr-44">
+  
 
-<app-title title="Impostazioni card"></app-title>
+    <app-title title="Stile delle card" class="lg:hidden"></app-title>
+    <app-subtitle subtitle="Modifica il look delle tue card" class="lg:hidden"></app-subtitle>
 
-<form [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()">
 
-    <div class="flex flex-col mb-2">
-      <div class="flex flex-row justify-between align-middle">
-          <img src="{{ card.img }}" class="flex h-36 w-36 mb-3 rounded-full">
-          
-          <a href="/card/{{card.token}}" class="flex bg-primary text-black text-medium_text h-10 pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Preview</a>
-      </div>
-  </div>
+    <form [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()">
+        <div class="flex flex-col my-4 lg:m-0">
+            <div class="flex flex-row justify-between align-middle lg:hidden">
+                <div class="w-20 h-20 overflow-hidden rounded-full">
+                    <img src="{{ card.img }}" class="object-cover w-full h-full">
+                </div>
+            </div>
+        </div>
 
-    <div class="flex flex-col mb-3 ">
-      <label for="img">Image</label>
-      <input type="file" accept=".jpg, .jpeg, .png" 
-      (change)="processFile($event)" class="form-control" id="img" 
-      formControlName="img" placeholder="Image" maxFileSize="5 * 1024 * 1024">
+        <div class="flex flex-col mb-3 ">
+            <label for="img">Image</label>
+            <input type="file" accept=".jpg, .jpeg, .png" 
+            (change)="processFile($event)" class="bg-secondary w-full p-2 rounded-md text-black" id="img" 
+            formControlName="img" placeholder="Image" maxFileSize="5 * 1024 * 1024">
+        </div>
+        
+        <div class="flex flex-row mb-3 ">
+            <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
+            <input type="color" id="backgroundColor" formControlName="backgroundColor" class="rounded-full" />
+        </div>
+        
+        <div class="flex flex-row mb-3 ">
+            <label for="textColor" class="flex w-4/5">Colore del testo: </label>
+            <input type="color" id="textColor" formControlName="textColor" class="rounded-full" />
+        </div>
+        
+        <div class="flex flex-row mb-3 ">
+            <label for="buttonColor" class="flex w-4/5">Colore del bottone: </label>
+            <input type="color" id="buttonColor" formControlName="buttonColor" class="rounded-full" />
+        </div>
+        
+        <div class="flex flex-col items-center">
+            <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
+        </div>
+    </form>
+    <div class="flex lg:block sm:hidden">
+        <app-card-preview *ngIf="!isLoading" [card]="card"></app-card-preview>
     </div>
-    
-    <div class="flex flex-row mb-3 ">
-        <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
-        <input type="color" id="backgroundColor" formControlName="backgroundColor" />
-    </div>
-    
-    <div class="flex flex-row mb-3 ">
-        <label for="textColor" class="flex w-4/5">Colore del testo: </label>
-        <input type="color" id="textColor" formControlName="textColor"/>
-    </div>
-    
-    <div class="flex flex-row mb-3 ">
-        <label for="buttonColor" class="flex w-4/5">Colore del bottone: </label>
-        <input type="color" id="buttonColor" formControlName="buttonColor" />
-    </div>
-    
-    <div class="flex flex-col items-center">
-        <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Salva</button>
-    </div>
-</form>
+</div>
+
+

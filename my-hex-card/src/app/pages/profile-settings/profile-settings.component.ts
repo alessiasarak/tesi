@@ -8,11 +8,12 @@ import { CommonModule } from '@angular/common';
 import { TitleComponent } from '../../component/title/title.component';
 import { MatIconModule } from '@angular/material/icon';
 import { LoadingComponent } from '../../component/loading/loading.component';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-profile-settings',
   standalone: true,
-  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule, TitleComponent, MatIconModule, LoadingComponent ],
+  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule, TitleComponent, MatIconModule, LoadingComponent, SubtitleComponent ],
   templateUrl: './profile-settings.component.html',
   styleUrl: './profile-settings.component.css'
 })

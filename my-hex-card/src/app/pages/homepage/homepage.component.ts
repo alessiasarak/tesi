@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { TitleComponent } from '../../component/title/title.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [ TitleComponent, CommonModule ],
+  imports: [ TitleComponent, SubtitleComponent, CommonModule ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })

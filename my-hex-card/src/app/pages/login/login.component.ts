@@ -9,11 +9,12 @@ import { CardService } from "../../services/card.service";
 import { TitleComponent } from "../../component/title/title.component";
 import { HeaderComponent } from "../../component/header/header.component";
 import { LoadingComponent } from "../../component/loading/loading.component";
+import { SubtitleComponent } from "../../component/subtitle/subtitle.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, TitleComponent, HeaderComponent, LoadingComponent ],
+  imports: [ CommonModule, SubtitleComponent, MatIconModule, ReactiveFormsModule, TitleComponent, HeaderComponent, LoadingComponent ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
