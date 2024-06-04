@@ -2,16 +2,13 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="lg:pl-96 lg:pr-96">
-<app-title title="Aggiungi utente"></app-title>
+<app-title title="Aggiungi contatto"></app-title>
+<app-subtitle subtitle="Aggiungi un contatto, il metodo di contatto può essere quelo che si preferisce di più!"></app-subtitle>
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <div *ngIf="isVisible" class="text-red-400 pb-6 w-full">
-    Email già presente
-  </div>
-
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="mt-8">
   <div class="flex flex-col mb-3">
-    <label for="title">Email</label>
-    <input type="email" class="bg-secondary w-full p-2 rounded-md text-black" id="email" formControlName="email" placeholder="Email">
+    <label for="title">Contatto</label>
+    <input type="email" class="bg-secondary w-full p-2 rounded-md text-black" id="email" formControlName="email" placeholder="Contatto">
   </div>
   
   <div class="flex flex-col mb-3 ">
