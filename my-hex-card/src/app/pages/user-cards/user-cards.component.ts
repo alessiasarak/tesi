@@ -11,11 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-user-cards',
   standalone: true,
-  imports: [ MyButtonComponent, CommonModule, QRCodeModule, MatIconModule, TitleComponent, LoadingComponent, ReactiveFormsModule ],
+  imports: [ MyButtonComponent, CommonModule, SubtitleComponent, QRCodeModule, MatIconModule, TitleComponent, LoadingComponent, ReactiveFormsModule ],
   templateUrl: './user-cards.component.html',
   styleUrl: './user-cards.component.css'
 })
