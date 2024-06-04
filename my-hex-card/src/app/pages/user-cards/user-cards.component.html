@@ -39,17 +39,20 @@
             ></qrcode>
           </div>
           <div class="flex flex-col text-subtitle w-full">
-            <div *ngIf="!changeNameVisibilty[i]" class="flex text-[20px] font-[700]" (click)="seeInput(i)">{{ card.name }} {{ card.surname }}</div>
+            <div *ngIf="!changeNameVisibilty[i]" class="flex text-[20px] font-[700]" (click)="seeInput(i)">
+              {{ card.name }} {{ card.surname }}
+              <mat-icon class="text-primary ml-2">edit</mat-icon>
+            </div>
 
             <form [formGroup]="myOtherForm" (ngSubmit)="saveNameSurname(i)" *ngIf="changeNameVisibilty[i]" class="flex flex-row">
               <div class="flex items-center border-b border-gray-500 py-2 mr-2">
                 <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-                placeholder="name" type="text" id="name" formControlName="name">
+                placeholder="Nome" type="text" id="name" formControlName="name">
               </div>
             
               <div class="flex items-center border-b border-gray-500 py-2">
                 <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-                placeholder="surname" type="text" id="surname" formControlName="surname">
+                placeholder="Cognome" type="text" id="surname" formControlName="surname">
               </div>
 
               <button type="submit" class="flex bg-transparent text-primary_text pl-2 pr-2 pt-2 pb-1 rounded-full">

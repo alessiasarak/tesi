@@ -52,17 +52,7 @@ export class UserCardsComponent {
   addCardVisibilty(){
     this.isVisibleAddCard = !this.isVisibleAddCard;
   }
-  addCard(){
-    /*this.isLoading = true;
-    this.cardService.postCard(this.idContact).then(
-      (data) => {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.isLoading = false;
-        this.router.navigate(["/contact-cards/"+this.idContact]);
-      }
-    );*/
-  }
+  
   myForm : FormGroup = this.fb.group({
     name: [''],
     surname: ['']
