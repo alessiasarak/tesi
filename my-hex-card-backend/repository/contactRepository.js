@@ -66,7 +66,8 @@ class ContactRepository {
         try {
           const contact = await Contact.findByPk(contactId);
           if (contact) {
-            await new CardRepository().deleteAllCardsByContact(contactId);
+            let cardRepository = new CardRepository();
+            await cardRepository.deleteAllCardsByContact(contactId);
 
             await contact.destroy();
             
