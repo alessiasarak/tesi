@@ -58,4 +58,8 @@ export class CardService extends CrudService<Card> {
     let response = await lastValueFrom(this.put(card, "associate/"+userId));
     return response;
   }
+
+  async deleteCard(token : string){
+    return this.delete(token);
+  }
 }

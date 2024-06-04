@@ -123,6 +123,17 @@ exports.getACardByUser = asyncHandler(async (req, res) => {
     }
 });
 
+exports.delete = asyncHandler(async (req, res) => {
+    let cardRepository = new CardRepository();
+    let token = req.params.token;
+
+    const deleted = await cardRepository.deleteCard(token);
+    if (deleted) {
+        res.status(200).json({ message: 'Card updated successfully' });
+    } else {
+        res.status(404).json({ message: 'Card not found' });
+    }
+});
 ///////////
 //UPDATE//
 //////////

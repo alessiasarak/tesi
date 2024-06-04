@@ -8,11 +8,12 @@ import { ContactService } from '../../services/contact/contact.service';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { TitleComponent } from '../../component/title/title.component';
 import { CommonModule } from '@angular/common';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [ ReactiveFormsModule, MyButtonComponent, LoadingComponent, TitleComponent, CommonModule ],
+  imports: [ ReactiveFormsModule, MyButtonComponent, LoadingComponent, TitleComponent, SubtitleComponent, CommonModule ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })

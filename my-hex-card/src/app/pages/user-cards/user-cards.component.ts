@@ -106,6 +106,20 @@ export class UserCardsComponent {
     this.isVisible = false;
   }
 
+  async delete(token:string,name:string,surname:string){
+    const confirmed = confirm("Sicuro di voler eliminare la carta (operazione irreversibile)?" + name + " " + surname);
+
+    if (confirmed) {
+      (await this.cardService.deleteCard(token)).subscribe((data) => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(["/contact-cards/"+this.idContact]);
+      });
+    }else {
+      console.log("Delete operation cancelled");
+    }
+  }
+
   setCardUrl(url: SafeUrl, i: number){
     this.cards[i].qrCode = url;
   }

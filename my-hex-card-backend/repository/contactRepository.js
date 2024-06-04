@@ -6,17 +6,6 @@ const bcrypt = require('bcrypt');
 class ContactRepository {
     async createContact(contactData) {
         try {
-            const existingContact = await Contact.findOne({ 
-                where: { 
-                    email: contactData.email 
-                } 
-            });
-            if (existingContact) {
-                return {
-                    "code": 403,
-                    "data": "Contact with this email already exists"
-                };
-            }
  
             let newContact = await Contact.create({
                 ...contactData
@@ -66,7 +55,8 @@ class ContactRepository {
         try {
           const contact = await Contact.findByPk(contactId);
           if (contact) {
-            await new CardRepository().deleteAllCardsByContact(contactId);
+            let cardRepository = new CardRepository();
+            await cardRepository.deleteAllCardsByContact(contactId);
 
             await contact.destroy();
             
