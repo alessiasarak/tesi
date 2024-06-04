@@ -38,9 +38,10 @@ export class CrudService<T> {
     else return this.http.get<T[]>(this.baseApiUrl + this.endpoint, {  withCredentials: true, headers: this.headers });
   }
 
-  put(item? : T, extraEndPoint?: string) : Observable<T>{
+  put(item? : T, extraEndPoint?: string, extraElement? : string) : Observable<T>{
     const body = {
       entity: item,
+      extra: extraElement
     }
 
     

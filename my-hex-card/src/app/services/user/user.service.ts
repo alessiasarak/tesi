@@ -22,8 +22,8 @@ export class UserService extends CrudService<User> {
     return response;
   }
 
-  async putPassword(user : User){
-    let response = await lastValueFrom(this.put(user, "/password/" + sessionStorage.getItem("user_id")!));
+  async putPassword(user : User, oldPassword : string){
+    let response = await lastValueFrom(this.put(user, "/password/" + sessionStorage.getItem("user_id")!, oldPassword));
     return response;
   }
 

@@ -51,8 +51,6 @@ export class ProfileSettingsComponent {
     this.myProfileForm.setValue({
       email: user.email,
     });
-
-    console.log(this.myProfileForm);
   }
 
   async onProfileSubmit() {
@@ -67,18 +65,33 @@ export class ProfileSettingsComponent {
   async onPasswordSubmit() {
     this.isLoading = true;
     this.user.password = this.myPasswordForm.value.newPassword;
+    let oldPassword = this.myPasswordForm.value.password;
     
     let isValid = await this.checkPasswordValidity();
-    if(!isValid) return;
+    if(!isValid) {
+      this.isLoading = false;
+      return;
+    }
 
-    let response = await this.service.putPassword(this.user);
-    if(response) this.router.navigateByUrl("/settings");
+    this.service.putPassword(this.user, oldPassword).then((value) => {
+      this.router.navigate(['/settings']);
+    }).catch((error) => {
+      this.passwordError = "La vecchia password non è corretta";
+      this.isVisible = true;
+    });
+    this.isLoading = false;
   }
 
   passwordError: string = "";
   isVisible: boolean = false;
 
   async checkPasswordValidity() : Promise<boolean> {
+    if(this.myPasswordForm.value.password == ''){
+      this.passwordError = "Inserire la vecchia password";
+      this.isVisible = true;
+      return false;
+    }
+
     const password = this.myPasswordForm.value.newPassword;
     const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
@@ -87,12 +100,12 @@ export class ProfileSettingsComponent {
         this.isVisible = false;
         return true;
       } else {
-        this.passwordError = "Passwords do not match";
+        this.passwordError = "Le password devono essere uguali";
         this.isVisible = true;
         return false;
       }
     } else {
-      this.passwordError = "Password is not valid";
+      this.passwordError = "La password non è valida";
       this.isVisible = true;
       return false;
     }
