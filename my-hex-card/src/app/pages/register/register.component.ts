@@ -99,12 +99,12 @@ export class RegisterComponent {
         this.isPasswordErrorVisible = false;
         return true;
       } else {
-        this.passwordError = "Passwords do not match";
+        this.passwordError = "Le password non sono uguali";
         this.isPasswordErrorVisible = true;
         return false;
       }
     } else {
-      this.passwordError = "Password is not valid";
+      this.passwordError = "La password non è valida";
       this.isPasswordErrorVisible = true;
       return false;
     }
