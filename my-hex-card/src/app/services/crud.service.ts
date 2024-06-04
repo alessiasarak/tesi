@@ -51,8 +51,6 @@ export class CrudService<T> {
   }
 
   delete(extraEndPoint?: string) : Observable<T>{
-    
-
     if(extraEndPoint) return this.http.delete<T>(this.baseApiUrl + this.endpoint + extraEndPoint, {  withCredentials: true, headers: this.headers });
     else return this.http.delete<T>(this.baseApiUrl + this.endpoint, {  withCredentials: true, headers: this.headers });
   }

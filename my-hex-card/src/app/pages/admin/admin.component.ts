@@ -50,8 +50,6 @@ export class AdminComponent {
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(["/admin"]);
       });
-    }else {
-      console.log("Delete operation cancelled");
     }
   }
 }

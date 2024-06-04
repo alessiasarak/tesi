@@ -277,7 +277,17 @@ class CardRepository {
 
   async deleteAllCardsByContact(contactId) {
     try {
-      await Card.destroy({ where: { fk_id_contact: contactId } });
+      let d = await Card.destroy({ where: { fk_id_contact: contactId } });
+      return d;
+    } catch (error) {
+      throw new Error(`Unable to delete cards: ${error}`);
+    }
+  }
+
+  async deleteCard(token) {
+    try {
+      let d = await Card.destroy({ where: { token: token } });
+      return d;
     } catch (error) {
       throw new Error(`Unable to delete cards: ${error}`);
     }

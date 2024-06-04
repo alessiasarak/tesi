@@ -25,4 +25,6 @@ router.post('/card/:idContact', helper.authenticate, cardController.postCard);
 router.put('/card/name-surname/update/:token', helper.authenticate, cardController.updateNameSurname);
 router.put('/card/associate/:idUser', helper.authenticate, cardController.associate);
 
+router.delete('/card/:token', helper.authenticate, cardController.delete);
+
 module.exports = router;
