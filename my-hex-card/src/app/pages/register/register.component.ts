@@ -54,13 +54,6 @@ export class RegisterComponent {
     let isPasswordValid = await this.checkPasswordValidity();
     if(!isPasswordValid) return;
 
-    let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!regex.test(this.user.email)) {
-      this.passwordError = "Bisogna inserire una mail nel formato corretto (pinco@pallo.com)";
-      this.isPasswordErrorVisible = true;
-      return;
-    }
-
     this.isLoading = true;
     this.route.params.subscribe(async params => {
       let token = params['token']; 
@@ -99,7 +92,7 @@ export class RegisterComponent {
 
   async checkPasswordValidity() : Promise<boolean> {
     const password = this.myForm.value.password;
-    const regex = /^(?=.*[A-Z]).{8,}$/;    
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;    
 
     if (regex.test(password)) {
       if (password === this.myForm.value.repeatPassword) {
