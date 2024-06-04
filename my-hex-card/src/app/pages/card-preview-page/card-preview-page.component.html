@@ -2,15 +2,17 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<app-title title="La tua carta digitale"></app-title>
-<app-subtitle subtitle="Qui è presente una preview di come risulterà il la tua carta digitale agli altri!"></app-subtitle>
+<div class="mt-20">
+    <app-title title="La tua carta digitale"></app-title>
+    <app-subtitle subtitle="Qui è presente una preview di come risulterà il la tua carta digitale agli altri!"></app-subtitle>
 
-<div class="lg:flex lg:w-full lg:justify-center my-8">
-    <div class="lg:w-80">
-        <app-card-preview *ngIf="!isLoading" [card]="card"></app-card-preview>
+    <div class="lg:flex lg:w-full lg:justify-center my-8">
+        <div class="lg:w-80">
+            <app-card-preview *ngIf="!isLoading" [card]="card"></app-card-preview>
+        </div>
     </div>
-</div>
 
-<div class="flex flex-col items-center mt-8">
-    <a href="/card-settings/{{card.token}}" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica</a>
+    <div class="flex flex-col items-center mt-8">
+        <a href="/card-settings/{{card.token}}" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica</a>
+    </div>
 </div>

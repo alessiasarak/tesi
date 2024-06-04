@@ -5,11 +5,15 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { User } from '../../interfaces/user';
+import { LoadingComponent } from '../../component/loading/loading.component';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { TitleComponent } from '../../component/title/title.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-forgot-password-reset',
   standalone: true,
-  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule ],
+  imports: [ ReactiveFormsModule, MyButtonComponent, CommonModule, TitleComponent, SubtitleComponent, MatIconModule ],
   templateUrl: './forgot-password-reset.component.html',
   styleUrl: './forgot-password-reset.component.css'
 })
@@ -18,7 +22,6 @@ export class ForgotPasswordResetComponent {
   constructor(private router: Router, private route: ActivatedRoute, private service: UserService, private fb: FormBuilder){}
 
   myPasswordForm : FormGroup = this.fb.group({
-    password: [''],
     newPassword: [''],
     repeatedPassword: [''],
   });
@@ -66,5 +69,10 @@ export class ForgotPasswordResetComponent {
       this.isVisible = true;
       return false;
     }
+  }
+
+  showPassword = false;
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

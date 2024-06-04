@@ -51,7 +51,7 @@
     <div class="mb-4"  *ngIf="showPassword">
       <div class="flex items-center border-b border-gray-500 py-2">
         <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-        placeholder="Password*" type="text" id="repeatPassword" formControlName="repeatPassword">
+        placeholder="COnferma password*" type="text" id="repeatPassword" formControlName="repeatPassword">
         <span class="text-gray-500" (click)="togglePassword()">
           <mat-icon class="flex">visibility_off</mat-icon>
         </span>
@@ -62,7 +62,7 @@
     <div class="mb-4"  *ngIf="!showPassword">
       <div class="flex items-center border-b border-gray-500 py-2">
         <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
-        placeholder="Confirm password*" type="password" id="repeatPassword" formControlName="repeatPassword">
+        placeholder="Conferma password*" type="password" id="repeatPassword" formControlName="repeatPassword">
         <span class="text-gray-500" (click)="togglePassword()">
           <mat-icon class="flex">visibility</mat-icon>
         </span>
