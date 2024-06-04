@@ -6,11 +6,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { TitleComponent } from '../../component/title/title.component';
+import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, TitleComponent ],
+  imports: [ CommonModule, SubtitleComponent,MatIconModule, ReactiveFormsModule, TitleComponent ],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })

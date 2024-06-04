@@ -1,16 +1,19 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="lg:flex lg:flex-col lg:min-h-screen justify-center">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="flex flex-col flex-grow min-h-screen justify-center">
   <!--Fixed worka per quello che intendevo, gli elemnti dentro non si centrano-->
   <div class="flex lg:flex-row sm:flex-col w-full justify-between">
-    <app-title title="Hey, welcome back!" class="flex lg:w-1/3"></app-title>
+    <div>
+      <app-title title="Bentornato!" class="flex lg:w-1/3"></app-title>
+      <app-subtitle subtitle="Effettua il login per accedere alla gestione delle tue carte digitali!"></app-subtitle>
+    </div>
+
     <div *ngIf="isVisible" class="lg:hidden text-red-400 pb-6 w-full">
       Errore nel login
     </div>
 
-    <div class="lg:flex lg:flex-row lg:w-2/3 lg:pl-32">
+    <div class="lg:flex lg:flex-row lg:w-2/3 lg:pl-32 mt-4 lg:mt-0">
       <div class="flex items-center border-b border-gray-500 py-2 lg:mr-4 mb-4 w-full">
         <input 
           type="email" 
@@ -40,7 +43,7 @@
   
   <div class="lg:flex lg:flex-row">
     <div class="flex flex-row w-full justify-end text-medium_text font-medium mb-4 lg:hidden cursor-pointer">
-      <a class="flex text-primary underline" (click)="forgotPassword()">Forgot password?</a>
+      <a class="flex text-primary underline" (click)="forgotPassword()">Password dimenticata?</a>
     </div>
 
     <div class="w-full">
@@ -51,7 +54,7 @@
         <button type="submit" class="bg-primary text-black pl-8 pr-8 pt-4 pb-4 mb-3 rounded-full">Login</button>
 
         <div class="flex flex-row w-full justify-end text-medium_text font-medium mb-4 lg:flex sm:hidden lg:text-right cursor-pointer">
-          <a class="flex text-primary underline" (click)="forgotPassword()">Forgot password?</a>
+          <a class="flex text-primary underline" (click)="forgotPassword()">Password dimenticata?</a>
         </div>
 
         <div class="flex flex-row w-full justify-center text-tiny_text font-normal cursor-pointer" *ngIf="token">
