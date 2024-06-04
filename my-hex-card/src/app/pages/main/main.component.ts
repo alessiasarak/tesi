@@ -90,6 +90,7 @@ export class MainComponent implements OnInit{
 
           this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
           this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
+          console.log(this.myMainStyle)
           this.isLoading = false;
         }
       );
@@ -97,19 +98,24 @@ export class MainComponent implements OnInit{
   }
 
   addToContact(){
-    let file = new Blob([ this.vCardCreator() ], {type: '.vcf'});
-    let a = document.createElement("a");
+    // Crea il file .vcf come blob
+    let file = new Blob([ this.vCardCreator() ], { type: 'text/vcard' });
     let url = URL.createObjectURL(file);
+
+    let a = document.createElement("a");
     a.href = url;
-    a.download = this.myCard.company + '.vcf';
+    a.target = '_blank'; 
+    a.download = this.myCard.company + '.vcf'; 
+    
     document.body.appendChild(a);
     a.click();
+    
     setTimeout(function() {
         document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);  
-    }, 0); 
+        window.URL.revokeObjectURL(url);
+    }, 0);
   }
-  
+
   private vCardCreator() {
     const vCard = vCardsJS();
 
