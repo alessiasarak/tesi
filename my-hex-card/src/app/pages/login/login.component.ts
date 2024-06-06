@@ -67,8 +67,8 @@ export class LoginComponent {
         sessionStorage.setItem("role", this.loggedUser.fk_role.toString());
   
         if(this.loggedUser.fk_role.toString() != "ADMIN"){
-          let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
-          sessionStorage.setItem('cards', JSON.stringify(card));
+          //let card = await this.cardService.getCardsByUser(this.loggedUser.id.toString());
+          //sessionStorage.setItem('cards', JSON.stringify(card));
         } else {
           this.isVisible = true;
         }
@@ -77,6 +77,7 @@ export class LoginComponent {
         else this.router.navigateByUrl("/settings");
       }
     }).catch((error) => {
+      console.log(error);
       this.isLoading = false;
       this.isVisible = true;
     });
