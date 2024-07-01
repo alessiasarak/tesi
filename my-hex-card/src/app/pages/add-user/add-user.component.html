@@ -3,31 +3,31 @@
 
 <div class="lg:pl-96 lg:pr-96 mt-20">
 <app-title title="Aggiungi contatto"></app-title>
-<app-subtitle subtitle="Aggiungi un contatto, il metodo di contatto può essere quelo che si preferisce di più!"></app-subtitle>
+<app-subtitle subtitle="Aggiungi un contatto, il metodo di contatto può essere quello che si preferisce di più!"></app-subtitle>
 
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="mt-8">
   <div class="flex flex-col mb-3">
     <label for="title">Contatto</label>
-    <input type="email" class="bg-secondary w-full p-2 rounded-md text-black" id="email" formControlName="email" placeholder="Contatto">
+    <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="email" formControlName="email" placeholder="Contatto">
   </div>
   
   <div class="flex flex-col mb-3 ">
-    <label for="name">Name</label>
-    <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="name" formControlName="name" placeholder="name">
+    <label for="name">Nome</label>
+    <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="name" formControlName="name" placeholder="Nome">
   </div>
 
   <div class="flex flex-col mb-3 ">
-      <label for="surname">Surname</label>
-      <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="surname" formControlName="surname" placeholder="surname">
+      <label for="surname">Cognome</label>
+      <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="surname" formControlName="surname" placeholder="Cognome">
   </div>
 
   <div class="flex flex-col mb-3 ">
-    <label for="company">Company</label>
-    <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="company" formControlName="company" placeholder="company">
+    <label for="company">Azienda</label>
+    <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="company" formControlName="company" placeholder="Azienda">
   </div>
 
   <div class="flex flex-col items-center">
-    <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Aggiungi utente</button>
+    <button type="submit" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Aggiungi contatto</button>
   </div>
 </form>
 </div>

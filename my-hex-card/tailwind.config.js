@@ -25,8 +25,8 @@ module.exports = {
       secondary: "#fff",
       transparent: "#00000000",
       
-      primary_text: "#fff",
-      secondary_text: "#BBBBBB",
+      primary_text: "#000",
+      secondary_text: "#777",
       
       black: "#000",
     },
