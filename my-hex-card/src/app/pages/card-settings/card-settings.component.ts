@@ -276,9 +276,10 @@ export class CardSettingsComponent {
 
     let response = await this.service.putCard(this.card, this.myToken);
     if(response) {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(["/card-settings/"+this.myToken]);
+      // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      // this.router.onSameUrlNavigation = 'reload';
+      // this.router.navigate(["/card-settings/"+this.myToken]);
+      this.setVisible();
       this.isLoading = false;
     }
   }
@@ -293,9 +294,10 @@ export class CardSettingsComponent {
     let response = await this.service.putStyleCard(this.card, this.myToken);
     
     if(response) {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(["/card-settings/"+this.myToken]);
+      // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      // this.router.onSameUrlNavigation = 'reload';
+      // this.router.navigate(["/card-settings/"+this.myToken]);
+      this.setVisible();
       this.isLoading = false;
     }
   }
@@ -315,5 +317,17 @@ export class CardSettingsComponent {
 
   setStyleTrue(){
     this.style = true;
+  }
+
+  isVisible = false;
+
+  async setVisible(){
+    this.isVisible = true;
+    await this.delay(3000);
+    this.isVisible = false;
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }
