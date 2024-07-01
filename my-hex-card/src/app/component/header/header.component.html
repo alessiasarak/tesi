@@ -1,4 +1,4 @@
-<div class="fixed w-full right-0">
+<div class="absolute w-full right-0">
     <div class="flex flex-row justify-between z-10 bg-transparent  text-secondary p-4 pt-8">
         <div class="flex">
             <button *ngIf="showBackButton" type="button" class="flex text-primary_text" (click)="goBack()">
@@ -21,7 +21,7 @@
 
 <div *ngIf="isVisible" class="obscure z-10" (click)="menu()"></div>
 
-<div class="z-20 absolute top-0 min-h-screen w-52 text-secondary bg-black pt-8 transition-all duration-1000"
+<div class="z-20 fixed top-0 min-h-screen w-52 text-secondary bg-black pt-8 transition-all duration-1000"
     [ngClass]="!isVisible ? '-right-52' : 'right-0'">
     
     <div class="flex w-full pr-4 justify-end">

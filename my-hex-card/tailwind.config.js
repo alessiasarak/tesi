@@ -27,6 +27,8 @@ module.exports = {
       
       primary_text: "#000",
       secondary_text: "#777",
+
+      background_color: "#fcf6ed",
       
       black: "#000",
     },
