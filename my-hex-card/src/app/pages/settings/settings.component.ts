@@ -9,11 +9,12 @@ import { CommonModule } from '@angular/common';
 import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { SecondaryButtonComponent } from '../../component/secondary-button/secondary-button.component';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [ CommonModule, CardPreviewComponent, TitleComponent, SubtitleComponent, LoadingComponent ],
+  imports: [ CommonModule, CardPreviewComponent, TitleComponent, SubtitleComponent, LoadingComponent, SecondaryButtonComponent ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -10,11 +10,12 @@ import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { SecondaryButtonComponent } from '../../component/secondary-button/secondary-button.component';
 
 @Component({
   selector: 'app-set-all-style-cards',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, TitleComponent, SubtitleComponent, LoadingComponent, CardPreviewComponent ],
+  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, TitleComponent, SubtitleComponent, LoadingComponent, CardPreviewComponent, SecondaryButtonComponent ],
   templateUrl: './set-all-style-cards.component.html',
   styleUrl: './set-all-style-cards.component.css'
 })
