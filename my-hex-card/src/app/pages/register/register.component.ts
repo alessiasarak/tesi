@@ -9,11 +9,12 @@ import { CardService } from '../../services/card.service';
 import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { SecondaryButtonComponent } from '../../component/secondary-button/secondary-button.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, FormsModule, TitleComponent, SubtitleComponent, LoadingComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, FormsModule, TitleComponent, SubtitleComponent, LoadingComponent, SecondaryButtonComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
