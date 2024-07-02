@@ -1,14 +1,13 @@
-<div class="fixed w-full right-0">
+<div class="absolute w-full right-0">
     <div class="flex flex-row justify-between z-10 bg-transparent  text-secondary p-4 pt-8">
         <div class="flex">
-            <button *ngIf="showBackButton" type="button" class="flex" (click)="goBack()">
+            <button *ngIf="showBackButton" type="button" class="flex text-primary_text" (click)="goBack()">
                 <mat-icon class="flex">arrow_back</mat-icon>
             </button>
         </div>
         
-        <button (click)="menu()" id="menuButton" class="flex z-30 lg:hidden">
-            <mat-icon *ngIf="!isVisible">menu</mat-icon>
-            <mat-icon *ngIf="isVisible">close</mat-icon>
+        <button (click)="menu()" id="menuButton" class="flex lg:hidden">
+            <mat-icon class="text-primary_text">menu</mat-icon>
         </button>
 
         
@@ -20,13 +19,20 @@
     </div>
 </div>
 
-<div *ngIf="isVisible" class="obscure z-10" (click)="menu()"></div>
+<!-- <div *ngIf="isVisible" class="obscure z-10" (click)="menu()"></div> -->
 
-<div class="z-20 absolute top-0 min-h-screen w-52 text-secondary bg-black pt-16 transition-all duration-1000"
-    [ngClass]="!isVisible ? '-right-52' : 'right-0'">
+<div class="z-20 fixed top-0 min-h-screen w-full text-black bg-background_color pt-8 transition-all duration-500"
+    [ngClass]="!isVisible ? '-right-full' : 'right-0'">
     
+    <div class="flex w-full pr-4 justify-end">
+        <button (click)="menu()" id="menuButton" class="flex z-50 lg:hidden">
+            <mat-icon class="pb-16">close</mat-icon>
+        </button>
+    </div>
+    
+
     @for (item of menuList; track item; let i = $index) {
-        <a [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-secondary'" (click)="menu()">{{ item.title }}</a>
+        <a [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" (click)="menu()">{{ item.title }}</a>
     }
 </div>
 

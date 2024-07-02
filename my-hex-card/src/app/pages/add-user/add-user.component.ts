@@ -9,11 +9,12 @@ import { LoadingComponent } from '../../component/loading/loading.component';
 import { TitleComponent } from '../../component/title/title.component';
 import { CommonModule } from '@angular/common';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { PrimaryButtonComponent } from '../../component/primary-button/primary-button.component';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [ ReactiveFormsModule, MyButtonComponent, LoadingComponent, TitleComponent, SubtitleComponent, CommonModule ],
+  imports: [ ReactiveFormsModule, MyButtonComponent, LoadingComponent, TitleComponent, SubtitleComponent, CommonModule, PrimaryButtonComponent ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })

@@ -25,8 +25,10 @@ module.exports = {
       secondary: "#fff",
       transparent: "#00000000",
       
-      primary_text: "#fff",
-      secondary_text: "#BBBBBB",
+      primary_text: "#000",
+      secondary_text: "#777",
+
+      background_color: "#f8f8f8",
       
       black: "#000",
     },

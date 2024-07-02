@@ -14,11 +14,12 @@ import { TitleComponent } from '../../component/title/title.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { PrimaryButtonComponent } from '../../component/primary-button/primary-button.component';
 
 @Component({
   selector: 'app-card-settings',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent, LoadingComponent, SubtitleComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent, LoadingComponent, SubtitleComponent, PrimaryButtonComponent ],
   templateUrl: './card-settings.component.html',
   styleUrl: './card-settings.component.css'
 })
@@ -276,9 +277,10 @@ export class CardSettingsComponent {
 
     let response = await this.service.putCard(this.card, this.myToken);
     if(response) {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(["/card-settings/"+this.myToken]);
+      // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      // this.router.onSameUrlNavigation = 'reload';
+      // this.router.navigate(["/card-settings/"+this.myToken]);
+      this.setVisible();
       this.isLoading = false;
     }
   }
@@ -293,9 +295,10 @@ export class CardSettingsComponent {
     let response = await this.service.putStyleCard(this.card, this.myToken);
     
     if(response) {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(["/card-settings/"+this.myToken]);
+      // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      // this.router.onSameUrlNavigation = 'reload';
+      // this.router.navigate(["/card-settings/"+this.myToken]);
+      this.setVisible();
       this.isLoading = false;
     }
   }
@@ -315,5 +318,17 @@ export class CardSettingsComponent {
 
   setStyleTrue(){
     this.style = true;
+  }
+
+  isVisible = false;
+
+  async setVisible(){
+    this.isVisible = true;
+    await this.delay(3000);
+    this.isVisible = false;
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }
