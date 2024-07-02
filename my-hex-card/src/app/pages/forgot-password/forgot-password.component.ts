@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { TitleComponent } from '../../component/title/title.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { SecondaryButtonComponent } from '../../component/secondary-button/secondary-button.component';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [ CommonModule, SubtitleComponent,MatIconModule, ReactiveFormsModule, TitleComponent ],
+  imports: [ CommonModule, SubtitleComponent,MatIconModule, ReactiveFormsModule, TitleComponent, SecondaryButtonComponent ],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })
