@@ -10,11 +10,13 @@ import { TitleComponent } from "../../component/title/title.component";
 import { HeaderComponent } from "../../component/header/header.component";
 import { LoadingComponent } from "../../component/loading/loading.component";
 import { SubtitleComponent } from "../../component/subtitle/subtitle.component";
+import { PrimaryButtonComponent } from "../../component/primary-button/primary-button.component";
+import { SecondaryButtonComponent } from "../../component/secondary-button/secondary-button.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, SubtitleComponent, MatIconModule, ReactiveFormsModule, TitleComponent, HeaderComponent, LoadingComponent ],
+  imports: [ CommonModule, SubtitleComponent, MatIconModule, ReactiveFormsModule, TitleComponent, HeaderComponent, LoadingComponent, SecondaryButtonComponent ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

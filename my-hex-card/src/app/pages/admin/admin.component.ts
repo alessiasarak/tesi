@@ -8,11 +8,12 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { PlusButtonComponent } from '../../component/plus-button/plus-button.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, MatIcon, TitleComponent, SubtitleComponent, LoadingComponent ],
+  imports: [ CommonModule, MatIconModule, MatIcon, TitleComponent, SubtitleComponent, LoadingComponent, PlusButtonComponent ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })

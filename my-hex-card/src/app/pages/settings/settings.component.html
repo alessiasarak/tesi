@@ -19,7 +19,9 @@
         <swiper-slide class="w-full overflow-y-scroll swiper-vertical" (click)="viewDetailCard(card.token)">
           <app-card-preview [card]="card"></app-card-preview>
           <div class="flex flex-col items-center mt-8">
-              <a href="/card-settings/{{card.token}}" class="flex bg-primary  text-black pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl">Modifica</a>
+            <a href="/card-settings/{{card.token}}" type="submit" class="flex text-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl border border-primary">
+              Modifica
+            </a>  
           </div>
         </swiper-slide>
       }

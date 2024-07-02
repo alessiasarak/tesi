@@ -14,11 +14,12 @@ import { TitleComponent } from '../../component/title/title.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
+import { PrimaryButtonComponent } from '../../component/primary-button/primary-button.component';
 
 @Component({
   selector: 'app-card-settings',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent, LoadingComponent, SubtitleComponent ],
+  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent, LoadingComponent, SubtitleComponent, PrimaryButtonComponent ],
   templateUrl: './card-settings.component.html',
   styleUrl: './card-settings.component.css'
 })

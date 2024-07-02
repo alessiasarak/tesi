@@ -19,10 +19,10 @@
     </div>
 </div>
 
-<div *ngIf="isVisible" class="obscure z-10" (click)="menu()"></div>
+<!-- <div *ngIf="isVisible" class="obscure z-10" (click)="menu()"></div> -->
 
-<div class="z-20 fixed top-0 min-h-screen w-52 text-secondary bg-black pt-8 transition-all duration-1000"
-    [ngClass]="!isVisible ? '-right-52' : 'right-0'">
+<div class="z-20 fixed top-0 min-h-screen w-full text-black bg-background_color pt-8 transition-all duration-500"
+    [ngClass]="!isVisible ? '-right-full' : 'right-0'">
     
     <div class="flex w-full pr-4 justify-end">
         <button (click)="menu()" id="menuButton" class="flex z-50 lg:hidden">
@@ -32,7 +32,7 @@
     
 
     @for (item of menuList; track item; let i = $index) {
-        <a [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-secondary'" (click)="menu()">{{ item.title }}</a>
+        <a [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" (click)="menu()">{{ item.title }}</a>
     }
 </div>
 
