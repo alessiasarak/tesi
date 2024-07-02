@@ -9,17 +9,19 @@
     <app-subtitle *ngIf="cards.length == 1" subtitle="Qua puoi trovare il tuo biglietto da visita digitale e modificarlo!"></app-subtitle>
 
     <div *ngIf="cards.length > 1" class="flex flex-col items-center mt-8 lg:block sm:hidden ">
-      <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black w-44 rounded-3xl pr-4 pl-4 pt-2 pb-2 text-[14px]">Impostazioni carte</a>
+      <a href="card-settings/style/set-all-style-cards" class="bg-primary !text-background_color w-44 rounded-3xl pr-4 pl-4 pt-2 pb-2 text-[14px]">Impostazioni carte</a>
     </div>
   </div>
 
   <div class="lg:flex lg:items-center lg:justify-center flex-grow min-h-full lg:w-2/3 mt-8 mb-4">
     <swiper-container class="w-full lg:w-72 " effect="cards">
       @for (card of cards; track card.token; let i = $index) {
-        <swiper-slide class="w-full overflow-y-scroll swiper-vertical" (click)="viewDetailCard(card.token)">
-          <app-card-preview [card]="card"></app-card-preview>
+        <swiper-slide class="w-full overflow-y-scroll swiper-vertical bg-[#fff] rounded-3xl" (click)="viewDetailCard(card.token)">
+          <div class="w-full h-[30rem] overflow-y-scroll swiper-vertical">
+            <app-card-preview [card]="card"></app-card-preview>
+          </div>
           <div class="flex flex-col items-center mt-8">
-            <a href="/card-settings/{{card.token}}" type="submit" class="flex text-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl border border-primary">
+            <a href="/card-settings/{{card.token}}" type="submit" class="flex !text-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl border border-primary">
               Modifica
             </a>  
           </div>
@@ -29,7 +31,7 @@
   </div>
 
   <div *ngIf="cards.length > 1" class="flex flex-col items-center p-4 mt-4 lg:hidden">
-    <a href="card-settings/style/set-all-style-cards" class="bg-primary  text-black rounded-3xl p-2">Impostazioni carte</a>
+    <a href="card-settings/style/set-all-style-cards" class="bg-primary  !text-background_color rounded-3xl p-2">Impostazioni carte</a>
   </div>
 </div>
 </div>
