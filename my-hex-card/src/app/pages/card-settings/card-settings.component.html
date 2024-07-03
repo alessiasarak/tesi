@@ -27,7 +27,7 @@
     <form *ngIf="!style" [formGroup]="myForm" (ngSubmit)="onSubmit()" class="lg:flex lg:flex-row lg:w-2/3 mt-4" >
         <div class="lg:flex lg:flex-col lg:mr-8">
             <div class="flex flex-col mb-4 lg:m-0">
-                <div class="flex flex-row justify-between align-middle lg:hidden">
+                <div class="flex flex-row justify-between align-middle lg:justify-center">
                     <div class="w-20 h-20 overflow-hidden rounded-full">
                         <img src="{{ card.img }}" class="object-cover w-full h-full">
                         <app-image-cropper 
@@ -36,7 +36,7 @@
                             (imageReady)="handleImageReady($event)" 
                         />
                     </div>
-                    <div class="flex bg-primary  text-background_color justify-center align-middle text-medium_text rounded-3xl h-10 w-24 pt-3">
+                    <div class="flex bg-primary  text-background_color justify-center align-middle text-medium_text rounded-3xl h-10 w-24 pt-3 lg:hidden">
                         <a href="/card-preview/{{card.token}}" class="flex">Preview</a>
                     </div>
                 </div>
