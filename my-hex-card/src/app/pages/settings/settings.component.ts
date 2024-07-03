@@ -10,11 +10,12 @@ import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 import { SecondaryButtonComponent } from '../../component/secondary-button/secondary-button.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [ CommonModule, CardPreviewComponent, TitleComponent, SubtitleComponent, LoadingComponent, SecondaryButtonComponent ],
+  imports: [ CommonModule, CardPreviewComponent, TitleComponent, SubtitleComponent, LoadingComponent, SecondaryButtonComponent, MatIcon ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -13,7 +13,7 @@
         
         <div class="flex flex-row text-secondary bg-transparent lg:z-30 sm:hidden lg:inline-flex">
             @for (item of menuList; track item; let i = $index) {
-                <a class="newA" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-secondary'">{{ item.title }}</a>
+                <a class="newA" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'">{{ item.title }}</a>
             }
         </div>
     </div>
@@ -32,7 +32,15 @@
     
 
     @for (item of menuList; track item; let i = $index) {
-        <a [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" (click)="menu()">{{ item.title }}</a>
+
+        <a *ngIf="item.link != '/guide' && item.link != '/logout'" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" (click)="menu()">{{ item.title }}</a>
+        
+        <a *ngIf="item.link == '/guide'" (click)="downloadGuide()" download [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" (click)="menu()">{{ item.title }}</a>
+
+        <div class="fixed w-full bottom-2" >
+            <hr *ngIf="item.link == '/logout'" class="lg:hidden border-[#acacac68] mx-4 " />
+            <a *ngIf="item.link == '/logout'" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" (click)="menu()">{{ item.title }}</a>
+        </div>
     }
 </div>
 

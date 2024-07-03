@@ -4,17 +4,17 @@
 
 <div class="sm:hidden lg:flex lg:flex-col">
   <app-title title="Registrati" class="flex"></app-title>
-  <app-subtitle subtitle="Registrati per collegare automaticamente la carta fisica a quella digitale!"></app-subtitle>
+  <app-subtitle subtitle="Registrati per collegare la tua carta fisica a quella digitale!"></app-subtitle>
 </div>
 
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="flex sm:flex-col lg:flex-row sm:min-h-screen sm:justify-center">
 
   <div class="sm:flex sm:flex-col lg:hidden">
     <app-title title="Registrati" class="flex"></app-title>
-    <app-subtitle subtitle="Registrati per collegare automaticamente la carta fisica a quella digitale!"></app-subtitle>
+    <app-subtitle subtitle="Registrati per collegare la tua carta fisica a quella digitale!"></app-subtitle>
   </div>
   <div class="mb-4">
-    <div class="flex items-center border-b border-gray-500 py-2 mr-4">
+    <div class="flex items-center border-b border-gray-500 py-2 ">
       <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none"
       placeholder="E-mail*" type="email" id="email" formControlName="email">
       <span class="text-gray-500">
@@ -22,6 +22,8 @@
       </span>
     </div>
   </div>
+
+  
   
   <div class="lg:flex lg:flex-col">
     <div class="mb-4"  *ngIf="showPassword">
@@ -79,7 +81,7 @@
     <div *ngIf="isPasswordErrorVisible" class="text-red-400 pb-6 w-full">
       {{ passwordError}}
     </div>
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center mt-4">
       <app-secondary-button text="Registrati"></app-secondary-button>
     </div>
     <div class="flex flex-row w-full justify-center text-tiny_text font-normal">

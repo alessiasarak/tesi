@@ -21,11 +21,13 @@ export class HeaderComponent {
   userMenu = [
     { link: "/settings", title: "Home" },
     { link: "/profile-settings", title: "Profilo" },
+    { link: "/guide", title: "Guida" },
     { link: "/logout", title: "Logout" }
   ];
   adminMenu = [
     { link: "/admin", title: "Home" },
     { link: "/profile-settings", title: "Profilo" },
+    { link: "/guide", title: "Guida", pdfLink: "path/to/your/guide.pdf" },
     { link: "/logout", title: "Logout" }
   ];
   notLoggedMenu = [
@@ -80,5 +82,13 @@ export class HeaderComponent {
     || this.router.url == '/register' || this.router.url == '/forgot-password'){
       this.showBackButton = false;
     }else this.showBackButton = true;
+  }
+
+  downloadGuide() {
+    const pdfLink = 'assets/guide.pdf'; // Path to your PDF file
+    const link = document.createElement('a');
+    link.href = pdfLink;
+    link.download = 'Guida.pdf'; // Name of the PDF file to be downloaded
+    link.click();
   }
 }
