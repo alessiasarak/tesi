@@ -1,0 +1,16 @@
+
+
+<div [style.width]="imageWidth() + 'px'" style="background-color: black;">
+    <img 
+        [src]="imageSource()" 
+        [height]="imageHeight()" 
+        [width]="imageWidth()" 
+        style="border-radius: 100px"
+    />
+
+    <button (click)="inputField.click()" class="bg-primary absolute text-background_color pt-2 px-2 rounded-full -mt-32 ml-12">
+        <mat-icon class="!text-lg">add_a_photo</mat-icon>
+    </button>
+</div>
+
+<input #inputField type="file" hidden (change)="fileSelected($event)" (click)="inputField.value = ''" />
