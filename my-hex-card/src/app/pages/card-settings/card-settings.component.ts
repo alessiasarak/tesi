@@ -15,18 +15,24 @@ import { CardPreviewComponent } from '../../component/card-preview/card-preview.
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 import { PrimaryButtonComponent } from '../../component/primary-button/primary-button.component';
+import { ImageCropperComponent } from '../../component/image-cropper/image-cropper.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-card-settings',
   standalone: true,
-  imports: [ CommonModule, MatIconModule, ReactiveFormsModule, MyButtonComponent, TitleComponent, CardPreviewComponent, LoadingComponent, SubtitleComponent, PrimaryButtonComponent ],
+  imports: [ CommonModule, 
+    MatIconModule, 
+    ReactiveFormsModule, 
+    MyButtonComponent, 
+    TitleComponent, CardPreviewComponent, LoadingComponent, SubtitleComponent, PrimaryButtonComponent, ImageCropperComponent ],
   templateUrl: './card-settings.component.html',
   styleUrl: './card-settings.component.css'
 })
 export class CardSettingsComponent {
   //constructor
   isLoading = true;
-  constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
+  constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder, private http: HttpClient){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -52,7 +58,6 @@ export class CardSettingsComponent {
   myToken : string = this.route.snapshot.params['id'];
 
   style = false;
-
 
   myForm : FormGroup = this.fb.group({
     img: [''],
@@ -310,6 +315,24 @@ export class CardSettingsComponent {
     reader.onload = () => {
         this.card.img = reader.result!.toString();
     };
+  }
+  croppedImageUrl: string | undefined;
+  handleImageReady(imageUrl: string) {
+    console.log("Image ready:", imageUrl);
+    this.croppedImageUrl = imageUrl;
+
+    return this.http.get(imageUrl, { responseType: 'blob' }).
+    subscribe(blob => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+        reader.onload = () => {
+          this.card.img = reader.result!.toString();
+        };
+
+      });
+    });
   }
 
   setStyleFalse(){

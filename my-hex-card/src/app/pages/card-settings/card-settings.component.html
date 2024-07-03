@@ -30,6 +30,11 @@
                 <div class="flex flex-row justify-between align-middle lg:hidden">
                     <div class="w-20 h-20 overflow-hidden rounded-full">
                         <img src="{{ card.img }}" class="object-cover w-full h-full">
+                        <app-image-cropper 
+                            [width]="80" 
+                            [height]="80" 
+                            (imageReady)="handleImageReady($event)" 
+                        />
                     </div>
                     <div class="flex bg-primary  text-background_color justify-center align-middle text-medium_text rounded-3xl h-10 w-24 pt-3">
                         <a href="/card-preview/{{card.token}}" class="flex">Preview</a>
@@ -44,14 +49,14 @@
                 </div>
             </div>
 
-            <div class="flex flex-col mb-2 ">
+            <!-- <div class="flex flex-col mb-2 ">
                 <label for="img">Immagine</label>
                 <input type="file" accept=".jpg, .jpeg, .png" 
                 (change)="processFile($event)" class="bg-secondary w-full p-2 rounded-md text-black" id="img" 
                 formControlName="img" placeholder="Image" maxFileSize="5 * 1024 * 1024">
             </div>
 
-            <hr class="my-4 lg:hidden" />
+            <hr class="my-4 lg:hidden" /> -->
 
             <div class="flex flex-col mb-2 ">
                 <label for="name">Nome</label>
