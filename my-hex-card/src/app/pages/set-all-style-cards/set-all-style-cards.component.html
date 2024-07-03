@@ -13,16 +13,22 @@
             <div class="flex flex-row justify-between align-middle lg:hidden">
                 <div class="w-20 h-20 overflow-hidden rounded-full">
                     <img src="{{ card.img }}" class="object-cover w-full h-full">
+
+                    <app-image-cropper 
+                        [width]="80" 
+                        [height]="80" 
+                        (imageReady)="handleImageReady($event)" 
+                    />
                 </div>
             </div>
         </div>
 
-        <div class="flex flex-col mb-3 ">
+        <!-- <div class="flex flex-col mb-3 ">
             <label for="img">Image</label>
             <input type="file" accept=".jpg, .jpeg, .png" 
             (change)="processFile($event)" class="bg-secondary w-full p-2 rounded-md text-black" id="img" 
             formControlName="img" placeholder="Image" maxFileSize="5 * 1024 * 1024">
-        </div>
+        </div> -->
         
         <div class="flex flex-row mb-3 ">
             <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>

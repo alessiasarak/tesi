@@ -11,16 +11,18 @@ import { LoadingComponent } from '../../component/loading/loading.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
 import { SecondaryButtonComponent } from '../../component/secondary-button/secondary-button.component';
+import { HttpClient } from '@angular/common/http';
+import { ImageCropperComponent } from '../../component/image-cropper/image-cropper.component';
 
 @Component({
   selector: 'app-set-all-style-cards',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, TitleComponent, SubtitleComponent, LoadingComponent, CardPreviewComponent, SecondaryButtonComponent ],
+  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, TitleComponent, SubtitleComponent, LoadingComponent, CardPreviewComponent, SecondaryButtonComponent, ImageCropperComponent ],
   templateUrl: './set-all-style-cards.component.html',
   styleUrl: './set-all-style-cards.component.css'
 })
 export class SetAllStyleCardsComponent {
-  constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder){}
+  constructor(private router: Router, private route: ActivatedRoute, private service: CardService, private fb: FormBuilder, private http: HttpClient){}
 
   isLoading = true;
   ngOnInit(): void {
@@ -130,5 +132,25 @@ export class SetAllStyleCardsComponent {
         this.card.img = reader.result!.toString();
         this.isLoading = false;
     };
+  }
+
+
+  croppedImageUrl: string | undefined;
+  handleImageReady(imageUrl: string) {
+    console.log("Image ready:", imageUrl);
+    this.croppedImageUrl = imageUrl;
+
+    return this.http.get(imageUrl, { responseType: 'blob' }).
+    subscribe(blob => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+        reader.onload = () => {
+          this.card.img = reader.result!.toString();
+          this.isLoading = false;
+        };
+      });
+    });
   }
 }
