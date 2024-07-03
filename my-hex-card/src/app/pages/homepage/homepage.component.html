@@ -8,11 +8,11 @@
 
 
             <div *ngIf="!token" class="flex text-subtitle font-subtitle text-secondary_text" >
-                Effettua il login o richiedi una carta su &#160;<a href="https://www.myhexcard.ch/" class="underline" target="_blank"> myhexcard.ch</a>
+                <div>Effettua il login o richiedi una carta su &#160;<a href="https://www.myhexcard.ch/" class="underline" target="_blank"> myhexcard.ch</a></div>
             </div>
 
             <!-- <app-subtitle *ngIf="!token" subtitle="Effettua il login o richiedi una carta!"></app-subtitle> -->
-            <app-subtitle *ngIf="token" subtitle="Effettua il login o registrati!"></app-subtitle>
+            <app-subtitle *ngIf="token" subtitle="Effettua il login o registrati"></app-subtitle>
         </div>
         <div class="flex flex-col justify-end mt-8">
             <app-primary-button text="Login" (click)="login()"></app-primary-button>
