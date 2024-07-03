@@ -1,17 +1,23 @@
-<h1 mat-dialog-title>Selziona la foto</h1>
+<div class="bg-[#000d] h-screen w-screen fixed"></div>
 
-<div mat-dialog-content>
-    <image-cropper
-        [imageFile]="data.image"
-        [maintainAspectRatio]="true"
-        [aspectRatio]="data.width / data.height"
-        [resizeToHeight]="data.height"
-        [resizeToWidth]="data.width"
-        (imageCropped)="imageCropped($event)"
-    ></image-cropper>
-</div>
+<div class="fixed flex flex-col bg-secondary align-middle p-4">
+    <div class="flex flex-col">
+        <h1 class="flex w-full justify-center">Taglia la foto come preferisci</h1>
 
-<div mat-dialog-actions>
-    <button mat-raised-button >Annulla</button>
-    <button mat-raised-button [mat-dialog-close]="result()" >Conferma</button>
+        <div class="flex w-full border my-2">
+            <image-cropper
+                [imageFile]="data.image"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="data.width / data.height"
+                [resizeToHeight]="data.height"
+                [resizeToWidth]="data.width"
+                (imageCropped)="imageCropped($event)"
+            ></image-cropper>
+        </div>
+
+        <div class="flex w-full justify-between">
+            <app-primary-button text="Annulla" [mat-dialog-close]="false" class="flex"></app-primary-button>
+            <app-secondary-button text="Conferma" [mat-dialog-close]="result()" class="flex"></app-secondary-button>
+        </div>
+    </div>
 </div>
