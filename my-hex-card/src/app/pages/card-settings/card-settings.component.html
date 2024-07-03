@@ -1,12 +1,12 @@
 <app-loading *ngIf="isLoading"></app-loading>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="flex lg:flex-row lg:justify-between sm:flex-col lg:pl-44 lg:pr-44 mt-20">
+<div class="flex lg:flex-row lg:justify-between sm:flex-col lg:px-36 mt-20">
   
     <app-title title="La tua card" class="lg:hidden"></app-title>
     <app-subtitle subtitle="Modifica i dati ed il look della tua card" class="lg:hidden"></app-subtitle>
 
-    <div class="flex flex-col mb-2 sm:hidden lg:flex lg:flex-col lg:justify-center flex-grow min-h-full lg:w-1/3">
+    <div class="flex flex-col mb-2 sm:hidden lg:flex lg:flex-col min-h-screen lg:w-1/3 mt-[270px]">
         <app-title title="La tua card"></app-title>
         <app-subtitle subtitle="Modifica i dati ed il look della tua card"></app-subtitle>
 
@@ -24,8 +24,11 @@
         </div>
     </div>
 
-    <form *ngIf="!style" [formGroup]="myForm" (ngSubmit)="onSubmit()" class="lg:flex lg:flex-row lg:w-2/3 mt-4" >
-        <div class="lg:flex lg:flex-col lg:mr-8">
+
+    
+
+    <form *ngIf="!style" [formGroup]="myForm" (ngSubmit)="onSubmit()" class="lg:flex lg:flex-row lg:w-2/3 mt-4  lg:min-h-screen" >
+        <div class="lg:flex lg:flex-col lg:mr-8 lg:w-1/2">
             <div class="flex flex-col mb-4 lg:m-0">
                 <div class="flex flex-row justify-between align-middle lg:justify-center">
                     <div class="w-20 h-20 overflow-hidden rounded-full">
@@ -58,7 +61,7 @@
 
             <hr class="my-4 lg:hidden" /> -->
 
-            <div class="flex flex-col mb-2 ">
+            <div class="flex flex-col mb-2 lg:mt-8">
                 <label for="name">Nome</label>
                 <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="name" formControlName="name" placeholder="Nome">
             </div>
@@ -79,7 +82,7 @@
             </div>
 
             
-            <hr class="my-4 lg:hidden" />
+            <hr class="my-4 lg:hidden border-[#acacac68]" />
             <div class="flex flex-col">
                 <label>Email</label>
             </div>
@@ -143,8 +146,8 @@
         </div>
         <hr class="my-4 lg:hidden" />
 
-        <div class="lg:flex lg:flex-col">
-            <div class="flex flex-col mb-2 ">
+        <div class="lg:flex lg:flex-col lg:w-1/2 lg:mt-8">
+            <div class="flex flex-col mb-2 mt-20">
                 <label for="inputLinkedinLink">Linkedin </label>
                 <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputLinkedinLink" placeholder="Link di condivisone del profilo" formControlName="linkedin" />
             </div>
@@ -211,16 +214,16 @@
             <hr class="my-4 lg:hidden" />
 
 
-            <div class="flex flex-col items-start">
+            <div class="flex flex-col items-start lg:mt-4">
                 <app-primary-button text="Salva"></app-primary-button>
             </div>
         </div>
     </form>
 
 
-    <form *ngIf="style" [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()" class="lg:w-2/3 mt-4">
-        <div class="lg:flex lg:flex-row lg:w-full lg:justify-center flex-grow min-h-full lg:items-center">
-            <div class="lg:flex lg:flex-col lg:w-1/2 lg:justify-start">
+    <form *ngIf="style" [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()" class="lg:w-2/3 mt-4 lg:mt-16 lg:min-h-screen ">
+        <div class="lg:flex lg:flex-row lg:w-full lg:justify-center flex-grow lg:items-center ">
+            <div class="lg:flex lg:flex-col lg:w-1/2 lg:justify-start ">
                 <div class="flex flex-col mb-4 lg:m-0">
                     <div class="flex flex-row justify-between align-middle lg:hidden">
                         <div class="w-20 h-20 overflow-hidden rounded-full">
@@ -232,38 +235,37 @@
                     </div>
                 </div>
     
-                <div class="flex flex-col mb-2 lg:hidden">
+                <div class="flex flex-col lg:hidden">
                     <div class="flex flex-row justify-between">
                         <button type="button"  (click)="setStyleFalse()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl">Modifica dati</button>
                         <button type="button"  (click)="setStyleTrue()" class="flex bg-primary  text-background_color text-medium_text pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl">Modifica look</button>
                     </div>
                 </div>
                 
-                <div class="flex flex-row mb-4 ">
+                <div class="flex flex-row mb-4 mt-10 justify-between px-2">
                     <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
                     <input type="color" id="backgroundColor" formControlName="backgroundColor" class="rounded-full" />
                 </div>
                 
-                <div class="flex flex-row mb-4 ">
+                <div class="flex flex-row mb-4  justify-between px-2">
                     <label for="textColor" class="flex w-4/5">Colore del testo: </label>
                     <input type="color" id="textColor" formControlName="textColor" class="rounded-full" />
                 </div>
                 
-                <div class="flex flex-row mb-4 ">
+                <div class="flex flex-row mb-4  justify-between px-2">
                     <label for="buttonColor" class="flex w-4/5">Colore del bottone: </label>
                     <input type="color" id="buttonColor" formControlName="buttonColor" class="rounded-full" />
                 </div>
                 
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center mt-12 lg:mt-8">
                     <app-primary-button text="Salva"></app-primary-button>
                 </div>
             </div>
             
-            <div *ngIf="style && !isLoading" class="flex lg:block sm:hidden lg:w-1/2 justify-center ml-4 ">
+            <div *ngIf="style && !isLoading" class="lg:flex sm:hidden lg:w-1/2 justify-end place-items-end ml-4 ">
                 <div class="flex max-w-80">
                     <app-card-preview [card]="card" class="lg:w-96"></app-card-preview>
                 </div>
-                
             </div>
         </div>
     </form>
