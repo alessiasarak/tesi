@@ -10,7 +10,7 @@
 
     <form [formGroup]="myStyleForm" (ngSubmit)="onStyleSubmit()" class="flex flex-col mb-2 lg:flex lg:flex-col lg:justify-center flex-grow min-h-full lg:w-1/3 mr-4">
         <div class="flex flex-col my-4 lg:m-0">
-            <div class="flex flex-row justify-between align-middle lg:hidden">
+            <div class="flex flex-row w-full justify-center align-middle">
                 <div class="w-20 h-20 overflow-hidden rounded-full">
                     <img src="{{ card.img }}" class="object-cover w-full h-full">
 
@@ -46,7 +46,7 @@
         </div>
         
         <div class="flex flex-col items-center">
-            <app-secondary-button text="Salva"></app-secondary-button>
+            <app-primary-button text="Salva"></app-primary-button>
         </div>
     </form>
     <div class="flex flex-col mb-2 sm:hidden lg:flex lg:flex-col lg:justify-center flex-grow min-h-full lg:w-1/3">
