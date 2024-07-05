@@ -25,3 +25,19 @@ img {
       box-shadow: 0px 3px 6px #0000001A;
       transform: scale(1.5);
   }
+
+
+  .custom-select {
+    appearance: none; /* Rimuove lo stile predefinito */
+    -webkit-appearance: none; /* Compatibilità con Safari */
+    -moz-appearance: none; /* Compatibilità con Firefox #FF742C*/
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 98% center; /* Posiziona la freccia a destra */
+    padding-right: 18px; /* Spazio per la freccia */
+}
+
+/* Se vuoi che la freccia sia più a sinistra */
+.custom-select.move-arrow-left {
+    background-position: 90% center; /* Modifica la percentuale per spostare la freccia più a sinistra */
+}
