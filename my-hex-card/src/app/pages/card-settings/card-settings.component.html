@@ -109,18 +109,30 @@
             </div>
             <div>
                 <div formArrayName="phoneNumbers">
-                    <div *ngFor="let phoneNumber of phoneNumberControls; let i = index" class="flex flex-row">
-                        <div class="flex flex-col mb-2 w-full">
-                            <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputPhoneNumber" [formControlName]="i" placeholder="Numero di telefono">
+                    <div *ngFor="let phoneNumber of phoneNumberControls; let i = index" [formGroupName]="i" class="flex flex-row">
+                        <div class="flex flex-col w-full">
+                            <select class="bg-secondary w-full p-2 rounded-md text-black mb-2" formControlName="label" placeholder="">
+                                <option value="work">Ufficio</option>
+                                <option value="cell">Cellulare</option>
+                                <option value="home">Casa</option>
+                                <option value="other">Altro</option>
+                                <!-- <option value="c">Casa</option> -->
+                            </select>
+                            <div class="flex w-full">
+                                <div class="flex flex-col mb-2 w-full">
+                                    <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" formControlName="number" placeholder="Numero di telefono">
+                                </div>
+                                <button type="button" *ngIf="i == 0" class="flex bg-secondary text-primary ml-2 pl-2 pr-2 pt-2 pb-2 mb-2 rounded-full" (click)="addPhoneNumber()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <button type="button" *ngIf="i != 0" (click)="removePhoneNumber(i)" class="flex bg-secondary text-primary ml-2 pl-2 pr-2 pt-2 pb-2 mb-2 rounded-full">
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+                            </div>
                         </div>
-                        <button type="button"  *ngIf="i == 0" type="button" class="flex  bg-secondary  text-primary ml-2 pl-2 pr-2 pt-2 pb-2 mb-2 rounded-full" (click)="addPhoneNumber()">
-                            <mat-icon>add</mat-icon>
-                        </button>
-                        <button type="button"  *ngIf="i != 0" type="button" (click)="removePhoneNumber(i)" class="flex bg-secondary  text-primary ml-2 pl-2 pr-2 pt-2 pb-2 mb-2 rounded-full">
-                            <mat-icon>remove</mat-icon>
-                        </button>
                     </div>
                 </div>
+                  
             </div>
             <hr class="my-4 lg:hidden border-[#acacac68]" />
 
@@ -154,7 +166,7 @@
 
             <div class="flex flex-col mb-2 ">
                 <label for="inputInstagramLink">Instagram  </label>
-                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputInstagramLink" placeholder="Link di condivisone del profilo" formControlName="instagram" />
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputInstagramLink" placeholder="Username" formControlName="instagram" />
             </div>
             
             <div class="flex flex-col mb-2 ">
@@ -169,7 +181,7 @@
 
             <div class="flex flex-col mb-2 ">
                 <label for="inputWhatsappLink">Whatsapp </label>
-                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputWhatsappLink" placeholder="Numero di telefono" formControlName="whatsapp" />
+                <input type="text" class="bg-secondary w-full p-2 rounded-md text-black" id="inputWhatsappLink" placeholder="+41 123 45 67" formControlName="whatsapp" />
             </div>
 
             <hr class="my-4 lg:hidden border-[#acacac68]" />

@@ -70,10 +70,11 @@ export class CardSettingsComponent {
     linkedin: [''],
     whatsapp: [''],
     youtube: [''],
-    emails: this.fb.array([ this.fb.control('') ]),
-    phoneNumbers: this.fb.array([ this.fb.control('') ]),
-    links: this.fb.array([ this.fb.control('') ]),
 
+    phoneNumbers: this.fb.array([]),
+
+    emails: this.fb.array([ this.fb.control('') ]),
+    links: this.fb.array([ this.fb.control('') ]),
     addresses: this.fb.array([])
    
   });
@@ -102,10 +103,14 @@ export class CardSettingsComponent {
   get phoneNumberControls() {
     return (this.myForm.get('phoneNumbers') as FormArray).controls;
   }
-  addPhoneNumber(){
+
+  addPhoneNumber() {
     const phoneNumbers = this.myForm.get('phoneNumbers') as FormArray;
-    phoneNumbers.push(this.fb.control(''));
-  } 
+    phoneNumbers.push(this.fb.group({
+      label: [''],
+      number: ['']
+    }));
+  }
   removePhoneNumber(index: number) {
     const phoneNumbers = this.myForm.get('phoneNumbers') as FormArray;
     phoneNumbers.removeAt(index);
@@ -196,15 +201,23 @@ export class CardSettingsComponent {
       youtube: card.youtube ?? ""
     });
 
+    console.log("Numeri telefono")
     const phoneNumberArray = this.myForm.get('phoneNumbers') as FormArray;
     phoneNumberArray.clear();
-  
+
     if (card.phone_number && card.phone_number.length > 0) {
+      console.log(card.phone_number)
       card.phone_number.forEach(phoneNumber => {
-        phoneNumberArray.push(this.fb.control(phoneNumber.number)); 
+        phoneNumberArray.push(this.fb.group({
+          number: [phoneNumber.number],
+          label: [phoneNumber.label]
+        }));
       });
     } else {
-      phoneNumberArray.push(this.fb.control(""));
+      phoneNumberArray.push(this.fb.group({
+        number: [''],
+        label: ['']
+      }));
     }
 
     const emailArray = this.myForm.get('emails') as FormArray;
@@ -272,11 +285,18 @@ export class CardSettingsComponent {
     this.card.instagram = this.myForm.value.instagram;
     this.card.facebook = this.myForm.value.facebook;
     this.card.linkedin = this.myForm.value.linkedin;
-    this.card.whatsapp = this.myForm.value.whatsapp;
+    this.card.whatsapp = this.myForm.value.whatsapp.replace(/\s/g, '');
     this.card.youtube = this.myForm.value.youtube;
 
     this.card.email = this.myForm.value.emails.filter((email:any) => typeof email === 'string' && email.trim() !== '');
-    this.card.phone_number = this.myForm.value.phoneNumbers.filter((phone:any) => typeof phone === 'string' && phone.trim() !== '');
+
+    this.card.phone_number = (this.myForm.get('phoneNumbers') as FormArray).value
+      .filter((phone: any) => phone.number && typeof phone.number === 'string' && phone.number.trim() !== '')
+      .map((phone: any) => ({
+        label: phone.label,
+        number: phone.number.trim()
+      }));
+
     this.card.link = this.myForm.value.links.filter((link:any) => typeof link === 'string' && link.trim() !== '');
     this.card.address = this.myForm.value.addresses.filter((address:any) => address.street_name.trim() !== '');
 

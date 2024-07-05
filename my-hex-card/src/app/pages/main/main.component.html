@@ -28,7 +28,7 @@
 
       <div *ngFor="let phone_number of myCard.phone_number" class="flex flex-row mb-3">
         <mat-icon aria-hidden="false" fontIcon="phone" class="flex"></mat-icon>
-        <span class="flex ml-3">{{ phone_number.number }}</span>
+        <a class="flex ml-3" href="tel:{{ phone_number.number }}">{{ phone_number.number }}</a>
       </div>
 
       <div *ngFor="let website of myCard.link" class="flex flex-row mb-3">
@@ -51,7 +51,7 @@
         </a>
       </div>
       <div class="flex" *ngIf="myCard.instagram">
-        <a href="{{ myCard.instagram }}" target="_blank">
+        <a href="https://www.instagram.com/{{ myCard.instagram }}" target="_blank">
           <img src="/assets/img/instagram.png" class="h-[20px] w-[20px]">
         </a>
       </div>

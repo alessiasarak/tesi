@@ -126,14 +126,24 @@ export class MainComponent implements OnInit{
 
     vCard.workUrl = this.myCard.link.length > 0 ? this.myCard.link[0].link : '';
     vCard.workEmail = this.myCard.email.length > 0 ? this.myCard.email[0].email : '';
-    vCard.workPhone = this.myCard.phone_number.length > 0 ? this.myCard.phone_number[0].number : '';
+    // vCard.workPhone = this.myCard.phone_number.length > 0 ? this.myCard.phone_number[0].number : '';
 
-    let otherPhoneNumbers = this.myCard.phone_number.slice(1);
+    vCard.socialUrls.facebook = this.myCard.facebook;
+    vCard.socialUrls.linkedIn = this.myCard.linkedin;
+
+    let otherPhoneNumbers = this.myCard.phone_number;
     let phoneNumber : string[] = [];
+    
     otherPhoneNumbers.forEach(element => {
+      console.log(element)
       phoneNumber.push(element.number);
+      if(element.label == 'work') vCard.workPhone = element.number;
+      else if(element.label == 'cell') vCard.cellPhone = element.number;
+      else if(element.label == 'home') vCard.homePhone = element.number;
+      else if(element.label == 'other') vCard.otherPhone = element.number;
+      else vCard.pagerPhone = element.number;
     });
-    vCard.pagerPhone = this.myCard.phone_number.length > 0 ? phoneNumber : '';
+    // vCard.cellPhone = this.myCard.phone_number.length > 0 ? phoneNumber : '';
 
     let otherEmails = this.myCard.email.slice(1);
     let email : string[] = [];

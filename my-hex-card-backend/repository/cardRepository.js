@@ -158,7 +158,6 @@ class CardRepository {
       let emailRepository = new EmailRepository();
       await emailRepository.deleteAll(idCard);
       for(let i = 0; i < emails.length; i++){
-        console.log(emails[i])
         await emailRepository.add(emails[i], idCard);
       }
 

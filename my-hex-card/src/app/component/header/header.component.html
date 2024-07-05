@@ -37,7 +37,7 @@
         
         <a *ngIf="item.link == '/guide'" (click)="downloadGuide()" download [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" (click)="menu()">{{ item.title }}</a>
 
-        <div class="fixed w-full bottom-2" >
+        <div class="fixed w-full bottom-32" >
             <hr *ngIf="item.link == '/logout'" class="lg:hidden border-[#acacac68] mx-4 " />
             <a *ngIf="item.link == '/logout'" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" (click)="menu()">{{ item.title }}</a>
         </div>
