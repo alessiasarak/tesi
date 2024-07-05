@@ -1,4 +1,4 @@
-<div class="bg-[#000d] h-screen w-screen fixed"></div>
+<!-- <div class="bg-[#000d] h-screen w-screen fixed"></div>
 
 <div class="fixed flex flex-col bg-secondary align-middle p-4">
     <div class="flex flex-col">
@@ -19,5 +19,26 @@
             <app-primary-button text="Annulla" [mat-dialog-close]="false" class="flex"></app-primary-button>
             <app-secondary-button text="Conferma" [mat-dialog-close]="result()" class="flex"></app-secondary-button>
         </div>
+    </div>
+</div>
+ -->
+
+ <div>
+    <h1 mat-dialog-title>Taglia la foto come preferisci</h1>
+
+    <div mat-dialog-content class="dialog-content">
+        <image-cropper
+            [imageFile]="data.image"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="data.width / data.height"
+            [resizeToHeight]="data.height"
+            [resizeToWidth]="data.width"
+            (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+    </div>
+
+    <div mat-dialog-actions class="flex w-full justify-between">
+        <app-primary-button mat-raised-button [mat-dialog-close]="false" text="Annulla" class="flex mr-5"> </app-primary-button>
+        <app-secondary-button mat-raised-button [mat-dialog-close]="result()" text="Conferma" class="flex"></app-secondary-button>
     </div>
 </div>
