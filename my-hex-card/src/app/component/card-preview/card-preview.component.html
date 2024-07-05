@@ -2,6 +2,13 @@
 <div [ngClass]="myMainClass" [style]="myMainStyle">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <div class="flex flex-col items-end">
+      <a href="/card-settings/{{card.token}}" type="submit" class="flex mb-3 rounded-3xl border !text-primary border-primary bg-background_color p-2">
+        <mat-icon>edit</mat-icon>
+      </a>  
+    </div>
+
+
     <div class="flex flex-col mb-2">
         <div class="flex flex-col items-center">
             <div class="w-36 h-36 overflow-hidden rounded-full">
