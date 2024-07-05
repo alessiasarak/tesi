@@ -112,9 +112,11 @@
                     <div *ngFor="let phoneNumber of phoneNumberControls; let i = index" [formGroupName]="i" class="flex flex-row">
                         <div class="flex flex-col w-full">
                             <select class="bg-secondary w-full p-2 rounded-md text-black mb-2" formControlName="label" placeholder="">
-                                <option value="a">Ufficio</option>
-                                <option value="b">Cellulare</option>
-                                <option value="c">Casa</option>
+                                <option value="work">Ufficio</option>
+                                <option value="cell">Cellulare</option>
+                                <option value="home">Casa</option>
+                                <option value="other">Altro</option>
+                                <!-- <option value="c">Casa</option> -->
                             </select>
                             <div class="flex w-full">
                                 <div class="flex flex-col mb-2 w-full">
