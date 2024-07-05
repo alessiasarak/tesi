@@ -133,7 +133,7 @@ export class MainComponent implements OnInit{
     otherPhoneNumbers.forEach(element => {
       phoneNumber.push(element.number);
     });
-    vCard.pagerPhone = this.myCard.phone_number.length > 0 ? phoneNumber : '';
+    vCard.cellPhone = this.myCard.phone_number.length > 0 ? phoneNumber : '';
 
     let otherEmails = this.myCard.email.slice(1);
     let email : string[] = [];

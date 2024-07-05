@@ -21,18 +21,19 @@ export class HeaderComponent {
   userMenu = [
     { link: "/settings", title: "Home" },
     { link: "/profile-settings", title: "Profilo" },
-    { link: "/guide", title: "Guida" },
+    { link: "/guide", title: "Serve Aiuto?" },
     { link: "/logout", title: "Logout" }
   ];
   adminMenu = [
     { link: "/admin", title: "Home" },
     { link: "/profile-settings", title: "Profilo" },
-    { link: "/guide", title: "Guida", pdfLink: "path/to/your/guide.pdf" },
+    { link: "/guide", title: "Serve Aiuto?" },
     { link: "/logout", title: "Logout" }
   ];
   notLoggedMenu = [
     { link: "/", title: "Home" },
-    { link: "/login", title: "Login" }/*,
+    { link: "/login", title: "Login" },
+    { link: "/guide", title: "Serve Aiuto?" },/*,
     { link: "https://hexcard.ch/store/", title: "Compra la card" },
     { link: "https://hexcard.ch/contatti/", title: "Aiuto?" }*/
   ];
@@ -85,10 +86,10 @@ export class HeaderComponent {
   }
 
   downloadGuide() {
-    const pdfLink = 'assets/guide.pdf'; // Path to your PDF file
+    const pdfLink = 'assets/guide.png'; 
     const link = document.createElement('a');
     link.href = pdfLink;
-    link.download = 'Guida.pdf'; // Name of the PDF file to be downloaded
+    link.download = 'guide.png';
     link.click();
   }
 }

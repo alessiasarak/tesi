@@ -4,7 +4,7 @@ class PhoneNumberRepository{
     async add(newPhoneNumber, idCard){
         try {
             const phoneNumber = await PhoneNumber.create({
-                number: newPhoneNumber,
+                ...newPhoneNumber,
                 fk_id_card: idCard
             }); 
             return phoneNumber;
