@@ -16,14 +16,9 @@
     <div class="lg:flex lg:items-center lg:justify-center flex-grow min-h-full lg:w-2/3 mt-8 mb-4">
       <swiper-container class="w-full lg:w-72 " effect="cards">
         @for (card of cards; track card.token; let i = $index) {
-          <swiper-slide class="w-full overflow-y-scroll swiper-vertical bg-[#fff] rounded-t-3xl" (click)="viewDetailCard(card.token)">
-            <div class="flex flex-col items-center mt-4">
-              <a href="/card-settings/{{card.token}}" type="submit" class="flex !text-primary mb-3 rounded-3xl border border-primary p-2">
-                <mat-icon>edit</mat-icon>
-              </a>  
-            </div>
+          <swiper-slide class="w-full overflow-y-scroll swiper-vertical bg-[#fff] rounded-3xl" (click)="viewDetailCard(card.token)">
             <div class="w-full h-[30rem] overflow-y-scroll swiper-vertical rounded-b-3xl">
-              <app-card-preview [card]="card"></app-card-preview>
+              <app-card-preview [card]="card" [edit]="true"></app-card-preview>
             </div>
           </swiper-slide>
         }

@@ -10,14 +10,16 @@ import { TitleComponent } from '../../component/title/title.component';
 import { LoadingComponent } from '../../component/loading/loading.component';
 import { CardPreviewComponent } from '../../component/card-preview/card-preview.component';
 import { SubtitleComponent } from '../../component/subtitle/subtitle.component';
-import { SecondaryButtonComponent } from '../../component/secondary-button/secondary-button.component';
 import { HttpClient } from '@angular/common/http';
 import { ImageCropperComponent } from '../../component/image-cropper/image-cropper.component';
+import { PrimaryButtonComponent } from '../../component/primary-button/primary-button.component';
 
 @Component({
   selector: 'app-set-all-style-cards',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, TitleComponent, SubtitleComponent, LoadingComponent, CardPreviewComponent, SecondaryButtonComponent, ImageCropperComponent ],
+  imports: [ ReactiveFormsModule, CommonModule, MatIconModule, MyButtonComponent, 
+    TitleComponent, SubtitleComponent, LoadingComponent, 
+    CardPreviewComponent, PrimaryButtonComponent, ImageCropperComponent ],
   templateUrl: './set-all-style-cards.component.html',
   styleUrl: './set-all-style-cards.component.css'
 })
