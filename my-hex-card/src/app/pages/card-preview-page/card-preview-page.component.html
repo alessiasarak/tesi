@@ -1,20 +1,39 @@
 <app-loading *ngIf="isLoading"></app-loading>
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="mt-20">
-    <app-title title="La tua carta digitale"></app-title>
-    <app-subtitle subtitle="Qui è presente una preview di come risulterà il la tua carta digitale agli altri!"></app-subtitle>
+<div class="flex lg:flex-row lg:justify-between sm:flex-col lg:px-36 mt-20">
+  
+    <app-title title="La tua card" class="lg:hidden"></app-title>
+    <app-subtitle subtitle="Modifica i dati ed il look della tua card" class="lg:hidden"></app-subtitle>
 
-    <div class="lg:flex lg:w-full lg:justify-center my-8">
-        <div class="lg:w-80">
-            <app-card-preview *ngIf="!isLoading" [card]="card"></app-card-preview>
+    <div class="flex flex-col mb-2 sm:hidden lg:flex lg:flex-col min-h-screen lg:w-1/3 mt-[270px]">
+        <app-title title="La tua carta digitale"></app-title>
+        <app-subtitle subtitle="Anteprima della tua carta digitale!"></app-subtitle>
+
+        <div class="lg:block mt-4">
+            <a href="/card-settings/{{card.token}}"  class="flex justify-center bg-primary  text-background_color  text-medium_text border pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl w-[140px]">Modifica dati</a>
+            <a href="/card-settings/{{card.token}}"  class="flex justify-center bg-primary  text-background_color  text-medium_text border pt-2 pb-2 mb-2 rounded-3xl w-[140px]">Modifica look</a>
+            <a href="/card-preview/{{card.token}}"  class="flex justify-center bg-transparent  text-primary text-medium_text border pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl w-[140px]">Preview</a>
+        </div>
+        
+        <div class="flex flex-col justify-center">
+            <div class="flex flex-col items-center mt-4 lg:hidden">
+                <a href="/card-preview/{{card.token}}" class="bg-primary  text-background_color rounded-3xl p-2">Preview</a>
+            </div>
         </div>
     </div>
 
-    <div class="flex flex-col items-center mt-8">
-        <a href="/card-settings/{{card.token}}" type="submit" class="flex text-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl border border-primary">
-            Modifica
-        </a>
+    <div class="flex flex-col">
+        <div class="lg:flex lg:w-full lg:justify-center my-8">
+            <div class="lg:w-80">
+                <app-card-preview *ngIf="!isLoading" [card]="card"></app-card-preview>
+            </div>
+        </div>
+    
+        <div class="flex flex-col items-center mt-8">
+            <a href="/card-settings/{{card.token}}" type="submit" class="flex text-primary pl-8 pr-8 pt-2 pb-2 mb-3 rounded-3xl border border-primary">
+                Modifica
+            </a>
+        </div>
     </div>
 </div>

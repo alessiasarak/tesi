@@ -13,17 +13,20 @@
         <div class="lg:block mt-4" *ngIf="style">
             <button type="button"  (click)="setStyleFalse()" class="flex bg-primary  text-background_color text-medium_text pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl">Modifica dati</button>
             <button type="button"  (click)="setStyleTrue()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl">Modifica look</button>
+            <a href="/card-preview/{{card.token}}"  class="flex justify-center bg-primary  text-background_color text-medium_text border pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl w-[140px]">Preview</a>
         </div>
         <div class="lg:block mt-4" *ngIf="!style">
             <button type="button"  (click)="setStyleFalse()" class="flex bg-transparent  text-primary text-medium_text border border-primary pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl">Modifica dati</button>
             <button type="button"  (click)="setStyleTrue()" class="flex bg-primary  text-background_color text-medium_text pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl">Modifica look</button>
+            <a href="/card-preview/{{card.token}}"  class="flex justify-center bg-primary  text-background_color text-medium_text border pl-8 pr-8 pt-2 pb-2 mb-2 rounded-3xl w-[140px]">Preview</a>
         </div>
-       
-        <div class="flex flex-col items-center mt-4 lg:hidden">
-            <a href="/card-preview/{{card.token}}" class="bg-primary  text-background_color rounded-3xl p-2">Preview</a>
+        
+        <div class="flex flex-col justify-center">
+            <div class="flex flex-col items-center mt-4 lg:hidden">
+                <a href="/card-preview/{{card.token}}" class="bg-primary  text-background_color rounded-3xl p-2">Preview</a>
+            </div>
         </div>
     </div>
-
 
     
 
@@ -39,8 +42,11 @@
                             (imageReady)="handleImageReady($event)" 
                         />
                     </div>
-                    <div class="flex bg-primary  text-background_color justify-center align-middle text-medium_text rounded-3xl h-10 w-24 pt-3 lg:hidden">
-                        <a href="/card-preview/{{card.token}}" class="flex">Preview</a>
+
+                    <div class="flex flex-col justify-center">
+                        <div class="flex bg-primary  text-background_color justify-center align-middle text-medium_text rounded-3xl h-10 w-24 pt-3 lg:hidden">
+                            <a href="/card-preview/{{card.token}}" class="flex">Preview</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,7 +122,6 @@
                                 <option value="cell">Cellulare</option>
                                 <option value="home">Casa</option>
                                 <option value="other">Altro</option>
-                                <!-- <option value="c">Casa</option> -->
                             </select>
                             <div class="flex w-full">
                                 <div class="flex flex-col mb-2 w-full">
@@ -241,8 +246,11 @@
                         <div class="w-20 h-20 overflow-hidden rounded-full">
                             <img src="{{ card.img }}" class="object-cover w-full h-full">
                         </div>
-                        <div class="flex bg-primary text-background_color justify-center align-middle text-medium_text rounded-3xl h-10 w-24 pt-3">
-                            <a href="/card-preview/{{card.token}}" class="flex">Preview</a>
+
+                        <div class="flex flex-col justify-center">
+                            <div class="flex bg-primary text-background_color justify-center align-middle text-medium_text rounded-3xl h-10 w-24 pt-3">
+                                <a href="/card-preview/{{card.token}}" class="flex">Preview</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -255,7 +263,7 @@
                 </div>
                 
                 <div class="flex flex-row mb-4 mt-10 justify-between px-2">
-                    <label for="backgroundColor" class="flex w-4/5">Colore sfondo: </label>
+                    <label for="backgroundColor" class="flex w-4/5">Colore dello sfondo: </label>
                     <input type="color" id="backgroundColor" formControlName="backgroundColor" class="rounded-full" />
                 </div>
                 
