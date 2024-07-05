@@ -116,8 +116,8 @@
             <div>
                 <div formArrayName="phoneNumbers">
                     <div *ngFor="let phoneNumber of phoneNumberControls; let i = index" [formGroupName]="i" class="flex flex-row">
-                        <div class="flex flex-col w-full">
-                            <select class="bg-secondary w-full p-2 rounded-md text-black mb-2" formControlName="label" placeholder="">
+                        <div class="flex flex-col w-full mb-4">
+                            <select class="custom-select bg-secondary w-full p-2 rounded-md text-black mb-2" formControlName="label" placeholder="">
                                 <option value="work">Ufficio</option>
                                 <option value="cell">Cellulare</option>
                                 <option value="home">Casa</option>
@@ -273,7 +273,7 @@
                 </div>
                 
                 <div class="flex flex-row mb-4  justify-between px-2">
-                    <label for="buttonColor" class="flex w-4/5">Colore del bottone: </label>
+                    <label for="buttonColor" class="flex w-4/5">Colore del bottone e icone: </label>
                     <input type="color" id="buttonColor" formControlName="buttonColor" class="rounded-full" />
                 </div>
                 
