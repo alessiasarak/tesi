@@ -26,6 +26,7 @@ export class MainComponent implements OnInit{
   myButtonClass : string = "";
   myMainStyle : string = "";
   myButtonStyle : string = "";
+  myIconStyle : string = "";
   isLoading = true;
 
   myCard: Card = {
@@ -90,6 +91,7 @@ export class MainComponent implements OnInit{
 
           this.myMainStyle = "color: " + this.myCard.text_color + "; background-color: " + this.myCard.background_color + ";";
           this.myButtonStyle = "background-color: " + this.myCard.button_color + ";";
+          this.myIconStyle = "fill: " + this.myCard.button_color + ";";
           
           this.isLoading = false;
         }

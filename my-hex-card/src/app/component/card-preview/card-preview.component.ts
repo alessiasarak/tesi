@@ -40,9 +40,11 @@ export class CardPreviewComponent {
   myButtonClass : string = "add-contact flex h-1/4 ";
   myMainStyle : string = "";
   myButtonStyle : string = "";
+  myIconStyle : string = "";
 
   ngOnInit(): void {
     this.myMainStyle = "color: " + this.card.text_color + "; background-color: " + this.card.background_color + ";";
     this.myButtonStyle = "background-color: " + this.card.button_color + ";";
+    this.myIconStyle = "fill: " + this.card.button_color + ";";
   }
 }
