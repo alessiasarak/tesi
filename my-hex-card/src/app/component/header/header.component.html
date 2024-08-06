@@ -13,7 +13,9 @@
         
         <div class="flex flex-row text-secondary bg-transparent lg:z-30 sm:hidden lg:inline-flex">
             @for (item of menuList; track item; let i = $index) {
-                <a class="newA" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'">{{ item.title }}</a>
+                <a *ngIf="item.link == '/guide'" class="newA hover:cursor-pointer" (click)="downloadGuide()" download [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'" >{{ item.title }}</a>
+        
+                <a *ngIf="item.link != '/guide'" class="newA" [routerLink]="item.link" routerLinkActive="active" [ngClass]="isCurrentPage(item.link) ? 'text-primary' : 'text-black'">{{ item.title }}</a>
             }
         </div>
     </div>
