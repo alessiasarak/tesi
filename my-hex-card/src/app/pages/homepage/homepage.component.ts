@@ -32,4 +32,12 @@ export class HomepageComponent {
     if(this.token) this.router.navigateByUrl("/login/"+this.token);
     else this.router.navigateByUrl("/login");
   }
+
+  downloadGuide() {
+    const pdfLink = 'assets/guide.png'; 
+    const link = document.createElement('a');
+    link.href = pdfLink;
+    link.download = 'guide.png';
+    link.click();
+  }
 }
