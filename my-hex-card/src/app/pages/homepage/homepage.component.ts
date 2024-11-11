@@ -34,10 +34,10 @@ export class HomepageComponent {
   }
 
   downloadGuide() {
-    const pdfLink = 'assets/guide.png'; 
+    const pdfLink = 'assets/guide.pdf'; 
     const link = document.createElement('a');
     link.href = pdfLink;
-    link.download = 'guide.png';
+    link.download = 'guide.pdf';
     link.click();
   }
 }
